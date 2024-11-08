@@ -7,7 +7,7 @@
 <title></title>
 
 <script>
-location.href="/sys/bussystem/Login.action";
+location.href="/sys2/bussystem/Login.action";
 </script>
 
 </head>
