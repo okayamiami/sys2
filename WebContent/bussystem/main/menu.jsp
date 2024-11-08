@@ -21,7 +21,7 @@
 					<a href="名簿情報一覧">名簿情報一覧</a>
 					<a href="保護者情報">保護者情報</a>
 					<a href="子供情報">子供情報</a>
-					<a href="AbsenceReport.action">欠席報告</a>
+					<a href="AbsenceSelect.action">欠席機能</a>
 					<a href="お知らせ機能">お知らせ機能</a>
 					<a href="QR機能">QR機能</a>
 				</c:when>
@@ -36,7 +36,7 @@
 					<h2>保護者</h2>
 					<a href="保護者情報">保護者情報</a>
 					<a href="子供情報">子供情報</a>
-					<a href="AbsenceSelect.action">欠席機能</a>
+					<a href="AbsenceReport.action">欠席報告</a>
 					<a href="お知らせ機能">お知らせ機能</a>
 				</c:when>
 			</c:choose>

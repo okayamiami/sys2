@@ -8,9 +8,9 @@ import tool.Action;
 public class AbsenceSelectAction extends Action{
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
+		req.getRequestDispatcher("absence_select.jsp").forward(req, res);
 	}
 
 }
