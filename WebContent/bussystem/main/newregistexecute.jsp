@@ -26,7 +26,7 @@
 	<td>${perfect_id}</td>
 	<td>
 	<c:choose>
-		<c:when test="${user_status=T}">
+		<c:when test="${user_status=='T'}">
 			先生
 		</c:when>
 		<c:otherwise>
