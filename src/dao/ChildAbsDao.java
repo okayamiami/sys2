@@ -38,7 +38,7 @@ public class ChildAbsDao extends Dao{
 				childabs.setClass_id(rSet.getString("class_id"));
 				childabs.setIs_attend(rSet.getBoolean("is_attend"));
 				childabs.setFacility_id(rSet.getString("facility_id"));
-				childabs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
+				childabs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));  //欠席情報なかったときわんちゃんエラー？？？
 				list.add(childabs);
 			}
 		}catch(Exception e){

@@ -15,8 +15,8 @@ public class NewRegistAction extends Action{
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//ローカル変数の宣言 1
-		HttpSession session = req.getSession(true);// セッションを取得
-		ManageUser mu = (ManageUser) session.getAttribute("user");// ログインユーザーを取得
+		HttpSession session = req.getSession(true);				// セッションを取得
+		ManageUser mu = (ManageUser) session.getAttribute("user");	// ログインユーザーを取得
 		List<String> us= new ArrayList<String>(Arrays.asList("T","P"));
 		//リクエストパラメータ―の取得 2
 		//なし

@@ -109,6 +109,51 @@ public class ChildDao extends Dao{
 	}
 
 
+	// 子供の名前から子供IDを取得
+	public Child getChildIdinfo(String facility_id,String child_name)throws Exception{
+		Child child = new Child();
+		Connection connection = getConnection();
+		PreparedStatement st = null;
+
+
+		String sql2 = "and child_name = ? ";
+		try{
+			st = connection.prepareStatement(baseSql+sql2);
+			st.setString(1,facility_id);
+			st.setString(2,child_name);
+			ResultSet rSet = st.executeQuery();
+
+			if(rSet.next()){
+				child.setChild_id(rSet.getString("child_id"));
+			}
+
+		}catch(Exception e){
+			throw e;
+		} finally {
+			//
+			if(st != null) {
+				try {
+					st.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+
+		}
+		return child;
+	}
+
+
+
 	//子供情報のデータベース登録
 	public boolean saveChildinfo(Child child) throws Exception{
 				//コネクションを確立
