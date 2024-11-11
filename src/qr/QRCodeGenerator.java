@@ -1,4 +1,4 @@
-package QR;
+package qr;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -12,7 +12,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 public class QRCodeGenerator {
 
-    private static final String QR_CODE_IMAGE_PATH = "./Webcontent/syashin/MyQRCode.png";
+    private static final String QR_CODE_IMAGE_PATH = "./Webcontent/sysshin/MyQRCode.png";
 
     private static void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
