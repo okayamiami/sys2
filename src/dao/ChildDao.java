@@ -108,6 +108,50 @@ public class ChildDao extends Dao{
 		return list;
 	}
 
+	// 保護者IDで子供情報を取得
+	public List<Child> getChildrenByParentId(String parents_id) throws Exception {
+		List<Child> list = new ArrayList<>();
+		Connection connection = getConnection();
+		PreparedStatement st = null;
+
+		String sql = "select * from Child where parents_id = ?";
+		try {
+			st = connection.prepareStatement(sql);
+			st.setString(1, parents_id);
+			ResultSet rSet = st.executeQuery();
+
+			while (rSet.next()) {
+				Child child = new Child();
+				child.setChild_id(rSet.getString("child_id"));
+				child.setChild_name(rSet.getString("child_name"));
+				child.setParents_id(rSet.getString("parents_id"));
+				child.setClass_id(rSet.getString("class_id"));
+				child.setIs_attend(rSet.getBoolean("is_attend"));
+				child.setFacility_id(rSet.getString("facility_id"));
+				list.add(child);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
+
 
 	// 子供の名前から子供IDを取得
 	public Child getChildIdinfo(String facility_id,String child_name)throws Exception{
