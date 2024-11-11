@@ -9,72 +9,53 @@ import java.util.List;
 
 import bean.ClassCd;
 
-public class ClassCdDao extends Dao{
+public class ClassCdDao extends Dao {
 
 	private String baseSql = "select * from ClassCd WHERE facility_id = ? ";
 
-	public List<ClassCd>  getClassCdinfo(String facility_id) throws Exception {
-			// 戻り値用のリストを作成
-			// new演算子とArrayListで空のListを用意
-			List<ClassCd> list = new ArrayList<>();
+	public List<ClassCd> getClassCdinfo(String facility_id) throws Exception {
+		List<ClassCd> list = new ArrayList<>();
 
-			// データベースへのコネクションを確立
-			// データベースに接続された！！
-			Connection connection = getConnection();
+		try (Connection connection = getConnection();
+			 PreparedStatement statement = connection.prepareStatement(baseSql)) {
 
-			// プリペアードステートメント
-			PreparedStatement statement = null;
+			statement.setString(1, facility_id);
+			ResultSet rSet = statement.executeQuery();
 
-			try {
-
-				// プリペアードステートメントにSQL文をセット
-				statement = connection.prepareStatement(baseSql);
-
-				//プレースホルダー（？の部分）に値を設定
-				statement.setString(1,facility_id);
-
-				// プリペアードステートメントを実行
-				// SQL文を実行する
-				// 結果はリザルトセット型となる
-				ResultSet rSet = statement.executeQuery();
-
-				// リザルトセット（結果）を全件走査
-				while (rSet.next()){
-					ClassCd classcd = new ClassCd();
-					// 戻り値用のlistにクラスIDを追加
-					classcd.setClass_id(rSet.getString("class_id"));
-					classcd.setClass_name(rSet.getString("class_name"));
-					classcd.setFacility_id(rSet.getString("facility_id"));
-					list.add(classcd);
-				}
-			} catch (Exception e) {
-				throw e;
-			} finally {
-				// プリペアードステートメントを閉じる
-				if (statement != null) {
-					try {
-						statement.close();
-					} catch (SQLException sqle) {
-						throw sqle;
-					}
-				}
-				// コネクションを閉じる
-				if (connection != null) {
-					try {
-						connection.close();
-					} catch (SQLException sqle) {
-						throw sqle;
-					}
-				}
+			while (rSet.next()) {
+				ClassCd classcd = new ClassCd();
+				classcd.setClass_id(rSet.getString("class_id"));
+				classcd.setClass_name(rSet.getString("class_name"));
+				classcd.setFacility_id(rSet.getString("facility_id"));
+				list.add(classcd);
 			}
+		} catch (SQLException e) {
+			throw new Exception("Error fetching class info", e);
+		}
 
-			return list;
-
-
-
+		return list;
 	}
 
-//	public void saveClassCdinfo(){
-//
-//	}
+	public ClassCd getClassCdinfoById(String classId) throws Exception {
+		ClassCd classCd = null;
+		String sql = "select * from ClassCd where class_id = ?";
+
+		try (Connection connection = getConnection();
+			 PreparedStatement statement = connection.prepareStatement(sql)) {
+
+			statement.setString(1, classId);
+			ResultSet rSet = statement.executeQuery();
+
+			if (rSet.next()) {
+				classCd = new ClassCd();
+				classCd.setClass_id(rSet.getString("class_id"));
+				classCd.setClass_name(rSet.getString("class_name"));
+				classCd.setFacility_id(rSet.getString("facility_id"));
+			}
+		} catch (SQLException e) {
+			throw new Exception("Error fetching class info by ID", e);
+		}
+
+		return classCd;
+	}
 }
