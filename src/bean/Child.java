@@ -8,6 +8,8 @@ public class Child {
 	private String class_id;
 	private boolean is_attend;
 	private String facility_id;
+	
+	
 	public String getChild_id() {
 		return child_id;
 	}

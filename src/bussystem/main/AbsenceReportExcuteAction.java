@@ -2,8 +2,6 @@ package bussystem.main;
 
 
 
-
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -35,12 +33,13 @@ public class AbsenceReportExcuteAction extends Action {
 	HttpSession session = req.getSession(true);				// セッションを取得
 	ChildDao cDao = new ChildDao(); 							// 子供Daoを初期化
 	AbsenceDao aDao = new AbsenceDao(); 						// 欠席Daoを初期化
+	String facility_id = "";
 	String child_name = "";										// 欠席報告で選択された子供情報
 	String abs_main = ""; 										// 欠席理由
 	String perfect_id = "";										// 欠席DBに登録するための欠席ID
 	String user_status = "";									// ユーザーの種類判別用
 	boolean abs_is_attend = true;								// 欠席報告が登録時点でtrue状態
-	Integer next_num ;
+	int nextNumber ;
 	ParentsUser pu = (ParentsUser) session.getAttribute("user");//（保護者）ログインユーザーを取得
 	ManageUser mu = (ManageUser) session.getAttribute("user");	//（管理者）ログインユーザーを取得
 	Map<String, String> errors = new HashMap<>();				// エラーメッセージ
@@ -48,24 +47,22 @@ public class AbsenceReportExcuteAction extends Action {
 
 	// 現在日時を取得
 	LocalDateTime nowDate = LocalDateTime.now();
-	System.out.println(nowDate); // 2020-12-20T13:32:48.293
+	System.out.println(nowDate);
 	// 表示形式を指定（年月日）
 	DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	String absence_date = dtf1.format(nowDate);
 
 
 
-
 	// ログインしているユーザー種別を判別
     if (pu != null ) {
-        user_status = "P";		// 保護者
+    	user_status = "P";		// 保護者
+        facility_id = pu.getFacility_id();					// 保護者から施設ID取得
     } else if (mu != null){
     	user_status = "M";		// 管理者
+    	facility_id = mu.getFacility_id();					// 管理者から施設ID取得
     }
 
-
-
-	String facility_id = pu.getFacility_id();					// 保護者から施設ID取得
 
 
 	//リクエストパラメータ―の取得 2
@@ -89,43 +86,49 @@ public class AbsenceReportExcuteAction extends Action {
 
 	// abs_idの数字部分の最大値を取得
 	OptionalInt maxAbsId = abs_list.stream()
-	        .map(Absence::getAbsence_id) // Absenceオブジェクトからabs_idを取得
-	        .map(s -> s.substring(1)) // 先頭の文字を除去して数字部分を抽出
-	        .mapToInt(Integer::parseInt) // Stringをintに変換
+	        .map(Absence::getAbsence_id) 		// Absenceオブジェクトからabs_idを取得
+	        .map(s -> s.substring(1)) 			// 先頭の文字を除去して数字部分を抽出
+	        .mapToInt(Integer::parseInt) 		// Stringをintに変換
 	        .max();
 
+	// IDの数字の最大値を取得
 	if (maxAbsId.isPresent()) {
 	    System.out.println("最大のabs_idの数字部分は: " + maxAbsId.getAsInt());
-	    
+	    nextNumber = maxAbsId.getAsInt()+ 1;
 	} else {
 	    System.out.println("欠席テーブルにabs_idが存在しません。");
-	}
-	
-	
-	int nextNumber = maxAbsId.getAsInt()+ 1;
-
-    // DBへデータ保存 5
-    muDao.newSaveManageUserInfo(perfect_id, perfect_id, facility_id);
-
-
-
-
-	// 施設でしぼった子供の名前のみリスト
-	for(Child c :list){
-		cNamelist.add(c.getChild_name());
+	    nextNumber = 1;
 	}
 
+	//欠席ID（完成形）
+	perfect_id = "A" + String.format("%05d", nextNumber);
 
-	//DBへデータ保存 5
-	//なし
+
+
+
+
+	// DBへデータ保存 5
+
+	// 欠席インスタンスを初期化
+	Absence abs = new Absence();
+	// インスタンスに値をセット
+	abs.setAbsence_id(perfect_id);						// 欠席ID
+	abs.setAbsence_main(abs_main);						// 欠席内容
+	abs.setChild_id(child_id.getChild_id());			// 子供ID
+	abs.setAbsence_date(absence_date);					// 欠席報告日
+	abs.setFacility_id(facility_id);					// 施設ID
+	abs.setAbs_is_attend(abs_is_attend);				// 出欠席フラグ
+
+	// 欠席情報を保存
+	aDao.saveAbsenceInfo(abs);
+
+
 
 	//レスポンス値をセット 6
-	req.setAttribute("list",list ); //子供情報すべてのリスト
-	req.setAttribute("cNamelist",cNamelist ); // 子供の名前のみのリスト
-	session.setAttribute("user", pu);
+	// 無し
 
 	//JSPへフォワード 7
-	req.getRequestDispatcher("absence_report.jsp").forward(req, res);
+	req.getRequestDispatcher("absence_report_done.jsp").forward(req, res);
 
 
 

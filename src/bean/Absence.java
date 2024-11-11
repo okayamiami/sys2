@@ -24,8 +24,8 @@ public class Absence {
 	public String getChild_id() {
 		return child_id;
 	}
-	public void setChild_id(String child_id) {
-		this.child_id = child_id;
+	public void setChild_id(String string) {
+		this.child_id = string;
 	}
 	public String getAbsence_date() {
 		return absence_date;
