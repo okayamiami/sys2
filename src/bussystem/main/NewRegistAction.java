@@ -17,7 +17,7 @@ public class NewRegistAction extends Action{
 		//ローカル変数の宣言 1
 		HttpSession session = req.getSession(true);// セッションを取得
 		ManageUser mu = (ManageUser) session.getAttribute("user");// ログインユーザーを取得
-		List<String> us= new ArrayList<String>(Arrays.asList("T","P"));//入学年度のリストを初期化
+		List<String> us= new ArrayList<String>(Arrays.asList("T","P"));
 		//リクエストパラメータ―の取得 2
 		//なし
 
@@ -32,7 +32,7 @@ public class NewRegistAction extends Action{
 
 		//レスポンス値をセット 6
 
-		req.setAttribute("user_status",us );//クラス番号のlistをセット
+		req.setAttribute("user_status",us );
 		session.setAttribute("user", mu);
 
 		//JSPへフォワード 7
