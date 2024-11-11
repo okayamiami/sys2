@@ -26,7 +26,7 @@
 		<label>ID</label>
 		<%-- value=T0000001 --%>
 		<%-- value=P2400001 --%>
-		<input type="text" name="user_id" maxlength="20" value="P2400001"
+		<input type="text" name="user_id" maxlength="20" value="M0000001"
 		required
 		><br>
 	</div>
@@ -36,7 +36,7 @@
 		<label>パスワード</label>
 		<%-- value=kanasen01 --%>
 		<%-- value=nohara111 --%>
-		<input type="password" id="user_pass" name="user_pass" maxlength="20" value="nohara111" required/><br>
+		<input type="password" id="user_pass" name="user_pass" maxlength="20" value="kanakan01" required/><br>
 		<input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()" />
 		<label for="showPassword">パスワードを表示</label>
 
