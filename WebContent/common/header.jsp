@@ -3,11 +3,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
-	<h1>得点管理システム</h1>
+<h1>得点管理システム</h1>
 </div>
 <c:if test="${user.isAuthenticated()}">
-	<div>
-		<span>${user.getUser_name()}様</span>
-		<a href="Logout.action">ログアウト</a>
-	</div>
+<div>
+<span>${user.getUser_name()}様</span>
+<a href="Logout.action">ログアウト</a>
+</div>
 </c:if>
