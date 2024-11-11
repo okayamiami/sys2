@@ -24,6 +24,9 @@
     </style>
 </head>
 <body>
+    <form action="AbsenceSelect.action" method="get">
+        <button type="submit">戻る</button>
+    </form>
     <c:if test="${not empty error}">
         <div class="alert alert-danger">
             ${error}
