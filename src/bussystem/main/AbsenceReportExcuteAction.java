@@ -1,7 +1,9 @@
 package bussystem.main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,27 +11,46 @@ import javax.servlet.http.HttpSession;
 
 import bean.Child;
 import bean.ParentsUser;
+import dao.AbsenceDao;
 import dao.ChildDao;
 import tool.Action;
 
 
 
-// 欠席報告入力ページへの値受け渡し
-public class AbsenceReportAction extends Action {
+// 欠席報告入力後
+public class AbsenceReportExcuteAction extends Action {
 
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-	System.out.println("ここまで来てる？");
 
 	//ローカル変数の宣言 1
 	HttpSession session = req.getSession(true);// セッションを取得
-	ChildDao cDao = new ChildDao(); // 子供Dao
+	ChildDao cDao = new ChildDao(); // 子供Daoを初期化
+	AbsenceDao aDao = new AbsenceDao(); // 欠席Daoを初期化
+	String child_name = "";// 欠席報告で選択された子供情報のはこ
+	String abs_main = ""; // 欠席理由のはこ
 	ParentsUser pu = (ParentsUser) session.getAttribute("user");// ログインユーザーを取得
 
-	//リクエストパラメータ―の取得 2
-	String facility_id=pu.getFacility_id();
+	Map<String, String> errors = new HashMap<>();// エラーメッセージ
 
-	System.out.println(facility_id);
+
+
+	//リクエストパラメータ―の取得 2
+	child_name = req.getParameter("child_name");// 選択した子供の名前
+	abs_main = req.getParameter("abs_main");    // 入力した欠席理由
+
+
+
+
+
+
+	/*ここから作成する！！！！！！！！！！*/
+
+
+
+
+
+
 
 	//DBからデータ取得 3
 	//なし
