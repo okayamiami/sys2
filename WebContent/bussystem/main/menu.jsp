@@ -23,14 +23,14 @@
 					<a href="子供情報">子供情報</a>
 					<a href="AbsenceSelect.action">欠席機能</a>
 					<a href="お知らせ機能">お知らせ機能</a>
-					<a href="QR機能">QR機能</a>
+					<a href="QrMenu.action">QR機能</a>
 				</c:when>
 				<c:when test="${user_type == 'T'}">
 					<h2>先生</h2>
 					<a href="名簿情報一覧">名簿情報一覧</a>
 					<a href="AbsenceSelect.action">欠席機能</a>
 					<a href="お知らせ機能">お知らせ機能</a>
-					<a href="QR機能">QR機能</a>
+					<a href="QrMenu.action">QR機能</a>
 				</c:when>
 				<c:when test="${user_type == 'P'}">
 					<h2>保護者</h2>
