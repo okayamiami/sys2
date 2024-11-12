@@ -21,14 +21,22 @@
         <th>アクション</th>
     </tr>
 
+<c:if test="${not empty child_set}">
     <c:forEach var="child" items="${child_set}">
         <tr>
             <td>${child.child_id}</td>
             <td>${child.child_name}</td>
-            <td>${child.facility_id}</td>
             <td>
-                <!-- 作成ボタン -->
-                <form action = "QrCreateExecute.action" method="post">
+                <c:if test="${not empty class_set}">
+                    <c:forEach var="classItem" items="${class_set}">
+                        <c:if test="${child.class_id eq classItem.class_id}">
+                            ${classItem.class_name}
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+            </td>
+            <td>
+                <form action="QrCreateExecute.action" method="post">
                     <input type="hidden" name="child_id" value="${child.child_id}" />
                     <input type="hidden" name="child_name" value="${child.child_name}" />
                     <input type="hidden" name="facility_id" value="${child.facility_id}" />
@@ -37,6 +45,9 @@
             </td>
         </tr>
     </c:forEach>
+</c:if>
+
+
 </table>
 
 
