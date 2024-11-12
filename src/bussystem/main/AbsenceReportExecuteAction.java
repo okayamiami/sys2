@@ -24,12 +24,13 @@ import tool.Action;
 
 
 // 欠席報告入力後
-public class AbsenceReportExcuteAction extends Action {
+public class AbsenceReportExecuteAction extends Action {
 
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 
 	//ローカル変数の宣言 1
+	System.out.println("A");
 	HttpSession session = req.getSession(true);				// セッションを取得
 	ChildDao cDao = new ChildDao(); 							// 子供Daoを初期化
 	AbsenceDao aDao = new AbsenceDao(); 						// 欠席Daoを初期化
@@ -38,10 +39,12 @@ public class AbsenceReportExcuteAction extends Action {
 	String abs_main = ""; 										// 欠席理由
 	String perfect_id = "";										// 欠席DBに登録するための欠席ID
 	String user_status = "";									// ユーザーの種類判別用
+	System.out.println("A");
 	boolean abs_is_attend = true;								// 欠席報告が登録時点でtrue状態
 	int nextNumber ;
 	ParentsUser pu = (ParentsUser) session.getAttribute("user");//（保護者）ログインユーザーを取得
 	ManageUser mu = (ManageUser) session.getAttribute("user");	//（管理者）ログインユーザーを取得
+	System.out.println("A");
 	Map<String, String> errors = new HashMap<>();				// エラーメッセージ
 
 
