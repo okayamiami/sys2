@@ -13,6 +13,7 @@ public class ClassCdDao extends Dao {
 
 	private String baseSql = "select * from ClassCd WHERE facility_id = ? ";
 
+	// 施設に登録されているクラス情報全てリスト
 	public List<ClassCd> getClassCdinfo(String facility_id) throws Exception {
 		List<ClassCd> list = new ArrayList<>();
 
@@ -36,6 +37,8 @@ public class ClassCdDao extends Dao {
 		return list;
 	}
 
+
+	// クラスIDからクラス情報を取得
 	public ClassCd getClassCdinfoById(String classId) throws Exception {
 		ClassCd classCd = null;
 		String sql = "select * from ClassCd where class_id = ?";
@@ -58,4 +61,6 @@ public class ClassCdDao extends Dao {
 
 		return classCd;
 	}
+
+
 }

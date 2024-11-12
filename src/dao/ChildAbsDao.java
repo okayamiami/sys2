@@ -9,6 +9,7 @@ import java.util.List;
 
 import bean.ChildAbs;
 
+
 public class ChildAbsDao extends Dao{
 
 	/**
@@ -62,6 +63,37 @@ public class ChildAbsDao extends Dao{
 			}
 
 
+		}
+		return list;
+	}
+
+
+
+
+
+	/**
+	 * postFilterメソッド フィルター後のリストへの格納処理 プライベート
+	 */
+	private List<ChildAbs> postFilter(ResultSet rSet) throws Exception {
+		// リストを初期化
+		List<ChildAbs> list = new ArrayList<>();
+		try {
+			// リザルトセットを全件走査
+			while(rSet.next()) {
+				// 子供情報一覧を初期化
+				ChildAbs childabs = new ChildAbs();
+				// 学生インスタンスに検索結果をセット
+				childabs.setChild_id(rSet.getString("child_id"));
+				childabs.setChild_name(rSet.getString("child_name"));
+				childabs.setParents_id(rSet.getString("parents_id"));
+				childabs.setClass_id(rSet.getString("class_id"));
+				childabs.setIs_attend(rSet.getBoolean("is_attend"));
+				childabs.setFacility_id(rSet.getString("facility_id"));
+				childabs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
+				list.add(childabs);
+			}
+		} catch (SQLException | NullPointerException e){
+			e.printStackTrace();
 		}
 		return list;
 	}
