@@ -109,15 +109,16 @@ public class ChildDao extends Dao{
 	}
 
 	// 保護者IDで子供情報を取得
-	public List<Child> getChildrenByParentId(String parents_id) throws Exception {
+	public List<Child> getChildrenByParentId(String parents_id, String facility_id) throws Exception {
 		List<Child> list = new ArrayList<>();
 		Connection connection = getConnection();
 		PreparedStatement st = null;
 
-		String sql = "select * from Child where parents_id = ?";
+		String sql = "select * from Child where parents_id = ? and facility_id=?";
 		try {
 			st = connection.prepareStatement(sql);
 			st.setString(1, parents_id);
+			st.setString(1, facility_id);
 			ResultSet rSet = st.executeQuery();
 
 			while (rSet.next()) {

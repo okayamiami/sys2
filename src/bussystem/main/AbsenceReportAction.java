@@ -31,9 +31,10 @@ public class AbsenceReportAction extends Action {
 		if ("P".equals(user_type)) {
 			ParentsUser pu = (ParentsUser) session.getAttribute("user"); // ログインユーザーを取得
 			// リクエストパラメータ―の取得 2
+			String facility_id = pu.getFacility_id();
 			String parents_id = pu.getParents_id();
 			// DBからデータ取得 3
-			list = cDao.getChildrenByParentId(parents_id); // 保護者IDで子供情報を取得
+			list = cDao.getChildrenByParentId(parents_id, facility_id); // 保護者IDで子供情報を取得
 
 			// 施設でしぼった子供の名前のみリスト
 			for (Child c : list) {
