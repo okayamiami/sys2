@@ -45,12 +45,17 @@ public class AbsenceReportExcuteAction extends Action {
 	Map<String, String> errors = new HashMap<>();				// エラーメッセージ
 
 
-	// 現在日時を取得
+	// 欠席報告日作成
 	LocalDateTime nowDate = LocalDateTime.now();
 	System.out.println(nowDate);
 	// 表示形式を指定（年月日）
 	DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	String absence_date = dtf1.format(nowDate);
+
+	// 欠席IDの年度部分を作成
+    int year = nowDate.getYear() % 100;  					// 2桁の年を取得
+    String formattedYear = String.format("%02d", year); 	// ゼロ埋めして2桁にする
+
 
 
 
@@ -101,7 +106,7 @@ public class AbsenceReportExcuteAction extends Action {
 	}
 
 	//欠席ID（完成形）
-	perfect_id = "A" + String.format("%05d", nextNumber);
+	perfect_id = "A" + formattedYear + String.format("%05d", nextNumber);
 
 
 
