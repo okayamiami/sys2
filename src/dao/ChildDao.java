@@ -118,7 +118,7 @@ public class ChildDao extends Dao{
 		try {
 			st = connection.prepareStatement(sql);
 			st.setString(1, parents_id);
-			st.setString(1, facility_id);
+			st.setString(2, facility_id);
 			ResultSet rSet = st.executeQuery();
 
 			while (rSet.next()) {
