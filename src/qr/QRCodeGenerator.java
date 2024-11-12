@@ -13,7 +13,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 public class QRCodeGenerator {
 
     // 保存するパスを直接指定
-    private static final String QR_CODE_IMAGE_PATH = "./WebContent/sysshin/MyQRCode.png";
+    private static final String QR_CODE_IMAGE_PATH = "/WebContent/sysshin/MyQRCode.png";
 
     // QRコード生成メソッド
     public String generateQRCode(String childId, String facilityId) throws WriterException, IOException {
@@ -30,7 +30,7 @@ public class QRCodeGenerator {
     	System.out.println("ddddddddddddddddddddd");
         // 直接ファイルパスを指定
     	// 直接ファイルパスを指定
-        String filePath = "./Webcontent/sysshin/MyQRCode.png";
+        String filePath = "/Webcontent/sysshin/MyQRCode.png";
         Path path = FileSystems.getDefault().getPath(filePath);
         System.out.println("eeeeeeeeeeeeeeeeeee");
 
