@@ -25,13 +25,13 @@
         <tr>
             <td>${child.child_id}</td>
             <td>${child.child_name}</td>
-            <td>${child.class_id}</td>
+            <td>${child.facility_id}</td>
             <td>
                 <!-- 作成ボタン -->
                 <form action = "QrCreateExecute.action" method="post">
                     <input type="hidden" name="child_id" value="${child.child_id}" />
                     <input type="hidden" name="child_name" value="${child.child_name}" />
-                    <input type="hidden" name="facility_id" value="${facility_id}" />
+                    <input type="hidden" name="facility_id" value="${child.facility_id}" />
                     <button type="submit">作成</button>
                 </form>
             </td>
