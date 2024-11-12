@@ -34,7 +34,7 @@ public class BusDao extends Dao {
 				Bus bus = new Bus();
 				bus.setBus_id(rSet.getString("bus_id"));
 				bus.setBus_name(rSet.getString("bus_name"));
-				bus.setFacility_id(rSet.getString("facility_id)"));
+				bus.setFacility_id(rSet.getString("facility_id"));
 				list.add(bus);
 			}
 		}catch(Exception e){

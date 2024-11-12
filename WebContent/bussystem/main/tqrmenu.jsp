@@ -14,7 +14,7 @@
 
 <h2>QR機能選択</h2>
 
-<a href="#">QR読み取り</a>
+<a href="QrReaderSelectBus.action">QR読み取り</a>
 
 <a href="#">乗降状況</a>
 </div>
