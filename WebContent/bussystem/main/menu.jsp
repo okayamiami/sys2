@@ -18,7 +18,7 @@
 				<c:when test="${user_type == 'M'}">
 					<h2>管理者</h2>
 					<a href="NewRegist.action">新規登録</a>
-					<a href="名簿情報一覧">名簿情報一覧</a>
+					<a href="ChildList.action">名簿情報一覧</a>
 					<a href="保護者情報">保護者情報</a>
 					<a href="子供情報">子供情報</a>
 					<a href="AbsenceSelect.action">欠席機能</a>
@@ -27,7 +27,7 @@
 				</c:when>
 				<c:when test="${user_type == 'T'}">
 					<h2>先生</h2>
-					<a href="名簿情報一覧">名簿情報一覧</a>
+					<a href="ChildList.action">名簿情報一覧</a>
 					<a href="AbsenceSelect.action">欠席機能</a>
 					<a href="お知らせ機能">お知らせ機能</a>
 					<a href="QrMenu.action">QR機能</a>
