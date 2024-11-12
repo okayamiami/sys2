@@ -95,7 +95,7 @@ public class AbsenceReportExecuteAction extends Action {
 	// abs_idの数字部分の最大値を取得
 	OptionalInt maxAbsId = abs_list.stream()
 	        .map(Absence::getAbsence_id) 		// Absenceオブジェクトからabs_idを取得
-	        .map(s -> s.substring(1)) 			// 先頭の文字を除去して数字部分を抽出
+	        .map(s -> s.substring(3)) 			// 先頭の文字を除去して数字部分を抽出
 	        .mapToInt(Integer::parseInt) 		// Stringをintに変換
 	        .max();
 
@@ -109,8 +109,15 @@ public class AbsenceReportExecuteAction extends Action {
 	}
 
 	//欠席ID（完成形）
-	perfect_id = "A" + formattedYear + String.format("%05d", nextNumber);
-
+	perfect_id = "A" + formattedYear + String.format("%04d", nextNumber);
+	System.out.println(formattedYear);
+	System.out.println(String.format("%04d", nextNumber));
+	System.out.println(perfect_id);
+	System.out.println(abs_main);
+	System.out.println(child_id.getChild_id());
+	System.out.println(absence_date);
+	System.out.println(facility_id);
+	System.out.println(abs_is_attend);
 
 
 

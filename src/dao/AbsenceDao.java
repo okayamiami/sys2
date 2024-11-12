@@ -148,12 +148,12 @@ public class AbsenceDao extends Dao{
 				//該当の日に対象の子の欠席情報が存在しなかった場合
 				//プリペアードステートメンにINSERT文をセット
 				statement = connection.prepareStatement(
-						"insert into Absence (absence_id, absence_main, child_id, absence_date, facility_id,) values(?, ?, ?, ?, ?) ");
+						"insert into Absence (absence_id, absence_main, child_id, absence_date, facility_id) values(?, ?, ?, ?, ?) ");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, absence.getAbsence_id());
 				statement.setString(2, absence.getAbsence_main());
 				statement.setString(3, absence.getChild_id());
-				statement.setString(4, absence.getAbsence_id());
+				statement.setString(4, absence.getAbsence_date());
 				statement.setString(5, absence.getFacility_id());
 
 			} else {
