@@ -42,8 +42,6 @@ public class AbsenceReportExecuteAction extends Action {
 	System.out.println("A");
 	boolean abs_is_attend = true;								// 欠席報告が登録時点でtrue状態
 	int nextNumber ;
-	ParentsUser pu = (ParentsUser) session.getAttribute("user");//（保護者）ログインユーザーを取得
-	ManageUser mu = (ManageUser) session.getAttribute("user");	//（管理者）ログインユーザーを取得
 	System.out.println("A");
 	Map<String, String> errors = new HashMap<>();				// エラーメッセージ
 
@@ -62,15 +60,17 @@ public class AbsenceReportExecuteAction extends Action {
 
 
 
-	// ログインしているユーザー種別を判別
-    if (pu != null ) {
-    	user_status = "P";		// 保護者
-        facility_id = pu.getFacility_id();					// 保護者から施設ID取得
-    } else if (mu != null){
-    	user_status = "M";		// 管理者
-    	facility_id = mu.getFacility_id();					// 管理者から施設ID取得
-    }
+	String user_type = (String) session.getAttribute("user_type");
 
+	if ("P".equals(user_type)) {
+		ParentsUser pu = (ParentsUser) session.getAttribute("user"); // ログインユーザーを取得
+		// リクエストパラメータ―の取得 2
+		facility_id = pu.getFacility_id();
+	} else if ("M".equals(user_type)) {
+		ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得
+		// リクエストパラメータ―の取得 2
+		facility_id = mu.getFacility_id();
+	}
 
 
 	//リクエストパラメータ―の取得 2
