@@ -28,7 +28,6 @@
 		<input type="submit" value="登録して終了">
 	</form>
 
-	<%--<a href="StudentList.action">戻る</a>--%>
 </div>
 </div>
 </body>

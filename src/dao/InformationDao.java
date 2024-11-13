@@ -4,17 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import bean.Information;
 
 public class InformationDao extends Dao{
 
-	private String baseSql = "select * from Infomation where facility_id=? ";
+	private String baseSql = "select * from Information where facility_id=? ";
 
 	// お知らせ全件表示
-	public List<Information> getInfo(String facility_id) throws Exception {
+	public List<Information> getInfoList(String facility_id) throws Exception {
 		// 戻り値用のリストを作成
 		// new演算子とArrayListで空のListを用意
 		List<Information> list = new ArrayList<>();
@@ -125,76 +127,82 @@ public class InformationDao extends Dao{
 	}
 
 
-	public boolean saveInfo(Information information) throws Exception {
+	public boolean saveInfo(String infoTitle, String infoMain, String facilityId, String infoGenre) throws Exception {
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    int count = 0;
 
-		//コネクションを確立
-		Connection connection = getConnection();
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-		//実行件数
-		int count = 0;
+	    try {
+	        // コネクションを確立
+	        connection = getConnection();
 
-		try{
-			//データベースからお知らせ情報を取得
-			Information info = getInfoMain(information.getFacility_id(), information.getInfo_id());
-			if (info == null) {
-				//お知らせ情報が存在しなかった場合
-				//プリペアードステートメンにINSERT文をセット
-				statement = connection.prepareStatement(
-						"insert into Information (info_id, info_title, info_main, facility_id, info_genre, info_date) values(?, ?, ?, ?, ?, ?) ");
-				//プリペアードステートメントに値をバインド
-				statement.setString(1, info.getInfo_id());
-				statement.setString(2, info.getInfo_title());
-				statement.setString(3, info.getInfo_main());
-				statement.setString(4, info.getFacility_id());
-				statement.setString(5, info.getInfo_genre());
-				statement.setString(6, info.getInfo_date());
-			} else {
-				//お知らせ情報が存在した場合
-				//プリペアードステートメントにUPDATE文をセット
-				statement = connection
-						.prepareStatement("update Information set info_title=? info_main=? info_genre=? info_date=? where info_id=? and facility_id=?");
-				//プリペアードステートメントに値をバインド
-				statement.setString(1, info.getInfo_title());
-				statement.setString(2, info.getInfo_main());
-				statement.setString(3, info.getInfo_genre());
-				statement.setString(4, info.getInfo_date());
-				statement.setString(5, info.getInfo_id());
-				statement.setString(6, info.getFacility_id());
-			}
+	        // 現在の日付と時刻を文字列で取得
+	        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-			//プリペアードステートメントを実行
-			count = statement.executeUpdate();
+	        // 新しい info_id を生成
+	        String newInfoId = generateNewInfoId(connection);
 
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			//
-			if(statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
+	        // プリペアードステートメントに INSERT 文をセット
+	        statement = connection.prepareStatement(
+	            "INSERT INTO Information (info_id, info_title, info_main, facility_id, info_genre, info_date) VALUES (?, ?, ?, ?, ?, ?)"
+	        );
+	        // プリペアードステートメントに値をバインド
+	        statement.setString(1, newInfoId);
+	        statement.setString(2, infoTitle);
+	        statement.setString(3, infoMain);
+	        statement.setString(4, facilityId);
+	        statement.setString(5, infoGenre);
+	        statement.setString(6, currentDate);
 
-			if(connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
+	        // プリペアードステートメントを実行
+	        count = statement.executeUpdate();
 
-		if (count > 0) {
-			//実行件数が1以上ある場合
-			return true;
-		} else {
-			//実行件数が0件の場合
-			return false;
-		}
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        // ステートメントとコネクションのクローズ
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
 
+	    // 実行件数が1以上ある場合は成功
+	    return count > 0;
+	}
+
+	// 新しい info_id を生成するメソッド
+	private String generateNewInfoId(Connection connection) throws SQLException {
+	    String newInfoId = "00001";  // 初期値
+	    String query = "SELECT info_id FROM Information";
+
+	    try (PreparedStatement statement = connection.prepareStatement(query);
+	         ResultSet resultSet = statement.executeQuery()) {
+
+	        int maxId = 0;
+
+	        // ResultSetからすべてのinfo_idを取得し、最大のものを探す
+	        while (resultSet.next()) {
+	            int currentId = Integer.parseInt(resultSet.getString("info_id"));
+	            if (currentId > maxId) {
+	                maxId = currentId;
+	            }
+	        }
+
+	        // 最大IDに1を加え、5桁のゼロパディングで新しいIDを生成
+	        newInfoId = String.format("%05d", maxId + 1);
+	    }
+	    return newInfoId;
 	}
 
 }
