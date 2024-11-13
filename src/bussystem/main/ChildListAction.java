@@ -21,6 +21,9 @@ import tool.Action;
 
 public class ChildListAction extends Action {
 
+
+	// 在籍無しの場合は非表示設定
+
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
@@ -33,7 +36,10 @@ public class ChildListAction extends Action {
 		String child_name ="";						// 選択された名前
 		String class_cd = "";						// 選択されたクラス
 		String absIsAttendStr="";					// 選択された出欠席フラグ
-		boolean absIsAttend = false;				// 出欠席フラグ false:全員表示
+
+		boolean absIsAttend = false;				// 出欠席フラグ 全員表示
+		boolean IsAttend = true;					// 在籍フラグ   在籍中の子のみ表示
+
 		List<ChildAbs> childabs = null;			// 子供一覧用リスト
 		LocalDate todaysDate = LocalDate.now();	// LcalDateインスタンスを取得
 		int year = todaysDate.getYear();			// 本日の日付を取得
@@ -52,18 +58,23 @@ public class ChildListAction extends Action {
 		child_id = req.getParameter("f1");			// 子供ID
 		child_name = req.getParameter("f2");		// 子供名前
 		class_cd = req.getParameter("f3");			// クラス
-		absIsAttendStr = req.getParameter("f4");	// 出欠席フラグ
+		absIsAttendStr = req.getParameter("f4");	// 出欠席フラグ 選択されていたら欠席の子のみ表示
+
+		if (absIsAttendStr != null) {
+			// 欠席フラグを立てる
+			absIsAttend = true;
+		}
 
 
 		//DBからデータ取得 3
 
 		// 子供
 		List<Child> childlist = cDao.getChildListinfo(facility_id);		// 子供情報一覧リスト
-		List<String> childIdlist = new ArrayList<>();				// 子供IDのみリスト
+		List<String> childIdlist = new ArrayList<>();					// 子供IDのみリスト
 		List<String> childNamelist = new ArrayList<>();				// 子供の名前のみリスト
 
 		for (Child c : childlist) {		// 子供IDリスト
-			childNamelist.add(c.getChild_id());
+			childIdlist.add(c.getChild_id());
 		}
 		for (Child c : childlist) {		// 子供名リスト
 			childNamelist.add(c.getChild_name());
@@ -78,38 +89,40 @@ public class ChildListAction extends Action {
 			classNamelist.add(c.getClass_name());
 		}
 
+		// 選択されたクラス名をクラスIDに変換
+		ClassCd classID = ccDao.getClassCdinfoById(class_cd);
+		String class_id = classID.getClass_id();
 
 
-		/**
-		 *  ここから作成する 複数選択を拒否するように各選択肢を作成する
-		 */
-		if (!child_id.equals("0") && !child_name.equals("0") && !class_cd.equals("0") ) {
-			// 子供IDのみ指定
-			childs = sDao.filter(teacher.getSchool(), entYear, classNum, isAttend);
-		} else if (entYear != 0 && classNum.equals("0")) {
-			// 子供の名前のみ指定
-			students = sDao.filter(teacher.getSchool(), entYear, isAttend);
-		} else if (entYear == 0 && classNum == null || entYear == 0 && classNum.equals("0")) {
-			// クラスのみ選択
-			students = sDao.filter(teacher.getSchool(), isAttend);
+
+		// 絞り込み条件の処理
+		if (!child_id.equals("0") && child_name.equals("0") && class_cd.equals("0") ) {				// 子供IDのみ指定
+			childs = caDao.filterbyChildId(child_id, facility_id);
+
+		} else if (child_id.equals("0") && !child_name.equals("0") && class_cd.equals("0")) {		// 子供の名前のみ指定
+			childs = caDao.filterbyChildName(child_name, facility_id);
+
+		} else if (child_id.equals("0") && child_name.equals("0") && !class_cd.equals("0")) {		// クラスのみ選択
+			childs = caDao.filterbyClassCd(class_id, facility_id);
+
+		} else if (child_id.equals("0") && child_name.equals("0") && !class_cd.equals("0")) {		// クラスと出欠席
+			childs = caDao.filterbyClassAbsAttend(class_id, facility_id, absIsAttend);
+
+		} else if (child_id.equals("0") && child_name.equals("0") && !class_cd.equals("0")) {		// 出欠席のみ
+			childs = caDao.filterbyAbsAttend(absIsAttend, facility_id);
+
 		} else {
-			errors.put("f1", "クラスを指定する場合は入学年度も指定してください");
+			// 選択条件が複数あったとき
+			errors.put("f1", "絞り込み条件が複数あります");
 			req.setAttribute("errors", errors);
-			// 全学生情報を取得
-			students = sDao.filter(teacher.getSchool(), isAttend);
+			// 施設の（在籍中の）子供全員表示
+			childs = caDao.getChildListAbsinfo(facility_id);
 		}
+
+
+
 
 		//ビジネスロジック 4
-		if (entYearStr != null) {
-			// 数値に変換
-			entYear = Integer.parseInt(entYearStr);
-		}
-		// リストを初期化
-		List<Integer> entYearSet = new ArrayList<>();
-		// 10年前から1年後まで年をリストに追加
-		for (int i = year - 10; i < year + 1; i++) {
-			entYearSet.add(i);
-		}
 
 		//DBへデータ保存 5
 		//なし
@@ -117,22 +130,34 @@ public class ChildListAction extends Action {
 
 
 		//レスポンス値をセット 6
-		// リクエストに入学年度をセット
-		req.setAttribute("f1", entYear);
-		// リクエストにクラス番号をセット
-		req.setAttribute("f2", classNum);
+
+		/**ここの値保持後で直す*/
+
+		// リクエストに子供IDのリストをセット
+		req.setAttribute("f1", childIdlist);
+		// リクエストに子供の名前リストをセット
+		req.setAttribute("f2", childNamelist);
 		// 在学フラグが送信されていた場合
-		if (isAttendStr != null) {
+		if (absIsAttendStr != null) {
 			// リクエストに在学フラグをセット
-			req.setAttribute("f3", isAttendStr);
+			req.setAttribute("f3", absIsAttendStr);
 		}
+
+
 		// リクエストに学生リストをセット
-		req.setAttribute("students", students);
-		// リクエストにデータをセット
-		req.setAttribute("class_num_set", list);
-		req.setAttribute("ent_year_set", entYearSet);
+		req.setAttribute("child_id_set", childIdlist);
+		req.setAttribute("child_name_set", childNamelist);
+		req.setAttribute("class_name", classNamelist);
+
 		//JSPへフォワード 7
-		req.getRequestDispatcher("student_list.jsp").forward(req, res);
+
+
+
+
+
+
+		//jsp作成から！！！！！！！！！！！
+		req.getRequestDispatcher("childlist.jsp").forward(req, res);
 	}
 
 }
