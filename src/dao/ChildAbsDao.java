@@ -21,15 +21,24 @@ public class ChildAbsDao extends Dao{
 
 
 	//子供情報一覧表示のみ使用（欠席情報あり）
-	public List<ChildAbs> getChildListAbsinfo(String facility_id)throws Exception{
+	public List<ChildAbs> getChildListAbsinfo(String facility_id, boolean IsAttend)throws Exception{
 		//戻り値用のリスト
 		List<ChildAbs> list = new ArrayList<>();
 		Connection connection = getConnection();
 		PreparedStatement st = null;
 
+		// SQL文の在学フラグ条件
+		String conditionIsAttend = "";
+		// 欠席フラグがのture場合(欠席のみ表示)
+		if (IsAttend) {
+		    conditionIsAttend = "and is_attend=true  ";
+		}
+
+
 		try{
-			st = connection.prepareStatement(baseSql);
+			st = connection.prepareStatement(baseSql+conditionIsAttend);
 			st.setString(1,facility_id);
+
 			ResultSet rSet = st.executeQuery();
 			while(rSet.next()){
 				ChildAbs childabs = new ChildAbs();
@@ -109,7 +118,7 @@ public class ChildAbsDao extends Dao{
 	 * @return 一覧のリスト:List<ChildAbs> 存在しない場合は0件のリスト
 	 * @throws Exception
 	 */
-	public List<ChildAbs> filterbyChildId(String child_id, String facility_id) throws Exception {
+	public List<ChildAbs> filterbyChildId(String child_id, String facility_id, boolean IsAttend) throws Exception {
 
 		// リストを初期化
 		List<ChildAbs> list = new ArrayList<>();
@@ -120,17 +129,27 @@ public class ChildAbsDao extends Dao{
 		// リザルトセット
 		ResultSet rSet = null;
 		// SQL文の条件
-		String condition = "and child_id=?  ";
+		String condition = "and child.child_id=?  ";
+
+		// SQL文の在学フラグ条件
+		String conditionIsAttend = "";
+		// 欠席フラグがtrueの場合(欠席のみ表示)
+		if (IsAttend) {
+		    conditionIsAttend = "and child.is_attend=true  ";
+		}
+
 		// SQL文のソート
-		String order = "order by child_id asc";
+		String order = "order by child.child_id asc";
+
 
 
 		try {
 			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition + order);
+			statement = connection.prepareStatement(baseSql + condition + conditionIsAttend + order);
 
 			statement.setString(1, facility_id);
 			statement.setString(2, child_id);
+
 			// プライベートステートメントを実行
 			rSet = statement.executeQuery();
 
@@ -169,7 +188,7 @@ public class ChildAbsDao extends Dao{
 	 * @return 一覧のリスト:List<ChildAbs> 存在しない場合は0件のリスト
 	 * @throws Exception
 	 */
-	public List<ChildAbs> filterbyChildName(String child_name, String facility_id) throws Exception {
+	public List<ChildAbs> filterbyChildName(String child_name, String facility_id, boolean IsAttend) throws Exception {
 
 		// リストを初期化
 		List<ChildAbs> list = new ArrayList<>();
@@ -182,11 +201,19 @@ public class ChildAbsDao extends Dao{
 		// SQL文の条件
 		String condition = "and child_name=?  ";
 
+		// SQL文の在学フラグ条件
+		String conditionIsAttend = "";
+		// 欠席フラグがのture場合(欠席のみ表示)
+		if (IsAttend) {
+		    conditionIsAttend = "and is_attend=true  ";
+		}
+
+
 
 
 		try {
 			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition);
+			statement = connection.prepareStatement(baseSql + condition + conditionIsAttend);
 
 			statement.setString(1, facility_id);
 			statement.setString(2, child_name);
@@ -228,7 +255,7 @@ public class ChildAbsDao extends Dao{
 	 * @return 一覧のリスト:List<ChildAbs> 存在しない場合は0件のリスト
 	 * @throws Exception
 	 */
-	public List<ChildAbs> filterbyClassCd(String class_id, String facility_id) throws Exception {
+	public List<ChildAbs> filterbyClassCd(String class_id, String facility_id, boolean IsAttend) throws Exception {
 
 		// リストを初期化
 		List<ChildAbs> list = new ArrayList<>();
@@ -241,11 +268,19 @@ public class ChildAbsDao extends Dao{
 		// SQL文の条件
 		String condition = "and class_id=?  ";
 
+		// SQL文の在学フラグ条件
+		String conditionIsAttend = "";
+		// 欠席フラグがのture場合(欠席のみ表示)
+		if (IsAttend) {
+		    conditionIsAttend = "and is_attend=true  ";
+		}
+
+
 
 
 		try {
 			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition);
+			statement = connection.prepareStatement(baseSql + condition + conditionIsAttend);
 
 			statement.setString(1, facility_id);
 			statement.setString(2, class_id);
@@ -291,7 +326,7 @@ public class ChildAbsDao extends Dao{
 	 * @return 一覧のリスト:List<ChildAbs> 存在しない場合は0件のリスト
 	 * @throws Exception
 	 */
-	public List<ChildAbs> filterbyClassAbsAttend(String class_id, String facility_id, boolean absIsAttend) throws Exception {
+	public List<ChildAbs> filterbyClassAbsAttend(String class_id, String facility_id, boolean absIsAttend, boolean IsAttend) throws Exception {
 
 		// リストを初期化
 		List<ChildAbs> list = new ArrayList<>();
@@ -304,12 +339,20 @@ public class ChildAbsDao extends Dao{
 		// SQL文の条件
 		String condition = "and class_id=? ";
 
-		// SQL文の在学フラグ条件
+		// SQL文の出欠席フラグ条件
 		String conditionabsIsAttend = "";
 		// 欠席フラグがのture場合(欠席のみ表示)
 		if (absIsAttend) {
 		    conditionabsIsAttend = "and abs_is_attend=true  ";
 		}
+
+		// SQL文の在学フラグ条件
+		String conditionIsAttend = "";
+		// 在学中のみ表示
+		if (IsAttend) {
+		    conditionIsAttend = "and is_attend=true  ";
+		}
+
 
 
 		/**
@@ -326,7 +369,7 @@ public class ChildAbsDao extends Dao{
 
 		try {
 			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + conditionabsIsAttend + condition);
+			statement = connection.prepareStatement(baseSql + conditionabsIsAttend + condition + conditionIsAttend);
 
 			statement.setString(1, facility_id);
 			statement.setString(2, class_id);
@@ -362,7 +405,7 @@ public class ChildAbsDao extends Dao{
 
 
 	/**
-	 * filterメソッド 欠席フラグを指定して子供の一覧を取得する """"""""5
+	 * filterメソッド 欠席フラグを指定して子供の一覧を取得する
 	 *
 	 * @param absIsAttend:Boolean
 	 *            出欠席フラグ
@@ -371,7 +414,7 @@ public class ChildAbsDao extends Dao{
 	 * @return 一覧のリスト:List<ChildAbs> 存在しない場合は0件のリスト
 	 * @throws Exception
 	 */
-	public List<ChildAbs> filterbyAbsAttend(boolean absIsAttend, String facility_id) throws Exception {
+	public List<ChildAbs> filterbyAbsAttend(boolean absIsAttend, String facility_id, boolean IsAttend) throws Exception {
 
 		// リストを初期化
 		List<ChildAbs> list = new ArrayList<>();
@@ -389,10 +432,18 @@ public class ChildAbsDao extends Dao{
 		    conditionabsIsAttend = "and abs_is_attend=true  ";
 		}
 
+		// SQL文の在学フラグ条件
+		String conditionIsAttend = "";
+		// 在学中のみ表示
+		if (IsAttend) {
+		    conditionIsAttend = "and is_attend=true  ";
+		}
+
+
 
 		try {
 			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + conditionabsIsAttend);
+			statement = connection.prepareStatement(baseSql + conditionabsIsAttend + conditionIsAttend);
 
 			statement.setString(1, facility_id);
 			// プライベートステートメントを実行
