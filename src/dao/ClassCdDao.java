@@ -63,4 +63,39 @@ public class ClassCdDao extends Dao {
 	}
 
 
+	// クラス名からクラスIDを取得
+	public ClassCd getClassIdinfobyName(String facility_id,String class_name) throws Exception {
+		ClassCd className = new ClassCd();
+		// コネクションを確立
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// リザルトセット
+		ResultSet rSet = null;
+		// SQL文の条件
+		String condition = "and class_name=? ";
+
+
+
+
+		try  {
+			// プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(baseSql + condition );
+
+			statement.setString(1, facility_id);
+			statement.setString(2, class_name);
+
+			rSet = statement.executeQuery();
+
+			if(rSet.next()){
+				className.setClass_id(rSet.getString("class_id"));
+			}
+		} catch (SQLException e) {
+			throw new Exception("Error fetching class info", e);
+		}
+
+		return className;
+	}
+
+
 }
