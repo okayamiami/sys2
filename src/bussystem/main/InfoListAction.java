@@ -1,5 +1,7 @@
 package bussystem.main;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,34 +18,29 @@ public class InfoListAction extends Action {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		//ローカル変数の宣言 1
-		HttpSession session = req.getSession();//セッション
-		ManageUser mu = (ManageUser) session.getAttribute("user");		// ログインユーザーを取得（管理者or先生）
+		// ローカル変数の宣言 1
+		HttpSession session = req.getSession(); // セッション
+		ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得（管理者or先生）
 		InformationDao iDao = new InformationDao();
 
+		// DBからお知らせリストを取得
 		List<Information> ilist = iDao.getInfoList(mu.getFacility_id());
 
-		//リクエストパラメータ―の取得 2（絞り込み部分）
+		// お知らせリストを日付順（新しい順）にソート
+		Collections.sort(ilist, new Comparator<Information>() {
+			@Override
+			public int compare(Information o1, Information o2) {
+				// info_dateを比較して新しい日付が先に来るようにソート
+				return o2.getInfo_date().compareTo(o1.getInfo_date());
+			}
+		});
 
-
-		//DBからデータ取得 3
-
-
-		//ビジネスロジック 4
-
-		//DBへデータ保存 5
-		//なし
-
-		//レスポンス値をセット 6
+		// リクエスト属性にセット
 		req.setAttribute("ilist_set", ilist);
 
-		//JSPへフォワード 7
+		// JSPへフォワード
 		req.getRequestDispatcher("infolist.jsp").forward(req, res);
 	}
-
 }
-
-
-
 
 
