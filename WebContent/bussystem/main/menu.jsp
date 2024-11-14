@@ -8,6 +8,7 @@
 <title>メニュー</title>
 
 </head>
+<c:import url="/common/header.jsp" />
 <body>
 		<form action = "Menu.action" method="post">
 		<%
