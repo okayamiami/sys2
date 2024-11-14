@@ -128,81 +128,85 @@ public class InformationDao extends Dao{
 
 
 	public boolean saveInfo(String infoTitle, String infoMain, String facilityId, String infoGenre) throws Exception {
-	    Connection connection = null;
-	    PreparedStatement statement = null;
-	    int count = 0;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        int count = 0;
 
-	    try {
-	        // コネクションを確立
-	        connection = getConnection();
+        try {
+            // コネクションを確立
+            connection = getConnection();
 
-	        // 現在の日付と時刻を文字列で取得
-	        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            // 現在の日付と時刻を文字列で取得
+            String currentDate = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date());
 
-	        // 新しい info_id を生成
-	        String newInfoId = generateNewInfoId(connection);
+            // 新しい info_id を生成
+            String newInfoId = generateNewInfoId(connection);
 
-	        // プリペアードステートメントに INSERT 文をセット
-	        statement = connection.prepareStatement(
-	            "INSERT INTO Information (info_id, info_title, info_main, facility_id, info_genre, info_date) VALUES (?, ?, ?, ?, ?, ?)"
-	        );
-	        // プリペアードステートメントに値をバインド
-	        statement.setString(1, newInfoId);
-	        statement.setString(2, infoTitle);
-	        statement.setString(3, infoMain);
-	        statement.setString(4, facilityId);
-	        statement.setString(5, infoGenre);
-	        statement.setString(6, currentDate);
+            // プリペアードステートメントに INSERT 文をセット
+            statement = connection.prepareStatement(
+                "INSERT INTO Information (info_id, info_title, info_main, facility_id, info_genre, info_date) VALUES (?, ?, ?, ?, ?, ?)"
+            );
 
-	        // プリペアードステートメントを実行
-	        count = statement.executeUpdate();
+            // プリペアードステートメントに値をバインド
+            statement.setString(1, newInfoId);
+            statement.setString(2, infoTitle);
+            statement.setString(3, infoMain);
+            statement.setString(4, facilityId);
+            statement.setString(5, infoGenre);
+            statement.setString(6, currentDate);
 
-	    } catch (Exception e) {
-	        throw e;
-	    } finally {
-	        // ステートメントとコネクションのクローズ
-	        if (statement != null) {
-	            try {
-	                statement.close();
-	            } catch (SQLException sqle) {
-	                throw sqle;
+            // プリペアードステートメントを実行
+            count = statement.executeUpdate();
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            // ステートメントとコネクションのクローズ
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+        }
+
+        // 実行件数が1以上ある場合は成功
+        return count > 0;
+    }
+
+
+	 public String generateNewInfoId(Connection connection) throws SQLException {
+	        String prefix = "24Y";
+	        int numericPart = 1; // デフォルトの数値部分
+
+	        String query = "SELECT MAX(info_id) AS max_id FROM Information WHERE info_id LIKE ?";
+	        try (PreparedStatement statement = connection.prepareStatement(query)) {
+	            statement.setString(1, prefix + "%");
+	            try (ResultSet resultSet = statement.executeQuery()) {
+	                if (resultSet.next()) {
+	                    String currentMaxId = resultSet.getString("max_id");
+	                    if (currentMaxId != null && currentMaxId.startsWith(prefix)) {
+	                        String numberPart = currentMaxId.substring(prefix.length());
+	                        try {
+	                            numericPart = Integer.parseInt(numberPart) + 1;
+	                        } catch (NumberFormatException e) {
+	                            numericPart = 1;
+	                        }
+	                    }
+	                }
 	            }
 	        }
-	        if (connection != null) {
-	            try {
-	                connection.close();
-	            } catch (SQLException sqle) {
-	                throw sqle;
-	            }
-	        }
+
+	        // 新しいIDを生成し、ゼロパディング（例: "24Y01"）
+	        return String.format("%s%02d", prefix, numericPart);
 	    }
-
-	    // 実行件数が1以上ある場合は成功
-	    return count > 0;
-	}
-
-	// 新しい info_id を生成するメソッド
-	private String generateNewInfoId(Connection connection) throws SQLException {
-	    String newInfoId = "00001";  // 初期値
-	    String query = "SELECT info_id FROM Information";
-
-	    try (PreparedStatement statement = connection.prepareStatement(query);
-	         ResultSet resultSet = statement.executeQuery()) {
-
-	        int maxId = 0;
-
-	        // ResultSetからすべてのinfo_idを取得し、最大のものを探す
-	        while (resultSet.next()) {
-	            int currentId = Integer.parseInt(resultSet.getString("info_id"));
-	            if (currentId > maxId) {
-	                maxId = currentId;
-	            }
-	        }
-
-	        // 最大IDに1を加え、5桁のゼロパディングで新しいIDを生成
-	        newInfoId = String.format("%05d", maxId + 1);
-	    }
-	    return newInfoId;
-	}
 
 }
