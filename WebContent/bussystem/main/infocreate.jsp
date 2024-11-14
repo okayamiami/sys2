@@ -27,12 +27,12 @@
 
             <!-- タイトルの入力 -->
             <label>タイトル</label>
-            <input type="text" name="title" value="${title}" required>
+            <input type="text" name="title" value="${title}" maxlength="20" required>
             <div>${errors.get("title")}</div>
 
             <!-- 本文の入力 -->
             <label>本文</label>
-            <textarea name="content" rows="5" cols="40" required>${content}</textarea>
+            <textarea name="content" rows="5" cols="40" maxlength="300" required>${content}</textarea>
             <div>${errors.get("content")}</div>
 
             <!-- 送信ボタンと戻るボタン -->
@@ -49,4 +49,5 @@
 
 </body>
 </html>
+
 

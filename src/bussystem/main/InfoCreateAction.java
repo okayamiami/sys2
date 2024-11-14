@@ -1,6 +1,7 @@
 package bussystem.main;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,12 +25,21 @@ public class InfoCreateAction extends Action {
 
 		//DBからデータ取得 3
 		List<Information> ilist = iDao.getInfoList(mu.getFacility_id());
+		List<Information> distinctilist = ilist.stream()
+        .collect(Collectors.toMap(
+                Information::getInfo_genre,  // キー：ジャンル
+                info -> info,                // 値：Information オブジェクト
+                (existing, replacement) -> existing  // 重複した場合は最初の要素を保持
+        ))
+        .values()  // Mapの値 (Information) のコレクションを取得
+        .stream()
+        .collect(Collectors.toList());  // コレクションをリストに変換
 		//ビジネスロジック 4
 		//なし
 		//DBへデータ保存 5
 		//なし
 		//レスポンス値をセット 6
-		req.setAttribute("info_set", ilist);
+		req.setAttribute("info_set", distinctilist);
 
 		//JSPへフォワード 7
 		req.getRequestDispatcher("infocreate.jsp").forward(req, res);

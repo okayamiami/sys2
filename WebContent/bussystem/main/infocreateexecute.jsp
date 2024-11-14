@@ -15,7 +15,7 @@
 <p>${message}</p>
 
 <!-- ホームや一覧に戻るリンク -->
-<a href="InfoCreateList.action">お知らせ作成に戻る</a>
+<a href="InfoCreate.action">お知らせ作成に戻る</a>
 
 </body>
 <c:import url="/common/footer.jsp" />
