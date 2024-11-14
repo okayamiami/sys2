@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import bean.Information;
@@ -50,7 +48,7 @@ public class InformationDao extends Dao{
 				info.setInfo_main(rSet.getString("info_main"));
 				info.setFacility_id(rSet.getString("facility_id"));
 				info.setInfo_genre(rSet.getString("info_genre"));
-				info.setInfo_date(rSet.getString("info_date"));
+				info.setInfo_date(rSet.getTimestamp("info_date"));
 				list.add(info);
 
 			}
@@ -99,7 +97,7 @@ public class InformationDao extends Dao{
 				infomain.setInfo_main(rSet.getString("info_main"));
 				infomain.setFacility_id(rSet.getString("facility_id"));
 				infomain.setInfo_genre(rSet.getString("info_genre"));
-				infomain.setInfo_date(rSet.getString("info_date"));
+				infomain.setInfo_date(rSet.getTimestamp("info_date"));
 			}else{
 				infomain=null;
 			}
@@ -128,59 +126,59 @@ public class InformationDao extends Dao{
 
 
 	public boolean saveInfo(String infoTitle, String infoMain, String facilityId, String infoGenre) throws Exception {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        int count = 0;
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    int count = 0;
 
-        try {
-            // コネクションを確立
-            connection = getConnection();
+	    try {
+	        // コネクションを確立
+	        connection = getConnection();
 
-            // 現在の日付と時刻を文字列で取得
-            String currentDate = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date());
+	        // 現在の日付と時刻を java.sql.Timestamp 型で取得（秒まで）
+	        java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(System.currentTimeMillis());
 
-            // 新しい info_id を生成
-            String newInfoId = generateNewInfoId(connection);
+	        // 新しい info_id を生成
+	        String newInfoId = generateNewInfoId(connection);
 
-            // プリペアードステートメントに INSERT 文をセット
-            statement = connection.prepareStatement(
-                "INSERT INTO Information (info_id, info_title, info_main, facility_id, info_genre, info_date) VALUES (?, ?, ?, ?, ?, ?)"
-            );
+	        // プリペアードステートメントに INSERT 文をセット
+	        statement = connection.prepareStatement(
+	            "INSERT INTO Information (info_id, info_title, info_main, facility_id, info_genre, info_date) VALUES (?, ?, ?, ?, ?, ?)"
+	        );
 
-            // プリペアードステートメントに値をバインド
-            statement.setString(1, newInfoId);
-            statement.setString(2, infoTitle);
-            statement.setString(3, infoMain);
-            statement.setString(4, facilityId);
-            statement.setString(5, infoGenre);
-            statement.setString(6, currentDate);
+	        // プリペアードステートメントに値をバインド
+	        statement.setString(1, newInfoId);
+	        statement.setString(2, infoTitle);
+	        statement.setString(3, infoMain);
+	        statement.setString(4, facilityId);
+	        statement.setString(5, infoGenre);
+	        statement.setTimestamp(6, sqlTimestamp);  // java.sql.Timestamp を使用
 
-            // プリペアードステートメントを実行
-            count = statement.executeUpdate();
+	        // プリペアードステートメントを実行
+	        count = statement.executeUpdate();
 
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            // ステートメントとコネクションのクローズ
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException sqle) {
-                    throw sqle;
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException sqle) {
-                    throw sqle;
-                }
-            }
-        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        // ステートメントとコネクションのクローズ
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
 
-        // 実行件数が1以上ある場合は成功
-        return count > 0;
-    }
+	    // 実行件数が1以上ある場合は成功
+	    return count > 0;
+	}
 
 
 	 public String generateNewInfoId(Connection connection) throws SQLException {
