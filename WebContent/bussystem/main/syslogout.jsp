@@ -18,7 +18,8 @@
 <div class="main">
 <div class="con">
 	<p>ログアウトしました</p>
-	<a href="/sys2/bussystem/Login.action">ログイン</a>
+	<br>
+	<a href="/sys2/bussystem/Login.action" >ログイン</a>
 </div>
 </div>
 

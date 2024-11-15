@@ -16,22 +16,21 @@
       <div>${errors.get("null")}</div>
     </div>
   </div>
-
+<div class="main">
+<div class="con">
   <form action="LoginExecute.action" method="post">
-    <div class="log">
-      <label>ID</label>
+  <dl>
+      <dt><label>ID</label></dt>
       <%-- value=T0000001 --%>
       <%-- value=P2400001 --%>
-      <input type="text" name="user_id" maxlength="20" value="M0000001" required><br>
-    </div>
+      <dd><input type="text" name="user_id" maxlength="20" value="M0000001" required></dd>
 
-    <div class="pas">
-      <label>パスワード</label>
+
+      <dt><label>パスワード</label></dt>
       <%-- value=kanasen01 --%>
       <%-- value=nohara111 --%>
-      <input type="password" id="user_pass" name="user_pass" maxlength="20" value="kanakan01" required/><br>
-      <input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()" />
-      <label for="showPassword">パスワードを表示</label>
+      <dd><input type="password" id="user_pass" name="user_pass" maxlength="20" value="kanakan01" required/></dd>
+      <dt><label for="showPassword">パスワードを表示</label>
 
       <script>
         function togglePasswordVisibility() {
@@ -44,18 +43,23 @@
             passwordInput.type = "password";
           }
         }
-      </script><br>
-    </div>
-	<div class="fac">
-    <label>facility_ID</label>
-    <input type="text" name="facility_id" maxlength="20" value="KK000" required><br>
-	</div>
+      </script>
+      </dt>
+      <dd><input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()" /></dd>
+
+
+    <dt><label>facility_ID</label></dt>
+    <dd><input type="text" name="facility_id" maxlength="20" value="KK000" required></dd>
+	</dl>
 
 	<div class="button">
     <input type="submit" name="login" value="ログイン"/>
     </div>
 
   </form>
+  </div>
+  </div>
+
   <c:import url="/common/footer.jsp" />
 </body>
 </html>
