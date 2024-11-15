@@ -9,6 +9,13 @@
 <body>
     <h2>QRコード読み取りページ</h2>
 
+    <c:import url="/common/header.jsp" />
+
+	<div class="main">
+	<c:import url="/common/navi.jsp" />
+
+	<div class ="con">
+
     <!-- QRコード読み取り開始ボタン -->
     <button onclick="startQRCodeReader()">QRコード読み取りを開始</button>
 
@@ -81,6 +88,8 @@
             }
         }
     </script>
+    </div>
+    </div>
 </body>
 </html>
 

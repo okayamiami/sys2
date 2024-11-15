@@ -9,8 +9,17 @@
 
 </head>
 <body>
+
 <c:import url="/common/header.jsp" />
+
+<div class="main">
+<c:import url="/common/navi.jsp" />
+
+<div class ="con">
+
 <p>ログアウトしました</p>
 <a href="/sys2/bussystem/Login.action">ログイン</a>
+</div>
+</div>
 </body>
 </html>

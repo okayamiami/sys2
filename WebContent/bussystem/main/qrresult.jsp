@@ -7,8 +7,18 @@
     <title>更新結果</title>
 </head>
 <body>
+
+<c:import url="/common/header.jsp" />
+
+<div class="main">
+<c:import url="/common/navi.jsp" />
+
+<div class ="con">
+
     <h2>出席情報の更新結果</h2>
     <p>${message}</p>
     <a href="qrreader.jsp">戻る</a>
+    </div>
+    </div>
 </body>
 </html>
