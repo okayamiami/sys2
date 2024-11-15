@@ -1,12 +1,17 @@
-<%-- 子供一覧JSP --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-
-
-
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>子供一覧</title>
+</head>
+<body>
+<c:import url="/common/header.jsp" />
+<div class="main">
+<c:import url="/common/navi.jsp" />
+<div class="con">
 	<h2>名簿一覧</h2>
 
 	<form method="get">
@@ -95,5 +100,7 @@
 	</c:choose>
 
 </div>
-
+</div>
+</body>
+<c:import url="/common/footer.jsp" />
 </html>
