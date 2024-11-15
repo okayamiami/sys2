@@ -8,8 +8,12 @@
 <title>メニュー</title>
 
 </head>
-<c:import url="/common/header.jsp" />
+
 <body>
+<c:import url="/common/header.jsp" />
+<div class="main">
+<c:import url="/common/navi.jsp" />
+<div class="con">
 		<form action = "Menu.action" method="post">
 		<%
 		session.getAttribute("user_type");
@@ -43,6 +47,9 @@
 			</c:choose>
 
 		</form>
+</div>
+</div>
 
 </body>
+<c:import url="/common/footer.jsp" />
 </html>

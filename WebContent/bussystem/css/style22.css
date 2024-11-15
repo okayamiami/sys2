@@ -1,0 +1,51 @@
+
+.header {
+	width: 100%;
+  text-align: center;
+  background-color: #0080ff;
+}
+
+.pas {
+	width: 100%;
+  text-align: center;
+  padding: 10px 0 0 0;
+
+}
+
+.log {
+	width: 100%;
+  text-align: center;
+   padding: 10px 0 0 0;
+}
+
+
+.fac {
+	width: 100%;
+  text-align: center;
+   padding: 10px 0 0 0;
+}
+
+
+.button {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0 20px 0;
+}
+
+.con {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+}
+
+
+.main{
+	display: flex;
+}
+
+.foo {
+  width: 100%;
+  text-align: center;
+  background-color: #808080;
+}
