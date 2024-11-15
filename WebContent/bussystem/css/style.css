@@ -1,3 +1,38 @@
+.header {
+  width: 100%;
+  text-align: center;
+  background-color: #0080ff;
+
+}
+
+
+.side {
+  width: 15%;
+  height: 100%;
+  text-align: center;
+
+
+
+}
+.con {
+  width: 85%;
+  height: 100%;
+  text-align: left;
+  margin-left: 20px;
+}
+
+
+.main{
+	display: flex;
+}
+
+.foo {
+  width: 100%;
+  text-align: center;
+  background-color: #808080;
+}
+
+
 @CHARSET "UTF-8";
         table {
             width: 100%;
@@ -13,3 +48,4 @@
         th {
             background-color: #f2f2f2;
         }
+

@@ -2,12 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div>
+<link rel='stylesheet' href='../../css/style.css'>
+
+<title>得点管理システム</title>
+</head>
+
+
+<div class ="header">
 <h1>得点管理システム</h1>
-</div>
 <c:if test="${user.isAuthenticated()}">
-<div>
 <span>${user.getUser_name()}様</span>
 <a href="Syslogout.action">ログアウト</a>
-</div>
 </c:if>
+</div>
