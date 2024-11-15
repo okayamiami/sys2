@@ -307,6 +307,9 @@ public class ChildAbsDao extends Dao{
 			statement.setString(1, facility_id);
 			statement.setString(2, class_id);
 
+			// プライベートステートメントを実行
+			rSet = statement.executeQuery();
+
 
 			while (rSet.next()) {
 	            String childName = rSet.getString("child_name");
