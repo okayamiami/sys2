@@ -31,9 +31,9 @@
             <td>${user.parents_name}</td>
             <td>${user.parets_address}</td>
             <td>${user.parents_tel}</td>
-            <td>${user.paremts_mail1}</td>
-            <td>${user.paremts_mail2}</td>
-            <td>${user.paremts_mail3}</td>
+            <td>${user.parents_mail1}</td>
+            <td>${user.parents_mail2}</td>
+            <td>${user.parents_mail3}</td>
             
             
             <td>

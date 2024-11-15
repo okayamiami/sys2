@@ -48,7 +48,10 @@ public class ParentsAction extends Action {
 
 		}else if("P".equals(user_type)){
 			//ログインユーザーが保護者の時、ログインした保護者の情報を取得
+			System.out.println(user_id);
+			System.out.println(facility_id);
 			PU = PD.getParentsUserInfo(user_id, facility_id);
+			System.out.println(PU);
 			session.setAttribute("user_set", PU);
 			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 
@@ -58,6 +61,6 @@ public class ParentsAction extends Action {
 
 
 
-		req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
+		//req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 	}
 }

@@ -11,7 +11,7 @@ import bean.ParentsUser;
 
 public class ParentsUserDao extends Dao{
 
-	private String baseSql = "select * from parentspser where parents_id=? and facility_id=? ";
+	private String baseSql = "select * from parentsuser where parents_id=? and facility_id=? ";
 
 	public ParentsUser getParentsUserInfo(String parents_id, String facility_id) throws Exception {
 		ParentsUser pu = new ParentsUser();
