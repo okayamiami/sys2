@@ -33,10 +33,11 @@ public class ParentsAction extends Action {
 
 		//ログインユーザーを一時的に取得
 		String user_type = (String) session.getAttribute("user_type");
+		PU = (ParentsUser)session.getAttribute("user");
 
 		//引数設定
-		String user_id = req.getParameter("user_id");
-		String facility_id = req.getParameter("facility_id");
+		String user_id = PU.getParents_id();
+		String facility_id = PU.getFacility_id();
 		//PU = PD.getParentsUserInfo(user_id, facility_id);
 
 
@@ -48,11 +49,8 @@ public class ParentsAction extends Action {
 
 		}else if("P".equals(user_type)){
 			//ログインユーザーが保護者の時、ログインした保護者の情報を取得
-			System.out.println(user_id);
-			System.out.println(facility_id);
 			PU = PD.getParentsUserInfo(user_id, facility_id);
-			System.out.println(PU);
-			session.setAttribute("user_set", PU);
+			session.setAttribute("user", PU);
 			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 
 		}else{

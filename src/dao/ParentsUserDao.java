@@ -171,19 +171,18 @@ public class ParentsUserDao extends Dao{
 				//保護者が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection
-						.prepareStatement("update parentsuser set parents_id=?, parents_name=?, parents_pass=?, parents_address=?, parents_tel=?, parents_mail1=?, parents_mail2=?, parents_mail3=?, facility_id=? where parentsuser_id=? and facility_id=?");
+						.prepareStatement("update parentsuser set parents_id=?, parents_name=?, parents_address=?, parents_tel=?, parents_mail1=?, parents_mail2=?, parents_mail3=?, facility_id=? where parents_id=? and facility_id=?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, pu.getParents_id());
 				statement.setString(2, pu.getParents_name());
-				statement.setString(3, pu.getParents_pass());
-				statement.setString(4, pu.getParents_address());
-				statement.setString(5, pu.getParents_tel());
-				statement.setString(6, pu.getParents_mail1());
-				statement.setString(7, pu.getParents_mail2());
-				statement.setString(8, pu.getParents_mail3());
-				statement.setString(9, pu.getFacility_id());
-				statement.setString(10, pu.getParents_id());
-				statement.setString(11, pu.getFacility_id());
+				statement.setString(3, pu.getParents_address());
+				statement.setString(4, pu.getParents_tel());
+				statement.setString(5, pu.getParents_mail1());
+				statement.setString(6, pu.getParents_mail2());
+				statement.setString(7, pu.getParents_mail3());
+				statement.setString(8, pu.getFacility_id());
+				statement.setString(9, pu.getParents_id());
+				statement.setString(10, pu.getFacility_id());
 			}
 
 			//プリペアードステートメントを実行
