@@ -8,7 +8,15 @@
     <title>欠席報告完了画面</title>
 </head>
 <body>
+<c:import url="/common/header.jsp" />
+
+<div class="main">
+<c:import url="/common/navi.jsp" />
+<div class="con">
     <p>登録完了しました</p>
-    <%--<a href="？？？.action">戻る</a>--%>
+    <a href="AbsenceSelect.action">戻る</a>
+  </div>
+  </div>
 </body>
+<c:import url="/common/footer.jsp" />
 </html>
