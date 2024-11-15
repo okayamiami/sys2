@@ -65,15 +65,23 @@
 					<tr>
 						<td>${child.child_id}</td>
 						<td>${child.child_name}</td>
-						<td>${child.class_id}</td>
+						<td>
+							<c:if test="${not empty class_set}">
+                    			<c:forEach var="classItem" items="${class_set}">
+                        			<c:if test="${child.class_id eq classItem.class_id}">
+                            		${classItem.class_name}
+                        			</c:if>
+                    			</c:forEach>
+                			</c:if>
+						</td>
 						<td class="text-center">
 							<%-- 欠席フラグがたっている場合「○」それ以外は「×」を表示 --%>
 							<c:choose>
 								<c:when test="${child.Abs_is_attend()}">
-									○
+									×
 								</c:when>
 								<c:otherwise>
-									×
+									◯
 								</c:otherwise>
 							</c:choose>
 						</td>

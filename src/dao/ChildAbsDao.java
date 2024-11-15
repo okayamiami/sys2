@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bean.ChildAbs;
 
@@ -17,66 +21,88 @@ public class ChildAbsDao extends Dao{
 	 */
 
 	private String baseSql =
-			"SELECT child.child_id, child.child_name, child.parents_id, child.class_id, child.is_attend, child.facility_id,absence.abs_is_attend FROM child left outer join absence ON child.child_id = absence.child_id and child.facility_id = absence.facility_id  where child.facility_id=? ";
+			"SELECT child.child_id, child.child_name, child.parents_id, child.class_id, child.is_attend, child.facility_id,absence.abs_is_attend, absence.absence_date FROM child left outer join absence ON child.child_id = absence.child_id and child.facility_id = absence.facility_id  where child.facility_id=? ";
 
 
 	//子供情報一覧表示のみ使用（欠席情報あり）
-	public List<ChildAbs> getChildListAbsinfo(String facility_id, boolean IsAttend)throws Exception{
-		//戻り値用のリスト
-		List<ChildAbs> list = new ArrayList<>();
-		Connection connection = getConnection();
-		PreparedStatement st = null;
+	public List<ChildAbs> getChildListAbsinfo(String facility_id, boolean IsAttend) throws Exception {
+	    // 戻り値用のマップ（名前をキーにして重複を排除）
+	    Map<String, ChildAbs> map = new HashMap<>();
+	    Connection connection = getConnection();
+	    PreparedStatement st = null;
 
-		// SQL文の在学フラグ条件
-		String conditionIsAttend = "";
-		// 欠席フラグがのture場合(欠席のみ表示)
-		if (IsAttend) {
-		    conditionIsAttend = "and is_attend=true  ";
-		}
+	    // 欠席報告日作成
+	    LocalDateTime nowDate = LocalDateTime.now();
+	    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	    String today_absence_date = dtf1.format(nowDate);
 
+	    // SQL文の在籍フラグ条件
+	    String conditionIsAttend = "";
+	    if (IsAttend) {
+	        conditionIsAttend = "and is_attend=true ";
+	    }
 
-		try{
-			st = connection.prepareStatement(baseSql+conditionIsAttend);
-			st.setString(1,facility_id);
+	    try {
+	        st = connection.prepareStatement(baseSql + conditionIsAttend);
+	        st.setString(1, facility_id);
 
-			ResultSet rSet = st.executeQuery();
-			while(rSet.next()){
-				ChildAbs childabs = new ChildAbs();
-				childabs.setChild_id(rSet.getString("child_id"));
-				childabs.setChild_name(rSet.getString("child_name"));
-				childabs.setParents_id(rSet.getString("parents_id"));
-				childabs.setClass_id(rSet.getString("class_id"));
-				childabs.setIs_attend(rSet.getBoolean("is_attend"));
-				childabs.setFacility_id(rSet.getString("facility_id"));
-				childabs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));  //欠席情報なかったときわんちゃんエラー？？？
-				list.add(childabs);
-			}
-		}catch(Exception e){
-			throw e;
-		} finally {
-			//
-			if(st != null) {
-				try {
-					st.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
+	        ResultSet rSet = st.executeQuery();
+	        while (rSet.next()) {
+	            String childName = rSet.getString("child_name");
+	            String absenceDate = rSet.getString("absence_date");
 
-			if(connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
+	            // 本日が欠席日　:　true
+	            // 欠席情報がない、または欠席日が今日でない： false
+	            boolean todayAbs = absenceDate != null && absenceDate.equals(today_absence_date);
 
 
-		}
-		return list;
+	            ChildAbs existingChild = map.get(childName);
+
+	            if (existingChild == null || // まだマップにない場合
+	                todayAbs ||              // 今日の日付がある場合
+	                existingChild.getAbsence_date() == null) { // 既存データがnullの場合
+
+	                ChildAbs childabs = new ChildAbs();
+	                childabs.setChild_id(rSet.getString("child_id"));
+	                childabs.setChild_name(childName);
+	                childabs.setParents_id(rSet.getString("parents_id"));
+	                childabs.setClass_id(rSet.getString("class_id"));
+	                childabs.setIs_attend(rSet.getBoolean("is_attend"));
+	                childabs.setFacility_id(rSet.getString("facility_id"));
+
+	                childabs.setAbs_is_attend(todayAbs);
+
+	                childabs.setAbsence_date(absenceDate);
+
+	                System.out.println(childName);
+	                System.out.println(todayAbs);
+
+
+	                map.put(childName, childabs); // マップに追加または更新
+	            }
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (st != null) {
+	            try {
+	                st.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    // Mapの値をListに変換して返す
+	    return new ArrayList<>(map.values());
 	}
-
-
 
 	// filterで統一されていないのはパラメーターがString,Stringと同じ属性だと使用できないため
 
@@ -87,6 +113,17 @@ public class ChildAbsDao extends Dao{
 	private List<ChildAbs> postFilter(ResultSet rSet) throws Exception {
 		// リストを初期化
 		List<ChildAbs> list = new ArrayList<>();
+
+		boolean today_abs = false;
+
+		// 欠席報告日作成
+		LocalDateTime nowDate = LocalDateTime.now();
+		System.out.println(nowDate);
+		// 表示形式を指定（年月日）
+		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		String today_absence_date = dtf1.format(nowDate);
+
+
 		try {
 			// リザルトセットを全件走査
 			while(rSet.next()) {
@@ -99,7 +136,13 @@ public class ChildAbsDao extends Dao{
 				childabs.setClass_id(rSet.getString("class_id"));
 				childabs.setIs_attend(rSet.getBoolean("is_attend"));
 				childabs.setFacility_id(rSet.getString("facility_id"));
-				childabs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
+				if (rSet.getString("absence_date") != null && rSet.getString("absence_date").equals(today_absence_date)){
+					today_abs = true;
+				}
+				System.out.println(rSet.getString("absence_date"));
+				System.out.println(today_absence_date);
+				childabs.setAbs_is_attend(today_abs);
+				childabs.setAbsence_date(rSet.getString("abs_is_attend"));
 				list.add(childabs);
 			}
 		} catch (SQLException | NullPointerException e){
@@ -131,9 +174,9 @@ public class ChildAbsDao extends Dao{
 		// SQL文の条件
 		String condition = "and child.child_id=?  ";
 
-		// SQL文の在学フラグ条件
+		// SQL文の在籍フラグ条件
 		String conditionIsAttend = "";
-		// 欠席フラグがtrueの場合(欠席のみ表示)
+		// 在学中のみ表示
 		if (IsAttend) {
 		    conditionIsAttend = "and child.is_attend=true  ";
 		}
@@ -152,6 +195,8 @@ public class ChildAbsDao extends Dao{
 
 			// プライベートステートメントを実行
 			rSet = statement.executeQuery();
+
+
 
 			// リストへの格納処理を実行
 			list = postFilter(rSet);
@@ -201,9 +246,9 @@ public class ChildAbsDao extends Dao{
 		// SQL文の条件
 		String condition = "and child_name=?  ";
 
-		// SQL文の在学フラグ条件
+		// SQL文の在籍フラグ条件
 		String conditionIsAttend = "";
-		// 欠席フラグがのture場合(欠席のみ表示)
+		// 在学中のみ表示
 		if (IsAttend) {
 		    conditionIsAttend = "and is_attend=true  ";
 		}
@@ -268,9 +313,9 @@ public class ChildAbsDao extends Dao{
 		// SQL文の条件
 		String condition = "and class_id=?  ";
 
-		// SQL文の在学フラグ条件
+		// SQL文の在籍フラグ条件
 		String conditionIsAttend = "";
-		// 欠席フラグがのture場合(欠席のみ表示)
+		// 在学中のみ表示
 		if (IsAttend) {
 		    conditionIsAttend = "and is_attend=true  ";
 		}
@@ -341,14 +386,14 @@ public class ChildAbsDao extends Dao{
 
 		// SQL文の出欠席フラグ条件
 		String conditionabsIsAttend = "";
-		// 欠席フラグがのture場合(欠席のみ表示)
+		// 本日欠席のみ表示
 		if (absIsAttend) {
 		    conditionabsIsAttend = "and abs_is_attend=true  ";
 		}
 
-		// SQL文の在学フラグ条件
+		// SQL文の在籍フラグ条件
 		String conditionIsAttend = "";
-		// 在学中のみ表示
+		// 在籍中のみ表示
 		if (IsAttend) {
 		    conditionIsAttend = "and is_attend=true  ";
 		}
@@ -425,16 +470,16 @@ public class ChildAbsDao extends Dao{
 		// リザルトセット
 		ResultSet rSet = null;
 
-		// SQL文の在学フラグ条件
+		// SQL文の欠席フラグ条件
 		String conditionabsIsAttend = "";
-		// 欠席フラグがのture場合(欠席のみ表示)
+		// 本日欠席のみ表示
 		if (absIsAttend) {
 		    conditionabsIsAttend = "and abs_is_attend=true  ";
 		}
 
-		// SQL文の在学フラグ条件
+		// SQL文の在籍フラグ条件
 		String conditionIsAttend = "";
-		// 在学中のみ表示
+		// 在籍中のみ表示
 		if (IsAttend) {
 		    conditionIsAttend = "and is_attend=true  ";
 		}

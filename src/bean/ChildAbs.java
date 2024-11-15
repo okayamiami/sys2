@@ -9,6 +9,7 @@ public class ChildAbs {
 	private boolean is_attend;
 	private String facility_id;
 	private boolean abs_is_attend;
+	private String absence_date;
 
 	public String getChild_id() {
 		return child_id;
@@ -52,4 +53,11 @@ public class ChildAbs {
 	public void setAbs_is_attend(boolean abs_is_attend) {
 		this.abs_is_attend = abs_is_attend;
 	}
+	public String getAbsence_date() {
+		return absence_date;
+	}
+	public void setAbsence_date(String absence_date) {
+		this.absence_date = absence_date;
+	}
+
 }

@@ -22,7 +22,8 @@ import tool.Action;
 public class ChildListAction extends Action {
 
 
-	// 在籍無しの場合は非表示設定
+	// 在籍無しの場合は非表示設定(11/15時点)
+
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -62,6 +63,8 @@ public class ChildListAction extends Action {
 		class_cd = req.getParameter("f3");			// クラス名
 		absIsAttendStr = req.getParameter("f4");	// 出欠席フラグ 選択されていたら欠席の子のみ表示
 
+
+		//欠席フラグが選択されたとき
 		if (absIsAttendStr != null) {
 			// 欠席フラグを立てる
 			absIsAttend = true;
@@ -109,7 +112,7 @@ public class ChildListAction extends Action {
 		} else if (class_cd != null && child_id.equals("0") && child_name.equals("0") && !class_cd.equals("0")) {
 		    // クラスと出欠席
 		    childs = caDao.filterbyClassAbsAttend(class_id, facility_id, absIsAttend, IsAttend);
-		} else if (child_id != null && child_name != null && class_cd != null) {
+		} else if (child_id == null && child_name == null && class_cd == null) {
 			// 1つも選択されていないとき（施設の全員表示）
 			childs = caDao.getChildListAbsinfo(facility_id, IsAttend);
 		}else {
@@ -122,6 +125,7 @@ public class ChildListAction extends Action {
 
 
 		//ビジネスロジック 4
+		//なし
 
 		//DBへデータ保存 5
 		//なし
@@ -130,14 +134,14 @@ public class ChildListAction extends Action {
 
 		//レスポンス値をセット 6
 
-		/**ここの値保持後で直す*/
 
-		// 子供IDをセット（予定）
-		req.setAttribute("f1", childIdlist);
+
+		// 子供IDをセット
+		req.setAttribute("f1", child_id);
 		// 子供の名前をセット（予定）
-		req.setAttribute("f2", childNamelist);
+		req.setAttribute("f2", child_name);
 		// クラスをセット（予定）
-				req.setAttribute("f3", classNamelist);
+				req.setAttribute("f3", class_cd);
 		// 欠席フラグが送信されていた場合
 		if (absIsAttendStr != null) {
 			// リクエストに欠席フラグをセット
@@ -150,6 +154,7 @@ public class ChildListAction extends Action {
 		req.setAttribute("child_id_set", childIdlist);
 		req.setAttribute("child_name_set", childNamelist);
 		req.setAttribute("class_name_set", classNamelist);
+		req.setAttribute("class_set", classlist);
 
 
 
