@@ -31,18 +31,28 @@ public class ParentsAction extends Action {
 		//sessionの有効化
 		HttpSession session = req.getSession(true);
 
-		//ログインユーザーの取得
-
+		//ログインユーザーを一時的に取得
+		String user_type = (String) session.getAttribute("user_type");
 
 		//引数設定
 		String user_id = req.getParameter("user_id");
 		String facility_id = req.getParameter("facility_id");
+		//PU = PD.getParentsUserInfo(user_id, facility_id);
 
-		//Daoのメソッドを使用
-		PU = PD.getParentsUserInfo(user_id, facility_id);
-		if(PU == null){
-			
-		}else if(PU == null){
+
+		//if文でログインユーザーを分ける
+		if("M".equals(user_type)){
+			//ログインユーザーが管理者の時
+			ParentsUser pu = (ParentsUser) session.getAttribute("user");
+			//
+
+		}else if("P".equals(user_type)){
+			//ログインユーザーが保護者の時、ログインした保護者の情報を取得
+			PU = PD.getParentsUserInfo(user_id, facility_id);
+			session.setAttribute("user_set", PU);
+			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
+
+		}else{
 			errors.put("kome", "情報取得に失敗しました。");
 		}
 
