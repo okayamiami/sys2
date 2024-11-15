@@ -96,7 +96,7 @@ public class ChildListAction extends Action {
 		String class_id = classID.getClass_id();
 
 
-
+		// 絞り込み条件
 		if (child_id != null && !child_id.equals("0") && child_name.equals("0") && class_cd.equals("0")) {
 		    // 子供IDのみ指定
 		    childs = caDao.filterbyChildId(child_id, facility_id, IsAttend);
@@ -109,6 +109,9 @@ public class ChildListAction extends Action {
 		} else if (class_cd != null && child_id.equals("0") && child_name.equals("0") && !class_cd.equals("0")) {
 		    // クラスと出欠席
 		    childs = caDao.filterbyClassAbsAttend(class_id, facility_id, absIsAttend, IsAttend);
+		} else if (child_id != null && child_name != null && class_cd != null) {
+			// 1つも選択されていないとき（施設の全員表示）
+			childs = caDao.getChildListAbsinfo(facility_id, IsAttend);
 		}else {
 		    // 選択条件が複数あったとき
 		    errors.put("f1", "絞り込み条件が複数あります");
