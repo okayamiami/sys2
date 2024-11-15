@@ -7,16 +7,19 @@
     <title>登録完了</title>
 </head>
 <body>
-<c:import url="/common/header.jsp" />
-<c:import url="/common/navi.jsp" />
 
+<c:import url="/common/header.jsp" />
+<div class="main">
+<c:import url="/common/navi.jsp" />
+<div class="con">
 <h2>お知らせ情報 登録完了</h2>
 
 <p>${message}</p>
 
 <!-- ホームや一覧に戻るリンク -->
 <a href="InfoCreate.action">お知らせ作成に戻る</a>
-
+</div>
+</div>
 </body>
 <c:import url="/common/footer.jsp" />
 </html>

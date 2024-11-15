@@ -24,6 +24,10 @@
     </style>
 </head>
 <body>
+<c:import url="/common/header.jsp" />
+<div class="main">
+<c:import url="/common/navi.jsp" />
+<div class="con">
     <form action="AbsenceSelect.action" method="get">
         <button type="submit">戻る</button>
     </form>
@@ -72,5 +76,8 @@
             </tr>
         </c:forEach>
     </table>
+    </div>
+    </div>
 </body>
+<c:import url="/common/footer.jsp" />
 </html>

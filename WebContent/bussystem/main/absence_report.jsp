@@ -8,6 +8,11 @@
     <title>欠席報告</title>
 </head>
 <body>
+<c:import url="/common/header.jsp" />
+
+<div class="main">
+<c:import url="/common/navi.jsp" />
+<div class="con">
 	<%-- エラーのところの処理わからない --%>
     <form action="AbsenceReportExecute.action" method="post">
         <label>名前(子供)</label>
@@ -26,6 +31,9 @@
 
         <input type="submit" value="送信">
     </form>
-    <%--<a href="？？？.action">戻る</a>--%>
+    <a href="AbsenceSelect.action">戻る</a>
+   </div>
+   </div>
 </body>
+<c:import url="/common/footer.jsp" />
 </html>
