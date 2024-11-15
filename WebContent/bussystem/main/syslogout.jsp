@@ -5,21 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel='stylesheet' href='../../bussystem/css/style22.css'>
 <title>ログアウト</title>
 
 </head>
 <body>
 
-<c:import url="/common/header.jsp" />
-
+<div class="header">
+	<h1>得点管理システム</h1>
+	<h2>ログアウト</h2>
+</div>
 <div class="main">
-<c:import url="/common/navi.jsp" />
-
-<div class ="con">
-
-<p>ログアウトしました</p>
-<a href="/sys2/bussystem/Login.action">ログイン</a>
+<div class="con">
+	<p>ログアウトしました</p>
+	<a href="/sys2/bussystem/Login.action">ログイン</a>
 </div>
 </div>
+
 </body>
+<c:import url="/common/footer.jsp" />
 </html>
