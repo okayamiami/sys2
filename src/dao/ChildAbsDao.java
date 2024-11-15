@@ -31,7 +31,7 @@ public class ChildAbsDao extends Dao{
 	    Connection connection = getConnection();
 	    PreparedStatement st = null;
 
-	    // 欠席報告日作成
+	    // 本日の日付取得
 	    LocalDateTime nowDate = LocalDateTime.now();
 	    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	    String today_absence_date = dtf1.format(nowDate);
@@ -106,7 +106,7 @@ public class ChildAbsDao extends Dao{
 
 
 
-
+	// 子供IDで指定して絞り込み
 	public List<ChildAbs> filterbyChildId(String child_id, String facility_id, boolean IsAttend) throws Exception {
 	    // Mapを使用して名前をキーにし、重複を排除
 	    Map<String, ChildAbs> map = new HashMap<>();
@@ -114,7 +114,7 @@ public class ChildAbsDao extends Dao{
 	    PreparedStatement statement = null;
 	    ResultSet rSet = null;
 
-	    // 欠席報告日作成
+	    // 本日の日付取得
 	    LocalDateTime nowDate = LocalDateTime.now();
 	    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	    String today_absence_date = dtf1.format(nowDate);
@@ -183,17 +183,24 @@ public class ChildAbsDao extends Dao{
 	    return new ArrayList<>(map.values());
 	}
 
-
+	// 子供の名前で指定して絞り込み
 	public List<ChildAbs> filterbyChildName(String child_name, String facility_id, boolean IsAttend) throws Exception {
 
-		// リストを初期化
-		List<ChildAbs> list = new ArrayList<>();
+		// Mapを使用して名前をキーにし、重複を排除
+	    Map<String, ChildAbs> map = new HashMap<>();
 		// コネクションを確立
 		Connection connection = getConnection();
 		// プリペアードステートメント
 		PreparedStatement statement = null;
 		// リザルトセット
 		ResultSet rSet = null;
+
+	    // 本日の日付取得
+	    LocalDateTime nowDate = LocalDateTime.now();
+	    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	    String today_absence_date = dtf1.format(nowDate);
+
+
 		// SQL文の条件
 		String condition = "and child_name=?  ";
 
@@ -216,51 +223,72 @@ public class ChildAbsDao extends Dao{
 			// プライベートステートメントを実行
 			rSet = statement.executeQuery();
 
-			// リストへの格納処理を実行
-			list = postFilter(rSet);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			// プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-			// コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
-		return list;
+			while (rSet.next()) {
+	            String childName = rSet.getString("child_name");
+	            String absenceDate = rSet.getString("absence_date");
+
+	            // 本日が欠席日であるかどうかを確認
+	            boolean todayAbs = absenceDate != null && absenceDate.equals(today_absence_date);
+
+	            ChildAbs existingChild = map.get(childName);
+
+	            if (existingChild == null || todayAbs || existingChild.getAbsence_date() == null) {
+	                ChildAbs childabs = new ChildAbs();
+	                childabs.setChild_id(rSet.getString("child_id"));
+	                childabs.setChild_name(childName);
+	                childabs.setParents_id(rSet.getString("parents_id"));
+	                childabs.setClass_id(rSet.getString("class_id"));
+	                childabs.setIs_attend(rSet.getBoolean("is_attend"));
+	                childabs.setFacility_id(rSet.getString("facility_id"));
+	                childabs.setAbs_is_attend(todayAbs);
+	                childabs.setAbsence_date(absenceDate);
+
+	                map.put(childName, childabs); // マップに追加または更新
+	            }
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    // Mapの値をListに変換して返す
+	    return new ArrayList<>(map.values());
 	}
 
-	/**
-	 * filterメソッド クラスを指定して子供の一覧を取得する
-	 *
-	 * @param clss_id:String
-	 *            クラスID
-	 * @param facility_id:String
-	 *            施設ID
-	 * @return 一覧のリスト:List<ChildAbs> 存在しない場合は0件のリスト
-	 * @throws Exception
-	 */
+
+
+	// クラスを指定して子供の一覧を取得する
 	public List<ChildAbs> filterbyClassCd(String class_id, String facility_id, boolean IsAttend) throws Exception {
 
-		// リストを初期化
-		List<ChildAbs> list = new ArrayList<>();
+		// Mapを使用して名前をキーにし、重複を排除
+	    Map<String, ChildAbs> map = new HashMap<>();
 		// コネクションを確立
 		Connection connection = getConnection();
 		// プリペアードステートメント
 		PreparedStatement statement = null;
 		// リザルトセット
 		ResultSet rSet = null;
+
+	    // 本日の日付取得
+	    LocalDateTime nowDate = LocalDateTime.now();
+	    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	    String today_absence_date = dtf1.format(nowDate);
+
+
 		// SQL文の条件
 		String condition = "and class_id=?  ";
 
@@ -272,66 +300,81 @@ public class ChildAbsDao extends Dao{
 		}
 
 
-
-
 		try {
 			// プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement(baseSql + condition + conditionIsAttend);
 
 			statement.setString(1, facility_id);
 			statement.setString(2, class_id);
-			// プライベートステートメントを実行
-			rSet = statement.executeQuery();
 
-			// リストへの格納処理を実行
-			list = postFilter(rSet);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			// プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-			// コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
-		return list;
+
+			while (rSet.next()) {
+	            String childName = rSet.getString("child_name");
+	            String absenceDate = rSet.getString("absence_date");
+
+	            // 本日が欠席日であるかどうかを確認
+	            boolean todayAbs = absenceDate != null && absenceDate.equals(today_absence_date);
+
+	            ChildAbs existingChild = map.get(childName);
+
+	            if (existingChild == null || todayAbs || existingChild.getAbsence_date() == null) {
+	                ChildAbs childabs = new ChildAbs();
+	                childabs.setChild_id(rSet.getString("child_id"));
+	                childabs.setChild_name(childName);
+	                childabs.setParents_id(rSet.getString("parents_id"));
+	                childabs.setClass_id(rSet.getString("class_id"));
+	                childabs.setIs_attend(rSet.getBoolean("is_attend"));
+	                childabs.setFacility_id(rSet.getString("facility_id"));
+	                childabs.setAbs_is_attend(todayAbs);
+	                childabs.setAbsence_date(absenceDate);
+
+	                map.put(childName, childabs); // マップに追加または更新
+	            }
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    // Mapの値をListに変換して返す
+	    return new ArrayList<>(map.values());
 	}
 
 
 
-	/**
-	 * filterメソッド クラスと出欠席フラグを指定して子供の一覧を取得する
-	 *
-	 * @param clss_id:String
-	 *            クラスID
-	 * @param absIsAttend:Boolean
-	 *            出欠席フラグ
-	 * @param facility_id:String
-	 *            施設ID
-	 * @return 一覧のリスト:List<ChildAbs> 存在しない場合は0件のリスト
-	 * @throws Exception
-	 */
+
+	 // filterメソッド クラスと出欠席フラグを指定して子供の一覧を取得する
+
 	public List<ChildAbs> filterbyClassAbsAttend(String class_id, String facility_id, boolean absIsAttend, boolean IsAttend) throws Exception {
 
-		// リストを初期化
-		List<ChildAbs> list = new ArrayList<>();
+		// Mapを使用して名前をキーにし、重複を排除
+	    Map<String, ChildAbs> map = new HashMap<>();
 		// コネクションを確立
 		Connection connection = getConnection();
 		// プリペアードステートメント
 		PreparedStatement statement = null;
 		// リザルトセット
 		ResultSet rSet = null;
+
+	    // 本日の日付取得
+	    LocalDateTime nowDate = LocalDateTime.now();
+	    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	    String today_absence_date = dtf1.format(nowDate);
+
 		// SQL文の条件
 		String condition = "and class_id=? ";
 
@@ -359,54 +402,73 @@ public class ChildAbsDao extends Dao{
 			// プライベートステートメントを実行
 			rSet = statement.executeQuery();
 
-			// リストへの格納処理を実行
-			list = postFilter(rSet);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			// プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-			// コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
-		return list;
+			while (rSet.next()) {
+	            String childName = rSet.getString("child_name");
+	            String absenceDate = rSet.getString("absence_date");
+
+	            // 本日が欠席日であるかどうかを確認
+	            boolean todayAbs = absenceDate != null && absenceDate.equals(today_absence_date);
+
+	            ChildAbs existingChild = map.get(childName);
+
+	            if (existingChild == null || todayAbs || existingChild.getAbsence_date() == null) {
+	                ChildAbs childabs = new ChildAbs();
+	                childabs.setChild_id(rSet.getString("child_id"));
+	                childabs.setChild_name(childName);
+	                childabs.setParents_id(rSet.getString("parents_id"));
+	                childabs.setClass_id(rSet.getString("class_id"));
+	                childabs.setIs_attend(rSet.getBoolean("is_attend"));
+	                childabs.setFacility_id(rSet.getString("facility_id"));
+	                childabs.setAbs_is_attend(todayAbs);
+	                childabs.setAbsence_date(absenceDate);
+
+	                map.put(childName, childabs); // マップに追加または更新
+	            }
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    // Mapの値をListに変換して返す
+	    return new ArrayList<>(map.values());
 	}
 
 
 
 
-	/**
-	 * filterメソッド 欠席フラグを指定して子供の一覧を取得する
-	 *
-	 * @param absIsAttend:Boolean
-	 *            出欠席フラグ
-	 * @param facility_id:String
-	 *            施設ID
-	 * @return 一覧のリスト:List<ChildAbs> 存在しない場合は0件のリスト
-	 * @throws Exception
-	 */
+
+	// filterメソッド 欠席フラグを指定して子供の一覧を取得する
 	public List<ChildAbs> filterbyAbsAttend(boolean absIsAttend, String facility_id, boolean IsAttend) throws Exception {
 
-		// リストを初期化
-		List<ChildAbs> list = new ArrayList<>();
+		// Mapを使用して名前をキーにし、重複を排除
+	    Map<String, ChildAbs> map = new HashMap<>();
 		// コネクションを確立
 		Connection connection = getConnection();
 		// プリペアードステートメント
 		PreparedStatement statement = null;
 		// リザルトセット
 		ResultSet rSet = null;
+
+	    // 本日の日付取得
+	    LocalDateTime nowDate = LocalDateTime.now();
+	    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	    String today_absence_date = dtf1.format(nowDate);
+
 
 		// SQL文の欠席フラグ条件
 		String conditionabsIsAttend = "";
@@ -432,33 +494,52 @@ public class ChildAbsDao extends Dao{
 			// プライベートステートメントを実行
 			rSet = statement.executeQuery();
 
-			// リストへの格納処理を実行
-			list = postFilter(rSet);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			// プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-			// コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
-		return list;
+			while (rSet.next()) {
+	            String childName = rSet.getString("child_name");
+	            String absenceDate = rSet.getString("absence_date");
+
+	            // 本日が欠席日であるかどうかを確認
+	            boolean todayAbs = absenceDate != null && absenceDate.equals(today_absence_date);
+
+	            ChildAbs existingChild = map.get(childName);
+
+	            if (existingChild == null || todayAbs || existingChild.getAbsence_date() == null) {
+	                ChildAbs childabs = new ChildAbs();
+	                childabs.setChild_id(rSet.getString("child_id"));
+	                childabs.setChild_name(childName);
+	                childabs.setParents_id(rSet.getString("parents_id"));
+	                childabs.setClass_id(rSet.getString("class_id"));
+	                childabs.setIs_attend(rSet.getBoolean("is_attend"));
+	                childabs.setFacility_id(rSet.getString("facility_id"));
+	                childabs.setAbs_is_attend(todayAbs);
+	                childabs.setAbsence_date(absenceDate);
+
+	                map.put(childName, childabs); // マップに追加または更新
+	            }
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    // Mapの値をListに変換して返す
+	    return new ArrayList<>(map.values());
 	}
-
 }
-
 
 
 	/**filter部分　コメントで一応残す
