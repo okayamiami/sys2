@@ -24,18 +24,17 @@ public class LoginRequiredFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        // セッション属性を取得（新しいセッションを作成しない）
-        ManageUser user = (ManageUser) req.getSession(false).getAttribute("user");
-        ParentsUser user2 = (ParentsUser) req.getSession(false).getAttribute("user2");
+        // セッションからユーザーオブジェクトを取得
+        Object userObject = req.getSession(false).getAttribute("user");
 
-        // ユーザーが存在しない場合、ログインページにリダイレクト
-        if (user == null && user2 == null) {
+        // ユーザーオブジェクトがManageUserかParentsUserのインスタンスかを確認
+        if (userObject instanceof ManageUser || userObject instanceof ParentsUser) {
+            // 認証済みの場合、次のフィルタに処理を渡す
+            chain.doFilter(request, response);
+        } else {
+            // ユーザーが存在しない場合、ログインページにリダイレクト
             res.sendRedirect(req.getContextPath() + "/bussystem/login.jsp");
-            return;
         }
-
-        // 認証済みの場合、次のフィルタに処理を渡す
-        chain.doFilter(request, response);
     }
 
     @Override
