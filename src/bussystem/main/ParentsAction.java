@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.ManageUser;
 import bean.ParentsUser;
 import dao.ParentsUserDao;
 import tool.Action;
@@ -19,46 +20,45 @@ public class ParentsAction extends Action {
 		String url = "";
 		Map<String, String> errors = new HashMap<>();
 
-
-		//Beanをインスタンス化
+		// Beanをインスタンス化
 		ParentsUser PU = new ParentsUser();
-		//ManageUser MU = new ManageUser();
+		ManageUser MU = new ManageUser();
 
-		//Daoをインスタンス化
+		// Daoをインスタンス化
 		ParentsUserDao PD = new ParentsUserDao();
-		//ManageUserDao MD = new ManageUserDao();
 
-		//sessionの有効化
+		// sessionの有効化
 		HttpSession session = req.getSession(true);
 
-		//ログインユーザーを一時的に取得
+		// ログインユーザーを一時的に取得
 		String user_type = (String) session.getAttribute("user_type");
-		PU = (ParentsUser)session.getAttribute("user");
 
-		//引数設定
-		String user_id = PU.getParents_id();
-		String facility_id = PU.getFacility_id();
-		//PU = PD.getParentsUserInfo(user_id, facility_id);
+		// sessionから"user"属性を取得し、型をチェック
+		Object userObj = session.getAttribute("user");
 
+		// userの型に応じて処理
+		if (userObj instanceof ParentsUser) {
+			// 保護者ユーザーの場合
+			PU = (ParentsUser) userObj;
+			String user_id = PU.getParents_id();
+			String facility_id = PU.getFacility_id();
 
-		//if文でログインユーザーを分ける
-		if("M".equals(user_type)){
-			//ログインユーザーが管理者の時
-			ParentsUser pu = (ParentsUser) session.getAttribute("user");
-			//
-
-		}else if("P".equals(user_type)){
-			//ログインユーザーが保護者の時、ログインした保護者の情報を取得
+			// 保護者の情報を取得
 			PU = PD.getParentsUserInfo(user_id, facility_id);
 			session.setAttribute("user", PU);
 			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 
-		}else{
+		} else if (userObj instanceof ManageUser) {
+			// 管理者ユーザーの場合
+			MU = (ManageUser) userObj;
+			// 保護者ID入力ページへ
+			req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
+
+		} else {
+			// 予期しない場合のエラーハンドリング
 			errors.put("kome", "情報取得に失敗しました。");
+			req.setAttribute("errors", errors);
+			req.getRequestDispatcher("errorPage.jsp").forward(req, res);
 		}
-
-
-
-		//req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 	}
 }
