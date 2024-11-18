@@ -30,6 +30,6 @@ public class QrReaderSelectBusAction extends Action{
 		//レスポンス値をセット 6
 		req.setAttribute("bus_set", blist);
 		//JSPへフォワード 7
-		req.getRequestDispatcher("qrreaderbusselect.jsp").forward(req, res);
+		req.getRequestDispatcher("qrreaderselectbus.jsp").forward(req, res);
 	}
 }
