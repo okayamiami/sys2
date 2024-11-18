@@ -14,7 +14,7 @@
 
     <div class="con">
         <!-- 保護者ID入力フォーム -->
-        <form action="ParentsInputAction" method="post">
+        <form action="ParentsInput.action" method="post">
             <label for="parents_id">保護者ID:</label>
             <input type="text" id="parents_id" name="parents_id" required/>
             <button type="submit">検索</button>

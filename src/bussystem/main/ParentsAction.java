@@ -51,6 +51,8 @@ public class ParentsAction extends Action {
 		} else if (userObj instanceof ManageUser) {
 			// 管理者ユーザーの場合
 			MU = (ManageUser) userObj;
+			String facility_id = MU.getFacility_id();
+			session.setAttribute("facility_id", facility_id);
 			// 保護者ID入力ページへ
 			req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
 
