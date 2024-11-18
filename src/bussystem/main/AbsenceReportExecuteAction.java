@@ -39,10 +39,8 @@ public class AbsenceReportExecuteAction extends Action {
 	String abs_main = ""; 										// 欠席理由
 	String perfect_id = "";										// 欠席DBに登録するための欠席ID
 	String user_status = "";									// ユーザーの種類判別用
-	System.out.println("A");
 	boolean abs_is_attend = true;								// 欠席報告が登録時点でtrue状態
 	int nextNumber ;
-	System.out.println("A");
 	Map<String, String> errors = new HashMap<>();				// エラーメッセージ
 
 
@@ -101,7 +99,6 @@ public class AbsenceReportExecuteAction extends Action {
 
 	// IDの数字の最大値を取得
 	if (maxAbsId.isPresent()) {
-	    System.out.println("最大のabs_idの数字部分は: " + maxAbsId.getAsInt());
 	    nextNumber = maxAbsId.getAsInt()+ 1;
 	} else {
 	    System.out.println("欠席テーブルにabs_idが存在しません。");

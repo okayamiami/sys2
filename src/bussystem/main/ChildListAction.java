@@ -38,7 +38,7 @@ public class ChildListAction extends Action {
 		String class_cd = "";												// 選択されたクラス
 		String absIsAttendStr="";											// 選択された出欠席フラグ
 
-		boolean absIsAttend = false;										// 出欠席フラグ 全員表示
+		boolean absIsAttend = false;										// 出欠席フラグ
 		boolean IsAttend = true;											// 在籍フラグ   在籍中の子のみ表示
 
 		ChildAbsDao caDao = new ChildAbsDao();								// 子供一覧表示用Dao
@@ -49,9 +49,6 @@ public class ChildListAction extends Action {
 		LocalDate todaysDate = LocalDate.now();							// LcalDateインスタンスを取得
 		int year = todaysDate.getYear();									// 本日の日付を取得
 		List<ChildAbs> childs = null;										// 子供一覧用リスト
-
-
-
 
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
 
@@ -64,17 +61,17 @@ public class ChildListAction extends Action {
 		absIsAttendStr = req.getParameter("f4");	// 出欠席フラグ 選択されていたら欠席の子のみ表示
 
 
-		//欠席フラグが選択されたとき
+		//欠席フラグが選択されたとき(欠席の子表示)
 		if (absIsAttendStr != null) {
 			// 欠席フラグを立てる
 			absIsAttend = true;
 		}
 
 
+
 		//DBからデータ取得 3
 
 		// 子供
-
 		List<String> childIdlist = new ArrayList<>();					// 子供IDのみリスト
 		List<String> childNamelist = new ArrayList<>();				// 子供の名前のみリスト
 
@@ -84,6 +81,7 @@ public class ChildListAction extends Action {
 		for (Child c : childlist) {		// 子供名リスト
 			childNamelist.add(c.getChild_name());
 		}
+
 
 		// クラス
 		List<ClassCd> classlist = ccDao.getClassCdinfo(facility_id);		// クラス情報一覧リスト
@@ -100,27 +98,24 @@ public class ChildListAction extends Action {
 
 
 		// 絞り込み条件
-		if (child_id != null && !child_id.equals("0") && child_name.equals("0") && class_cd.equals("0")) {
+		if (child_id != null && !child_id.equals("0") && child_name.equals("0")&& class_cd.equals("0")) {
 		    // 子供IDのみ指定
-		    childs = caDao.filterbyChildId(child_id, facility_id, IsAttend);
-		} else if (child_name != null && child_id.equals("0") && !child_name.equals("0") && class_cd.equals("0")) {
+		    childs = caDao.filterbyChildId(child_id, facility_id, IsAttend, absIsAttend);
+		} else if (child_name != null && !child_name.equals("0") && child_id.equals("0") && class_cd.equals("0")) {
 		    // 子供の名前のみ指定
-		    childs = caDao.filterbyChildName(child_name, facility_id, IsAttend);
-		} else if (class_cd != null && child_id.equals("0") && child_name.equals("0") && !class_cd.equals("0")) {
+		    childs = caDao.filterbyChildName(child_name, facility_id, IsAttend, absIsAttend);
+		} else if (class_cd != null && !class_cd.equals("0") && child_id.equals("0") && child_name.equals("0")) {
 		    // クラスのみ選択
-		    childs = caDao.filterbyClassCd(class_id, facility_id, IsAttend);
-		} else if (class_cd != null && child_id.equals("0") && child_name.equals("0") && !class_cd.equals("0")) {
-		    // クラスと出欠席
-		    childs = caDao.filterbyClassAbsAttend(class_id, facility_id, absIsAttend, IsAttend);
-		} else if (child_id == null && child_name == null && class_cd == null) {
+		    childs = caDao.filterbyClassCd(class_id, facility_id, IsAttend, absIsAttend);
+		} else if (child_id == null && child_name == null && class_cd == null || child_id.equals("0") && child_name.equals("0")&&class_cd.equals("0")) {
 			// 1つも選択されていないとき（施設の全員表示）
-			childs = caDao.getChildListAbsinfo(facility_id, IsAttend);
+			childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
 		}else {
 		    // 選択条件が複数あったとき
 		    errors.put("f1", "絞り込み条件が複数あります");
 		    req.setAttribute("errors", errors);
 		    // 施設の（在籍中の）子供全員表示
-		    childs = caDao.getChildListAbsinfo(facility_id, IsAttend);
+		    childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
 		}
 
 
