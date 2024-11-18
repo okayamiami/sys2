@@ -18,7 +18,6 @@ public class AbsenceReportAction extends Action {
 
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		System.out.println("ここまで来てる？");
 
 		// ローカル変数の宣言 1
 		HttpSession session = req.getSession(true); // セッションを取得

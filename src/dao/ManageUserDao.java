@@ -14,7 +14,10 @@ import bean.ManageUser;
 
 public class ManageUserDao extends Dao{
 
+	private String baseSql = "select * from manageuser ";
+
 	public ManageUser getManageUserInfo(String user_id, String facility_id) throws Exception {
+
 		//先生インスタンス初期化
 		ManageUser mu = new ManageUser();
 
@@ -26,7 +29,7 @@ public class ManageUserDao extends Dao{
 
 		try{
 			//prepareにsql文セット
-			statement=connection.prepareStatement("select * from manageuser where user_id=? and facility_id=? ");
+			statement=connection.prepareStatement(baseSql+"where user_id=? and facility_id=? ");
 			//バインド
 			statement.setString(1, user_id);
 			statement.setString(2, facility_id);
@@ -107,11 +110,11 @@ public class ManageUserDao extends Dao{
 		//リザルトセット
 		ResultSet rSet=null;
 		//SQL文の条件追加
-		String sql="select * from manageuser where facility_id=? ";
+		String sql="where facility_id=? ";
 
 		try{
 			//プリペアードステートメントにSQLセット
-			statement=connection.prepareStatement(sql);
+			statement=connection.prepareStatement(baseSql+sql);
 			//プリペアードステートメントに学校コードをバインド
 			statement.setString(1, facility_id);
 
@@ -269,7 +272,7 @@ public class ManageUserDao extends Dao{
 
 		try{
 			//prepareにsql文セット
-			statement=connection.prepareStatement("select * from manageuser where user_id=? and user_pass=? and facility_id=? ");
+			statement=connection.prepareStatement(baseSql+"where user_id=? and user_pass=? and facility_id=? ");
 			//バインド
 			statement.setString(1, user_id);
 			statement.setString(2, user_pass);

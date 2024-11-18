@@ -79,7 +79,7 @@ public class InformationDao extends Dao{
 
 
 	//お知らせ1件詳細情報取得
-	public Information getInfoMain(String facility_id,String info_id)throws Exception{
+	public Information getInfoContent(String facility_id,String info_id)throws Exception{
 		Information infomain = new Information();
 		Connection connection = getConnection();
 		PreparedStatement st = null;
