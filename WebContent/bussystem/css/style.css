@@ -1,16 +1,22 @@
 .header {
   width: 100%;
   text-align: center;
-  background-color: #0080ff;
+  background-color: #dff4dd;
 
 }
 
 
 .side {
-  width: 15%;
+  width: 16.5%;
   height: 100%;
   text-align: center;
-
+  background-image: linear-gradient(
+    90deg,
+    transparent 99.5%,
+    black 99.5%,
+    black 100.5%,
+    transparent 100.5%
+  );
 
 
 }

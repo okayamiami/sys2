@@ -8,7 +8,7 @@
 </head>
 <div class ="header">
 <div>
-  <h1>得点管理システム</h1>
+  <h1>登園・バス管理システム</h1>
 </div>
 
 <c:if test="${user.isAuthenticated()}">
