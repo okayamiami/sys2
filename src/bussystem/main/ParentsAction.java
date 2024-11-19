@@ -23,10 +23,6 @@ public class ParentsAction extends Action {
 		// sessionの有効化
 		HttpSession session = req.getSession(true);
 
-		// Beanをインスタンス
-		ParentsUser PU = new ParentsUser();
-		ManageUser MU = new ManageUser();
-
 		// Daoをインスタンス化
 		ParentsUserDao PD = new ParentsUserDao();
 
@@ -35,33 +31,25 @@ public class ParentsAction extends Action {
 		// ログインユーザーを一時的に取得
 		String user_type = (String) session.getAttribute("user_type");
 
-		// sessionから"user"属性を取得し、型をチェック
-		Object userObj = session.getAttribute("user");
-		// 管理者または保護者のログイン情報を保存
-		session.setAttribute("loggedInUser", userObj);
-
-
 		// userの型に応じて処理
-		if (userObj instanceof ParentsUser) {
+		if ("P".equals(user_type)) {
 			// 保護者ユーザーの場合
-			PU = (ParentsUser) userObj;
+			ParentsUser PU = (ParentsUser) session.getAttribute("user");
 			String user_id = PU.getParents_id();
 			String facility_id = PU.getFacility_id();
 			System.out.println("保護者でーす");
 
 			// 保護者の情報を取得
-			PU = PD.getParentsUserInfo(user_id, facility_id);
-			session.setAttribute("user", PU);
+			ParentsUser PU2 = PD.getParentsUserInfo(user_id, facility_id);
+			req.setAttribute("user", PU2);
 			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 
-
-		} else if (userObj instanceof ManageUser) {
-			session.removeAttribute("PU");
+		} else if ("M".equals(user_type)) {
 			System.out.println("管理者でーす");
 			// 管理者ユーザーの場合
-			MU = (ManageUser) userObj;
+			ManageUser MU = (ManageUser) session.getAttribute("user");
 			String facility_id = MU.getFacility_id();
-			session.setAttribute("facility_id", facility_id);
+			req.setAttribute("facility_id", facility_id);
 			// 保護者ID入力ページへ
 			req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
 

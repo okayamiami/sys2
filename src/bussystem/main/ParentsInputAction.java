@@ -41,7 +41,7 @@ public class ParentsInputAction extends Action {
         // 結果が取得できたかどうかをチェック
         if (PU != null) {
             // セッションにデータを保存
-            session.setAttribute("user", PU);
+            req.setAttribute("user", PU);
 
             // 結果ページにフォワード
             req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
