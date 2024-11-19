@@ -14,14 +14,14 @@ import java.util.Map;
 import bean.ChildAbs;
 
 
-public class ChildAbsDao extends Dao{
+public class ChildDetailedDao extends Dao{
 
 	/**
 	 * baseSql:String 共通SQL文 プライベート
 	 */
 
 	private String baseSql =
-			"SELECT child.child_id, child.child_name, child.parents_id, child.class_id, child.is_attend, child.facility_id,absence.abs_is_attend, absence.absence_date FROM child left outer join absence ON child.child_id = absence.child_id and child.facility_id = absence.facility_id  where child.facility_id=? ";
+			"SELECT child.child_id, child.child_name, child.class_id, child.parents_id, child.facility_id, parentsuser.parents_id, parentsuser.parents_name, parentsuser.parents_address, parentsuser.parents_tel, parentsuser.parents_mail1, parentsuser.parents_mail2, parentsuser.parents_mail3 FROM child left outer join parentsuser ON child.facility_id = parentsuser.facility_id and child.parents_id = parentsuser.parents_id where child.facility_id=? and child.parents_id=? ";
 
 
 	// absIsAttend 欠席表示の時true 全員false

@@ -68,7 +68,9 @@
 				</tr>
 				<c:forEach var="child" items="${childs}">
 					<tr>
-						<td>${child.child_id}</td>
+						 <td>
+    						<a href="ChildDetailed.action?child_id=${child.child_id}">${child.child_id}</a>
+						</td>
 						<td>${child.child_name}</td>
 						<td>
 							<c:if test="${not empty class_set}">
