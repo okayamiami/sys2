@@ -69,7 +69,7 @@
 				<c:forEach var="child" items="${childs}">
 					<tr>
 						 <td>
-    						<a href="ChildDetailed.action?child_id=${child.child_id}">${child.child_id}</a>
+    						<a href="ChildDetail.action?child_id=${child.child_id}">${child.child_id}</a>
 						</td>
 						<td>${child.child_name}</td>
 						<td>

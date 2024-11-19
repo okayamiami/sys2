@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Child;
+import bean.ChildDetail;
 import bean.ManageUser;
 import dao.ChildDao;
-import dao.ParentsUserDao;
+import dao.ChildDetailDao;
 import tool.Action;
 
-public class ChildDetailedAction extends Action {
+public class ChildDetailAction extends Action {
 
 
 	// 子供詳細画面情報
@@ -27,10 +28,10 @@ public class ChildDetailedAction extends Action {
 		String facility_id = mu.getFacility_id();
 
 		ChildDao cDao = new ChildDao();										// 子供
-		ParentsUserDao pDao = new ParentsUserDao();							// 保護者
+		ChildDetailDao cdDao = new ChildDetailDao();						// 子供詳細情報
 
 
-		Map<String, String> errors = new HashMap<>();// エラーメッセージ
+		Map<String, String> errors = new HashMap<>();						// エラーメッセージ
 
 
 
@@ -38,8 +39,14 @@ public class ChildDetailedAction extends Action {
 		String child_id = req.getParameter("child_id");				// 子供ID
 
 
+
 		//DBからデータ取得 3
-		Child child = cDao.getChildinfo(facility_id, child_id);			// 子供情報取得
+
+		// 子供情報取得
+		Child child = cDao.getChildinfo(facility_id, child_id);
+		String parents_id = child.getParents_id();
+		// 子供詳細情報取得
+		ChildDetail cdetail = cdDao.getChildDetailinfo(facility_id, parents_id, child_id);
 
 
 		//ビジネスロジック 4
@@ -54,30 +61,12 @@ public class ChildDetailedAction extends Action {
 
 
 
-		// 子供IDをセット
-		req.setAttribute("f1", child_id);
-		// 子供の名前をセット（予定）
-		req.setAttribute("f2", child_name);
-		// クラスをセット（予定）
-				req.setAttribute("f3", class_cd);
-		// 欠席フラグが送信されていた場合
-		if (absIsAttendStr != null) {
-			// リクエストに欠席フラグをセット
-			req.setAttribute("f4", absIsAttendStr);
-		}
-
-
 		// リクエストにをセット
-		req.setAttribute("childs", childs);
-		req.setAttribute("child_id_set", childIdlist);
-		req.setAttribute("child_name_set", childNamelist);
-		req.setAttribute("class_name_set", classNamelist);
-		req.setAttribute("class_set", classlist);
-
+		req.setAttribute("child_detail", cdetail);
 
 
 		//JSPへフォワード 7
-		req.getRequestDispatcher("childlist.jsp").forward(req, res);
+		req.getRequestDispatcher("childdetail.jsp").forward(req, res);
 	}
 
 }
