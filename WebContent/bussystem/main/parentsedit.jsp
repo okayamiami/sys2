@@ -36,7 +36,7 @@
                             <input type="text" name="parents_address" value="${user.parents_address}"/>
                         </td>
                         <td>
-                            <input type="text" name="parents_tel" value="${user.parents_tel}"/>
+                            <input type="tel" name="parents_tel" value="${user.parents_tel}"/>
                         </td>
                         <td>
                             <input type="email" name="parents_mail1" value="${user.parents_mail1}"/>

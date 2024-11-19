@@ -28,10 +28,9 @@ public class ParentsInputAction extends Action {
         	System.out.println("エラーです");
             errors.put("inputError", "保護者IDを入力してください");
             req.setAttribute("errors", errors);
-            req.getRequestDispatcher("errorPage.jsp").forward(req, res);
+            req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
             return;  // 処理終了
         }
-
 
         // Daoをインスタンス化
         ParentsUserDao PD = new ParentsUserDao();
@@ -50,7 +49,7 @@ public class ParentsInputAction extends Action {
             // データが見つからない場合のエラーハンドリング
             errors.put("notFound", "指定された保護者IDまたは施設IDに一致する情報が見つかりませんでした。");
             req.setAttribute("errors", errors);
-            req.getRequestDispatcher("errorPage.jsp").forward(req, res);
+            req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
         }
     }
 }
