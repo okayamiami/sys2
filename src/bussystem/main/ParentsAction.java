@@ -16,6 +16,7 @@ public class ParentsAction extends Action {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		//保護者情報をクリック時、ログインアカウントによって内容を変える
 
 		String url = "";
 		Map<String, String> errors = new HashMap<>();
@@ -37,7 +38,6 @@ public class ParentsAction extends Action {
 			ParentsUser PU = (ParentsUser) session.getAttribute("user");
 			String user_id = PU.getParents_id();
 			String facility_id = PU.getFacility_id();
-			System.out.println("保護者でーす");
 
 			// 保護者の情報を取得
 			ParentsUser PU2 = PD.getParentsUserInfo(user_id, facility_id);
@@ -45,7 +45,6 @@ public class ParentsAction extends Action {
 			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 
 		} else if ("M".equals(user_type)) {
-			System.out.println("管理者でーす");
 			// 管理者ユーザーの場合
 			ManageUser MU = (ManageUser) session.getAttribute("user");
 			String facility_id = MU.getFacility_id();

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import bean.ManageUser;
 import bean.ParentsUser;
-import dao.ManageUserDao;
 import dao.ParentsUserDao;
 import tool.Action;
 
@@ -17,8 +16,8 @@ public class ParentsEditAction extends Action {
 	//saveParentsUserInfo
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		//編集を押したときに来る場所
 
-		String url = "";
 		Map<String, String> errors = new HashMap<>();
 
 
@@ -28,7 +27,7 @@ public class ParentsEditAction extends Action {
 
 		//Daoをインスタンス化
 		ParentsUserDao PD = new ParentsUserDao();
-		ManageUserDao MD = new ManageUserDao();
+		//ManageUserDao MD = new ManageUserDao();
 
 		//sessionの有効化
 		HttpSession session = req.getSession(true);
@@ -36,18 +35,24 @@ public class ParentsEditAction extends Action {
 		//ログインユーザーを一時的に取得
 		String user_type = (String) session.getAttribute("user_type");
 
-		if (session.getAttribute("user") instanceof ParentsUser) {
+		//引数設定 外部
+		String user_id = null;
+		String facility_id = null;
+
+
+		if ("P".equals(user_type)) {
 		    PU = (ParentsUser) session.getAttribute("user");
-		} else if (session.getAttribute("user") instanceof ManageUser) {
+		    user_id = PU.getParents_id();
+			facility_id = PU.getFacility_id();
+		} else if ("M".equals(user_type)) {
 		    MU = (ManageUser) session.getAttribute("user");
+		    user_id = req.getParameter("parents_id");
+		    facility_id = MU.getFacility_id();
 		} else {
 		    errors.put("kome", "セッションに不正なユーザー情報が格納されています。");
 		}
 
 
-		//引数設定
-		String user_id = PU.getParents_id();
-		String facility_id = PU.getFacility_id();
 		//PU = PD.getParentsUserInfo(user_id, facility_id);
 
 
@@ -55,13 +60,13 @@ public class ParentsEditAction extends Action {
 		if("M".equals(user_type)){
 			//ログインユーザーが管理者の時
 			PU = PD.getParentsUserInfo(user_id, facility_id);
-			session.setAttribute("user", PU);
+			req.setAttribute("user", PU);
 			req.getRequestDispatcher("parentsedit.jsp").forward(req, res);
 
 		}else if("P".equals(user_type)){
 			//ログインユーザーが保護者の時、ログインした保護者の情報を取得
 			PU = PD.getParentsUserInfo(user_id, facility_id);
-			session.setAttribute("user", PU);
+			req.setAttribute("user", PU);
 			req.getRequestDispatcher("parentsedit.jsp").forward(req, res);
 
 		}else{
