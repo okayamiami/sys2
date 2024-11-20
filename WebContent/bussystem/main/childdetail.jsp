@@ -10,26 +10,43 @@
 <body>
 <c:import url="/common/header.jsp" />
 <div class="main">
-<c:import url="/common/navi.jsp" />
-<div class="con">
-	<h2>子供詳細情報</h2>
+    <c:import url="/common/navi.jsp" />
+    <div class="con">
+        <h2>子供詳細情報</h2>
 
-	<table class="table table-hover">
+        <!-- エラーメッセージの表示 -->
+        <c:if test="${not empty error}">
+            <p style="color: red; font-weight: bold;">${error}</p>
+        </c:if>
 
-			<tr><th>子供ID</th><td>${cdetail.child_id}</td></tr>
-			<tr><th>名前（子供）</th><td>${cdetail.child_name}</td></tr>
+        <!-- 情報表示 -->
+        <c:if test="${empty error}">
+            <table>
+                <tr><th>子供ID</th><td>${child_id}</td></tr>
+                <tr><th>名前（子供）</th><td>${child_name}</td></tr>
+                <tr><th>クラス</th>
+                    <td>
+                        <c:forEach var="classItem" items="${classlist}">
+                            <c:if test="${class_id eq classItem.class_id}">
+                                ${classItem.class_name}
+                            </c:if>
+                        </c:forEach>
+                    </td>
+                </tr>
+                <tr><th>保護者ID</th><td>${parents_id}</td></tr>
+                <tr><th>名前（保護者）</th><td>${parents_name}</td></tr>
+                <tr><th>住所</th><td>${parents_address}</td></tr>
+                <tr><th>電話番号</th><td>${parents_tel}</td></tr>
+                <tr><th>メールアドレス１</th><td>${parents_mail1}</td></tr>
+                <tr><th>メールアドレス２</th><td>${parents_mail2}</td></tr>
+                <tr><th>メールアドレス３</th><td>${parents_mail3}</td></tr>
+            </table>
+        </c:if>
 
-			<tr><th>保護者ID</th><td>${cdetail.parents_id}</td></tr>
-			<tr><th>名前（保護者）</th><td>${cdetail.parents_name}</td></tr>
-			<tr><th>住所</th><td>${cdetail.parents_address}</td></tr>
-			<tr><th>電話番号</th><td>${cdetail.parents_tel}</td></tr>
-			<tr><th>メールアドレス１</th><td>${cdetail.parents_mail1}</td></tr>
-			<tr><th>メールアドレス２</th><td>${cdetail.parents_mail2}</td></tr>
-			<tr><th>メールアドレス３</th><td>${cdetail.parents_mail3}</td></tr>
-	</table>
-
+        <a href="ChildList.action">名簿一覧画面に戻る</a>
+    </div>
 </div>
-</div>
+
 </body>
 <c:import url="/common/footer.jsp" />
 </html>

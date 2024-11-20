@@ -1,6 +1,5 @@
 package bussystem.main;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,9 +44,6 @@ public class ChildListAction extends Action {
 		ChildDao cDao = new ChildDao();										// 子供名前選択用
 		ClassCdDao ccDao = new ClassCdDao();								// クラス選択用
 
-		List<Child> childlist = cDao.getChildListinfo(facility_id);			// 子供情報一覧リスト
-		LocalDate todaysDate = LocalDate.now();							// LcalDateインスタンスを取得
-		int year = todaysDate.getYear();									// 本日の日付を取得
 		List<ChildAbs> childs = null;										// 子供一覧用リスト
 
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
@@ -75,6 +71,15 @@ public class ChildListAction extends Action {
 		List<String> childIdlist = new ArrayList<>();					// 子供IDのみリスト
 		List<String> childNamelist = new ArrayList<>();				// 子供の名前のみリスト
 
+
+		List<Child> childlist = cDao.getChildListinfo(facility_id);		// 子供情報一覧リスト
+		if (childlist == null || childlist.isEmpty()) {
+		    req.setAttribute("error", "子供情報の取得に失敗しました。");
+		    req.getRequestDispatcher("childlist.jsp").forward(req, res);
+		    return;
+		}
+
+
 		for (Child c : childlist) {		// 子供IDリスト
 			childIdlist.add(c.getChild_id());
 		}
@@ -84,16 +89,30 @@ public class ChildListAction extends Action {
 
 
 		// クラス
-		List<ClassCd> classlist = ccDao.getClassCdinfo(facility_id);		// クラス情報一覧リスト
 		List<String> classNamelist = new ArrayList<>();					// クラス名のみリスト
+
+		List<ClassCd> classlist = ccDao.getClassCdinfo(facility_id);		// クラス情報一覧リスト
+		if (classlist == null || classlist.isEmpty()) {
+		    req.setAttribute("error", "クラス情報の取得に失敗しました。");
+		    req.getRequestDispatcher("childlist.jsp").forward(req, res);
+		    return;
+		}
 
 
 		for (ClassCd c : classlist) {	// クラス名リスト
 			classNamelist.add(c.getClass_name());
 		}
 
+
+
 		// 選択されたクラス名をクラスIDに変換
 		ClassCd classID = ccDao.getClassIdinfobyName(facility_id, class_cd);
+		if (classID == null) {
+		    req.setAttribute("error", "クラスIDの取得に失敗しました。");
+		    req.getRequestDispatcher("childlist.jsp").forward(req, res);
+		    return;
+		}
+
 		String class_id = classID.getClass_id();
 
 
@@ -112,11 +131,18 @@ public class ChildListAction extends Action {
 			childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
 		}else {
 		    // 選択条件が複数あったとき
-		    errors.put("f1", "絞り込み条件が複数あります");
+		    errors.put("f1", "欠席以外の項目が複数選択されています");
 		    req.setAttribute("errors", errors);
 		    // 施設の（在籍中の）子供全員表示
 		    childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
 		}
+
+		if (childs == null || childs.isEmpty()) {
+		    req.setAttribute("error", "子供情報一覧情報の取得に失敗しました。");
+		    req.getRequestDispatcher("childlist.jsp").forward(req, res);
+		    return;
+		}
+
 
 
 		//ビジネスロジック 4
@@ -128,8 +154,6 @@ public class ChildListAction extends Action {
 
 
 		//レスポンス値をセット 6
-
-
 
 		// 子供IDをセット
 		req.setAttribute("f1", child_id);
@@ -158,8 +182,5 @@ public class ChildListAction extends Action {
 	}
 
 }
-
-
-
 
 
