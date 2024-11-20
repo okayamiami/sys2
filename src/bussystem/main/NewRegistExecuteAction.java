@@ -1,5 +1,6 @@
 package bussystem.main;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ public class NewRegistExecuteAction extends Action {
         ManageUserDao muDao = new ManageUserDao();
         Map<String, String> errors = new HashMap<>();
         ManageUser mu = (ManageUser) session.getAttribute("user");
+        String password = generateRandomPassword(16);
 
         if (mu == null || mu.getFacility_id() == null) {
             errors.put("facility_id_error", "施設IDが取得できませんでした。");
@@ -83,14 +85,49 @@ public class NewRegistExecuteAction extends Action {
             perfect_id = user_status + formattedYear + String.format("%05d", nextNumber);
 
             // DBへデータ保存 5
-            puDao.newSaveParentsUserInfo(perfect_id, perfect_id, facility_id);
+            puDao.newSaveParentsUserInfo(perfect_id, password, facility_id);
         }
 
         // レスポンス値をセット 6
         req.setAttribute("user_status", user_status);
         session.setAttribute("perfect_id", perfect_id);
+        session.setAttribute("password", password);
 
         // JSPへフォワード 7
         req.getRequestDispatcher("newregistexecute.jsp").forward(req, res);
+    }
+
+    public static String generateRandomPassword(int length) {
+        // 使用する文字セットを定義
+        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+
+        // 全ての文字セットを結合
+        String allCharacters = upperCase + lowerCase + numbers;
+
+        // SecureRandomインスタンスを作成
+        SecureRandom random = new SecureRandom();
+
+        // パスワード生成用のStringBuilder
+        StringBuilder password = new StringBuilder();
+
+        // 残りの文字をランダムに追加
+        for (int i = 0; i < length; i++) {
+            password.append(allCharacters.charAt(random.nextInt(allCharacters.length())));
+        }
+
+        return password.toString();
+    }
+
+    private static String shuffleString(String input, SecureRandom random) {
+        char[] characters = input.toCharArray();
+        for (int i = characters.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            char temp = characters[i];
+            characters[i] = characters[j];
+            characters[j] = temp;
+        }
+        return new String(characters);
     }
 }

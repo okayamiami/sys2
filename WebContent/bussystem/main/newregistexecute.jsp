@@ -23,7 +23,7 @@
 </tr>
 <tr>
 	<td>${perfect_id}</td>
-	<td>${perfect_id}</td>
+	<td>${password}</td>
 	<td>
 	<c:choose>
 		<c:when test="${user_status=='T'}">
