@@ -13,7 +13,14 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
-	<%-- エラーのところの処理わからない --%>
+
+    <!-- エラーメッセージの表示 -->
+	<c:if test="${not empty error}">
+   	    <div class="alert alert-danger">
+       	    ${error}
+       	</div>
+   	</c:if>
+
     <form action="AbsenceReportExecute.action" method="post">
         <label>名前(子供)</label>
         <select name="child_name">
@@ -24,7 +31,6 @@
         <%-- <div>${errors.get("")}</div> --%>
 
         <label>欠席理由</label>
-        <%-- ☆★☆CSSで理由記入欄を大きく表示する☆★☆ --%>
         <input type="text" name="abs_main"
             placeholder="欠席理由を入力してください" maxlength="30"  />
         <%-- <div>${errors.get("no")}</div> --%>

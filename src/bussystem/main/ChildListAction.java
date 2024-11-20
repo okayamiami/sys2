@@ -49,132 +49,118 @@ public class ChildListAction extends Action {
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
 
 
+		try{
+			//リクエストパラメータ―の取得 2（絞り込み部分）
+			child_id = req.getParameter("f1");			// 子供ID
+			child_name = req.getParameter("f2");		// 子供名前
+			class_cd = req.getParameter("f3");			// クラス名
+			absIsAttendStr = req.getParameter("f4");	// 出欠席フラグ 選択されていたら欠席の子のみ表示
 
-		//リクエストパラメータ―の取得 2（絞り込み部分）
-		child_id = req.getParameter("f1");			// 子供ID
-		child_name = req.getParameter("f2");		// 子供名前
-		class_cd = req.getParameter("f3");			// クラス名
-		absIsAttendStr = req.getParameter("f4");	// 出欠席フラグ 選択されていたら欠席の子のみ表示
+
+			//欠席フラグが選択されたとき(欠席の子表示)
+			if (absIsAttendStr != null) {
+				// 欠席フラグを立てる
+				absIsAttend = true;
+			}
 
 
-		//欠席フラグが選択されたとき(欠席の子表示)
-		if (absIsAttendStr != null) {
-			// 欠席フラグを立てる
-			absIsAttend = true;
+
+			//DBからデータ取得 3
+
+			// 子供
+			List<String> childIdlist = new ArrayList<>();					// 子供IDのみリスト
+			List<String> childNamelist = new ArrayList<>();				// 子供の名前のみリスト
+
+
+			List<Child> childlist = cDao.getChildListinfo(facility_id);		// 子供情報一覧リスト
+
+
+			for (Child c : childlist) {		// 子供IDリスト
+				childIdlist.add(c.getChild_id());
+			}
+			for (Child c : childlist) {		// 子供名リスト
+				childNamelist.add(c.getChild_name());
+			}
+
+
+			// クラス
+			List<String> classNamelist = new ArrayList<>();					// クラス名のみリスト
+
+			List<ClassCd> classlist = ccDao.getClassCdinfo(facility_id);		// クラス情報一覧リスト
+
+
+
+			for (ClassCd c : classlist) {	// クラス名リスト
+				classNamelist.add(c.getClass_name());
+			}
+
+
+
+			// 選択されたクラス名をクラスIDに変換
+			ClassCd classID = ccDao.getClassIdinfobyName(facility_id, class_cd);
+
+
+			String class_id = classID.getClass_id();
+
+
+			// 絞り込み条件
+			if (child_id != null && !child_id.equals("0") && child_name.equals("0")&& class_cd.equals("0")) {
+			    // 子供IDのみ指定
+			    childs = caDao.filterbyChildId(child_id, facility_id, IsAttend, absIsAttend);
+			} else if (child_name != null && !child_name.equals("0") && child_id.equals("0") && class_cd.equals("0")) {
+			    // 子供の名前のみ指定
+			    childs = caDao.filterbyChildName(child_name, facility_id, IsAttend, absIsAttend);
+			} else if (class_cd != null && !class_cd.equals("0") && child_id.equals("0") && child_name.equals("0")) {
+			    // クラスのみ選択
+			    childs = caDao.filterbyClassCd(class_id, facility_id, IsAttend, absIsAttend);
+			} else if (child_id == null && child_name == null && class_cd == null || child_id.equals("0") && child_name.equals("0")&&class_cd.equals("0")) {
+				// 1つも選択されていないとき（施設の全員表示）
+				childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
+			}else {
+			    // 選択条件が複数あったとき
+			    errors.put("f1", "欠席以外の項目が複数選択されています");
+			    req.setAttribute("errors", errors);
+			    // 施設の（在籍中の）子供全員表示
+			    childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
+			}
+
+
+
+
+			//ビジネスロジック 4
+			//なし
+
+			//DBへデータ保存 5
+			//なし
+
+
+
+			//レスポンス値をセット 6
+
+			// 子供IDをセット
+			req.setAttribute("f1", child_id);
+			// 子供の名前をセット
+			req.setAttribute("f2", child_name);
+			// クラスをセット
+					req.setAttribute("f3", class_cd);
+			// 欠席フラグが送信されていた場合
+			if (absIsAttendStr != null) {
+				// リクエストに欠席フラグをセット
+				req.setAttribute("f4", absIsAttendStr);
+			}
+
+
+			// リクエストにをセット
+			req.setAttribute("childs", childs);
+			req.setAttribute("child_id_set", childIdlist);
+			req.setAttribute("child_name_set", childNamelist);
+			req.setAttribute("class_name_set", classNamelist);
+			req.setAttribute("class_set", classlist);
+
+		} catch (Exception e) {
+			req.setAttribute("error", "子供一覧情報の取得中にエラーが発生しました。");
+			req.getRequestDispatcher("childlist.jsp").forward(req, res);
 		}
-
-
-
-		//DBからデータ取得 3
-
-		// 子供
-		List<String> childIdlist = new ArrayList<>();					// 子供IDのみリスト
-		List<String> childNamelist = new ArrayList<>();				// 子供の名前のみリスト
-
-
-		List<Child> childlist = cDao.getChildListinfo(facility_id);		// 子供情報一覧リスト
-		if (childlist == null || childlist.isEmpty()) {
-		    req.setAttribute("error", "子供情報の取得に失敗しました。");
-		    req.getRequestDispatcher("childlist.jsp").forward(req, res);
-		    return;
-		}
-
-
-		for (Child c : childlist) {		// 子供IDリスト
-			childIdlist.add(c.getChild_id());
-		}
-		for (Child c : childlist) {		// 子供名リスト
-			childNamelist.add(c.getChild_name());
-		}
-
-
-		// クラス
-		List<String> classNamelist = new ArrayList<>();					// クラス名のみリスト
-
-		List<ClassCd> classlist = ccDao.getClassCdinfo(facility_id);		// クラス情報一覧リスト
-		if (classlist == null || classlist.isEmpty()) {
-		    req.setAttribute("error", "クラス情報の取得に失敗しました。");
-		    req.getRequestDispatcher("childlist.jsp").forward(req, res);
-		    return;
-		}
-
-
-		for (ClassCd c : classlist) {	// クラス名リスト
-			classNamelist.add(c.getClass_name());
-		}
-
-
-
-		// 選択されたクラス名をクラスIDに変換
-		ClassCd classID = ccDao.getClassIdinfobyName(facility_id, class_cd);
-		if (classID == null) {
-		    req.setAttribute("error", "クラスIDの取得に失敗しました。");
-		    req.getRequestDispatcher("childlist.jsp").forward(req, res);
-		    return;
-		}
-
-		String class_id = classID.getClass_id();
-
-
-		// 絞り込み条件
-		if (child_id != null && !child_id.equals("0") && child_name.equals("0")&& class_cd.equals("0")) {
-		    // 子供IDのみ指定
-		    childs = caDao.filterbyChildId(child_id, facility_id, IsAttend, absIsAttend);
-		} else if (child_name != null && !child_name.equals("0") && child_id.equals("0") && class_cd.equals("0")) {
-		    // 子供の名前のみ指定
-		    childs = caDao.filterbyChildName(child_name, facility_id, IsAttend, absIsAttend);
-		} else if (class_cd != null && !class_cd.equals("0") && child_id.equals("0") && child_name.equals("0")) {
-		    // クラスのみ選択
-		    childs = caDao.filterbyClassCd(class_id, facility_id, IsAttend, absIsAttend);
-		} else if (child_id == null && child_name == null && class_cd == null || child_id.equals("0") && child_name.equals("0")&&class_cd.equals("0")) {
-			// 1つも選択されていないとき（施設の全員表示）
-			childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
-		}else {
-		    // 選択条件が複数あったとき
-		    errors.put("f1", "欠席以外の項目が複数選択されています");
-		    req.setAttribute("errors", errors);
-		    // 施設の（在籍中の）子供全員表示
-		    childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
-		}
-
-		if (childs == null || childs.isEmpty()) {
-		    req.setAttribute("error", "子供情報一覧情報の取得に失敗しました。");
-		    req.getRequestDispatcher("childlist.jsp").forward(req, res);
-		    return;
-		}
-
-
-
-		//ビジネスロジック 4
-		//なし
-
-		//DBへデータ保存 5
-		//なし
-
-
-
-		//レスポンス値をセット 6
-
-		// 子供IDをセット
-		req.setAttribute("f1", child_id);
-		// 子供の名前をセット（予定）
-		req.setAttribute("f2", child_name);
-		// クラスをセット（予定）
-				req.setAttribute("f3", class_cd);
-		// 欠席フラグが送信されていた場合
-		if (absIsAttendStr != null) {
-			// リクエストに欠席フラグをセット
-			req.setAttribute("f4", absIsAttendStr);
-		}
-
-
-		// リクエストにをセット
-		req.setAttribute("childs", childs);
-		req.setAttribute("child_id_set", childIdlist);
-		req.setAttribute("child_name_set", childNamelist);
-		req.setAttribute("class_name_set", classNamelist);
-		req.setAttribute("class_set", classlist);
-
 
 
 		//JSPへフォワード 7

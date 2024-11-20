@@ -13,6 +13,13 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
+	<!-- エラーメッセージの表示 -->
+	<c:if test="${not empty error}">
+   	    <div class="alert alert-danger">
+       	    ${error}
+       	</div>
+   	</c:if>
+
     <p>登録完了しました</p>
     <a href="AbsenceSelect.action">戻る</a>
   </div>

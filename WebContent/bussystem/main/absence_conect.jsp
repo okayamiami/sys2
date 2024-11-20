@@ -31,53 +31,108 @@
     <form action="AbsenceSelect.action" method="get">
         <button type="submit">戻る</button>
     </form>
-    <c:if test="${not empty error}">
-        <div class="alert alert-danger">
-            ${error}
-        </div>
-    </c:if>
-    <form action="AbsenceConectAction" method="get">
-        <label for="absence_date">欠席日:</label>
-        <select id="absence_date" name="absence_date">
-            <option value="">選択してください</option>
-            <c:forEach var="date" items="${absenceDates}">
-                <option value="${date}">${date}</option>
-            </c:forEach>
-        </select>
-        <label for="class_name">クラス:</label>
-        <select id="class_name" name="class_name">
-            <option value="">選択してください</option>
-            <c:forEach var="className" items="${classNames}">
-                <option value="${className}">${className}</option>
-            </c:forEach>
-        </select>
-        <label for="child_name">名前:</label>
-        <select id="child_name" name="child_name">
-            <option value="">選択してください</option>
-            <c:forEach var="childName" items="${childNames}">
-                <option value="${childName}">${childName}</option>
-            </c:forEach>
-        </select>
-        <button type="submit">検索</button>
-    </form>
-    <table class="table table-hover">
-        <tr>
-            <th>欠席日</th>
-            <th>クラス</th>
-            <th>名前</th>
-            <th>欠席理由</th>
-        </tr>
-        <c:forEach var="absence" items="${absenceList}">
-            <tr>
-                <td>${absence.absence_date}</td>
-                <td>${absence.class_name}</td>
-                <td>${absence.child_name}</td>
-                <td>${absence.absence_main}</td>
-            </tr>
-        </c:forEach>
-    </table>
-    </div>
-    </div>
+		<!-- エラーメッセージの表示 -->
+        <c:if test="${not empty error}">
+            <p style="color: red; font-weight: bold;">${error}</p>
+        </c:if>
+		<form method="get">
+			<label> 欠席 </label>
+			<select name="f1">
+				<option value="0">--------</option>
+				<c:forEach var="childId" items="${child_id_set}">
+					<%-- 現在のchildIdと選択されていたf1が一致していた場合selectedを追記 --%>
+					<option value="${childId}" <c:if test="${childId==f1}">selected</c:if>>${childId}</option>
+				</c:forEach>
+			</select>
+
+			<label> 名前 </label>
+			<select name="f2">
+				<option value="0">--------</option>
+				<c:forEach var="childName" items="${child_name_set}">
+					<%-- 現在のchildNameと選択されていたf2が一致していた場合selectedを追記 --%>
+					<option value="${childName}" <c:if test="${childName==f2}">selected</c:if>>${childName}</option>
+				</c:forEach>
+			</select>
+
+			<label> クラス </label>
+			<select name="f3">
+				<option value="0">--------</option>
+				<c:forEach var="className" items="${class_name_set}">
+					<%-- 現在のclassNameと選択されていたf2が一致していた場合selectedを追記 --%>
+					<option value="${className}" <c:if test="${className==f3}">selected</c:if>>${className}</option>
+				</c:forEach>
+			</select>
+
+
+			<label>欠席
+				<%-- パラメーターf4が存在している場合checkedを追記 --%>
+				<input type="checkbox" name="f4" value="t"
+				<c:if test="${!empty f4}">checked</c:if> />
+			</label>
+
+			<button>絞込み</button>
+
+			<div>${errors.get("f1")}</div>
+		</form>
+
+		<!-- エラーメッセージの表示 -->
+        <c:if test="${not empty error}">
+            <p style="color: red; font-weight: bold;">${error}</p>
+        </c:if>
+
+        <!-- 情報表示 -->
+        <c:if test="${empty error}">
+
+			<c:choose>
+				<c:when test="${childs.size()>0}">
+					<div>検索結果：${childs.size()}件</div>
+
+					<table class="table table-hover">
+						<tr>
+							<th>子供ID</th>
+							<th>名前</th>
+							<th>クラス</th>
+							<th class="text-center">出欠状況</th>
+
+						</tr>
+						<c:forEach var="child" items="${childs}">
+							<tr>
+								 <td>
+		    						<a href="ChildDetail.action?child_id=${child.child_id}">${child.child_id}</a>
+								</td>
+								<td>${child.child_name}</td>
+								<td>
+									<c:if test="${not empty class_set}">
+		                    			<c:forEach var="classItem" items="${class_set}">
+		                        			<c:if test="${child.class_id eq classItem.class_id}">
+		                            		${classItem.class_name}
+		                        			</c:if>
+		                    			</c:forEach>
+		                			</c:if>
+								</td>
+								<td class="text-center">
+									<%-- 欠席フラグがたっている場合「○」それ以外は「×」を表示 --%>
+									<c:choose>
+										<c:when test="${child.Abs_is_attend()}">
+											×
+										</c:when>
+										<c:otherwise>
+											◯
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:when>
+				<c:otherwise>
+					<div>子供情報が存在しませんでした</div>
+				</c:otherwise>
+			</c:choose>
+		</c:if>
+	<a href="Menu.action">メニュー画面に戻る</a>
+	</div>
+</div>
 </body>
 <c:import url="/common/footer.jsp" />
 </html>

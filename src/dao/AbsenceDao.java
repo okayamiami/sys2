@@ -129,9 +129,6 @@ public class AbsenceDao extends Dao{
 	}
 
 
-
-
-
 	// 欠席情報登録
 	public boolean saveAbsenceInfo(Absence absence) throws Exception {
 		//コネクションを確立
@@ -204,6 +201,232 @@ public class AbsenceDao extends Dao{
 
 
 	}
+
+
+
+	/**filter部分　コメントで一応残す
+	 *
+	 * 子供一覧絞り込みで使用
+	 * postFilterメソッド フィルター後のリストへの格納処理 プライベート
+	 */
+
+	private List<Absence> postFilter(ResultSet rSet) throws Exception {
+		// リストを初期化
+		List<Absence> list = new ArrayList<>();
+
+		try {
+			// リザルトセットを全件走査
+			while(rSet.next()) {
+				// 欠席情報一覧を初期化
+				Absence abs = new Absence();
+				// 欠席インスタンスに検索結果をセット
+				abs.setAbsence_id(rSet.getString("absence_id"));
+				abs.setAbsence_main(rSet.getString("absence_main"));
+				abs.setChild_id(rSet.getString("child_id"));
+				abs.setAbsence_date(rSet.getString("absence_date"));
+				abs.setFacility_id(rSet.getString("facility_id"));
+				abs.setFacility_id(rSet.getString("facility_id"));
+				abs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
+
+				list.add(abs);
+			}
+		} catch (SQLException | NullPointerException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	 /** filterメソッド 欠席日を指定して欠席の一覧を取得する
+	 *
+	 * @param absence_date:String
+	 *            欠席日
+	 * @param facility_id:String
+	 *            施設ID
+	 * @return 一覧のリスト:List<Absence> 存在しない場合は0件のリスト
+	 * @throws Exception
+	 */
+
+	public List<Absence> filterbyAbsence_date(String absence_date, String facility_id) throws Exception {
+
+		// リストを初期化
+		List<Absence> list = new ArrayList<>();
+		// コネクションを確立
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// リザルトセット
+		ResultSet rSet = null;
+		// SQL文の条件
+		String condition = "and absence_date=?  ";
+
+		// SQL文のソート
+		String order = "order by absence_id desc";
+
+
+
+		try {
+			// プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(baseSql + condition + order);
+
+			statement.setString(1, facility_id);
+			statement.setString(2, absence_date);
+
+			// プライベートステートメントを実行
+			rSet = statement.executeQuery();
+
+			// リストへの格納処理を実行
+			list = postFilter(rSet);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
+
+
+	 /** filterメソッド クラスを指定して欠席の一覧を取得する
+	 *
+	 * @param class_id:String
+	 *            クラスID
+	 * @param facility_id:String
+	 *            施設ID
+	 * @return 一覧のリスト:List<Absence> 存在しない場合は0件のリスト
+	 * @throws Exception
+	 */
+
+	public List<Absence> filterbyClassId(String class_id, String facility_id) throws Exception {
+
+		// リストを初期化
+		List<Absence> list = new ArrayList<>();
+		// コネクションを確立
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// リザルトセット
+		ResultSet rSet = null;
+		// SQL文の条件
+		String condition = "and class_id=?  ";
+
+		// SQL文のソート
+		String order = "order by absence_id desc";
+
+
+
+		try {
+			// プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(baseSql + condition + order);
+
+			statement.setString(1, facility_id);
+			statement.setString(2, class_id);
+
+			// プライベートステートメントを実行
+			rSet = statement.executeQuery();
+
+			// リストへの格納処理を実行
+			list = postFilter(rSet);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
+
+	 /** filterメソッド 名前を指定して欠席の一覧を取得する
+	 *
+	 * @param child_name:String
+	 *            子供の名前
+	 * @param facility_id:String
+	 *            施設ID
+	 * @return 一覧のリスト:List<Absence> 存在しない場合は0件のリスト
+	 * @throws Exception
+	 */
+
+	public List<Absence> filterbyChildName(String child_name, String facility_id) throws Exception {
+
+		// リストを初期化
+		List<Absence> list = new ArrayList<>();
+		// コネクションを確立
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// リザルトセット
+		ResultSet rSet = null;
+		// SQL文の条件
+		String condition = "and child_name=?  ";
+
+		// SQL文のソート
+		String order = "order by absence_id desc";
+
+
+
+		try {
+			// プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(baseSql + condition + order);
+
+			statement.setString(1, facility_id);
+			statement.setString(2, child_name);
+
+			// プライベートステートメントを実行
+			rSet = statement.executeQuery();
+
+			// リストへの格納処理を実行
+			list = postFilter(rSet);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
+
 
 
 }
