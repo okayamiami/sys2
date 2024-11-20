@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <h2>保護者ID入力</h2>
 </head>
 <body>
 
@@ -16,10 +15,9 @@
         <!-- 保護者ID入力フォーム -->
         <form action="ParentsInput.action" method="post">
             <label for="parents_id">保護者ID:</label>
-            <input type="text" id="parents_id" name="parents_id" required/>
+            <input type="text" id="parents_id" name="parents_id" required/></br>
             <button type="submit">検索</button>
         </form>
-
         <a href="menu.jsp">戻る</a>
     </div>
 </div>

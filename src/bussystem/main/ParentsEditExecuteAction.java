@@ -12,6 +12,8 @@ import tool.Action;
 public class ParentsEditExecuteAction extends Action {
 
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+    	//保護者情報の変更をコミットする場所
+
         HttpSession session = req.getSession(); // セッションを取得
         String user_type = (String) session.getAttribute("user_type");
         String facilityId = null;

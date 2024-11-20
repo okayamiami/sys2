@@ -36,7 +36,7 @@
                             <input type="text" name="parents_address" value="${user.parents_address}"/>
                         </td>
                         <td>
-                            <input type="tel" name="parents_tel" value="${user.parents_tel}"/>
+                            <input type="tel" name="parents_tel" pattern="\d+" value="${user.parents_tel}"/>
                         </td>
                         <td>
                             <input type="email" name="parents_mail1" value="${user.parents_mail1}"/>
@@ -52,6 +52,7 @@
             </table>
 
             <button type="submit">保存</button>
+            <input type="reset" value="入力内容をキャンセル"/>
         </form>
     </div>
 </div>

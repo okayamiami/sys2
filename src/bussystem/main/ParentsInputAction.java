@@ -26,14 +26,11 @@ public class ParentsInputAction extends Action {
     	ManageUser MU = (ManageUser) session.getAttribute("user");
 		String facility_id = MU.getFacility_id();
 
-        // 入力チェック: parents_id が入力されているか、facility_id がセッションに存在するかを確認
-        if (parents_id == null) {
-        	System.out.println("エラーです");
-            errors.put("inputError", "保護者IDを入力してください");
-            req.setAttribute("errors", errors);
-            req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
-            return;  // 処理終了
-        }
+	    if (parents_id == null || parents_id.trim().isEmpty()) {
+	        req.setAttribute("errorMessage", "保護者IDを入力してください。");
+	        req.getRequestDispatcher("/parentsInput.jsp").forward(req, res);
+	        return;
+	    }
 
         // Daoをインスタンス化
         ParentsUserDao PD = new ParentsUserDao();
@@ -51,7 +48,6 @@ public class ParentsInputAction extends Action {
             // 結果ページにフォワード
             req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
         } else {
-            // データが見つからない場合のエラーハンドリング
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
         }
