@@ -81,6 +81,10 @@
                             document.getElementById('qrData').value = code.data;
                             // bus_idの値をチェック
                             console.log("bus_id: ", document.getElementById('bus_id').value);
+
+                            // QRコードの位置に枠を描画
+                            drawQRCodeOutline(code);
+
                             // スキャン停止してフォーム送信
                             scanning = false;
                             video.srcObject.getTracks().forEach(track => track.stop()); // カメラを停止
@@ -94,11 +98,21 @@
                         alert("QRコードの読み取り中にエラーが発生しました。");
                     }
                 }
+
+                // QRコードの位置に枠を描画
+                function drawQRCodeOutline(code) {
+                    ctx.beginPath();
+                    ctx.moveTo(code.topLeft.x, code.topLeft.y);
+                    ctx.lineTo(code.topRight.x, code.topRight.y);
+                    ctx.lineTo(code.bottomRight.x, code.bottomRight.y);
+                    ctx.lineTo(code.bottomLeft.x, code.bottomLeft.y);
+                    ctx.closePath();
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = "#FF0000"; // 赤色の枠
+                    ctx.stroke();
+                }
             </script>
         </div>
     </div>
 </body>
 </html>
-
-
-
