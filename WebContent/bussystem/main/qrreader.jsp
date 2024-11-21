@@ -32,85 +32,91 @@
             </form>
 
             <script>
-                const video = document.getElementById('video');
-                const canvas = document.getElementById('canvas');
-                const ctx = canvas.getContext('2d');
-                let scanning = false;
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });  // willReadFrequentlyを追加
+            let scanning = false;
 
-                // QRコードリーダーを開始
-                async function startQRCodeReader() {
-                    try {
-                        document.getElementById('scannerContainer').style.display = 'block';
+            // QRコードリーダーを開始
+            async function startQRCodeReader() {
+                try {
+                    document.getElementById('scannerContainer').style.display = 'block';
 
-                        // カメラアクセスをリクエスト
-                        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-                        video.srcObject = stream;
+                    // カメラアクセスをリクエスト
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                    video.srcObject = stream;
 
-                        video.addEventListener('loadedmetadata', () => {
-                            scanning = true;
-                            scanQRCode();
-                        });
-                    } catch (error) {
-                        console.error("カメラ起動エラー: ", error);
-                        alert("カメラを起動できませんでした。");
+                    video.addEventListener('loadedmetadata', () => {
+                        scanning = true;
+                        scanQRCode();
+                    });
+                } catch (error) {
+                    console.error("カメラ起動エラー: ", error);
+                    alert("カメラを起動できませんでした。");
+                }
+            }
+
+            // QRコードをスキャン
+            function scanQRCode() {
+                if (!scanning) return;
+
+                try {
+                    if (video.videoWidth === 0 || video.videoHeight === 0) {
+                        console.warn("カメラの解像度が取得できません。");
+                        return setTimeout(scanQRCode, 100); // 少し待って再試行
                     }
-                }
 
-                // QRコードをスキャン
-                function scanQRCode() {
-                    if (!scanning) return;
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-                    try {
-                        if (video.videoWidth === 0 || video.videoHeight === 0) {
-                            console.warn("カメラの解像度が取得できません。");
-                            return setTimeout(scanQRCode, 100); // 少し待って再試行
-                        }
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const code = jsQR(imageData.data, canvas.width, canvas.height, {
+                        inversionAttempts: "dontInvert",
+                    });
 
-                        canvas.width = video.videoWidth;
-                        canvas.height = video.videoHeight;
-                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    if (code) {
+                        // QRコードが読み取れた場合
+                        console.log("QRコード内容: ", code.data);
+                        document.getElementById('qrData').value = code.data;
+                        // bus_idの値をチェック
+                        console.log("bus_id: ", document.getElementById('bus_id').value);
 
-                        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                        const code = jsQR(imageData.data, canvas.width, canvas.height, {
-                            inversionAttempts: "dontInvert",
-                        });
+                        // QRコードの位置に枠を描画
+                        drawQRCodeOutline(code);
+                        console.log("aaa");
 
-                        if (code) {
-                            // QRコードが読み取れた場合
-                            console.log("QRコード内容: ", code.data);
-                            document.getElementById('qrData').value = code.data;
-                            // bus_idの値をチェック
-                            console.log("bus_id: ", document.getElementById('bus_id').value);
-
-                            // QRコードの位置に枠を描画
-                            drawQRCodeOutline(code);
-
-                            // スキャン停止してフォーム送信
-                            scanning = false;
-                            video.srcObject.getTracks().forEach(track => track.stop()); // カメラを停止
-                            document.qrForm.submit(); // フォーム送信
-                        } else {
-                            // QRコードが見つからない場合、再度スキャン
-                            requestAnimationFrame(scanQRCode);
-                        }
-                    } catch (error) {
-                        console.error("QRコード読み取りエラー: ", error);
-                        alert("QRコードの読み取り中にエラーが発生しました。");
+                        // スキャン停止してフォーム送信
+                        scanning = false;
+                        console.log("bbb");
+                        video.srcObject.getTracks().forEach(track => track.stop()); // カメラを停止
+                        console.log("ccc");
+                        document.qrForm.submit(); // フォーム送信
+                        console.log("ddd");
+                    } else {
+                        // QRコードが見つからない場合、再度スキャン
+                        console.log("111");
+                        requestAnimationFrame(scanQRCode);
+                        console.log("222");
                     }
+                } catch (error) {
+                    console.error("QRコード読み取りエラー: ", error);
+                    alert("QRコードの読み取り中にエラーが発生しました。");
                 }
+            }
 
-                // QRコードの位置に枠を描画
-                function drawQRCodeOutline(code) {
-                    ctx.beginPath();
-                    ctx.moveTo(code.topLeft.x, code.topLeft.y);
-                    ctx.lineTo(code.topRight.x, code.topRight.y);
-                    ctx.lineTo(code.bottomRight.x, code.bottomRight.y);
-                    ctx.lineTo(code.bottomLeft.x, code.bottomLeft.y);
-                    ctx.closePath();
-                    ctx.lineWidth = 4;
-                    ctx.strokeStyle = "#FF0000"; // 赤色の枠
-                    ctx.stroke();
-                }
+            // QRコードの位置に枠を描画
+            function drawQRCodeOutline(code) {
+                ctx.beginPath();
+                ctx.moveTo(code.topLeft.x, code.topLeft.y);
+                ctx.lineTo(code.topRight.x, code.topRight.y);
+                ctx.lineTo(code.bottomRight.x, code.bottomRight.y);
+                ctx.lineTo(code.bottomLeft.x, code.bottomLeft.y);
+                ctx.closePath();
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = "#FF0000"; // 赤色の枠
+                ctx.stroke();
+            }
             </script>
         </div>
     </div>
