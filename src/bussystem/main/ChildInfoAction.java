@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Child;
+import bean.ClassCd;
 import bean.ManageUser;
 import bean.ParentsUser;
 import dao.ChildDao;
+import dao.ClassCdDao;
 import tool.Action;
 
 public class ChildInfoAction extends Action{
@@ -28,6 +30,7 @@ public class ChildInfoAction extends Action{
 
 		// Daoをインスタンス化
 		ChildDao CD = new ChildDao();
+		ClassCdDao CC = new ClassCdDao();
 
 		// ログインユーザーを一時的に取得
 		String user_type = (String) session.getAttribute("user_type");
@@ -39,11 +42,21 @@ public class ChildInfoAction extends Action{
 			String user_id = PU.getParents_id();
 			String facility_id = PU.getFacility_id();
 
-			// 子供の情報を取得
+			//Beanをインスタンス化しクラス名を取得祈願　　引数null
+
+			ClassCd Cd = new ClassCd();
+
+
+			//子供の情報を取得
 		    List<Child> CI = new ArrayList<>();
 			CI = CD.getChildrenByParentId(user_id, facility_id);
+			//全クラス情報取得
+			List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
 			System.out.println(CI);
-			req.setAttribute("user", CI);
+			System.out.println(class_set);
+			req.setAttribute("class_set", class_set);
+			req.setAttribute("userCI", CI);
+			req.setAttribute("user", PU);
 			req.getRequestDispatcher("childinfo.jsp").forward(req, res);
 
 		} else if ("M".equals(user_type)) {

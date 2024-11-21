@@ -10,35 +10,45 @@
     <c:import url="/common/navi.jsp" />
 
     <div class="con">
-    <!-- 子供情報の表示 -->
         <a href="menu.jsp">戻る</a>
+
+        <!-- 子供情報テーブル -->
         <table>
             <tr>
-                <th>ID</th>
-                <th>クラス</th>
-                <th>名前</th>
+                <th>保護者ID</th>
+                <th>クラス名</th>
+                <th>子供の名前</th>
+                <th>操作</th>
             </tr>
-
-            <c:forEach var="user" items="${user}">
+            <c:forEach var="child" items="${userCI}">
                 <tr>
-                    <li>${user.parents_id}</li>
-                    <li>${user.class_id}</li>
-                    <li>${user.child_name}</li>
+                    <td>${child.parents_id}</td>
+                    <td>
+                        <!-- クラスIDに対応するクラス名を表示 -->
+                        <c:forEach var="classCd" items="${class_set}">
+                            <c:if test="${classCd.class_id == child.class_id}">
+                                ${classCd.class_name}
+                            </c:if>
+                        </c:forEach>
+                    </td>
+                    <td>${child.child_name}</td>
+                    <td>
+                        <!-- 編集ボタン -->
+                        <form action="ChildUpdate.action" method="post" style="display:inline;">
+                            <input type="hidden" name="parents_id" value="${child.parents_id}" />
+                            <button type="submit">編集</button>
+                        </form>
+
+                        <!-- 追加ボタン -->
+                        <form action="addChild.action" method="post" style="display:inline;">
+                            <input type="hidden" name="parents_id" value="${child.parents_id}" />
+                            <button type="submit">追加</button>
+                        </form>
+                    </td>
                 </tr>
-                <td>
-             <form action="" method="post">
-                 <input type="hidden" name="parents_id" value="${user.parents_id}" />
-                 <button type="submit">編集</button>
-             </form>
-             <form action="" method="post">
-                 <input type="hidden" name="parents_id" value="${user.parents_id}" />
-                 <button type="submit">追加</button>
-             </form>
-             </td>
             </c:forEach>
-
-
         </table>
+
     </div>
 </div>
 
