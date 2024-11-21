@@ -51,6 +51,8 @@ public class AbsenceDao extends Dao{
 				abs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
 				list.add(abs);
 
+				System.out.println(abs);
+
 			}
 		} catch (Exception e) {
 			throw e;
@@ -127,6 +129,7 @@ public class AbsenceDao extends Dao{
 		}
 		return abs;
 	}
+
 
 
 	// 欠席情報登録
@@ -225,8 +228,15 @@ public class AbsenceDao extends Dao{
 				abs.setChild_id(rSet.getString("child_id"));
 				abs.setAbsence_date(rSet.getString("absence_date"));
 				abs.setFacility_id(rSet.getString("facility_id"));
-				abs.setFacility_id(rSet.getString("facility_id"));
 				abs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
+
+				System.out.println(rSet.getString("absence_id"));
+				System.out.println(rSet.getString("absence_main"));
+				System.out.println(rSet.getString("child_id"));
+				System.out.println(rSet.getString("absence_date"));
+				System.out.println(rSet.getString("facility_id"));
+				System.out.println(rSet.getBoolean("abs_is_attend"));
+
 
 				list.add(abs);
 			}
@@ -264,6 +274,9 @@ public class AbsenceDao extends Dao{
 		String order = "order by absence_id desc";
 
 
+		System.out.println("欠席日で絞り込み入ってる☆★☆");
+
+
 
 		try {
 			// プリペアードステートメントにSQL文をセット
@@ -272,11 +285,15 @@ public class AbsenceDao extends Dao{
 			statement.setString(1, facility_id);
 			statement.setString(2, absence_date);
 
+			System.out.println("SQL☆OK!!★☆"+ statement);
+
 			// プライベートステートメントを実行
 			rSet = statement.executeQuery();
 
 			// リストへの格納処理を実行
 			list = postFilter(rSet);
+
+			System.out.println(list);
 		} catch (Exception e) {
 			throw e;
 		} finally {

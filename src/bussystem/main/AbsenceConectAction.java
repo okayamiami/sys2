@@ -101,6 +101,7 @@ public class AbsenceConectAction extends Action {
 				abs = aDao.filterbyChildName(child_name, facility_id);
 			} else if (absence_date == null && class_id == null && child_name == null || absence_date.equals("0") && class_id.equals("0")&&child_name.equals("0")) {
 				// 1つも選択されていないとき（欠席の全表示）
+				System.out.println("最初ここ通ってる？？");
 				abs = aDao.getAbsenceInfo(facility_id);
 			}else {
 			    // 選択条件が複数あったとき
@@ -135,11 +136,14 @@ public class AbsenceConectAction extends Action {
 
 
 			// リクエストにをセット
-			req.setAttribute("absences", abs);						// 欠席情報一覧
+			req.setAttribute("absence", abs);
 			req.setAttribute("datelist", dateList);					// 欠席日（過去10日）のリスト
 			req.setAttribute("class_name_set", classNamelist);		// クラスの名前リスト
 			req.setAttribute("child_name_set", childNamelist);		// 子供の名前リスト
-			req.setAttribute("class_set", classlist);				// クラス名表示のためのクラス情報リスト
+			req.setAttribute("class_set", classlist);				// jspでクラス名表示のためのクラス情報リスト
+			req.setAttribute("child_set", childlist);				// jspで名前表示のための子供情報リスト
+
+
 
 		} catch (Exception e) {
 			req.setAttribute("error", "欠席情報の取得中にエラーが発生しました。");

@@ -174,6 +174,7 @@ public class ChildAbsDao extends Dao{
 	        statement.setString(1, facility_id);
 	        statement.setString(2, child_id);
 
+
 	        rSet = statement.executeQuery();
 
 	        while (rSet.next()) {
