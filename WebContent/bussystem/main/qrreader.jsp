@@ -28,7 +28,7 @@
             <!-- QRコード読み取り後に送信するフォーム -->
             <form name="qrForm" action="QrReaderExecute.action" method="post">
                 <input type="hidden" id="qrData" name="qrData" />
-                <input type="hidden" name="bus_id" value="${bus_id}">
+                <input type="hidden" id="bus_id" name="bus_id" value="${bus_id}">
             </form>
 
             <script>
@@ -79,9 +79,12 @@
                             // QRコードが読み取れた場合
                             console.log("QRコード内容: ", code.data);
                             document.getElementById('qrData').value = code.data;
+                            // bus_idの値をチェック
+                            console.log("bus_id: ", document.getElementById('bus_id').value);
+                            // スキャン停止してフォーム送信
                             scanning = false;
                             video.srcObject.getTracks().forEach(track => track.stop()); // カメラを停止
-                            document.qrForm.submit();
+                            document.qrForm.submit(); // フォーム送信
                         } else {
                             // QRコードが見つからない場合、再度スキャン
                             requestAnimationFrame(scanQRCode);
