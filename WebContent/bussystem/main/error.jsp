@@ -8,10 +8,10 @@
 <body>
     <h2>エラーが発生しました</h2>
 
-    <!-- エラーメッセージの表示 -->
-    <c:if test="${not empty error}">
+    <!-- errorMessage属性が存在する場合に表示 -->
+    <c:if test="${not empty errorMessage}">
         <div>
-            <strong style="color:red;">${error}</strong>
+            <strong style="color:red;">${errorMessage}</strong>
         </div>
     </c:if>
 
@@ -20,5 +20,3 @@
 </body>
 </html>
 
-</body>
-</html>

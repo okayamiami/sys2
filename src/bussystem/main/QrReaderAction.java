@@ -14,7 +14,7 @@ public class QrReaderAction extends Action {
 
         // 取得したパラメータが不足していないか確認
         if (busId == null) {
-            req.setAttribute("error", "必要な情報が不足しています。");
+            req.setAttribute("errorMessage", "必要な情報が不足しています。");
             req.getRequestDispatcher("qrreader.jsp").forward(req, res);
             return;
         }
