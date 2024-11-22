@@ -47,7 +47,26 @@ public class NewRegistExecuteAction extends Action {
         user_status = req.getParameter("user_status");
 
         // ビジネスロジック 4
-        if ("T".equals(user_status)) {
+        if ("M".equals(user_status)) {
+            List<ManageUser> list = muDao.filter(facility_id);
+            List<String> sList = new ArrayList<>();
+
+            for (ManageUser m : list) {
+                sList.add(m.getUser_id());
+            }
+
+            OptionalInt maxNum = sList.stream()
+                    .filter(s -> s.startsWith("M"))
+                    .map(s -> Integer.parseInt(s.substring(3)))
+                    .mapToInt(Integer::intValue)
+                    .max();
+
+            int nextNumber = maxNum.orElse(0) + 1;
+            perfect_id = user_status + formattedYear + String.format("%05d", nextNumber);
+
+            // DBへデータ保存 5
+            muDao.newSaveManageUserInfo(perfect_id, perfect_id, facility_id);
+        }else if ("T".equals(user_status)) {
             List<ManageUser> list = muDao.filter(facility_id);
             List<String> sList = new ArrayList<>();
 

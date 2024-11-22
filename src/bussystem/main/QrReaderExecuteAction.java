@@ -14,6 +14,7 @@ public class QrReaderExecuteAction extends Action {
         try {
             // QRコードで読み取ったデータを取得
             String qrData = req.getParameter("qrData");
+            
             // QRコードデータがnullまたは空の場合、エラーメッセージを設定してリダイレクト
             if (qrData == null || qrData.isEmpty()) {
                 req.setAttribute("errorMessage", "QRコードのデータが無効です。");
@@ -41,7 +42,7 @@ public class QrReaderExecuteAction extends Action {
                 req.getRequestDispatcher("error.jsp").forward(req, res);
                 return;
             }
-
+            
             // GetDaoインスタンスを作成し、changeGetメソッドを実行
             GetDao dao = new GetDao();
             boolean isUpdated = dao.changeGet(bus_id, child_id, facility_id);

@@ -17,7 +17,7 @@ public class NewRegistAction extends Action{
 		//ローカル変数の宣言 1
 		HttpSession session = req.getSession(true);				// セッションを取得
 		ManageUser mu = (ManageUser) session.getAttribute("user");	// ログインユーザーを取得
-		List<String> us= new ArrayList<String>(Arrays.asList("T","P"));
+		List<String> us= new ArrayList<String>(Arrays.asList("M","T","P"));
 		//リクエストパラメータ―の取得 2
 		//なし
 

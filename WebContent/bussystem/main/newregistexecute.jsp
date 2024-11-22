@@ -26,6 +26,9 @@
 	<td>${password}</td>
 	<td>
 	<c:choose>
+		<c:when test="${user_status=='M'}">
+			管理者
+		</c:when>
 		<c:when test="${user_status=='T'}">
 			先生
 		</c:when>
