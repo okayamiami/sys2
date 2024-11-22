@@ -205,9 +205,60 @@ public class AbsenceDao extends Dao{
 
 	}
 
+	 // クラスを指定して欠席の一覧を取得する
+	public List<Absence> filterbyClassId(String class_id, String facility_id) throws Exception {
+
+		// リストを初期化
+		List<Absence> list = new ArrayList<>();
+		// コネクションを確立
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// リザルトセット
+		ResultSet rSet = null;
 
 
-	/**filter部分　コメントで一応残す
+		try {
+			// プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement("SELECT a.* "
+					+ "FROM Absence a JOIN Child c ON a.child_id = c.child_id and a.facility_id =c.facility_id "
+					+ "WHERE c.class_id =? and a.facility_id =?");
+
+			statement.setString(1, class_id);
+			statement.setString(2, facility_id);
+
+			// プライベートステートメントを実行
+			rSet = statement.executeQuery();
+
+			// リストへの格納処理を実行
+			list = postFilter(rSet);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
+
+
+
+
+	/**filter部分
 	 *
 	 * 子供一覧絞り込みで使用
 	 * postFilterメソッド フィルター後のリストへの格納処理 プライベート
@@ -318,68 +369,6 @@ public class AbsenceDao extends Dao{
 	}
 
 
-	 /** filterメソッド クラスを指定して欠席の一覧を取得する
-	 *
-	 * @param class_id:String
-	 *            クラスID
-	 * @param facility_id:String
-	 *            施設ID
-	 * @return 一覧のリスト:List<Absence> 存在しない場合は0件のリスト
-	 * @throws Exception
-	 */
-
-	public List<Absence> filterbyClassId(String class_id, String facility_id) throws Exception {
-
-		// リストを初期化
-		List<Absence> list = new ArrayList<>();
-		// コネクションを確立
-		Connection connection = getConnection();
-		// プリペアードステートメント
-		PreparedStatement statement = null;
-		// リザルトセット
-		ResultSet rSet = null;
-		// SQL文の条件
-		String condition = "and class_id=?  ";
-
-		// SQL文のソート
-		String order = "order by absence_id desc";
-
-
-
-		try {
-			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition + order);
-
-			statement.setString(1, facility_id);
-			statement.setString(2, class_id);
-
-			// プライベートステートメントを実行
-			rSet = statement.executeQuery();
-
-			// リストへの格納処理を実行
-			list = postFilter(rSet);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			// プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-			// コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
-		return list;
-	}
 
 	 /** filterメソッド 名前を指定して欠席の一覧を取得する
 	 *

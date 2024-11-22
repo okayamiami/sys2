@@ -111,7 +111,7 @@ public class AbsenceConectAction extends Action {
 				abs = aDao.getAbsenceInfo(facility_id);
 			}
 
-
+			System.out.println(abs);
 
 
 			//ビジネスロジック 4
@@ -136,7 +136,7 @@ public class AbsenceConectAction extends Action {
 
 
 			// リクエストにをセット
-			req.setAttribute("absence", abs);
+			req.setAttribute("abs", abs);
 			req.setAttribute("datelist", dateList);					// 欠席日（過去10日）のリスト
 			req.setAttribute("class_name_set", classNamelist);		// クラスの名前リスト
 			req.setAttribute("child_name_set", childNamelist);		// 子供の名前リスト
