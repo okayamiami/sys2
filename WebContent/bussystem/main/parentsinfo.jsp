@@ -10,6 +10,7 @@
     <c:import url="/common/navi.jsp" />
 
     <div class="con">
+
     <!-- 保護者情報の表示 -->
         <h2>保護者情報</h2>
         <a href="menu.jsp">戻る</a>

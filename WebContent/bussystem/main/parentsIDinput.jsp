@@ -12,9 +12,9 @@
     <c:import url="/common/navi.jsp" />
 
     <div class="con">
-    	 <h2>保護者情報</h2>
         <!-- 保護者ID入力フォーム -->
-        <form action="ParentsInput.action" method="post">
+        <h2>子供情報</h2>
+        <form action="ParentsIDInput.action" method="post">
             <label for="parents_id">保護者ID:</label>
             <input type="text" id="parents_id" name="parents_id" required/></br>
             <button type="submit">検索</button>

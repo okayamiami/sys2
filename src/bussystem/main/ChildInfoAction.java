@@ -52,8 +52,8 @@ public class ChildInfoAction extends Action{
 			CI = CD.getChildrenByParentId(user_id, facility_id);
 			//全クラス情報取得
 			List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
-			System.out.println(CI);
-			System.out.println(class_set);
+
+
 			req.setAttribute("class_set", class_set);
 			req.setAttribute("userCI", CI);
 			req.setAttribute("user", PU);
@@ -65,7 +65,7 @@ public class ChildInfoAction extends Action{
 			String facility_id = MU.getFacility_id();
 			req.setAttribute("facility_id", facility_id);
 			// 保護者ID入力ページへ
-			req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
+			req.getRequestDispatcher("parentsIDinput.jsp").forward(req, res);
 
 		} else {
 			// 予期しない場合のエラーハンドリング

@@ -19,7 +19,7 @@
 					<li><a href="NewRegist.action">新規登録</a></li>
 					<li><a href="ChildList.action">名簿情報一覧</a></li>
 					<li><a href="Parents.action">保護者情報</a></li>
-					<li><a href="子供情報">子供情報</a></li>
+					<li><a href="ChildInfo.action">子供情報</a></li>
 					<li><a href="AbsenceSelect.action">欠席機能</a></li>
 					<li><a href="InfoMenu.action">お知らせ機能</a></li>
 					<li><a href="QrMenu.action">QR機能</a></li>
@@ -38,7 +38,7 @@
 					<h2>保護者</h2>
 					<ul>
 					<li><a href="Parents.action">保護者情報</a></li>
-					<li><a href="子供情報">子供情報</a></li>
+					<li><a href="ChildInfo.action">子供情報</a></li>
 					<li><a href="AbsenceReport.action">欠席報告</a></li>
 					<li><a href="InfoList.action">お知らせ一覧</a></li>
 					</ul>

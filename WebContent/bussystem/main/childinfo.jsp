@@ -36,18 +36,20 @@
                         <!-- 編集ボタン -->
                         <form action="ChildUpdate.action" method="post" style="display:inline;">
                             <input type="hidden" name="parents_id" value="${child.parents_id}" />
-                            <button type="submit">編集</button>
-                        </form>
-
-                        <!-- 追加ボタン -->
-                        <form action="addChild.action" method="post" style="display:inline;">
-                            <input type="hidden" name="parents_id" value="${child.parents_id}" />
-                            <button type="submit">追加</button>
+                            <!-- 子供のchild_idを送信する隠しフィールド -->
+                            <input type="hidden" name="child_id" value="${child.child_id}" /> <!-- これでchild_idは画面には表示されない -->
+                            <button type="submit">更新</button>
                         </form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
+
+        <!-- 追加ボタン -->
+        <form action="ChildAdd.action" method="post" style="display:inline;">
+            <input type="hidden" name="parents_id" value="${child.parents_id}" />
+            <button type="submit">追加</button>
+        </form>
 
     </div>
 </div>

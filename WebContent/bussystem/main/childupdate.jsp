@@ -4,46 +4,64 @@
 <html>
 <body>
 
+<!-- ヘッダーのインクルード -->
 <c:import url="/common/header.jsp" />
 
 <div class="main">
+    <!-- ナビゲーションのインクルード -->
     <c:import url="/common/navi.jsp" />
 
     <div class="con">
         <h2>保護者情報</h2>
+
+        <!-- フォームの開始 -->
         <form action="ChildUpdateExecute.action" method="post">
             <table>
                 <tr>
-                  	<th>保護者ID</th>
-                	<th>クラス名</th>
-                	<th>子供の名前</th>
-                	<th>操作</th>
+                    <th>保護者ID</th>
+                    <th>クラス名</th>
+                    <th>子供の名前</th>
                 </tr>
 
-                <c:if test="${not empty CI}">
+                <!-- childInfoが存在すれば、その情報を表示 -->
+                <c:if test="${not empty childInfo}">
                     <tr>
+                        <!-- 保護者ID -->
                         <td>
-                    <input type="hidden" name="parents_id" value="${CI.parents_id}"/>
-                    ${CI.parents_id} <!-- IDは表示する -->
-                		</td>
-                        <td>
-                            <input type="text" name="class_set.class_name" value="${class_set.class_name}"/>
-                        </td>
-                        <td>
-                            <input type="text" name="CI.child_name" pattern="\d+" value="${CI.child_name}"/>
+                            <input type="hidden" name="parents_id" value="${childInfo.parents_id}" />
+                            ${childInfo.parents_id} <!-- IDを表示 -->
                         </td>
 
+                        <!-- クラス情報をプルダウン形式で表示 -->
+                        <td>
+                            <select name="class_name">
+                                <c:forEach var="classOption" items="${class_set}">
+                                    <option value="${classOption.class_name}">
+                                        ${classOption.class_name}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </td>
+
+                        <!-- 子供の名前 -->
+                        <td>
+                            <input type="text" name="child_name" value="${childInfo.child_name}" /> <!-- child_nameを送信 -->
+                        	<input type="hidden" name="child_id" value="${childInfo.child_id}" /> <!-- child_idを送信 -->
+                        </td>
                     </tr>
                 </c:if>
             </table>
 
+            <!-- 保存ボタンとリセットボタン -->
             <button type="submit">保存</button>
             <input type="reset" value="入力内容をキャンセル"/>
         </form>
+        <!-- フォームの終了 -->
     </div>
 </div>
 
-</body>
+<!-- フッターのインクルード -->
 <c:import url="/common/footer.jsp" />
-</html>
 
+</body>
+</html>
