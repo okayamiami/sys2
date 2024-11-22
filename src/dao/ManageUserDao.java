@@ -166,7 +166,7 @@ public class ManageUserDao extends Dao{
 				//保護者が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection
-						.prepareStatement("update ManageUser set user_id=?, user_name=?, user_pass=?, facility_id=? where parentsuser_id=? and facility_id=?");
+						.prepareStatement("update ManageUser set user_id=?, user_name=?, user_pass=?, facility_id=? where user_id=? and facility_id=?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, mu.getUser_id());
 				statement.setString(2, mu.getUser_name());

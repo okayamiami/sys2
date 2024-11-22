@@ -48,7 +48,11 @@ public class LoginExecuteAction extends Action{
 	            // セッションに "user" として ManageUser インスタンスを格納
 	            session.setAttribute("user", MU);
 	            session.setAttribute("user_type", user_type);
-	            url = "main/Menu.action";
+	            if(MU.getUser_name()==null){
+	            	url = "main/NewInfo.action";
+	            }else{
+	            	url = "main/Menu.action";
+	            }
 	            res.sendRedirect(url);
 	        }
 	    } else if(user_id.contains("P")) {
@@ -62,7 +66,11 @@ public class LoginExecuteAction extends Action{
 	            PU.setAuthenticated(true);
 	            session.setAttribute("user", PU);
 	            session.setAttribute("user_type", user_type);
-	            url = "main/Menu.action";
+	            if(PU.getParents_name()==null){
+	            	url = "main/NewInfo.action";
+	            }else{
+	            	url = "main/Menu.action";
+	            }
 	            res.sendRedirect(url);
 	        }
 	    }
