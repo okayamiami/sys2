@@ -34,7 +34,7 @@
             <script>
             const video = document.getElementById('video');
             const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d', { willReadFrequently: true });  // willReadFrequentlyを追加
+            const ctx = canvas.getContext('2d', { willReadFrequently: true }); // willReadFrequently を追加
             let scanning = false;
 
             // QRコードリーダーを開始
@@ -79,25 +79,17 @@
                         // QRコードが読み取れた場合
                         console.log("QRコード内容: ", code.data);
                         document.getElementById('qrData').value = code.data;
+
                         // bus_idの値をチェック
                         console.log("bus_id: ", document.getElementById('bus_id').value);
 
-                        // QRコードの位置に枠を描画
-                        drawQRCodeOutline(code);
-                        console.log("aaa");
-
                         // スキャン停止してフォーム送信
                         scanning = false;
-                        console.log("bbb");
                         video.srcObject.getTracks().forEach(track => track.stop()); // カメラを停止
-                        console.log("ccc");
                         document.qrForm.submit(); // フォーム送信
-                        console.log("ddd");
                     } else {
                         // QRコードが見つからない場合、再度スキャン
-                        console.log("111");
-                        requestAnimationFrame(scanQRCode);
-                        console.log("222");
+             			requestAnimationFrame(scanQRCode);
                     }
                 } catch (error) {
                     console.error("QRコード読み取りエラー: ", error);
@@ -105,18 +97,6 @@
                 }
             }
 
-            // QRコードの位置に枠を描画
-            function drawQRCodeOutline(code) {
-                ctx.beginPath();
-                ctx.moveTo(code.topLeft.x, code.topLeft.y);
-                ctx.lineTo(code.topRight.x, code.topRight.y);
-                ctx.lineTo(code.bottomRight.x, code.bottomRight.y);
-                ctx.lineTo(code.bottomLeft.x, code.bottomLeft.y);
-                ctx.closePath();
-                ctx.lineWidth = 4;
-                ctx.strokeStyle = "#FF0000"; // 赤色の枠
-                ctx.stroke();
-            }
             </script>
         </div>
     </div>
