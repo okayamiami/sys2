@@ -62,8 +62,8 @@
         <c:if test="${empty error}">
 
 			<c:choose>
-				<c:when test="${absences.size()>0}">
-					<div>検索結果：${absences.size()}件</div>
+				<c:when test="${abs.size()>0}">
+					<div>検索結果：${abs.size()}件</div>
 
 					<table class="table table-hover">
 						<tr>
@@ -73,7 +73,7 @@
 							<th>欠席理由</th>
 
 						</tr>
-						<c:forEach var="abs" items="${absences}">
+						<c:forEach var="abs" items="${abs}">
 						    <tr>
 						        <td>${abs.absence_date}</td>
 						        <td>
