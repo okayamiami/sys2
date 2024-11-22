@@ -46,10 +46,13 @@
         </table>
 
         <!-- 追加ボタン -->
+        <c:if test="${not empty parents_id}">
+    	<!-- 処理をここで実行 -->
         <form action="ChildAdd.action" method="post" style="display:inline;">
-            <input type="hidden" name="parents_id" value="${child.parents_id}" />
-            <button type="submit">追加</button>
+             <input type="hidden" name="parents_id" value="${parents_id}" />
+            <button type="submit">新規登録</button>
         </form>
+        </c:if>
 
     </div>
 </div>

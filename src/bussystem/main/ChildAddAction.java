@@ -9,8 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import bean.ManageUser;
 import bean.ParentsUser;
-import dao.ChildDao;
-import dao.ClassCdDao;
 import tool.Action;
 
 public class ChildAddAction extends Action{
@@ -29,10 +27,6 @@ public class ChildAddAction extends Action{
 		// sessionの有効化
 		HttpSession session = req.getSession(true);
 
-		// Daoをインスタンス化
-		ChildDao CD = new ChildDao();
-		ClassCdDao CC = new ClassCdDao();
-
 	    // 引数設定 外部
         String user_id = null;
         String facility_id = null;
@@ -44,9 +38,11 @@ public class ChildAddAction extends Action{
             PU = (ParentsUser) session.getAttribute("user");
             user_id = PU.getParents_id();
             facility_id = PU.getFacility_id();
+            System.out.println(PU);
         } else if ("M".equals(user_type)) {
             MU = (ManageUser) session.getAttribute("user");
             user_id = req.getParameter("parents_id"); // 管理者の場合、保護者IDをリクエストから取得
+            System.out.println(user_id);
             facility_id = MU.getFacility_id();
         } else {
             errors.put("kome", "セッションに不正なユーザー情報が格納されています。");
@@ -54,10 +50,12 @@ public class ChildAddAction extends Action{
 
 		 if("P".equals(user_type)){
 			 //保護者が新規登録を押した場合
+			 req.setAttribute("parents_id", user_id);
 			 req.setAttribute("user", PU);
 			 req.getRequestDispatcher("childadd.jsp").forward(req, res);
 		 } else if ("M".equals(user_type)) {
 			//管理者が新規登録を押した場合
+			 req.setAttribute("parents_id", user_id);
 			 req.setAttribute("user", MU);
 			 req.getRequestDispatcher("childadd.jsp").forward(req, res);
 		 }
