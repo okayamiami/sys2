@@ -58,7 +58,6 @@ public class AbsenceConectAction extends Action {
 	        List<Map<String, Object>> absMapList;
 	        if (absence_date != null && !absence_date.equals("0") && class_id.equals("0") && child_name.equals("0")) {
 	            // 欠席日指定
-	        	System.out.println("欠席日指定");
 	        	absMapList = aDao.filterbyAbsence_date(absence_date, facility_id);
 	        } else if (class_id != null && !class_id.equals("0") && absence_date.equals("0") && child_name.equals("0")) {
 	        	// クラス指定
@@ -101,10 +100,8 @@ public class AbsenceConectAction extends Action {
 	        req.getRequestDispatcher("absence_conect.jsp").forward(req, res);
 
 	    } catch (Exception e) {
-	        // エラーハンドリング
-	        e.printStackTrace(); // デバッグ用出力（本番では削除）
-	        req.setAttribute("error", "欠席情報の取得中にエラーが発生しました。");
-	        return;
-	    }
+			req.setAttribute("error", "欠席情報の取得中にエラーが発生しました。");
+			req.getRequestDispatcher("childlist.jsp").forward(req, res);
+		}
 	}
 }

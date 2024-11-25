@@ -51,13 +51,15 @@
 
 			<button>絞込み</button>
 
+
+			<!-- エラーメッセージの表示 -->
+			<c:if test="${not empty error}">
+		            <p style="color: red; font-weight: bold;">${error}</p>
+		    </c:if>
 			<div>${errors.get("f1")}</div>
 		</form>
 
-		<!-- エラーメッセージの表示 -->
-        <c:if test="${not empty error}">
-            <p style="color: red; font-weight: bold;">${error}</p>
-        </c:if>
+
 
         <!-- 情報表示 -->
         <c:if test="${empty error}">

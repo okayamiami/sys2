@@ -13,15 +13,21 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
+
+	<form action="AbsenceSelect.action" method="get">
+        <button type="submit">戻る</button>
+    </form>
+
+
+	<h2>欠席報告</h2>
+
 	<!-- エラーメッセージの表示 -->
 	<c:if test="${not empty error}">
-   	    <div class="alert alert-danger">
-       	    ${error}
-       	</div>
-   	</c:if>
+    	<p style="color: red; font-weight: bold;">${error}</p>
+    </c:if>
 
-    <p>登録完了しました</p>
-    <a href="AbsenceSelect.action">戻る</a>
+    <p>報告が完了しました</p>
+
   </div>
   </div>
 </body>
