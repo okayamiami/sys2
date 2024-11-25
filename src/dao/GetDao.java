@@ -113,29 +113,24 @@ public class GetDao extends Dao{
 
 	public boolean changeGet(String bus_id, String child_id, String facility_id) throws Exception {
 	    Connection connection = getConnection();
-	    if (connection == null) {
-	        throw new IllegalStateException("データベース接続が確立できませんでした。");
-	    }
 	    PreparedStatement statement = null;
 	    int count = 0;
 
 	    GetDao gDao = new GetDao();
 
 	    try {
-	        // デバッグログ: 入力データ
-	        System.out.println("changeGetメソッド開始: bus_id=" + bus_id + ", child_id=" + child_id + ", facility_id=" + facility_id);
 
 	        // データベースから学生情報を取得
 	        Get get = gDao.getGetinfo(bus_id, child_id, facility_id);
+	        // gDao.getGetinfoの戻り値がnullである場合
 	        if (get == null) {
 	            throw new IllegalStateException("Get情報が見つかりません: bus_id=" + bus_id + ", child_id=" + child_id + ", facility_id=" + facility_id);
 	        }
 
-	        System.out.println("Get情報: is_attend=" + get.isGet_is_attend() + ", bus_id=" + get.getBus_id() + ", child_id=" + get.getChild_id() + ", facility_id=" + get.getFacility_id());
 
 	        // SQL 文の準備
 	        statement = connection.prepareStatement(
-	            "UPDATE Get SET is_attend=? WHERE bus_id=? AND child_id=? AND facility_id=?");
+	            "UPDATE Get SET get_is_attend=? WHERE bus_id=? AND child_id=? AND facility_id=?");
 	        statement.setBoolean(1, !get.isGet_is_attend()); // 現在の値を反転
 	        statement.setString(2, get.getBus_id());
 	        statement.setString(3, get.getChild_id());
@@ -143,11 +138,9 @@ public class GetDao extends Dao{
 
 	        // プリペアードステートメントを実行
 	        count = statement.executeUpdate();
-	        System.out.println("更新件数: " + count);
 
 	    } catch (Exception e) {
 	        // デバッグログ: エラー詳細
-	        System.err.println("changeGetメソッド中にエラー: " + e.getMessage());
 	        e.printStackTrace();
 	        throw e;
 	    } finally {
