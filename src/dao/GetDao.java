@@ -171,7 +171,7 @@ public class GetDao extends Dao{
 	    return count > 0;
 	}
 
-	// 施設に関連するすべてのバスに対して、Getテーブルに子供情報をデータベースに登録
+	// 施設に存在するすべてのバスに対して、Getテーブルに子供情報をデータベースに登録
 	public boolean saveGetInfoForAllBuses(Child child) throws Exception {
 	    // コネクションを確立
 	    Connection connection = getConnection();
@@ -182,7 +182,7 @@ public class GetDao extends Dao{
 	    BusDao bDao = new BusDao();
 
 	    try {
-	        // 施設に関連するすべてのバスを取得
+	        // 施設に存在するすべてのバスを取得
 	        List<Bus> buses = bDao.getBus(child.getFacility_id());
 
 	        for (Bus bus : buses) {
