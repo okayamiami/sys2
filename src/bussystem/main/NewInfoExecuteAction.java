@@ -49,7 +49,7 @@ public class NewInfoExecuteAction extends Action{
                 mdao.saveManageUserInfo(mu);
                 // ユーザー情報をリクエストに設定し、メッセージを表示
 
-                req.getRequestDispatcher("menu.jsp").forward(req, res);
+                req.getRequestDispatcher("newinfodone.jsp").forward(req, res);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -82,7 +82,7 @@ public class NewInfoExecuteAction extends Action{
                 // 保護者情報を保存
                 pdao.saveParentsUserInfo(pu);
                 // ユーザー情報をリクエストに設定し、メッセージを表示
-                req.getRequestDispatcher("menu.jsp").forward(req, res);
+                req.getRequestDispatcher("newinfodone.jsp").forward(req, res);
 
             } catch (Exception e) {
                 e.printStackTrace();

@@ -18,6 +18,9 @@
         <c:when test="${user_type == 'M'}">
           ${user.getUser_name()}先生、ようこそ！
         </c:when>
+        <c:when test="${user_type == 'T'}">
+          ${user.getUser_name()}先生、ようこそ！
+        </c:when>
         <c:when test="${user_type == 'P'}">
           ${user.getParents_name()}様、ようこそ！
         </c:when>

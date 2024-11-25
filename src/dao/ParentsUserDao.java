@@ -326,4 +326,45 @@ public class ParentsUserDao extends Dao{
 		return pu;
 	}
 
+	public boolean getParentsUser(String parents_id, String facility_id) throws Exception {
+
+		Connection connection = getConnection();
+		PreparedStatement st = null;
+		boolean flg;
+
+		try{
+			st = connection.prepareStatement(baseSql);
+			st.setString(1,parents_id);
+			st.setString(2,facility_id);
+			ResultSet rSet = st.executeQuery();
+			if (rSet == null){
+				flg=false;
+			}else{
+				flg=true;
+			}
+		}catch(Exception e){
+			throw e;
+		} finally {
+			//
+			if(st != null) {
+				try {
+					st.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+
+		}
+		return flg;
+	}
 }
+

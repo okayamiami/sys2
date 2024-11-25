@@ -19,7 +19,6 @@
 		<select name="user_status">
 			<option value="0">--------</option>
 			<c:forEach var="user_status" items="${user_status}">
-				<%-- 現在のyearと選択されていたent_yearが一致していた場合selectedを追記 --%>
 				<option value="${user_status}">${user_status}</option>
 			</c:forEach>
 		</select>

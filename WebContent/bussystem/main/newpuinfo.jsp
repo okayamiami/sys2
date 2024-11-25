@@ -17,8 +17,8 @@
                     <th>ID</th>
                     <th>名前(保護者)</th>
                     <th>住所</th>
-                    <th>電話番号</th>
                     <th>パスワード</th>
+                    <th>電話番号</th>
                     <th>メールアドレス１</th>
                     <th>メールアドレス２</th>
                     <th>メールアドレス３</th>
@@ -31,25 +31,25 @@
                     ${user.parents_id} <!-- IDは表示する -->
                 		</td>
                         <td>
-                            <input type="text" name="parents_name" value="${user.parents_name}"/>
+                            <input type="text" name="parents_name" />
                         </td>
                         <td>
-                            <input type="text" name="parents_address" value="${user.parents_address}"/>
+                            <input type="text" name="parents_address" />
                         </td>
                         <td>
                             <input type="text" name="parents_pass" value="${user.parents_pass}"/>
                         </td>
                         <td>
-                            <input type="tel" name="parents_tel" pattern="\d+" value="${user.parents_tel}"/>
+                            <input type="tel" name="parents_tel" pattern="\d+" />
                         </td>
                         <td>
-                            <input type="email" name="parents_mail1" value="${user.parents_mail1}"/>
+                            <input type="email" name="parents_mail1" />
                         </td>
                         <td>
-                            <input type="email" name="parents_mail2" value="${user.parents_mail2}"/>
+                            <input type="email" name="parents_mail2" />
                         </td>
                         <td>
-                            <input type="email" name="parents_mail3" value="${user.parents_mail3}"/>
+                            <input type="email" name="parents_mail3" />
                         </td>
                     </tr>
                 </c:if>
