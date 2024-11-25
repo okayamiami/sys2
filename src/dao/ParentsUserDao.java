@@ -327,7 +327,7 @@ public class ParentsUserDao extends Dao{
 	}
 
 	public boolean getParentsUser(String parents_id, String facility_id) throws Exception {
-
+		ParentsUser pu = new ParentsUser();
 		Connection connection = getConnection();
 		PreparedStatement st = null;
 		boolean flg;
@@ -337,7 +337,20 @@ public class ParentsUserDao extends Dao{
 			st.setString(1,parents_id);
 			st.setString(2,facility_id);
 			ResultSet rSet = st.executeQuery();
-			if (rSet == null){
+			if(rSet.next()){
+				pu.setParents_id(rSet.getString("parents_id"));
+				pu.setParents_name(rSet.getString("parents_name"));
+				pu.setParents_pass(rSet.getString("parents_pass"));
+				pu.setParents_address(rSet.getString("parents_address"));
+				pu.setParents_tel(rSet.getString("parents_tel"));
+				pu.setParents_mail1(rSet.getString("parents_mail1"));
+				pu.setParents_mail2(rSet.getString("parents_mail2"));
+				pu.setParents_mail3(rSet.getString("parents_mail3"));
+				pu.setFacility_id(rSet.getString("facility_id"));
+			}else{
+				pu=null;
+			}
+			if (pu == null){
 				flg=false;
 			}else{
 				flg=true;
