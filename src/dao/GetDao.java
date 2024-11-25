@@ -108,71 +108,64 @@ public class GetDao extends Dao{
 		return list;
 	}
 
-	public boolean changeGet(String bus_id, String child_id, String facility_id) throws Exception{
-		//コネクションを確立
-		Connection connection = getConnection();
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-		//実行件数
-		int count = 0;
+	public boolean changeGet(String bus_id, String child_id, String facility_id) throws Exception {
+	    Connection connection = getConnection();
+	    if (connection == null) {
+	        throw new IllegalStateException("データベース接続が確立できませんでした。");
+	    }
+	    PreparedStatement statement = null;
+	    int count = 0;
 
-		GetDao gDao = new GetDao();
+	    GetDao gDao = new GetDao();
 
-		try{
-			//データベースから学生を取得
-			Get get = gDao.getGetinfo(bus_id, child_id,facility_id);
-			if (get.isGet_is_attend() == false) {
-				//プリペアードステートメンにUPDATE文をセット
-				statement = connection.prepareStatement(
-						"update Get set is_attend=? where bus_id=?, child_id=?, facility_id=? ");
-				//プリペアードステートメントに値をバインド
-				statement.setBoolean(1, true);
-				statement.setString(2, get.getBus_id());
-				statement.setString(3, get.getChild_id());
-				statement.setString(4, get.getFacility_id());
+	    try {
+	        // デバッグログ: 入力データ
+	        System.out.println("changeGetメソッド開始: bus_id=" + bus_id + ", child_id=" + child_id + ", facility_id=" + facility_id);
 
-			} else {
-				//プリペアードステートメンにUPDATE文をセット
-				statement = connection.prepareStatement(
-						"update Get set is_attend=? where bus_id=?, child_id=?, facility_id=? ");
-				//プリペアードステートメントに値をバインド
-				statement.setBoolean(1, false);
-				statement.setString(2, get.getBus_id());
-				statement.setString(3, get.getChild_id());
-				statement.setString(4, get.getFacility_id());
-			}
+	        // データベースから学生情報を取得
+	        Get get = gDao.getGetinfo(bus_id, child_id, facility_id);
+	        if (get == null) {
+	            throw new IllegalStateException("Get情報が見つかりません: bus_id=" + bus_id + ", child_id=" + child_id + ", facility_id=" + facility_id);
+	        }
 
-			//プリペアードステートメントを実行
-			count = statement.executeUpdate();
+	        System.out.println("Get情報: is_attend=" + get.isGet_is_attend() + ", bus_id=" + get.getBus_id() + ", child_id=" + get.getChild_id() + ", facility_id=" + get.getFacility_id());
 
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			//
-			if(statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
+	        // SQL 文の準備
+	        statement = connection.prepareStatement(
+	            "UPDATE Get SET is_attend=? WHERE bus_id=? AND child_id=? AND facility_id=?");
+	        statement.setBoolean(1, !get.isGet_is_attend()); // 現在の値を反転
+	        statement.setString(2, get.getBus_id());
+	        statement.setString(3, get.getChild_id());
+	        statement.setString(4, get.getFacility_id());
 
-			if(connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
+	        // プリペアードステートメントを実行
+	        count = statement.executeUpdate();
+	        System.out.println("更新件数: " + count);
 
-		if (count > 0) {
-			//実行件数が1以上ある場合
-			return true;
-		} else {
-			//実行件数が0件の場合
-			return false;
-		}
+	    } catch (Exception e) {
+	        // デバッグログ: エラー詳細
+	        System.err.println("changeGetメソッド中にエラー: " + e.getMessage());
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        // リソースのクリーンアップ
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                sqle.printStackTrace();
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                sqle.printStackTrace();
+	            }
+	        }
+	    }
 
+	    return count > 0;
 	}
+
 }
