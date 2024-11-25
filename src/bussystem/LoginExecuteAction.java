@@ -47,6 +47,7 @@ public class LoginExecuteAction extends Action{
 	            MU.setAuthenticated(true);
 	            // セッションに "user" として ManageUser インスタンスを格納
 	            session.setAttribute("user", MU);
+	            session.setAttribute("user_id", MU.getUser_id());
 	            session.setAttribute("user_type", user_type);
 	            if(MU.getUser_name()==null){
 	            	url = "main/NewInfo.action";
