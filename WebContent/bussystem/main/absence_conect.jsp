@@ -72,20 +72,20 @@
 							<th>名前</th>
 							<th>欠席理由</th>
 
+
 						</tr>
 						<c:forEach var="abs" items="${abs}">
 						    <tr>
 						        <td>${abs.absence_date}</td>
-						        <td>
-						            <!-- 子供名をchild_setから取得 -->
-						            <c:if test="${not empty child_set}">
-						                <c:forEach var="childItem" items="${child_set}">
-						                    <c:if test="${abs.child_id eq childItem.child_id}">
-						                        ${childItem.child_name}
-						                    </c:if>
-						                </c:forEach>
-						            </c:if>
-						        </td>
+								<td>
+								    <c:forEach var="classItem" items="${class_set}">
+								        <!-- eq を使用して比較 -->
+								        <c:if test="${classItem.class_id eq abs.class_id}">
+								            ${classItem.class_name}
+								        </c:if>
+								    </c:forEach>
+								</td>
+						        <td>${abs.child_name}</td>
 						        <td>${abs.absence_main}</td>
 						    </tr>
 						</c:forEach>

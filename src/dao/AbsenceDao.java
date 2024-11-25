@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bean.Absence;
 
@@ -13,7 +15,7 @@ public class AbsenceDao extends Dao{
 
 	private String baseSql = "select * from Absence where facility_id=? ";
 
-	// 欠席情報のリスト一覧
+	// 欠席情報のリスト取得（報告ID作成用）
 	public List<Absence> getAbsenceInfo(String facility_id) throws Exception {
 		// 戻り値用のリストを作成
 		// new演算子とArrayListで空のListを用意
@@ -205,33 +207,176 @@ public class AbsenceDao extends Dao{
 
 	}
 
+
+
+	/** ここから先欠席連絡表示用（マップ使用） */
+
+	String conectSql ="SELECT a.*, c.child_name, c.class_id " +
+	            "FROM Absence a " +
+	            "JOIN Child c ON a.child_id = c.child_id AND a.facility_id = c.facility_id " +
+	            "WHERE a.facility_id=? ";
+
+
+
+	// 欠席情報全件取得（連絡表示用）
+	public List<Map<String, Object>> getAbsenceInfo2(String facility_id) throws Exception {
+	    // 戻り値用のリストを作成
+	    List<Map<String, Object>> list = new ArrayList<>();
+
+	    // データベースへのコネクションを確立
+	    Connection connection = getConnection();
+
+	    // プリペアードステートメント
+	    PreparedStatement statement = null;
+
+	    try {
+	        // プリペアードステートメントにSQL文をセット
+	        statement = connection.prepareStatement(conectSql);
+
+	        // プレースホルダー（？の部分）に値を設定
+	        statement.setString(1, facility_id);
+
+	        // SQL文を実行
+	        ResultSet rSet = statement.executeQuery();
+
+	        // リザルトセット（結果）を全件走査
+	        while (rSet.next()) {
+	            // Map に欠席情報を格納
+	            Map<String, Object> map = new HashMap<>();
+	            map.put("absence_id", rSet.getString("absence_id"));
+	            map.put("absence_main", rSet.getString("absence_main"));
+	            map.put("child_id", rSet.getString("child_id"));
+	            map.put("absence_date", rSet.getString("absence_date"));
+	            map.put("facility_id", rSet.getString("facility_id"));
+	            map.put("abs_is_attend", rSet.getBoolean("abs_is_attend"));
+	            map.put("child_name", rSet.getString("child_name")); // 子供の名前を追加
+	            map.put("class_id", rSet.getString("class_id"));     // クラスIDを追加
+
+	            // リストに追加
+	            list.add(map);
+
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        // プリペアードステートメントを閉じる
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        // コネクションを閉じる
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    return list;
+	}
+
+
 	 // クラスを指定して欠席の一覧を取得する
-	public List<Absence> filterbyClassId(String class_id, String facility_id) throws Exception {
+	public List<Map<String, Object>> filterbyClassId(String class_id, String facility_id) throws Exception {
+	    List<Map<String, Object>> list = new ArrayList<>();
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    ResultSet rSet = null;
+
+	    String condition = "and class_id=?  ";
+
+	    try {
+	        statement = connection.prepareStatement(conectSql + condition);
+
+	        statement.setString(1, facility_id);
+	        statement.setString(2, class_id);
+
+	        rSet = statement.executeQuery();
+
+	        while (rSet.next()) {
+	            // Map に値を格納
+	            Map<String, Object> map = new HashMap<>();
+	            map.put("absence_id", rSet.getString("absence_id"));
+	            map.put("absence_main", rSet.getString("absence_main"));
+	            map.put("child_id", rSet.getString("child_id"));
+	            map.put("absence_date", rSet.getString("absence_date"));
+	            map.put("facility_id", rSet.getString("facility_id"));
+	            map.put("abs_is_attend", rSet.getBoolean("abs_is_attend"));
+	            map.put("child_name", rSet.getString("child_name")); // 子供の名前を追加
+	            map.put("class_id", rSet.getString("class_id"));     // クラスIDを追加
+
+	            list.add(map);
+
+
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    return list;
+	}
+
+
+
+	 // 欠席日を指定して欠席の一覧を取得する
+
+	public List<Map<String, Object>> filterbyAbsence_date(String absence_date, String facility_id) throws Exception {
 
 		// リストを初期化
-		List<Absence> list = new ArrayList<>();
-		// コネクションを確立
+	    List<Map<String, Object>> list = new ArrayList<>();
 		Connection connection = getConnection();
-		// プリペアードステートメント
 		PreparedStatement statement = null;
-		// リザルトセット
 		ResultSet rSet = null;
 
 
-		try {
-			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("SELECT a.* "
-					+ "FROM Absence a JOIN Child c ON a.child_id = c.child_id and a.facility_id =c.facility_id "
-					+ "WHERE c.class_id =? and a.facility_id =?");
+	    String condition = "and absence_date=?  ";
 
-			statement.setString(1, class_id);
-			statement.setString(2, facility_id);
+	    try {
+	        statement = connection.prepareStatement(conectSql + condition);
 
-			// プライベートステートメントを実行
-			rSet = statement.executeQuery();
+	        statement.setString(1, facility_id);
+	        statement.setString(2, absence_date);
 
-			// リストへの格納処理を実行
-			list = postFilter(rSet);
+	        System.out.println(statement);
+
+	        rSet = statement.executeQuery();
+
+
+
+	        while (rSet.next()) {
+	            // Map に値を格納
+	            Map<String, Object> map = new HashMap<>();
+	            map.put("absence_id", rSet.getString("absence_id"));
+	            map.put("absence_main", rSet.getString("absence_main"));
+	            map.put("child_id", rSet.getString("child_id"));
+	            map.put("absence_date", rSet.getString("absence_date"));
+	            map.put("facility_id", rSet.getString("facility_id"));
+	            map.put("abs_is_attend", rSet.getBoolean("abs_is_attend"));
+	            map.put("child_name", rSet.getString("child_name")); // 子供の名前を追加
+	            map.put("class_id", rSet.getString("class_id"));     // クラスIDを追加
+
+	            list.add(map);
+	        }
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -257,159 +402,40 @@ public class AbsenceDao extends Dao{
 
 
 
-
-	/**filter部分
-	 *
-	 * 子供一覧絞り込みで使用
-	 * postFilterメソッド フィルター後のリストへの格納処理 プライベート
-	 */
-
-	private List<Absence> postFilter(ResultSet rSet) throws Exception {
-		// リストを初期化
-		List<Absence> list = new ArrayList<>();
-
-		try {
-			// リザルトセットを全件走査
-			while(rSet.next()) {
-				// 欠席情報一覧を初期化
-				Absence abs = new Absence();
-				// 欠席インスタンスに検索結果をセット
-				abs.setAbsence_id(rSet.getString("absence_id"));
-				abs.setAbsence_main(rSet.getString("absence_main"));
-				abs.setChild_id(rSet.getString("child_id"));
-				abs.setAbsence_date(rSet.getString("absence_date"));
-				abs.setFacility_id(rSet.getString("facility_id"));
-				abs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
-
-				System.out.println(rSet.getString("absence_id"));
-				System.out.println(rSet.getString("absence_main"));
-				System.out.println(rSet.getString("child_id"));
-				System.out.println(rSet.getString("absence_date"));
-				System.out.println(rSet.getString("facility_id"));
-				System.out.println(rSet.getBoolean("abs_is_attend"));
-
-
-				list.add(abs);
-			}
-		} catch (SQLException | NullPointerException e){
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-
-	 /** filterメソッド 欠席日を指定して欠席の一覧を取得する
-	 *
-	 * @param absence_date:String
-	 *            欠席日
-	 * @param facility_id:String
-	 *            施設ID
-	 * @return 一覧のリスト:List<Absence> 存在しない場合は0件のリスト
-	 * @throws Exception
-	 */
-
-	public List<Absence> filterbyAbsence_date(String absence_date, String facility_id) throws Exception {
+	 // 名前を指定して欠席の一覧を取得する
+	public List<Map<String, Object>> filterbyChildName(String child_name, String facility_id) throws Exception {
 
 		// リストを初期化
-		List<Absence> list = new ArrayList<>();
-		// コネクションを確立
+	    List<Map<String, Object>> list = new ArrayList<>();
 		Connection connection = getConnection();
-		// プリペアードステートメント
 		PreparedStatement statement = null;
-		// リザルトセット
 		ResultSet rSet = null;
-		// SQL文の条件
-		String condition = "and absence_date=?  ";
-
-		// SQL文のソート
-		String order = "order by absence_id desc";
 
 
-		System.out.println("欠席日で絞り込み入ってる☆★☆");
+	    String condition = "and child_name=?  ";
 
+	    try {
+	        statement = connection.prepareStatement(conectSql + condition);
 
+	        statement.setString(1, facility_id);
+	        statement.setString(2, child_name);
 
-		try {
-			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition + order);
+	        rSet = statement.executeQuery();
 
-			statement.setString(1, facility_id);
-			statement.setString(2, absence_date);
+	        while (rSet.next()) {
+	            // Map に値を格納
+	            Map<String, Object> map = new HashMap<>();
+	            map.put("absence_id", rSet.getString("absence_id"));
+	            map.put("absence_main", rSet.getString("absence_main"));
+	            map.put("child_id", rSet.getString("child_id"));
+	            map.put("absence_date", rSet.getString("absence_date"));
+	            map.put("facility_id", rSet.getString("facility_id"));
+	            map.put("abs_is_attend", rSet.getBoolean("abs_is_attend"));
+	            map.put("child_name", rSet.getString("child_name")); // 子供の名前を追加
+	            map.put("class_id", rSet.getString("class_id"));     // クラスIDを追加
 
-			System.out.println("SQL☆OK!!★☆"+ statement);
-
-			// プライベートステートメントを実行
-			rSet = statement.executeQuery();
-
-			// リストへの格納処理を実行
-			list = postFilter(rSet);
-
-			System.out.println(list);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			// プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-			// コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
-		return list;
-	}
-
-
-
-	 /** filterメソッド 名前を指定して欠席の一覧を取得する
-	 *
-	 * @param child_name:String
-	 *            子供の名前
-	 * @param facility_id:String
-	 *            施設ID
-	 * @return 一覧のリスト:List<Absence> 存在しない場合は0件のリスト
-	 * @throws Exception
-	 */
-
-	public List<Absence> filterbyChildName(String child_name, String facility_id) throws Exception {
-
-		// リストを初期化
-		List<Absence> list = new ArrayList<>();
-		// コネクションを確立
-		Connection connection = getConnection();
-		// プリペアードステートメント
-		PreparedStatement statement = null;
-		// リザルトセット
-		ResultSet rSet = null;
-		// SQL文の条件
-		String condition = "and child_name=?  ";
-
-		// SQL文のソート
-		String order = "order by absence_id desc";
-
-
-
-		try {
-			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition + order);
-
-			statement.setString(1, facility_id);
-			statement.setString(2, child_name);
-
-			// プライベートステートメントを実行
-			rSet = statement.executeQuery();
-
-			// リストへの格納処理を実行
-			list = postFilter(rSet);
+	            list.add(map);
+	        }
 		} catch (Exception e) {
 			throw e;
 		} finally {
