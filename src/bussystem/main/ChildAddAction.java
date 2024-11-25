@@ -38,12 +38,12 @@ public class ChildAddAction extends Action{
             PU = (ParentsUser) session.getAttribute("user");
             user_id = PU.getParents_id();
             facility_id = PU.getFacility_id();
-            System.out.println(PU);
+            System.out.println(PU + "保護者ユーザーログイン");
         } else if ("M".equals(user_type)) {
             MU = (ManageUser) session.getAttribute("user");
             user_id = req.getParameter("parents_id"); // 管理者の場合、保護者IDをリクエストから取得
-            System.out.println(user_id);
             facility_id = MU.getFacility_id();
+            System.out.println(MU + "管理ユーザーログイン");
         } else {
             errors.put("kome", "セッションに不正なユーザー情報が格納されています。");
         }

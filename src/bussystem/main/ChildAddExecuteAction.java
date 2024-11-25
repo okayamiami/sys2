@@ -29,8 +29,8 @@ public class ChildAddExecuteAction extends Action {
             ManageUser manageUser = (ManageUser) user;
             facilityId = manageUser.getFacility_id();
             parentsId = req.getParameter("parents_id");
+            //System.out.println(parentsId);
         }
-
         // リクエストパラメータを取得
         String childId = req.getParameter("child_id");
         String childName = req.getParameter("child_name");

@@ -15,7 +15,8 @@
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>名前(保護者)</th>
+                    <th>名前</th>
+                    <th>パスワード</th>
                     <th>住所</th>
                     <th>電話番号</th>
                     <th>メールアドレス１</th>
@@ -32,6 +33,10 @@
                         <td>
                             <input type="text" name="parents_name" value="${user.parents_name}"/>
                         </td>
+                        <td>
+                            <input type="text" name="parents_pass" value="${user.parents_pass}"/>
+                        </td>
+
                         <td>
                             <input type="text" name="parents_address" value="${user.parents_address}"/>
                         </td>
@@ -52,7 +57,7 @@
             </table>
 
             <button type="submit">保存</button>
-            <input type="reset" value="入力内容をキャンセル"/>
+            <input type="reset" value="リセット"/>
         </form>
     </div>
 </div>

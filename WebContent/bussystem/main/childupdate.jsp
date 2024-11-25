@@ -12,7 +12,7 @@
     <c:import url="/common/navi.jsp" />
 
     <div class="con">
-        <h2>保護者情報</h2>
+        <h2>子供情報</h2>
 
         <!-- フォームの開始 -->
         <form action="ChildUpdateExecute.action" method="post">

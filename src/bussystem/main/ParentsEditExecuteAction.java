@@ -33,16 +33,19 @@ public class ParentsEditExecuteAction extends Action {
         // パラメータを取得
         String parents_id = req.getParameter("parents_id");
         String parents_name = req.getParameter("parents_name");
+        String parents_pass = req.getParameter("parents_pass");
         String parents_address = req.getParameter("parents_address");
         String parents_tel = req.getParameter("parents_tel");
         String parents_mail1 = req.getParameter("parents_mail1");
         String parents_mail2 = req.getParameter("parents_mail2");
         String parents_mail3 = req.getParameter("parents_mail3");
 
+
         // 保護者情報を設定
         ParentsUser parentsUser = new ParentsUser();
         parentsUser.setParents_id(parents_id);
         parentsUser.setParents_name(parents_name);
+        parentsUser.setParents_pass(parents_pass);
         parentsUser.setParents_address(parents_address);
         parentsUser.setParents_tel(parents_tel);
         parentsUser.setParents_mail1(parents_mail1);
