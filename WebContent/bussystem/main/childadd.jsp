@@ -4,17 +4,14 @@
 <html>
 <body>
 
-<!-- ヘッダーのインクルード -->
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <!-- ナビゲーションのインクルード -->
     <c:import url="/common/navi.jsp" />
 
     <div class="con">
         <h2>子供情報追加登録</h2>
 
-        <!-- フォームの開始 -->
         <form action="ChildAddExecute.action" method="post">
             <div class="form-group">
                 <label for="child_id">子供ID:</label>
@@ -26,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="parents_id">保護者ID:</label>
-                <input type="hidden" id="parents_id" name="parents_id" value="${childInfo.parents_id}" />
+                <input type="hidden" id="parents_id" name="parents_id" value="${parents_id}" />
                 <span>${parents_id}</span> <!-- 保護者IDを表示 -->
             </div>
             <div class="form-group">
@@ -34,11 +31,14 @@
                 <input type="text" id="class_id" name="class_id" required>
             </div>
             <div class="form-group">
+            
                 <label for="is_attend">出席中:</label>
                 <select id="is_attend" name="is_attend" required>
                     <option value="true">はい</option>
                     <option value="false">いいえ</option>
                 </select>
+                
+                <input type="hidden" id="is_attend" name="is_attend" value="true" />
             </div>
             <div class="form-group">
                 <label for="facility_id">施設ID:</label>
@@ -48,11 +48,9 @@
                 <button type="submit">登録</button>
             </div>
         </form>
-        <!-- フォームの終了 -->
     </div>
 </div>
 
-<!-- フッターのインクルード -->
 <c:import url="/common/footer.jsp" />
 
 </body>

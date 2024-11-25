@@ -25,31 +25,36 @@ public class ParentsInputAction extends Action {
         //String facility_id = (String) session.getAttribute("facility_id"); // セッションから取得
     	ManageUser MU = (ManageUser) session.getAttribute("user");
 		String facility_id = MU.getFacility_id();
-
-	    if (parents_id == null || parents_id.trim().isEmpty()) {
-	        req.setAttribute("errorMessage", "保護者IDを入力してください。");
-	        req.getRequestDispatcher("/parentsInput.jsp").forward(req, res);
-	        return;
-	    }
-
-        // Daoをインスタンス化
+		 // Daoをインスタンス化
         ParentsUserDao PD = new ParentsUserDao();
+
+        //Daoのメソッド
+        boolean  TF = PD.getParentsUser(parents_id, facility_id);
+
+	    if (TF == false) {
+	        errors.put("errorMessage", "保護者IDを入力してください。");
+
+	    }
 
         // データ取得
         //ParentsUser PU = (ParentsUser) session.getAttribute("user");//ログインユーザーの
         ParentsUser PU = PD.getParentsUserInfo(parents_id, facility_id);
 
-        // 結果が取得できたかどうかをチェック
-        if (PU != null) {
-            // リクエストにデータを保存
-            req.setAttribute("user", PU);
-            req.setAttribute("parents_id", parents_id);
-
-            // 結果ページにフォワード
-            req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
-        } else {
+       if(!errors.isEmpty()){
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
+            return;
         }
+       // 結果が取得できたかどうかをチェック
+       if (PU != null) {
+           // リクエストにデータを保存
+           req.setAttribute("user", PU);
+           req.setAttribute("parents_id", parents_id);
+
+           // 結果ページにフォワード
+           req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
+       }else{
+    	   req.getRequestDispatcher("menu.jsp").forward(req, res);
+       }
     }
 }

@@ -17,7 +17,8 @@
         <table>
             <tr>
                 <th>ID</th>
-                <th>名前(保護者)</th>
+                <th>名前</th>
+                <th>パスワード</th>
                 <th>住所</th>
                 <th>電話番号</th>
                 <th>メールアドレス１</th>
@@ -29,6 +30,7 @@
                 <tr>
                     <td>${user.parents_id}</td>
                     <td>${user.parents_name}</td>
+                    <td>${user.parents_pass}</td>
                     <td>${user.parents_address}</td>
                     <td>${user.parents_tel}</td>
                     <td>${user.parents_mail1}</td>

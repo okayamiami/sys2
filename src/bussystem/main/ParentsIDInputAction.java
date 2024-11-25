@@ -14,6 +14,7 @@ import bean.ClassCd;
 import bean.ManageUser;
 import dao.ChildDao;
 import dao.ClassCdDao;
+import dao.ParentsUserDao;
 import tool.Action;
 
 public class ParentsIDInputAction extends Action {
@@ -29,11 +30,14 @@ public class ParentsIDInputAction extends Action {
     	ManageUser MU = (ManageUser) session.getAttribute("user");//ログインユーザーは管理者
 		String facility_id = MU.getFacility_id();//ファシリティIDゲット
 
+		// Daoをインスタンス化
+        ParentsUserDao PD = new ParentsUserDao();
+		//Daoのメソッド
+        boolean  TF = PD.getParentsUser(parents_id, facility_id);
 
-	    if (parents_id == null || parents_id.trim().isEmpty()) {
-	        req.setAttribute("errorMessage", "保護者IDを入力してください。");
-	        req.getRequestDispatcher("/parentsInput.jsp").forward(req, res);
-	        return;
+	    if (TF == false) {
+	        errors.put("errorMessage", "保護者IDを入力してください。");
+
 	    }
 
 
@@ -48,6 +52,12 @@ public class ParentsIDInputAction extends Action {
 			CI = CD.getChildrenByParentId(parents_id, facility_id);
 			//全クラス情報取得
 			List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
+
+		   if(!errors.isEmpty()){
+	            req.setAttribute("errors", errors);
+	            req.getRequestDispatcher("parentsIDinput.jsp").forward(req, res);
+	            return;
+	        }
 
 	        // リクエストにデータを保存
 			req.setAttribute("user", MU);
