@@ -65,7 +65,7 @@ public class NewRegistExecuteAction extends Action {
             perfect_id = user_status + formattedYear + String.format("%05d", nextNumber);
 
             // DBへデータ保存 5
-            muDao.newSaveManageUserInfo(perfect_id, perfect_id, facility_id);
+            muDao.newSaveManageUserInfo(perfect_id, password, facility_id);
         }else if ("T".equals(user_status)) {
             List<ManageUser> list = muDao.filter(facility_id);
             List<String> sList = new ArrayList<>();
@@ -84,12 +84,11 @@ public class NewRegistExecuteAction extends Action {
             perfect_id = user_status + formattedYear + String.format("%05d", nextNumber);
 
             // DBへデータ保存 5
-            muDao.newSaveManageUserInfo(perfect_id, perfect_id, facility_id);
+            muDao.newSaveManageUserInfo(perfect_id, password, facility_id);
 
         } else if ("P".equals(user_status)) {
             List<ParentsUser> list = puDao.filter(facility_id);
             List<String> sList = new ArrayList<>();
-
             for (ParentsUser p : list) {
                 sList.add(p.getParents_id());
             }

@@ -64,16 +64,16 @@ public class NewInfoExecuteAction extends Action{
             String parents_id = req.getParameter("parents_id");
             String parents_name = req.getParameter("parents_name");
             String parents_address = req.getParameter("parents_address");
-            String parents_tel = req.getParameter("parents_tel");
             String parents_pass = req.getParameter("parents_pass");
+            String parents_tel = req.getParameter("parents_tel");
             String parents_mail1 = req.getParameter("parents_mail1");
             String parents_mail2 = req.getParameter("parents_mail2");
             String parents_mail3 = req.getParameter("parents_mail3");
             pu.setParents_id(parents_id);
             pu.setParents_name(parents_name);
             pu.setParents_address(parents_address);
-            pu.setParents_tel(parents_tel);
             pu.setParents_pass(parents_pass);
+            pu.setParents_tel(parents_tel);
             pu.setParents_mail1(parents_mail1);
             pu.setParents_mail2(parents_mail2);
             pu.setParents_mail3(parents_mail3);
