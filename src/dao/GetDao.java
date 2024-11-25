@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.Bus;
+import bean.Child;
 import bean.Get;
 
 public class GetDao extends Dao{
@@ -108,6 +110,7 @@ public class GetDao extends Dao{
 		return list;
 	}
 
+
 	public boolean changeGet(String bus_id, String child_id, String facility_id) throws Exception {
 	    Connection connection = getConnection();
 	    if (connection == null) {
@@ -165,6 +168,58 @@ public class GetDao extends Dao{
 	        }
 	    }
 
+	    return count > 0;
+	}
+
+	// 施設に関連するすべてのバスに対して、Getテーブルに子供情報をデータベースに登録
+	public boolean saveGetInfoForAllBuses(Child child) throws Exception {
+	    // コネクションを確立
+	    Connection connection = getConnection();
+	    // プリペアードステートメント
+	    PreparedStatement statement = null;
+	    // 実行件数
+	    int count = 0;
+	    BusDao bDao = new BusDao();
+
+	    try {
+	        // 施設に関連するすべてのバスを取得
+	        List<Bus> buses = bDao.getBus(child.getFacility_id());
+
+	        for (Bus bus : buses) {
+	            // Getテーブルへの挿入
+	            statement = connection.prepareStatement(
+	                    "insert into Get (bus_id, child_id, get_is_attend, facility_id) values(?, ?, ?, ?)");
+
+	            statement.setString(1, bus.getBus_id()); // バスID
+	            statement.setString(2, child.getChild_id()); // 子供ID
+	            statement.setBoolean(3, false); // get_is_attend (初期値はfalse)
+	            statement.setString(4, child.getFacility_id()); // 施設ID
+
+	            // プリペアードステートメントを実行
+	            count += statement.executeUpdate();
+	        }
+
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    // 実行件数が1以上であれば成功
 	    return count > 0;
 	}
 
