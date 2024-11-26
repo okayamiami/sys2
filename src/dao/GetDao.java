@@ -139,6 +139,12 @@ public class GetDao extends Dao{
 	        // プリペアードステートメントを実行
 	        count = statement.executeUpdate();
 
+	     // 反転後の値が false だった場合（降車時）に保護者にメール送信
+	        if (count > 0 && !get.isGet_is_attend() == false) {
+	            // 反転後の状態が false なら処理を実行
+	            //メール送信メソッド
+	        }
+
 	    } catch (Exception e) {
 	        // デバッグログ: エラー詳細
 	        e.printStackTrace();
