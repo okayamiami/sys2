@@ -16,7 +16,7 @@
 
 <a href="QrReaderSelectBus.action">QR読み取り</a>
 
-<a href="#">乗降状況</a>
+<a href="GetListInfo.action">乗降状況</a>
 </div>
 </div>
 </body>
