@@ -41,8 +41,7 @@ public class ChildInfoAction extends Action{
 			ParentsUser PU = (ParentsUser) session.getAttribute("user");
 			String user_id = PU.getParents_id();
 			String facility_id = PU.getFacility_id();
-
-			//Beanをインスタンス化しクラス名を取得祈願　　引数null
+			String parents_name = PU.getParents_name();
 
 			ClassCd Cd = new ClassCd();
 
@@ -52,6 +51,7 @@ public class ChildInfoAction extends Action{
 			CI = CD.getChildrenByParentId(user_id, facility_id);
 			//全クラス情報取得
 			List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
+
 
 
 			req.setAttribute("class_set", class_set);
@@ -66,7 +66,7 @@ public class ChildInfoAction extends Action{
 			String facility_id = MU.getFacility_id();
 			req.setAttribute("facility_id", facility_id);
 			// 保護者ID入力ページへ
-			req.getRequestDispatcher("parentsIDinput.jsp").forward(req, res);
+			req.getRequestDispatcher("parentsidinput.jsp").forward(req, res);
 
 		} else {
 			// 予期しない場合のエラーハンドリング

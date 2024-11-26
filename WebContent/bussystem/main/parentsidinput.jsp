@@ -19,6 +19,7 @@
             <label for="parents_id">保護者ID:</label>
             <input type="text" id="parents_id" name="parents_id" required/></br>
             <button type="submit">検索</button>
+             <input type="hidden" id="parents_name" name="parents_name" value="${parents_name}" />
         </form>
         <a href="menu.jsp">戻る</a>
     </div>

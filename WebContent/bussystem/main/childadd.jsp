@@ -15,35 +15,42 @@
         <form action="ChildAddExecute.action" method="post">
             <div class="form-group">
                 <label for="child_id">子供ID:</label>
-                <input type="text" id="child_id" name="child_id" required>
+                <!-- 自動生成された child_id を表示 -->
+                <input type="hidden" id="child_id" name="child_id" value="${child_id}" readonly>
+                <span>${child_id}</span>
             </div>
             <div class="form-group">
                 <label for="child_name">子供の名前:</label>
                 <input type="text" id="child_name" name="child_name" required>
             </div>
             <div class="form-group">
-                <label for="parents_id">保護者ID:</label>
                 <input type="hidden" id="parents_id" name="parents_id" value="${parents_id}" />
-                <span>${parents_id}</span> <!-- 保護者IDを表示 -->
             </div>
+            <div class="form-group">
+                <label for="parents_name">保護者の名前:</label>
+                <!-- 保護者名を読み取り専用で表示 -->
+                <span>${parents_name}</span>
+                <!-- 保護者名をhiddenフィールドで送信 -->
+                <input type="hidden" id="parents_name" name="parents_name" value="${parents_name}" />
+            </div>
+
             <div class="form-group">
                 <label for="class_id">クラスID:</label>
-                <input type="text" id="class_id" name="class_id" required>
-            </div>
-            <div class="form-group">
-            
-                <label for="is_attend">出席中:</label>
-                <select id="is_attend" name="is_attend" required>
-                    <option value="true">はい</option>
-                    <option value="false">いいえ</option>
+                <select id="class_id" name="class_id">
+                    <c:forEach var="classId" items="${class_set}">
+                        <option value="${classId}">${classId}</option>
+                    </c:forEach>
                 </select>
-                
+            </div>
+
+            <div class="form-group">
                 <input type="hidden" id="is_attend" name="is_attend" value="true" />
             </div>
+
             <div class="form-group">
-                <label for="facility_id">施設ID:</label>
-                <input type="text" id="facility_id" name="facility_id" required>
+                <input type="hidden" id="facility_id" name="facility_id" value="${facility_id}" />
             </div>
+
             <div class="form-group">
                 <button type="submit">登録</button>
             </div>

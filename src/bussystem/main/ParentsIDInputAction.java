@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import bean.Child;
 import bean.ClassCd;
 import bean.ManageUser;
+import bean.ParentsUser;
 import dao.ChildDao;
 import dao.ClassCdDao;
 import dao.ParentsUserDao;
@@ -34,11 +35,16 @@ public class ParentsIDInputAction extends Action {
         ParentsUserDao PD = new ParentsUserDao();
 		//Daoのメソッド
         boolean  TF = PD.getParentsUser(parents_id, facility_id);
+        //保護者の名前取得
+        ParentsUser PU  = PD.getParentsUserInfo(parents_id, facility_id);
+        String parents_name = PU.getParents_name();
 
 	    if (TF == false) {
 	        errors.put("errorMessage", "保護者IDを入力してください。");
-
 	    }
+
+	    //getParentsUserInfo
+
 
 
 			//Beanをインスタンス化しクラス名を取得祈願　　引数null
@@ -52,14 +58,22 @@ public class ParentsIDInputAction extends Action {
 			CI = CD.getChildrenByParentId(parents_id, facility_id);
 			//全クラス情報取得
 			List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
+			 List<String> classCdList = new ArrayList<>();
+
+			 for (ClassCd classCd : class_set) {
+			     classCdList.add(classCd.getClass_id());  // getClass_cd()を取り出して新しいリストに追加
+			 }
 
 		   if(!errors.isEmpty()){
 	            req.setAttribute("errors", errors);
-	            req.getRequestDispatcher("parentsIDinput.jsp").forward(req, res);
+	            req.getRequestDispatcher("parentsidinput.jsp").forward(req, res);
 	            return;
 	        }
 
+		   System.out.println(parents_name);
 	        // リクエストにデータを保存
+		   req.setAttribute("class_set", classCdList);
+			req.setAttribute("parents_name", parents_name);
 			req.setAttribute("user", MU);
 			req.setAttribute("parents_id", parents_id);
 			req.setAttribute("class_set", class_set);
