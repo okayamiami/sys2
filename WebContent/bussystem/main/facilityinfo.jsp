@@ -4,40 +4,42 @@
 <c:import url="/common/header.jsp" />
 <div class="main">
 <c:import url="/common/navi.jsp" />
-    <div class="con">
-        <h2>保護者情報</h2>
-        <form action="NewInfoExecute.action" method="post">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>名前</th>
-                    <th>パスワード</th>
-                </tr>
+<div class="con">
+<table>
+<tr>
+    <th>施設ID</th>
+    <th>施設名</th>
+    <th>住所</th>
+    <th>電話番号</th>
+    <th>メールアドレス</th>
+    <th>プラン</th>
+</tr>
 
-                <c:if test="${not empty user}">
-                    <tr>
-                        <td>
-                    <input type="hidden" name="user_id" value="${user.user_id}"/>
-                    ${user.user_id} <!-- IDは表示する -->
-                		</td>
-                        <td>
-                            <input type="text" name="user_name" pattern="^[^0-9]*$" required title="数字を含めないでください"/>
-                        </td>
-                        <td>
-                            <input type="password" name="user_pass"
-           					pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}"
-           					required
-           					title="8文字以上で、大文字・小文字・数字をそれぞれ1文字以上含めてください"/>
-                        </td>
-                    </tr>
-                </c:if>
-            </table>
-
-            <button type="submit">保存</button>
-        </form>
-    </div>
+<c:if test="${not empty fc}">
+    <tr>
+        <td>${fc.facility_id}</td>
+        <td>${fc.facility_name}</td>
+        <td>${fc.facility_address}</td>
+        <td>${fc.facility_tel}</td>
+        <td>${fc.facility_mail}</td>
+        <td>
+        	<c:choose>
+				<c:when test="${fc.getFacility_plan()}">
+					S
+				</c:when>
+				<c:otherwise>
+					L
+				</c:otherwise>
+			</c:choose>
+		</td>
+    </tr>
+</c:if>
+</table>
+<form action="FacilityInfoEdit.action" method="post">
+    <input type="hidden" name="facility_id" value="${fc.facility_id}"/>
+    <button type="submit">編集</button>
+</form>
 </div>
-
-</body>
+</div>
 <c:import url="/common/footer.jsp" />
 </html>

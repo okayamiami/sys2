@@ -5,9 +5,9 @@ public class Facility {
 	private String facility_id;
 	private String facility_name;
 	private String facility_address;
-	private int facility_tel;
+	private String facility_tel;
 	private String facility_mail;
-	private Boolean plan_is_attend;
+	private Boolean facility_plan;
 
 	public String getFacility_id() {
 		return facility_id;
@@ -27,10 +27,10 @@ public class Facility {
 	public void setFacility_address(String facility_address) {
 		this.facility_address = facility_address;
 	}
-	public int getFacility_tel() {
+	public String getFacility_tel() {
 		return facility_tel;
 	}
-	public void setFacility_tel(int facility_tel) {
+	public void setFacility_tel(String facility_tel) {
 		this.facility_tel = facility_tel;
 	}
 	public String getFacility_mail() {
@@ -39,11 +39,12 @@ public class Facility {
 	public void setFacility_mail(String facility_mail) {
 		this.facility_mail = facility_mail;
 	}
-	public boolean getPlan_is_attend() {
-		return plan_is_attend;
+	public Boolean getFacility_plan() {
+		return facility_plan;
 	}
-	public void setPlan_is_attend(boolean plan_is_attend) {
-		this.plan_is_attend = plan_is_attend;
+	public void setFacility_plan(Boolean facility_plan) {
+		this.facility_plan = facility_plan;
 	}
+
 
 }

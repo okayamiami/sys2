@@ -5,23 +5,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Facility;
-import bean.ManageUser;
 import dao.FacilityDao;
 import tool.Action;
 
-public class FacilityInfoAction extends Action{
-
+public class FacilityInfoEditAction extends Action{
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		HttpSession session = req.getSession(true);
-		ManageUser mu = (ManageUser) session.getAttribute("user");	// ログインユーザーを取得
+		HttpSession session = req.getSession();
+		String facility_id;
+		Facility fc;
 		FacilityDao fcdao = new FacilityDao();
-		String fcid;
-		Facility fc = new Facility();
-		fcid = mu.getFacility_id();
-		fc = fcdao.getFacilityInfo(fcid);
+		facility_id = req.getParameter("facility_id");
+
+		fc = fcdao.getFacilityInfo(facility_id);
+
 		req.setAttribute("fc",fc );
-		req.getRequestDispatcher("facilityinfo.jsp").forward(req, res);
+		req.getRequestDispatcher("facilityinfoedit.jsp").forward(req, res);
+
+
+
+
 
 	}
 
