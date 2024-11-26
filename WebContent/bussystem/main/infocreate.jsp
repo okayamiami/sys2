@@ -38,9 +38,9 @@
             <!-- 送信ボタンと戻るボタン -->
             <div>
                 <button type="submit">送信</button>
-                <button type="button" onclick="history.back()">戻る</button>
             </div>
         </form>
+        <a href="InfoMenu.action">お知らせ機能選択に戻る</a>
     </div>
 </div>
 

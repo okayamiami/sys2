@@ -16,22 +16,25 @@ public class BusChildDao extends Dao{
 
 	    // SQL文の動的構築
 	    StringBuilder sql = new StringBuilder(
-	        "SELECT DISTINCT c.child_id, c.child_name, c.class_id, b.bus_id, b.bus_name " +
+	        "SELECT DISTINCT c.child_id, c.child_name, c.class_id, b.bus_id, b.bus_name, " +
+	        "cl.class_name " + // 修正：classCdのエイリアスを使用
 	        "FROM Get g " +
 	        "LEFT JOIN Child c ON g.child_id = c.child_id " +
 	        "LEFT JOIN Bus b ON g.bus_id = b.bus_id " +
+	        "LEFT JOIN classCd cl ON c.class_id = cl.class_id " + // 修正：classCdにエイリアスを使用
 	        "WHERE g.get_is_attend = true " +
 	        "AND c.is_attend = true " +
 	        "AND c.facility_id = ? " +  // c.facility_id に施設IDを設定
 	        "AND b.facility_id = ? " +  // b.facility_id にも施設IDを設定
-	        "AND g.facility_id = ? "    // g.facility_id にも施設IDを設定
+	        "AND g.facility_id = ? " +  // g.facility_id にも施設IDを設定
+	        "AND cl.facility_id = ? " // cl.facility_id にも施設IDを設定（修正）
 	    );
 
 	    // 他の条件を追加
 	    if (bus_id != null && !bus_id.isEmpty()) {
 	        sql.append("AND b.bus_id = ? ");
 	    }
-	    if (child_id != null && !child_id.isEmpty() && !"-----".equals(child_id)) {
+	    if (child_id != null && !child_id.isEmpty()) {
 	        sql.append("AND c.child_id = ? ");
 	    }
 	    if (class_id != null && !class_id.isEmpty()) {
@@ -50,11 +53,14 @@ public class BusChildDao extends Dao{
 	        // 3番目の施設IDを設定 (g.facility_id)
 	        st.setString(3, facility_id);
 
-	        int index = 4; // 次のパラメータのインデックス
+	        // 4番目の施設IDを設定 (classCd.facility_id)
+	        st.setString(4, facility_id);
+
+	        int index = 5; // 次のパラメータのインデックス
 	        if (bus_id != null && !bus_id.isEmpty()) {
 	            st.setString(index++, bus_id);
 	        }
-	        if (child_id != null && !child_id.isEmpty() && !"-----".equals(child_id)) {
+	        if (child_id != null && !child_id.isEmpty()) {
 	            st.setString(index++, child_id);
 	        }
 	        if (class_id != null && !class_id.isEmpty()) {
@@ -70,6 +76,7 @@ public class BusChildDao extends Dao{
 	            info.setClass_id(rs.getString("class_id"));
 	            info.setBus_id(rs.getString("bus_id"));
 	            info.setBus_name(rs.getString("bus_name"));
+	            info.setClass_name(rs.getString("class_name")); // class_nameをセット
 	            list.add(info);
 	        }
 	    } finally {
@@ -78,6 +85,8 @@ public class BusChildDao extends Dao{
 	    }
 	    return list;
 	}
+
+
 
 
 }

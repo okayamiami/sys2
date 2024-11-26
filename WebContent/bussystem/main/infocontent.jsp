@@ -19,7 +19,7 @@
         <table border="1">
             <tr>
                 <td>日付</td>
-                <td><fmt:formatDate value="${info_set.info_date}" pattern="yyyy年MM月dd日HH時mm分ss秒" /></td>
+                <td><fmt:formatDate value="${info_set.info_date}" pattern="yyyy年MM月dd日 HH:mm" /></td>
             </tr>
             <tr>
                 <td>タイトル</td>
@@ -36,9 +36,7 @@
         </table>
 
         <!-- 戻るボタン -->
-        <div>
-            <button type="button" onclick="history.back()">戻る</button>
-        </div>
+        <a href="InfoList.action">お知らせ一覧に戻る</a>
     </div>
 </div>
 

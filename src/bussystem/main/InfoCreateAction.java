@@ -25,15 +25,17 @@ public class InfoCreateAction extends Action {
 
 		//DBからデータ取得 3
 		List<Information> ilist = iDao.getInfoList(mu.getFacility_id());
+		//genreが重複しないように変換
 		List<Information> distinctilist = ilist.stream()
-        .collect(Collectors.toMap(
-                Information::getInfo_genre,  // キー：ジャンル
-                info -> info,                // 値：Information オブジェクト
-                (existing, replacement) -> existing  // 重複した場合は最初の要素を保持
-        ))
-        .values()  // Mapの値 (Information) のコレクションを取得
-        .stream()
-        .collect(Collectors.toList());  // コレクションをリストに変換
+			    .filter(info -> info.getInfo_genre() != null && !info.getInfo_genre().trim().isEmpty()) // null または空白の名前を除外
+			    .collect(Collectors.toMap(
+			            Information::getInfo_genre,  // キー：ジャンル
+			            info -> info,                // 値：Information オブジェクト
+			            (existing, replacement) -> existing  // 重複した場合は最初の要素を保持
+			    ))
+			    .values() // Mapの値だけを取り出す
+			    .stream()  // 再度Streamに変換
+			    .collect(Collectors.toList());  // 最終的にListに集約
 		//ビジネスロジック 4
 		//なし
 		//DBへデータ保存 5

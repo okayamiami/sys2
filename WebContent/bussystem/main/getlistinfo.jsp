@@ -70,6 +70,7 @@
                 <tr>
                     <th>バス名</th>
                     <th>子供の名前</th>
+                    <th>クラス名</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,11 +86,12 @@
                     <tr>
                         <td>${info.bus_name}</td>
                         <td>${info.child_name}</td>
+                        <td>${info.class_name}</td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-        <a href="Menu.action">メニュー画面に戻る</a>
+        <a href="QrMenu.action">QR機能選択画面に戻る</a>
     </div>
 </div>
 

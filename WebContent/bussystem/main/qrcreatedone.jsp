@@ -19,7 +19,7 @@
     <div>
         <img src="${qrImagePath}" alt="QR Code" width="500" height="500" />
     </div>
-<p><a href="Menu.action">メニューに戻る</a></p>
+<a href="QrCreate.action">QR作成画面に戻る</a>
 </div>
 </div>
 

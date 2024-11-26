@@ -22,7 +22,7 @@
                     <td>日付</td>
                     <!-- Timestamp型の日付をフォーマットして表示 -->
                     <td>
-                        <fmt:formatDate value="${info.info_date}" pattern="yyyy年MM月dd日HH時mm分ss秒" />
+                        <fmt:formatDate value="${info.info_date}" pattern="yyyy年MM月dd日 HH:mm" />
                     </td>
                 </tr>
                 <tr>
@@ -39,9 +39,7 @@
         </c:forEach>
 
         <!-- 戻るボタン -->
-        <div>
-            <button type="button" onclick="history.back()">戻る</button>
-        </div>
+        <a href="InfoMenu.action">お知らせ機能選択に戻る</a>
     </div>
 </div>
 
