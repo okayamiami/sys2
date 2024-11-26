@@ -4,6 +4,7 @@ package bussystem.main;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
@@ -49,6 +50,60 @@ public class AbsenceReportExecuteAction extends Action {
 	String absence_date = dtf1.format(nowDate);
 
 
+	// エラーで欠席報告入力画面に戻るときに必要になるリスト
+	List<Child> list = new ArrayList<>();
+	List<String> cNamelist = new ArrayList<>();
+
+	if ("P".equals(user_type)) {
+		ParentsUser pu = (ParentsUser) session.getAttribute("user"); // ログインユーザーを取得
+		// リクエストパラメータ―の取得 2
+		facility_id = pu.getFacility_id();
+		String parents_id = pu.getParents_id();
+		// DBからデータ取得 3
+		list = cDao.getChildrenByParentId(parents_id, facility_id); // 保護者IDで子供情報を取得
+
+		// 施設でしぼった子供の名前のみリスト
+		for (Child c : list) {
+			cNamelist.add(c.getChild_name());
+		}
+
+		session.setAttribute("user", pu);
+
+	} else if ("T".equals(user_type) || "M".equals(user_type)) {
+		ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得
+		// リクエストパラメータ―の取得 2
+		facility_id = mu.getFacility_id();
+		// DBからデータ取得 3
+		list = cDao.getChildListinfo(facility_id); // 子供情報一覧取得
+
+		// 施設でしぼった子供の名前のみリスト
+		for (Child c : list) {
+			cNamelist.add(c.getChild_name());
+		}
+
+		session.setAttribute("user", mu);
+	}
+
+
+
+
+
+	//リクエストパラメータ―の取得 2
+	child_name = req.getParameter("child_name");		// 選択した子供の名前
+	abs_main = req.getParameter("abs_main");    		// 入力した欠席理由
+
+	System.out.println("abs_mainの値は:" + abs_main);
+
+	// 欠席理由欄が空文字で帰ってきたとき
+	if ( abs_main.trim().isEmpty()){
+		req.setAttribute("error", "子供の選択がされていないまたは<br>欠席理由が入力がされていません");
+
+		req.setAttribute("list", list); 			// 子供情報すべてのリスト
+		req.setAttribute("cNamelist", cNamelist); 	// 子供の名前のみのリスト
+		req.getRequestDispatcher("absence_report.jsp").forward(req, res);
+	}
+
+
 	try{
 		// 欠席IDの年度部分を作成
 	    int year = nowDate.getYear() % 100;  					// 2桁の年を取得
@@ -63,14 +118,6 @@ public class AbsenceReportExecuteAction extends Action {
 			// リクエストパラメータ―の取得 2
 			facility_id = mu.getFacility_id();
 		}
-
-
-		//リクエストパラメータ―の取得 2
-		child_name = req.getParameter("child_name");		// 選択した子供の名前
-		abs_main = req.getParameter("abs_main");    		// 入力した欠席理由
-
-		/*名前　野原しんのすけ
-		 * 理由　風邪のため*/
 
 
 		//DBからデータ取得 3
@@ -101,16 +148,6 @@ public class AbsenceReportExecuteAction extends Action {
 
 		//欠席ID（完成形）
 		perfect_id = "A" + formattedYear + String.format("%04d", nextNumber);
-		System.out.println(formattedYear);
-		System.out.println(String.format("%04d", nextNumber));
-		System.out.println(perfect_id);
-		System.out.println(abs_main);
-		System.out.println(child_id.getChild_id());
-		System.out.println(absence_date);
-		System.out.println(facility_id);
-		System.out.println(abs_is_attend);
-
-
 
 
 		// DBへデータ保存 5
@@ -129,8 +166,11 @@ public class AbsenceReportExecuteAction extends Action {
 		aDao.saveAbsenceInfo(abs);
 
 	} catch (Exception e) {
-		req.setAttribute("error", "欠席情報の登録中にエラーが発生しました。");
-		req.getRequestDispatcher("absence_report_done.jsp").forward(req, res);
+		req.setAttribute("error", "本日の欠席登録がすでにされているか<br>子供の選択がされていません");
+
+		req.setAttribute("list", list); 			// 子供情報すべてのリスト
+		req.setAttribute("cNamelist", cNamelist); 	// 子供の名前のみのリスト
+		req.getRequestDispatcher("absence_report.jsp").forward(req, res);
 	}
 
 

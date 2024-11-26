@@ -13,13 +13,16 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
+	<form action="AbsenceSelect.action" method="get">
+        <button type="submit">戻る</button>
+    </form>
+
+    <h2>欠席報告</h2>
 
     <!-- エラーメッセージの表示 -->
 	<c:if test="${not empty error}">
-   	    <div class="alert alert-danger">
-       	    ${error}
-       	</div>
-   	</c:if>
+            <p style="color: red; font-weight: bold;">${error}</p>
+    </c:if>
 
     <form action="AbsenceReportExecute.action" method="post">
         <label>名前(子供)</label>
@@ -28,16 +31,16 @@
 	        <c:forEach var="name" items="${cNamelist}">
 	            <option value="${name}">${name}</option>
 	        </c:forEach>        </select>
-        <%-- <div>${errors.get("")}</div> --%>
+
+        <p></p>
 
         <label>欠席理由</label>
-        <input type="text" name="abs_main"
-            placeholder="欠席理由を入力してください" maxlength="30"  />
-        <%-- <div>${errors.get("no")}</div> --%>
+	        <input type="text" name="abs_main" style="width:400px;height:25px;"
+	            placeholder="30文字以内で欠席理由を入力してください" maxlength="30"  />
 
         <input type="submit" value="送信">
     </form>
-    <a href="AbsenceSelect.action">戻る</a>
+
    </div>
    </div>
 </body>

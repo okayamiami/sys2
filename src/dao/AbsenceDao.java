@@ -357,10 +357,7 @@ public class AbsenceDao extends Dao{
 	        statement.setString(1, facility_id);
 	        statement.setString(2, absence_date);
 
-	        System.out.println(statement);
-
 	        rSet = statement.executeQuery();
-
 
 
 	        while (rSet.next()) {
