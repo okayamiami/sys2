@@ -50,25 +50,27 @@ public class ChildAddAction extends Action {
         // ログインユーザーを取得
         String user_type = (String) session.getAttribute("user_type");
 
-        if ("P".equals(user_type)) {  // 保護者の場合
+        // ユーザータイプが保護者の場合
+        if ("P".equals(user_type)) {
+            // 保護者情報を取得
             PU = (ParentsUser) session.getAttribute("user");
             user_id = PU.getParents_id();
             facility_id = PU.getFacility_id();
             parents_name = PU.getParents_name();
 
-            // 子供ID作成
+            // 子供リストを取得
             List<Child> child_list = CD.getChildListinfo(facility_id);
             System.out.println(child_list);
 
-            // child_idの最大値を取得
+            // child_idの最大値を計算
             OptionalInt maxChildId = child_list.stream()
-                .map(Child::getChild_id)  // Childオブジェクトからchild_idを取得
-                .map(childId -> childId.trim()) //空白を
-                .mapToInt(Integer::parseInt)     // Stringをintに変換
+                .map(Child::getChild_id)       // Childオブジェクトからchild_idを取得
+                .map(childId -> childId.trim()) // 空白を削除
+                .mapToInt(Integer::parseInt)   // Stringをintに変換
                 .max();
 
+            // 次のchild_idを決定
             int nextNumber;
-            // IDの数字の最大値を取得
             if (maxChildId.isPresent()) {
                 nextNumber = maxChildId.getAsInt() + 1;
             } else {
@@ -76,20 +78,19 @@ public class ChildAddAction extends Action {
                 nextNumber = 1;
             }
 
-         // クラス情報取得
+            // クラス情報を取得
             List<ClassCd> CID = CCD.getClassCdinfo(facility_id);
             if (CID != null && !CID.isEmpty()) {
                 uniqueClassIds = CID.stream()
-                        .map(ClassCd::getClass_id)  // ClassCd の class_id を抽出
-                        .distinct()  // 重複を削除
-                        .collect(Collectors.toList());  // List に変換
+                    .map(ClassCd::getClass_id)  // ClassCdのclass_idを抽出
+                    .distinct()                 // 重複を削除
+                    .collect(Collectors.toList()); // Listに変換
             }
-
 
             System.out.println(nextNumber);
             System.out.println(PU + "保護者ユーザーログイン");
 
-            // 保護者が新規登録を押した場合
+            // 保護者が新規登録を押した場合の処理
             req.setAttribute("child_id", nextNumber);
             req.setAttribute("class_set", uniqueClassIds);
             req.setAttribute("parents_name", parents_name);
@@ -97,37 +98,39 @@ public class ChildAddAction extends Action {
             req.setAttribute("user", PU);
             req.getRequestDispatcher("childadd.jsp").forward(req, res);
 
-        } else if ("M".equals(user_type)) {  // 管理者の場合
+        // ユーザータイプが管理者の場合
+        } else if ("M".equals(user_type)) {
+            // 管理者情報を取得
             MU = (ManageUser) session.getAttribute("user");
-            user_id = req.getParameter("parents_id");  // 管理者の場合、保護者IDをリクエストから取得
+            user_id = req.getParameter("parents_id"); // 管理者の場合、保護者IDをリクエストから取得
             facility_id = MU.getFacility_id();
 
-            // 保護者の名前取得
+            // 保護者の名前を取得
             ParentsUser PU1 = PD.getParentsUserInfo(user_id, facility_id);
             parents_name = PU1.getParents_name();
 
-            // クラス情報取得
+            // クラス情報を取得
             List<ClassCd> CID = CCD.getClassCdinfo(facility_id);
             if (CID != null && !CID.isEmpty()) {
                 uniqueClassIds = CID.stream()
-                        .map(ClassCd::getClass_id)  // ClassCd の class_id を抽出
-                        .distinct()  // 重複を削除
-                        .collect(Collectors.toList());  // List に変換
+                    .map(ClassCd::getClass_id)  // ClassCdのclass_idを抽出
+                    .distinct()                 // 重複を削除
+                    .collect(Collectors.toList()); // Listに変換
             }
 
-         // 子供ID作成
+            // 子供リストを取得
             List<Child> child_list = CD.getChildListinfo(facility_id);
             System.out.println(child_list);
 
-            // child_idの最大値を取得
+            // child_idの最大値を計算
             OptionalInt maxChildId = child_list.stream()
-                .map(Child::getChild_id)  // Childオブジェクトからchild_idを取得
-                .map(childId -> childId.trim()) //空白を
-                .mapToInt(Integer::parseInt)     // Stringをintに変換
+                .map(Child::getChild_id)       // Childオブジェクトからchild_idを取得
+                .map(childId -> childId.trim()) // 空白を削除
+                .mapToInt(Integer::parseInt)   // Stringをintに変換
                 .max();
 
+            // 次のchild_idを決定
             int nextNumber;
-            // IDの数字の最大値を取得
             if (maxChildId.isPresent()) {
                 nextNumber = maxChildId.getAsInt() + 1;
             } else {
@@ -138,7 +141,7 @@ public class ChildAddAction extends Action {
             System.out.println(nextNumber);
             System.out.println(MU + "管理ユーザーログイン");
 
-            // 管理者が新規登録を押した場合
+            // 管理者が新規登録を押した場合の処理
             req.setAttribute("child_id", nextNumber);
             req.setAttribute("class_set", uniqueClassIds);
             req.setAttribute("parents_name", parents_name);
@@ -146,7 +149,8 @@ public class ChildAddAction extends Action {
             req.setAttribute("user", MU);
             req.getRequestDispatcher("childadd.jsp").forward(req, res);
 
-        } else {  // 不正なユーザータイプ
+        // 不正なユーザータイプの場合
+        } else {
             errors.put("kome", "セッションに不正なユーザー情報が格納されています。");
         }
     }
