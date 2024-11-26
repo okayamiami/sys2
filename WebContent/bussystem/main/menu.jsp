@@ -31,7 +31,7 @@
 					<a href="InfoMenu.action">お知らせ機能</a>
 					<a href="QrMenu.action">QR機能</a>
 					<c:if test="${user_id == 'M0000001'}">
-					<a href="#">施設情報</a>
+					<a href="FacilityInfo.action">施設情報</a>
 					</c:if>
 				</c:when>
 				<c:when test="${user_type == 'T'}">
