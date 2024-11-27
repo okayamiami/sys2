@@ -61,7 +61,7 @@
     <script>
     // パスワードの表示/非表示を切り替える関数
     function togglePassword() {
-        var passwordField = document.getElementById("facility_appPassword");
+        var passwordField = document.getElementById("facility_app_password");
         var currentType = passwordField.type;
 
         // 現在のタイプがpasswordならtextに、textならpasswordに変更
