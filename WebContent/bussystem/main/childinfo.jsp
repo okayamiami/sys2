@@ -22,7 +22,10 @@
             </tr>
             <c:forEach var="child" items="${userCI}">
                 <tr>
+                	<!-- 保護者IDの表示 -->
                     <td>${child.parents_id}</td>
+
+					<!-- クラスの名前を表示 -->
                     <td>
                         <!-- クラスIDに対応するクラス名を表示 -->
                         <c:forEach var="classCd" items="${class_set}">
@@ -31,9 +34,12 @@
                             </c:if>
                         </c:forEach>
                     </td>
+
+					<!-- 子供の名前表示 -->
                     <td>${child.child_name}</td>
+
+					<!-- 編集ボタン -->
                     <td>
-                        <!-- 編集ボタン -->
                         <form action="ChildUpdate.action" method="post" style="display:inline;">
                             <input type="hidden" name="parents_id" value="${child.parents_id}" />
                             <!-- 子供のchild_idを送信する隠しフィールド -->
@@ -41,6 +47,7 @@
                             <button type="submit">更新</button>
                         </form>
                     </td>
+
                 </tr>
             </c:forEach>
         </table>

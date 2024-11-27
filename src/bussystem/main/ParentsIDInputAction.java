@@ -43,48 +43,48 @@ public class ParentsIDInputAction extends Action {
         String parents_name = null;
 
 	    if (TF == false) {
-	        errors.put("errorMessage", "保護者IDを入力してください。");
+	        errors.put("errorMessage", "保護者IDが間違っています");
 	    }else if(TF == true){
 	    	 parents_name = PU.getParents_name();
 	    }
 
-			//Beanをインスタンス化しクラス名を取得祈願　　引数null
-			ChildDao CD = new ChildDao();
-			ClassCdDao CC = new ClassCdDao();
+		//Beanをインスタンス化しクラス名を取得祈願　　引数null
+		ChildDao CD = new ChildDao();
+		ClassCdDao CC = new ClassCdDao();
 
-			//子供の情報を取得
-		    List<Child> CI = new ArrayList<>();
-			CI = CD.getChildrenByParentId(parents_id, facility_id);
-			//全クラス情報取得
-			List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
-			 List<String> classCdList = new ArrayList<>();
+		//子供の情報を取得
+	    List<Child> CI = new ArrayList<>();
+		CI = CD.getChildrenByParentId(parents_id, facility_id);
+		//全クラス情報取得
+		List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
+		 List<String> classCdList = new ArrayList<>();
 
-			 for (ClassCd classCd : class_set) {
-			     classCdList.add(classCd.getClass_id());  // getClass_cd()を取り出して新しいリストに追加
-			 }
+		 for (ClassCd classCd : class_set) {
+		     classCdList.add(classCd.getClass_id());  // getClass_cd()を取り出して新しいリストに追加
+		 }
 
-			// 子供情報を child_id の小さい順にソート
-			Collections.sort(CI, (child1, child2) -> child1.getChild_id().compareTo(child2.getChild_id()));
-
-
-		   if(!errors.isEmpty()){
-	            req.setAttribute("errors", errors);
-	            req.getRequestDispatcher("parentsidinput.jsp").forward(req, res);
-	            return;
-	        }
+		// 子供情報を child_id の小さい順にソート
+		Collections.sort(CI, (child1, child2) -> child1.getChild_id().compareTo(child2.getChild_id()));
 
 
+	   if(!errors.isEmpty()){
+            req.setAttribute("errors", errors);
+            req.getRequestDispatcher("parentsidinput.jsp").forward(req, res);
+            return;
+        }
 
-	        // リクエストにデータを保存
-		   	req.setAttribute("class_set", classCdList);
-			req.setAttribute("parents_name", parents_name);
-			req.setAttribute("user", MU);
-			req.setAttribute("parents_id", parents_id);
-			req.setAttribute("class_set", class_set);
-			req.setAttribute("userCI", CI);
 
-			// 結果ページにフォワード
-			req.getRequestDispatcher("childinfo.jsp").forward(req, res);
+
+        // リクエストにデータを保存
+	   	req.setAttribute("class_set", classCdList);
+		req.setAttribute("parents_name", parents_name);
+		req.setAttribute("user", MU);
+		req.setAttribute("parents_id", parents_id);
+		req.setAttribute("class_set", class_set);
+		req.setAttribute("userCI", CI);
+
+		// 結果ページにフォワード
+		req.getRequestDispatcher("childinfo.jsp").forward(req, res);
 
     }
 }
