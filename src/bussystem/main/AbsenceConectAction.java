@@ -101,7 +101,7 @@ public class AbsenceConectAction extends Action {
 
 	    } catch (Exception e) {
 			req.setAttribute("error", "欠席情報の取得中にエラーが発生しました。");
-			req.getRequestDispatcher("childlist.jsp").forward(req, res);
+			req.getRequestDispatcher("absence_conect.jsp").forward(req, res);
 		}
 	}
 }

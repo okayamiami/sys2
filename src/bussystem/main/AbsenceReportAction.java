@@ -35,7 +35,7 @@ public class AbsenceReportAction extends Action {
 			String facility_id = pu.getFacility_id();
 			String parents_id = pu.getParents_id();
 			// DBからデータ取得 3
-			list = cDao.getChildrenByParentId(parents_id, facility_id); // 保護者IDで子供情報を取得
+			list = cDao.getAttendChildrenByParentId(parents_id, facility_id); // 保護者IDで子供情報を取得
 
 			// 施設でしぼった子供の名前のみリスト
 			for (Child c : list) {
@@ -49,7 +49,7 @@ public class AbsenceReportAction extends Action {
 			// リクエストパラメータ―の取得 2
 			String facility_id = mu.getFacility_id();
 			// DBからデータ取得 3
-			list = cDao.getChildListinfo(facility_id); // 子供情報一覧取得
+			list = cDao.getAttendChildListinfo(facility_id); // 子供情報一覧取得
 
 			// 施設でしぼった子供の名前のみリスト
 			for (Child c : list) {

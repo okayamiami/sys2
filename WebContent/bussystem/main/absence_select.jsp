@@ -13,6 +13,9 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
+	<form action="AbsenceSelect.action" method="get">
+        <button type="submit">戻る</button>
+    </form>
 	<h2>欠席機能選択</h2>
 	<form action="AbsenceConect.action" method="post">
 		<input type="submit" value="欠席連絡">
@@ -21,7 +24,6 @@
 		<input type="submit" value="欠席報告">
 	</form>
 
-	<a href="Menu.action">戻る</a>
 	</div>
 	</div>
 </body>

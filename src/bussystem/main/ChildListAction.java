@@ -1,6 +1,7 @@
 package bussystem.main;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,26 +104,50 @@ public class ChildListAction extends Action {
 			String class_id = classID.getClass_id();
 
 
+			/**時間計測のコメント後で消す*/
+			long startTime ;
+			long endTime;
+
 			// 絞り込み条件
 			if (child_id != null && !child_id.equals("0") && child_name.equals("0")&& class_cd.equals("0")) {
 			    // 子供IDのみ指定
+				startTime = System.currentTimeMillis();
 			    childs = caDao.filterbyChildId(child_id, facility_id, IsAttend, absIsAttend);
+			    endTime = System.currentTimeMillis();
+			    System.out.println("子供ID実行時間: " + (endTime - startTime) + "ms");
 			} else if (child_name != null && !child_name.equals("0") && child_id.equals("0") && class_cd.equals("0")) {
 			    // 子供の名前のみ指定
-			    childs = caDao.filterbyChildName(child_name, facility_id, IsAttend, absIsAttend);
+				startTime = System.currentTimeMillis();
+				childs = caDao.filterbyChildName(child_name, facility_id, IsAttend, absIsAttend);
+				endTime = System.currentTimeMillis();
+				System.out.println("子供名前実行時間: " + (endTime - startTime) + "ms");
+
 			} else if (class_cd != null && !class_cd.equals("0") && child_id.equals("0") && child_name.equals("0")) {
 			    // クラスのみ選択
-			    childs = caDao.filterbyClassCd(class_id, facility_id, IsAttend, absIsAttend);
+				startTime = System.currentTimeMillis();
+				childs = caDao.filterbyClassCd(class_id, facility_id, IsAttend, absIsAttend);
+				endTime = System.currentTimeMillis();
+				System.out.println("クラス実行時間: " + (endTime - startTime) + "ms");
 			} else if (child_id == null && child_name == null && class_cd == null || child_id.equals("0") && child_name.equals("0")&&class_cd.equals("0")) {
 				// 1つも選択されていないとき（施設の全員表示）
+				startTime = System.currentTimeMillis();
 				childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
+				endTime = System.currentTimeMillis();
+				System.out.println("選択なし（全員）実行時間: " + (endTime - startTime) + "ms");
 			}else {
 			    // 選択条件が複数あったとき
 			    errors.put("f1", "欠席以外の項目が複数選択されています");
 			    req.setAttribute("errors", errors);
 			    // 施設の（在籍中の）子供全員表示
+			    startTime = System.currentTimeMillis();
 			    childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
+				endTime = System.currentTimeMillis();
+			    childs = caDao.getChildListAbsinfo(facility_id, IsAttend, absIsAttend);
+			    System.out.println("複数（全員）実行時間: " + (endTime - startTime) + "ms");
 			}
+
+			// リストの値をchild_id順に変換する
+			childs.sort(Comparator.comparing(ChildAbs::getChild_id));
 
 
 

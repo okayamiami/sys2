@@ -154,6 +154,105 @@ public class ChildDao extends Dao{
 	}
 
 
+	// 保護者IDで(在籍中の)子供情報を取得 ： 欠席報告で利用
+	public List<Child> getAttendChildrenByParentId(String parents_id, String facility_id) throws Exception {
+		List<Child> list = new ArrayList<>();
+		Connection connection = getConnection();
+		PreparedStatement st = null;
+		Boolean attend = true;
+
+		String sql = "select * from Child where parents_id = ? and facility_id=? and is_attend=?";
+		try {
+			st = connection.prepareStatement(sql);
+			st.setString(1, parents_id);
+			st.setString(2, facility_id);
+			st.setBoolean(3, attend);
+			ResultSet rSet = st.executeQuery();
+
+			while (rSet.next()) {
+				Child child = new Child();
+				child.setChild_id(rSet.getString("child_id"));
+				child.setChild_name(rSet.getString("child_name"));
+				child.setParents_id(rSet.getString("parents_id"));
+				child.setClass_id(rSet.getString("class_id"));
+				child.setIs_attend(rSet.getBoolean("is_attend"));
+				child.setFacility_id(rSet.getString("facility_id"));
+				list.add(child);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
+
+	// 施設の(在籍中の)子供情報を取得 ： 欠席報告で利用
+	public List<Child> getAttendChildListinfo(String facility_id)throws Exception{
+		//戻り値用のリスト
+		List<Child> list = new ArrayList<>();
+		Connection connection = getConnection();
+		PreparedStatement st = null;
+		Boolean attend = true;
+
+		String sql2 = "and is_attend=? ";
+
+		try{
+			st = connection.prepareStatement(baseSql + sql2);
+			st.setString(1,facility_id);
+			st.setBoolean(2, attend);
+			ResultSet rSet = st.executeQuery();
+
+			while(rSet.next()){
+				Child child = new Child();
+				child.setChild_id(rSet.getString("child_id"));
+				child.setChild_name(rSet.getString("child_name"));
+				child.setParents_id(rSet.getString("parents_id"));
+				child.setClass_id(rSet.getString("class_id"));
+				child.setIs_attend(rSet.getBoolean("is_attend"));
+				child.setFacility_id(rSet.getString("facility_id"));
+				list.add(child);
+			}
+		}catch(Exception e){
+			throw e;
+		} finally {
+			//
+			if(st != null) {
+				try {
+					st.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+
+		}
+		return list;
+	}
+
+
 	// 子供の名前から子供IDを取得
 	public Child getChildIdinfo(String facility_id,String child_name)throws Exception{
 		Child child = new Child();
@@ -209,10 +308,10 @@ public class ChildDao extends Dao{
 				int count = 0;
 
 				try{
-					//データベースから学生を取得
+					//データベースから子供を取得
 					Child old = getChildinfo(child.getFacility_id(), child.getChild_id());
 					if (old == null) {
-						//学生が存在しなかった場合
+						//子供が存在しなかった場合
 						//プリペアードステートメンにINSERT文をセット
 						statement = connection.prepareStatement(
 								"insert into Child (child_id, child_name, parents_id, class_id, is_attend, facility_id) values(?, ?, ?, ?, ?, ?) ");
@@ -224,7 +323,7 @@ public class ChildDao extends Dao{
 						statement.setBoolean(5, child.is_attend());
 						statement.setString(6, child.getFacility_id());
 					} else {
-						//学生が存在した場合
+						//子供が存在した場合
 						//プリペアードステートメントにUPDATE文をセット
 						statement = connection
 								.prepareStatement("update Child set child_name=?, parents_id=?, class_id=?, is_attend=?, facility_id=? where child_id=? and facility_id=?");

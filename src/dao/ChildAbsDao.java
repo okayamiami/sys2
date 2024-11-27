@@ -51,14 +51,13 @@ public class ChildAbsDao extends Dao{
 	        conditionAbsIsAttend = "and abs_is_attend=true ";
 	    }
 
-	    /** まだうまく反応しないため後で
+
 	    // ソート
-	    String order = "ORDER BY LPAD(child.child_id, 7, '0') ASC";
-		*/
+	    String order = "ORDER BY child_id ASC";
 
 	    try {
 	        // 子供の情報取得
-	        st = connection.prepareStatement(baseSql + conditionIsAttend + conditionAbsIsAttend );
+	        st = connection.prepareStatement(baseSql + conditionIsAttend + conditionAbsIsAttend + order);
 	        st.setString(1, facility_id);
 
 	        ResultSet rSet = st.executeQuery();
@@ -97,6 +96,7 @@ public class ChildAbsDao extends Dao{
 
 	                map.put(childName, childabs); // マップに追加または更新
 	            }
+
 	        }
 
 	        // バッチで更新を実行

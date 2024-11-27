@@ -14,6 +14,11 @@
 	<div class="con">
 		<h2>名簿一覧</h2>
 
+		<!-- エラーメッセージの表示 -->
+		<c:if test="${not empty error}">
+	            <p style="color: red; font-weight: bold;">${error}</p>
+	    </c:if>
+
 		<form method="get">
 			<label> 子供ID </label>
 			<select name="f1">
@@ -49,14 +54,17 @@
 				<c:if test="${!empty f4}">checked</c:if> />
 			</label>
 
+
 			<button>絞込み</button>
+
+			<div style="color: red; font-weight: bold;">${errors.get("f1")}</div>
 
 
 			<!-- エラーメッセージの表示 -->
 			<c:if test="${not empty error}">
 		            <p style="color: red; font-weight: bold;">${error}</p>
 		    </c:if>
-			<div>${errors.get("f1")}</div>
+
 		</form>
 
 

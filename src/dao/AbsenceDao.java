@@ -159,7 +159,7 @@ public class AbsenceDao extends Dao{
 				statement.setString(5, absence.getFacility_id());
 
 			} else {
-				//該当の日に対象の子の欠席情報が存在した場合
+				//該当の日に対象の子の欠席情報が存在した場合（欠席情報更新）
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection
 						.prepareStatement("update Absence set absence_main=? child_id=? absence_date=? where absence_id=? and facility_id=?  ");
@@ -209,7 +209,7 @@ public class AbsenceDao extends Dao{
 
 
 
-	/** ここから先欠席連絡表示用（マップ使用） */
+	/** ここから先 欠席連絡表示用（マップ使用） */
 
 	String conectSql ="SELECT a.*, c.child_name, c.class_id " +
 	            "FROM Absence a " +
@@ -229,9 +229,13 @@ public class AbsenceDao extends Dao{
 	    // プリペアードステートメント
 	    PreparedStatement statement = null;
 
+	    // 欠席ID順にソート
+	    String sort = " ORDER BY absence_id ASC ";
+
+
 	    try {
 	        // プリペアードステートメントにSQL文をセット
-	        statement = connection.prepareStatement(conectSql);
+	        statement = connection.prepareStatement(conectSql + sort);
 
 	        // プレースホルダー（？の部分）に値を設定
 	        statement.setString(1, facility_id);
@@ -289,9 +293,11 @@ public class AbsenceDao extends Dao{
 	    ResultSet rSet = null;
 
 	    String condition = "and class_id=?  ";
+	 // 欠席ID順にソート
+	    String sort = " ORDER BY absence_id ASC ";
 
 	    try {
-	        statement = connection.prepareStatement(conectSql + condition);
+	        statement = connection.prepareStatement(conectSql + condition + sort);
 
 	        statement.setString(1, facility_id);
 	        statement.setString(2, class_id);
@@ -350,9 +356,11 @@ public class AbsenceDao extends Dao{
 
 
 	    String condition = "and absence_date=?  ";
+	    // 欠席ID順にソート
+	    String sort = " ORDER BY absence_id ASC ";
 
 	    try {
-	        statement = connection.prepareStatement(conectSql + condition);
+	        statement = connection.prepareStatement(conectSql + condition + sort);
 
 	        statement.setString(1, facility_id);
 	        statement.setString(2, absence_date);
@@ -410,9 +418,11 @@ public class AbsenceDao extends Dao{
 
 
 	    String condition = "and child_name=?  ";
+	    // 欠席ID順にソート
+	    String sort = " ORDER BY absence_id ASC ";
 
 	    try {
-	        statement = connection.prepareStatement(conectSql + condition);
+	        statement = connection.prepareStatement(conectSql + condition + sort);
 
 	        statement.setString(1, facility_id);
 	        statement.setString(2, child_name);

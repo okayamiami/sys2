@@ -9,6 +9,12 @@
 
 </head>
 <body>
+
+<h2>欠席連絡</h2>
+<!-- エラーメッセージの表示 -->
+<c:if test="${not empty error}">
+    <p style="color: red; font-weight: bold;">${error}</p>
+</c:if>
 <c:import url="/common/header.jsp" />
 <div class="main">
 <c:import url="/common/navi.jsp" />
@@ -16,10 +22,6 @@
     <form action="AbsenceSelect.action" method="get">
         <button type="submit">戻る</button>
     </form>
-		<!-- エラーメッセージの表示 -->
-        <c:if test="${not empty error}">
-            <p style="color: red; font-weight: bold;">${error}</p>
-        </c:if>
 		<form method="get">
 			<label> 欠席日 </label>
 			<select name="f1">
@@ -50,13 +52,10 @@
 
 			<button>絞込み</button>
 
-			<div>${errors.get("f1")}</div>
+			<div style="color: red; font-weight: bold;">${errors.get("f1")}</div>
 		</form>
 
-		<!-- エラーメッセージの表示 -->
-        <c:if test="${not empty error}">
-            <p style="color: red; font-weight: bold;">${error}</p>
-        </c:if>
+
 
         <!-- 情報表示 -->
         <c:if test="${empty error}">
