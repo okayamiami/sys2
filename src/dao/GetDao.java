@@ -146,7 +146,7 @@ public class GetDao extends Dao{
 	            if (facility != null) {
 	                String facilityMail = facility.getFacility_mail();
 	                ParentsUserDao puDao = new ParentsUserDao();
-	                List<String> parentsMails = puDao.getParentsEmails(child_id);
+	                List<String> parentsMails = puDao.getParentsEmails(child_id, facility_id);
 
 	                // メールを送信
 	                if (facilityMail != null && !parentsMails.isEmpty()) {

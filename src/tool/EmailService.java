@@ -59,9 +59,9 @@ public class EmailService {
     private static String getSmtpServerFromEmail(String email) {
         if (email.endsWith("@gmail.com")) {
             return "smtp.gmail.com"; // Gmailの場合
-        } else if (email.endsWith("@outlook.com")) {
+        } else if (email.endsWith("@outlook.com") || email.endsWith("@outlook.jp")) {
             return "smtp-mail.outlook.com"; // Outlookの場合
-        } else if (email.endsWith("@yahoo.com")) {
+        } else if (email.endsWith("@yahoo.com") || email.endsWith("@yahoo.co.jp")) {
             return "smtp.mail.yahoo.com"; // Yahooの場合
         } else {
             return "smtp.example.com"; // デフォルトのSMTPサーバー
