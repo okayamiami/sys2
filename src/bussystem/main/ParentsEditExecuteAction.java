@@ -22,6 +22,7 @@ public class ParentsEditExecuteAction extends Action {
         Object user = session.getAttribute("user");
         ParentsUserDao PD = new ParentsUserDao();
 
+        //ユーザータイプで分ける
         if ("P".equals(user_type)) {
             ParentsUser parentsUser = (ParentsUser) user;
             facilityId = parentsUser.getFacility_id();

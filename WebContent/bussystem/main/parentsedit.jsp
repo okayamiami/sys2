@@ -34,7 +34,9 @@
                     <tr>
                         <th>パスワード</th>
                         <td>
+                         <input type="hidden" name="parents_pass" value="${user.parents_pass}" />
                				<span>${user.parents_pass} *変更不可</span>
+
                         </td>
                     </tr>
                     <tr>

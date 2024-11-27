@@ -42,22 +42,19 @@ public class ChildInfoAction extends Action{
 			ParentsUser PU = (ParentsUser) session.getAttribute("user");
 			String user_id = PU.getParents_id();
 			String facility_id = PU.getFacility_id();
-			String parents_name = PU.getParents_name();
-
-			ClassCd Cd = new ClassCd();
-
 
 			//子供の情報を取得
 		    List<Child> CI = new ArrayList<>();
 			CI = CD.getChildrenByParentId(user_id, facility_id);
+
 			//全クラス情報取得
 			List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
 
-			// 子供情報を child_id の小さい順にソート
+			// 子供情報を child_id の小さい順にソートし「CI」に入れる
 			Collections.sort(CI, (child1, child2) -> child1.getChild_id().compareTo(child2.getChild_id()));
 
 
-
+			//リクエストに情報をセット
 			req.setAttribute("class_set", class_set);
 			req.setAttribute("userCI", CI);
 			req.setAttribute("user", PU);
@@ -67,15 +64,15 @@ public class ChildInfoAction extends Action{
 		} else if ("M".equals(user_type)) {
 			// 管理者ユーザーの場合
 			ManageUser MU = (ManageUser) session.getAttribute("user");
+
+			//ログインユーザーから施設ID入手
 			String facility_id = MU.getFacility_id();
 			req.setAttribute("facility_id", facility_id);
+
 			// 保護者ID入力ページへ
 			req.getRequestDispatcher("parentsidinput.jsp").forward(req, res);
-
 		} else {
 			// 予期しない場合のエラーハンドリング
-			errors.put("kome", "情報取得に失敗しました。");
-			req.setAttribute("errors", errors);
 			req.getRequestDispatcher("menu.jsp").forward(req, res);
 		}
 

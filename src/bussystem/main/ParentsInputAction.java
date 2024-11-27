@@ -32,15 +32,11 @@ public class ParentsInputAction extends Action {
         boolean  TF = PD.getParentsUser(parents_id, facility_id);
 
 	    if (TF == false) {
-	        errors.put("errorMessage", "保護者IDを入力してください。");
+	        errors.put("errorMessage", "保護者IDが間違っています");
 	    }
 
         // データ取得
         ParentsUser PU = PD.getParentsUserInfo(parents_id, facility_id);
-        String parents_pass = PU.getParents_pass();
-        String parents_name = PU.getParents_name();
-        System.out.println(parents_pass);
-        System.out.println(parents_name);
 
        if(!errors.isEmpty()){
             req.setAttribute("errors", errors);
