@@ -9,6 +9,7 @@ import java.util.List;
 
 import bean.Bus;
 import bean.Child;
+import bean.Facility;
 import bean.Get;
 import tool.EmailService;
 
@@ -120,14 +121,11 @@ public class GetDao extends Dao{
 	    GetDao gDao = new GetDao();
 
 	    try {
-
 	        // データベースから学生情報を取得
 	        Get get = gDao.getGetinfo(bus_id, child_id, facility_id);
-	        // gDao.getGetinfoの戻り値がnullである場合
 	        if (get == null) {
 	            throw new IllegalStateException("Get情報が見つかりません: bus_id=" + bus_id + ", child_id=" + child_id + ", facility_id=" + facility_id);
 	        }
-
 
 	        // SQL 文の準備
 	        statement = connection.prepareStatement(
@@ -140,21 +138,33 @@ public class GetDao extends Dao{
 	        // プリペアードステートメントを実行
 	        count = statement.executeUpdate();
 
-	     // 反転後の値が false だった場合（降車時）に保護者にメール送信
-	        if (count > 0 && !get.isGet_is_attend() == false) {
-	            // 反転後の状態が false なら処理を実行
-	            //メール送信メソッド
-	        	FacilityDao fDao = new FacilityDao();
-	        	ParentsUserDao puDao = new ParentsUserDao();
-	        	String facilityMail = fDao.getFacilityInfo(facility_id).getFacility_mail(); // 施設メールを取得
-	        	List<String> parentsMails = puDao.getParentsEmails(child_id); // 保護者メールを取得
+	        // 反転後の値が false なら処理を実行
+	        if (count > 0 && !get.isGet_is_attend()) {
+	            // Daoインスタンス化
+	            FacilityDao fDao = new FacilityDao();
+	            Facility facility = fDao.getFacilityInfo(facility_id);
+	            if (facility != null) {
+	                String facilityMail = facility.getFacility_mail();
+	                ParentsUserDao puDao = new ParentsUserDao();
+	                List<String> parentsMails = puDao.getParentsEmails(child_id);
 
-	        	// メールを送信
-	            if (facilityMail != null && !parentsMails.isEmpty()) {
-	                for (String parentMail : parentsMails) {
-	                	//それぞれメール送信
-	                	EmailService es = new EmailService();
-	                    es.sendEmail(parentMail, "題名","内容");
+	                // メールを送信
+	                if (facilityMail != null && !parentsMails.isEmpty()) {
+	                    for (String parentMail : parentsMails) {
+	                        // nullまたは空白の場合はスキップ
+	                        if (parentMail == null || parentMail.trim().isEmpty()) {
+	                            continue; // continueで次の親メールに進む
+	                        }
+
+	                        // メールアドレス形式が不正な場合もスキップ
+	                        if (!isValidEmail(parentMail)) {
+	                            continue; // continueで次の親メールに進む
+	                        }
+
+	                        // 正常なメールアドレスの場合はメール送信
+	                        EmailService es = new EmailService();
+	                        es.sendEmail(facility_id, parentMail, "保護者の方へ", "お子さんは無事に登園完了しましたよ！^^");
+	                    }
 	                }
 	            }
 	        }
@@ -182,6 +192,12 @@ public class GetDao extends Dao{
 	    }
 
 	    return count > 0;
+	}
+
+	// メールアドレス形式を検証するメソッド
+	public boolean isValidEmail(String email) {
+	    String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+	    return email != null && email.matches(emailRegex);
 	}
 
 

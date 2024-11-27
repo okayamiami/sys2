@@ -12,6 +12,7 @@
     <th>住所</th>
     <th>電話番号</th>
     <th>メールアドレス</th>
+    <th>アプリパスワード</th>
     <th>プラン</th>
 </tr>
 
@@ -22,6 +23,7 @@
         <td>${fc.facility_address}</td>
         <td>${fc.facility_tel}</td>
         <td>${fc.facility_mail}</td>
+        <td>********</td>
         <td>
         	<c:choose>
 				<c:when test="${fc.getFacility_plan()}">

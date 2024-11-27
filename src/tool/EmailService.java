@@ -10,14 +10,17 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import dao.FacilityDao;
+
 
 public class EmailService {
-
-	public boolean sendEmail(String recipientEmail, String subject, String messageBody) {
+	//recipientEmail 受取先 subject 件名 messageBody メール内容
+	public boolean sendEmail(String facility_id, String recipientEmail, String subject, String messageBody) throws Exception {
 
         // 送信元のメールアドレスとパスワード
-        String fromEmail = "your-email@example.com";
-        String password = "your-app-password";  // アプリパスワード
+		FacilityDao fDao = new FacilityDao();
+        String fromEmail = fDao.getFacilityInfo(facility_id).getFacility_mail();
+        String password = fDao.getFacilityInfo(facility_id).getFacility_app_password();
 
         // メールサービスのドメインを確認して適切なSMTPサーバーを選択
         String smtpServer = getSmtpServerFromEmail(fromEmail);
@@ -64,4 +67,5 @@ public class EmailService {
             return "smtp.example.com"; // デフォルトのSMTPサーバー
         }
     }
+
 }

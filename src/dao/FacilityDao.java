@@ -35,6 +35,7 @@ public class FacilityDao extends Dao{
 				fc.setFacility_address(rSet.getString("facility_address"));
 				fc.setFacility_tel(rSet.getString("facility_tel"));
 				fc.setFacility_mail(rSet.getString("facility_mail"));
+				fc.setFacility_app_password(rSet.getString("facility_app_password"));
 				fc.setFacility_plan(rSet.getBoolean("facility_plan"));
 			}else{
 				//リザルトセットが存在しない場合

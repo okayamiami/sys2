@@ -13,6 +13,7 @@
             <th>住所</th>
             <th>電話番号</th>
             <th>メールアドレス</th>
+            <th>アプリパスワード</th>
             <th>プラン切り替え</th>
         </tr>
 
@@ -43,6 +44,10 @@
                 	<input type="email" name="facility_mail" value="${fc.facility_mail}" required/>
                 </td>
                 <td>
+	                <input type="password" id="facility_appPassword" name="facility_appPassword" value="${fc.facility_app_password}" maxlength="20" required />
+	                <button type="button" onclick="togglePassword()">表示/非表示</button>
+	            </td>
+                <td>
                 	<!-- 隠しフィールドに反転後の値をデフォルト設定 -->
                 	<input type="hidden" name="facility_plan" value="${fc.facility_plan ? 'false' : 'true'}" />
 
@@ -53,6 +58,21 @@
             </tr>
         </c:if>
     </table>
+
+    <script>
+    // パスワードの表示/非表示を切り替える関数
+    function togglePassword() {
+        var passwordField = document.getElementById("facility_appPassword");
+        var currentType = passwordField.type;
+
+        // 現在のタイプがpasswordならtextに、textならpasswordに変更
+        if (currentType === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+</script>
 
     <button type="submit">保存</button>
 </form>
