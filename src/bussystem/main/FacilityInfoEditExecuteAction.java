@@ -17,6 +17,7 @@ public class FacilityInfoEditExecuteAction extends Action{
 		String facility_address = req.getParameter("facility_address");
 		String facility_tel = req.getParameter("facility_tel");
 		String facility_mail = req.getParameter("facility_mail");
+		String facility_app_password = req.getParameter("facility_app_password");
 		String facilityplanparam = req.getParameter("facility_plan");
 		Boolean facility_plan = Boolean.parseBoolean(facilityplanparam);
 
@@ -26,6 +27,7 @@ public class FacilityInfoEditExecuteAction extends Action{
 		fc.setFacility_address(facility_address);
 		fc.setFacility_tel(facility_tel);
 		fc.setFacility_mail(facility_mail);
+		fc.setFacility_app_password(facility_app_password);
 		fc.setFacility_plan(facility_plan);
 		try{
 			fcdao.saveFacilityInfo(fc);

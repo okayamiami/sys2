@@ -44,13 +44,12 @@
                 	<input type="email" name="facility_mail" value="${fc.facility_mail}" required/>
                 </td>
                 <td>
-	                <input type="password" id="facility_appPassword" name="facility_appPassword" value="${fc.facility_app_password}" maxlength="20" required />
+	                <input type="password" id="facility_app_password" name="facility_app_password" value="${fc.facility_app_password}" maxlength="20" required title="20文字以内で入力してください"/>
 	                <button type="button" onclick="togglePassword()">表示/非表示</button>
 	            </td>
                 <td>
                 	<!-- 隠しフィールドに反転後の値をデフォルト設定 -->
                 	<input type="hidden" name="facility_plan" value="${fc.facility_plan ? 'false' : 'true'}" />
-
                 <!-- チェックボックスをデフォルトで外す -->
                 	<input type="checkbox" id="facility_plan_toggle"
                     onclick="document.getElementsByName('facility_plan')[0].value = this.checked ? '${fc.facility_plan ? 'false' : 'true'}' : '${fc.facility_plan ? 'true' : 'false'}';">
