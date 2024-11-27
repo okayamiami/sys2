@@ -1,6 +1,7 @@
 package bussystem.main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,9 @@ public class ChildInfoAction extends Action{
 			CI = CD.getChildrenByParentId(user_id, facility_id);
 			//全クラス情報取得
 			List<ClassCd> class_set = CC.getClassCdinfo(facility_id);
+
+			// 子供情報を child_id の小さい順にソート
+			Collections.sort(CI, (child1, child2) -> child1.getChild_id().compareTo(child2.getChild_id()));
 
 
 

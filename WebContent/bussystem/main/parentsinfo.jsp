@@ -15,35 +15,19 @@
         <h2>保護者情報</h2>
         <a href="menu.jsp">戻る</a>
         <table>
-            <tr>
-                <th>ID</th>
-                <th>名前</th>
-                <th>パスワード</th>
-                <th>住所</th>
-                <th>電話番号</th>
-                <th>メールアドレス１</th>
-                <th>メールアドレス２</th>
-                <th>メールアドレス３</th>
-            </tr>
-
-            <c:if test="${not empty user}">
-                <tr>
-                    <td>${user.parents_id}</td>
-                    <td>${user.parents_name}</td>
-                    <td>${user.parents_pass}</td>
-                    <td>${user.parents_address}</td>
-                    <td>${user.parents_tel}</td>
-                    <td>${user.parents_mail1}</td>
-                    <td>${user.parents_mail2}</td>
-                    <td>${user.parents_mail3}</td>
-
-                <td>
+        <c:if test="${empty error}">
+            	<tr><th>保護者ID</th><td>${user.parents_id}</td></tr>
+                <tr><th>名前（保護者）</th><td>${user.parents_name}</td></tr>
+               	<tr><th>パスワード</th><td>${user.parents_pass}</td></tr>
+                <tr><th>住所</th><td>${user.parents_address}</td></tr>
+                <tr><th>電話番号</th><td>${user.parents_tel}</td></tr>
+                <tr><th>メールアドレス１</th><td>${user.parents_mail1}</td></tr>
+                <tr><th>メールアドレス２</th><td>${user.parents_mail2}</td></tr>
+                <tr><th>メールアドレス３</th><td>${user.parents_mail3}</td></tr>
                 <form action="ParentsEdit.action" method="post">
                     <input type="hidden" name="parents_id" value="${user.parents_id}"/>
                     <button type="submit">編集</button>
                 </form>
-            	</td>
-                </tr>
             </c:if>
         </table>
     </div>

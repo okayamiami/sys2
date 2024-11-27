@@ -1,6 +1,7 @@
 package bussystem.main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,25 +32,23 @@ public class ParentsIDInputAction extends Action {
     	ManageUser MU = (ManageUser) session.getAttribute("user");//ログインユーザーは管理者
 		String facility_id = MU.getFacility_id();//ファシリティIDゲット
 
-		// Daoをインスタンス化
+		//Daoをインスタンス化
         ParentsUserDao PD = new ParentsUserDao();
-		//Daoのメソッド
+
+        //Daoのメソッド
         boolean  TF = PD.getParentsUser(parents_id, facility_id);
-        //保護者の名前取得
+
+      //保護者の名前取得
         ParentsUser PU  = PD.getParentsUserInfo(parents_id, facility_id);
-        String parents_name = PU.getParents_name();
+        String parents_name = null;
 
 	    if (TF == false) {
 	        errors.put("errorMessage", "保護者IDを入力してください。");
+	    }else if(TF == true){
+	    	 parents_name = PU.getParents_name();
 	    }
 
-	    //getParentsUserInfo
-
-
-
 			//Beanをインスタンス化しクラス名を取得祈願　　引数null
-
-			ClassCd Cd = new ClassCd();
 			ChildDao CD = new ChildDao();
 			ClassCdDao CC = new ClassCdDao();
 
@@ -64,15 +63,20 @@ public class ParentsIDInputAction extends Action {
 			     classCdList.add(classCd.getClass_id());  // getClass_cd()を取り出して新しいリストに追加
 			 }
 
+			// 子供情報を child_id の小さい順にソート
+			Collections.sort(CI, (child1, child2) -> child1.getChild_id().compareTo(child2.getChild_id()));
+
+
 		   if(!errors.isEmpty()){
 	            req.setAttribute("errors", errors);
 	            req.getRequestDispatcher("parentsidinput.jsp").forward(req, res);
 	            return;
 	        }
 
-		   System.out.println(parents_name);
+
+
 	        // リクエストにデータを保存
-		   req.setAttribute("class_set", classCdList);
+		   	req.setAttribute("class_set", classCdList);
 			req.setAttribute("parents_name", parents_name);
 			req.setAttribute("user", MU);
 			req.setAttribute("parents_id", parents_id);
@@ -81,5 +85,6 @@ public class ParentsIDInputAction extends Action {
 
 			// 結果ページにフォワード
 			req.getRequestDispatcher("childinfo.jsp").forward(req, res);
+
     }
 }

@@ -37,7 +37,7 @@
                         <form action="ChildUpdate.action" method="post" style="display:inline;">
                             <input type="hidden" name="parents_id" value="${child.parents_id}" />
                             <!-- 子供のchild_idを送信する隠しフィールド -->
-                            <input type="hidden" name="child_id" value="${child.child_id}" /> <!-- これでchild_idは画面には表示されない -->
+                            <input type="hidden" name="child_id" value="${child.child_id}" />
                             <button type="submit">更新</button>
                         </form>
                     </td>
@@ -47,11 +47,10 @@
 
         <!-- 追加ボタン -->
         <c:if test="${not empty parents_id}">
-    	<!-- 処理をここで実行 -->
-        <form action="ChildAdd.action" method="post" style="display:inline;">
-             <input type="hidden" name="parents_id" value="${parents_id}" />
-            <button type="submit">新規登録</button>
-        </form>
+            <form action="ChildAdd.action" method="post" style="display:inline;">
+                <input type="hidden" name="parents_id" value="${parents_id}" />
+                <button type="submit">新規登録</button>
+            </form>
         </c:if>
 
     </div>

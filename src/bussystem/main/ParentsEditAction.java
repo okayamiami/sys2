@@ -67,7 +67,7 @@ public class ParentsEditAction extends Action {
 			//ログインユーザーが保護者の時、ログインした保護者の情報を取得
 			PU = PD.getParentsUserInfo(user_id, facility_id);
 			req.setAttribute("user", PU);
-			req.getRequestDispatcher("parentsedit.jsp").forward(req, res);
+			req.getRequestDispatcher("parentseditp.jsp").forward(req, res);
 
 		}else{
 			errors.put("kome", "情報取得に失敗しました。");
