@@ -74,15 +74,16 @@ public class FacilityDao extends Dao{
 		try{
 			//プリペアードステートメントにUPDATE文をセット
 			statement = connection
-					.prepareStatement("update Facility set facility_id=?, facility_name=?, facility_address=?, facility_tel=?, facility_mail=?, facility_plan=? where facility_id=?");
+					.prepareStatement("update Facility set facility_id=?, facility_name=?, facility_address=?, facility_tel=?, facility_mail=?, facility_app_password=?, facility_plan=? where facility_id=?");
 			//プリペアードステートメントに値をバインド
 			statement.setString(1, fc.getFacility_id());
 			statement.setString(2, fc.getFacility_name());
 			statement.setString(3, fc.getFacility_address());
 			statement.setString(4, fc.getFacility_tel());
 			statement.setString(5, fc.getFacility_mail());
-			statement.setBoolean(6, fc.getFacility_plan());
-			statement.setString(7, fc.getFacility_id());
+			statement.setString(6, fc.getFacility_app_password());
+			statement.setBoolean(7, fc.getFacility_plan());
+			statement.setString(8, fc.getFacility_id());
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
 
