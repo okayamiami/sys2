@@ -10,6 +10,7 @@ import java.util.List;
 import bean.Bus;
 import bean.Child;
 import bean.Get;
+import tool.EmailService;
 
 public class GetDao extends Dao{
 
@@ -143,6 +144,19 @@ public class GetDao extends Dao{
 	        if (count > 0 && !get.isGet_is_attend() == false) {
 	            // 反転後の状態が false なら処理を実行
 	            //メール送信メソッド
+	        	FacilityDao fDao = new FacilityDao();
+	        	ParentsUserDao puDao = new ParentsUserDao();
+	        	String facilityMail = fDao.getFacilityInfo(facility_id).getFacility_mail(); // 施設メールを取得
+	        	List<String> parentsMails = puDao.getParentsEmails(child_id); // 保護者メールを取得
+
+	        	// メールを送信
+	            if (facilityMail != null && !parentsMails.isEmpty()) {
+	                for (String parentMail : parentsMails) {
+	                	//それぞれメール送信
+	                	EmailService es = new EmailService();
+	                    es.sendEmail(parentMail, "題名","内容");
+	                }
+	            }
 	        }
 
 	    } catch (Exception e) {
@@ -169,6 +183,7 @@ public class GetDao extends Dao{
 
 	    return count > 0;
 	}
+
 
 	// 施設に存在するすべてのバスに対して、Getテーブルに子供情報をデータベースに登録
 	public boolean saveGetInfoForAllBuses(Child child) throws Exception {

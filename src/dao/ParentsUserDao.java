@@ -380,5 +380,32 @@ public class ParentsUserDao extends Dao{
 		}
 		return flg;
 	}
+
+	public List<String> getParentsEmails(String child_id) throws Exception {
+	    List<String> emails = new ArrayList<>();
+	    String sql = "SELECT p.parents_mail1, p.parents_mail2, p.parents_mail3 " +
+	                 "FROM parentsuser p " +
+	                 "JOIN child c ON p.parents_id = c.parents_id " +
+	                 "WHERE c.child_id = ?";
+	    try (Connection connection = getConnection();
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+	        statement.setString(1, child_id);
+	        try (ResultSet rs = statement.executeQuery()) {
+	            if (rs.next()) {
+	                // 各メールをリストに追加（nullを除外）
+	                String mail1 = rs.getString("parents_mail1");
+	                String mail2 = rs.getString("parents_mail2");
+	                String mail3 = rs.getString("parents_mail3");
+
+	                if (mail1 != null) emails.add(mail1);
+	                if (mail2 != null) emails.add(mail2);
+	                if (mail3 != null) emails.add(mail3);
+	            }
+	        }
+	    }
+	    return emails;
+	}
+
+
 }
 
