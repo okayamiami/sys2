@@ -45,7 +45,9 @@
 
                         <!-- 子供の名前 -->
                         <td>
-                            <input type="text" name="child_name" value="${childInfo.child_name}" /> <!-- child_nameを送信 -->
+                             <input type="text" id="child_name" name="child_name" required
+					           pattern="^[^\d０-９]+$" value="${childInfo.child_name}"
+					           title="数字を含まない名前を入力してください"> <!-- child_nameを送信 -->
                         	<input type="hidden" name="child_id" value="${childInfo.child_id}" /> <!-- child_idを送信 -->
                         </td>
                     </tr>

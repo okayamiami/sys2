@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,11 +25,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>名前</th>
-                        <td>
-                            <input type="text" name="parents_name" value="${user.parents_name}"
-                                   required minlength="1" maxlength="50" placeholder="名前を入力" required />
-                        </td>
+
+                    <th>名前</th>
+                    <td>
+                        <input type="text" name="parents_name" value="${user.parents_name}"
+                               required minlength="1" maxlength="50" placeholder="名前を入力"
+                               title="名前に数字を含めないでください。"
+                               pattern="^[^\d０-９]+$" />
+                    </td>
+
                     </tr>
                     <tr>
                         <th>パスワード</th>
@@ -93,4 +97,3 @@
 
 </body>
 <c:import url="/common/footer.jsp" />
-</html>
