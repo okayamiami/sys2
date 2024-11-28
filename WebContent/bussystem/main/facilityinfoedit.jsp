@@ -62,7 +62,9 @@
 
     <button type="submit">保存</button>
 </form>
-
+<a href="FacilityInfo.action">
+  <button type="button">戻る</button>
+</a>
 </div>
 </div>
 <c:import url="/common/footer.jsp" />
