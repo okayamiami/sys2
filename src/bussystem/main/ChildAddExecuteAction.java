@@ -8,6 +8,7 @@ import bean.Child;
 import bean.ManageUser;
 import bean.ParentsUser;
 import dao.ChildDao;
+import dao.GetDao;
 import tool.Action;
 
 public class ChildAddExecuteAction extends Action {
@@ -60,7 +61,9 @@ public class ChildAddExecuteAction extends Action {
         try {
             // データベースに子供情報を登録
             ChildDao childDao = new ChildDao();
+            GetDao gDao = new GetDao();
             childDao.saveChildinfo(child);
+            gDao.saveGetInfoForAllBuses(child);
             req.setAttribute("user_type", user_type);
             req.setAttribute("parents_id", parents_id);
             // 登録完了メッセージを設定して遷移
