@@ -31,7 +31,6 @@ public class EmailService {
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", smtpServer);
         properties.put("mail.smtp.port", smtpPort);
-
         Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
@@ -42,12 +41,12 @@ public class EmailService {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-            message.setSubject(subject);
-            message.setText(messageBody);
+            message.setSubject(subject,"UTF-8");
+            message.setText(messageBody,"UTF-8");
+            System.out.println("メッセージ準備成功");
 
             // メール送信
             Transport.send(message);
-            System.out.println("メール送信成功");
             return true;
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -58,13 +57,9 @@ public class EmailService {
     // メールアドレスからSMTPサーバーを選択するロジック
     private static String getSmtpServerFromEmail(String email) {
         if (email.endsWith("@gmail.com")) {
-            return "smtp.gmail.com"; // Gmailの場合
-        } else if (email.endsWith("@outlook.com") || email.endsWith("@outlook.jp")) {
-            return "smtp-mail.outlook.com"; // Outlookの場合
-        } else if (email.endsWith("@yahoo.com") || email.endsWith("@yahoo.co.jp")) {
-            return "smtp.mail.yahoo.com"; // Yahooの場合
-        } else {
-            return "smtp.example.com"; // デフォルトのSMTPサーバー
+            return "smtp.gmail.com"; // Gmailの場合の場合
+        }  else {
+            return "えらー"; // 対応してない
         }
     }
 
