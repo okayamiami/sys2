@@ -11,6 +11,7 @@
 
     <div class="con">
         <a href="menu.jsp">戻る</a>
+        <br>
 
         <!-- 子供情報テーブル -->
         <table>

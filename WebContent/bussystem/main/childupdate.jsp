@@ -54,13 +54,14 @@
                 </c:if>
             </table>
 
+
             <!-- 保存ボタンとリセットボタン -->
             <button type="submit">保存</button>
-
+		</form>
             <c:choose>
 	        <c:when test="${user_type == 'M'}">
-
-	        	<a href="ParentsIDInput.action?parents_id=${parents_id}"><button type="submit">子供情報画面</button></a>
+	        	<a href="ParentsIDInput.action?parents_id=${parents_id}">
+	        	<button type="submit">子供情報画面</button></a>
 	        </c:when>
 
 	        <c:when test="${user_type == 'P'}">
@@ -68,8 +69,7 @@
 	        </c:when>
 
     		</c:choose>
-        </form>
-        <!-- フォームの終了 -->
+
     </div>
 </div>
 

@@ -41,8 +41,8 @@ public class ParentsAction extends Action {
 
 			// 保護者の情報を取得
 			ParentsUser PU2 = PD.getParentsUserInfo(user_id, facility_id);
-			req.setAttribute("userinfo", PU);
-			req.setAttribute("user", PU2);
+			req.setAttribute("user", PU);
+			req.setAttribute("userinfo", PU2);
 			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 
 		} else if ("M".equals(user_type)) {

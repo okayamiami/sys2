@@ -21,8 +21,10 @@
         <!-- 保護者情報の表示 -->
         <h2>保護者情報</h2>
         <a href="menu.jsp" class="button">戻る</a>
+        <br>
         <table>
             <c:if test="${empty error}">
+            <br>
                 <tr>
                     <th>保護者ID</th>
                     <td>${userinfo.parents_id}</td>
