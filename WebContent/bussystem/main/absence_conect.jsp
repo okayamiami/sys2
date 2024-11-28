@@ -73,6 +73,7 @@
 							<th>クラス</th>
 							<th>名前</th>
 							<th>欠席理由</th>
+							<th>-</th>
 
 
 						</tr>
@@ -89,6 +90,12 @@
 								</td>
 						        <td>${abs.child_name}</td>
 						        <td>${abs.absence_main}</td>
+								<td>
+								    <form action="AbsenceInfoEdit.action" method="get">
+								        <input type="hidden" name="absenceId" value="${abs.absence_id}">
+								        <button type="submit">変更</button>
+								    </form>
+								</td>
 						    </tr>
 						</c:forEach>
 					</table>

@@ -133,6 +133,57 @@ public class AbsenceDao extends Dao{
 	}
 
 
+	// 欠席IDから欠席情報を取得する
+	public Absence getAbschildinfobyAbsenceId(String facility_id,String absence_id)throws Exception{
+		Absence abs = new Absence();
+		Connection connection = getConnection();
+		PreparedStatement st = null;
+
+
+		String sql2 = "and absence_id=? ";
+
+		try{
+			st = connection.prepareStatement(baseSql+sql2);
+			st.setString(1,facility_id);
+			st.setString(2,absence_id);
+			ResultSet rSet = st.executeQuery();
+
+			if(rSet.next()){
+				abs.setAbsence_id(rSet.getString("absence_id"));
+				abs.setAbsence_main(rSet.getString("absence_main"));
+				abs.setChild_id(rSet.getString("child_id"));
+				abs.setAbsence_date(rSet.getString("absence_date"));
+				abs.setFacility_id(rSet.getString("facility_id"));
+				abs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
+			}else{
+				abs=null;
+			}
+		}catch(Exception e){
+			throw e;
+		} finally {
+			//
+			if(st != null) {
+				try {
+					st.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+
+		}
+		return abs;
+	}
+
+
 
 	// 欠席情報登録
 	public boolean saveAbsenceInfo(Absence absence) throws Exception {
@@ -162,7 +213,7 @@ public class AbsenceDao extends Dao{
 				//該当の日に対象の子の欠席情報が存在した場合（欠席情報更新）
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection
-						.prepareStatement("update Absence set absence_main=? child_id=? absence_date=? where absence_id=? and facility_id=?  ");
+						.prepareStatement("update Absence set absence_main=?, child_id=?, absence_date=? where absence_id=? and facility_id=?  ");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, absence.getAbsence_main());
 				statement.setString(2, absence.getChild_id());
@@ -171,6 +222,8 @@ public class AbsenceDao extends Dao{
 				statement.setString(5, absence.getFacility_id());
 
 			}
+
+			System.out.println("SQLがおかしい？"+ statement);
 
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
