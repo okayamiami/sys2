@@ -25,40 +25,40 @@
             <c:if test="${empty error}">
                 <tr>
                     <th>保護者ID</th>
-                    <td>${user.parents_id}</td>
+                    <td>${userinfo.parents_id}</td>
                 </tr>
                 <tr>
                     <th>名前（保護者）</th>
-                    <td>${user.parents_name}</td>
+                    <td>${userinfo.parents_name}</td>
                 </tr>
                 <tr>
                     <th>パスワード</th>
-                    <td>${user.parents_pass}</td>
+                    <td>${userinfo.parents_pass}</td>
                 </tr>
                 <tr>
                     <th>住所</th>
-                    <td>${user.parents_address}</td>
+                    <td>${userinfo.parents_address}</td>
                 </tr>
                 <tr>
                     <th>電話番号</th>
-                    <td>${user.parents_tel}</td>
+                    <td>${userinfo.parents_tel}</td>
                 </tr>
                 <tr>
                     <th>メールアドレス１</th>
-                    <td>${user.parents_mail1}</td>
+                    <td>${userinfo.parents_mail1}</td>
                 </tr>
                 <tr>
                     <th>メールアドレス２</th>
-                    <td>${user.parents_mail2}</td>
+                    <td>${userinfo.parents_mail2}</td>
                 </tr>
                 <tr>
                     <th>メールアドレス３</th>
-                    <td>${user.parents_mail3}</td>
+                    <td>${userinfo.parents_mail3}</td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
                         <form action="ParentsEdit.action" method="post">
-                            <input type="hidden" name="parents_id" value="${user.parents_id}" />
+                            <input type="hidden" name="parents_id" value="${userinfo.parents_id}" />
                             <button type="submit" class="button">編集</button>
                         </form>
                     </td>

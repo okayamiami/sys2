@@ -43,7 +43,8 @@ public class ParentsInputAction extends Action {
             return;
         }
        // リクエストにデータを保存
-	   req.setAttribute("user", PU);
+	   req.setAttribute("user", MU);
+	   req.setAttribute("userinfo", PU);
 	   req.setAttribute("parents_id", parents_id);
 
 	   // 結果ページにフォワード
