@@ -30,6 +30,9 @@
     <input type="hidden" name="facility_id" value="${fc.facility_id}"/>
     <button type="submit">編集</button>
 </form>
+<a href="Menu.action">
+  <button type="button">戻る</button>
+</a>
 </div>
 </div>
 <c:import url="/common/footer.jsp" />

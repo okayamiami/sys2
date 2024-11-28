@@ -36,13 +36,27 @@
 	                <input type="password" id="facility_app_password" name="facility_app_password" value="${fc.facility_app_password}" maxlength="20" required title="20文字以内で入力してください"/>
 	                <button type="button" onclick="togglePassword()">表示/非表示</button>
 	            </td></tr>
-        <tr><th>プラン切り替え</th><td>
-                	<!-- 隠しフィールドに反転後の値をデフォルト設定 -->
-                	<input type="hidden" name="facility_plan" value="${fc.facility_plan ? 'false' : 'true'}" />
-                <!-- チェックボックスをデフォルトで外す -->
-                	<input type="checkbox" id="facility_plan_toggle"
-                    onclick="document.getElementsByName('facility_plan')[0].value = this.checked ? '${fc.facility_plan ? 'false' : 'true'}' : '${fc.facility_plan ? 'true' : 'false'}';">
-                </td></tr>
+        <tr><th>プラン選択</th><td>
+				    <!-- 初期値をhiddenにセット -->
+				    <input type="hidden" name="facility_plan" id="facility_plan_hidden" value="${fc.facility_plan}" />
+
+				    <!-- ラジオボタンでプランを選択 -->
+				    <label>
+				        <input type="radio" name="facility_plan_radio" value="true"
+				               <c:if test="${fc.facility_plan}">checked</c:if>
+				               onclick="document.getElementById('facility_plan_hidden').value = 'true';">
+				        S（スタンダード）
+				    </label>
+				    <label>
+				        <input type="radio" name="facility_plan_radio" value="false"
+				               <c:if test="${not fc.facility_plan}">checked</c:if>
+				               onclick="document.getElementById('facility_plan_hidden').value = 'false';">
+				        L（ライト）
+				    </label>
+
+				    <!-- 現在のプランを表示 -->
+				    現在のプラン: <c:if test="${fc.facility_plan}">S</c:if><c:if test="${not fc.facility_plan}">L</c:if>
+				</td></tr>
          </c:if>
     </table>
     <script>
