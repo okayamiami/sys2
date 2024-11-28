@@ -43,7 +43,7 @@ public class ParentsIDInputAction extends Action {
         String parents_name = null;
 
 	    if (TF == false) {
-	        errors.put("errorMessage", "保護者IDが間違っています");
+	        errors.put("errorMessage", "保護者IDが見つかりません");
 	    }else if(TF == true){
 	    	 parents_name = PU.getParents_name();
 	    }

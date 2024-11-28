@@ -32,6 +32,7 @@ public class ChildAddExecuteAction extends Action {
             //System.out.println(parentsId);
         }
         // リクエストパラメータを取得
+        String parents_id = req.getParameter("parents_id");
         String childId = req.getParameter("child_id");
         String childName = req.getParameter("child_name");
         String classId = req.getParameter("class_id");
@@ -60,7 +61,8 @@ public class ChildAddExecuteAction extends Action {
             // データベースに子供情報を登録
             ChildDao childDao = new ChildDao();
             childDao.saveChildinfo(child);
-
+            req.setAttribute("user_type", user_type);
+            req.setAttribute("parents_id", parents_id);
             // 登録完了メッセージを設定して遷移
             req.setAttribute("message", "登録が完了しました。");
             req.getRequestDispatcher("childaddexecute.jsp").forward(req, res);

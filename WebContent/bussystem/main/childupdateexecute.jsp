@@ -18,7 +18,17 @@
 
     <h2>子供情報</h2>
     <p>${message}</p>
-    <a href="menu.jsp">戻る</a>
+    <c:choose>
+        <c:when test="${user_type == 'M'}">
+        	<a href="ParentsIDInput.action?parents_id=${parents_id}">子供情報の確認</a>
+        </c:when>
+
+        <c:when test="${user_type == 'P'}">
+            <a href="ChildInfo.action">保護者情報の確認</a>
+        </c:when>
+
+    </c:choose>
+    <a href="menu.jsp">メニューに戻る</a>
     </div>
     </div>
 </body>

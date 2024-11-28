@@ -55,13 +55,15 @@ public class ParentsEditExecuteAction extends Action {
         parentsUser.setFacility_id(facilityId);
 
         try {
+
             // 保護者情報を保存
             PD.saveParentsUserInfo(parentsUser);
             // ユーザー情報をリクエストに設定し、メッセージを表示
+            req.setAttribute("user_type", user_type);
+            req.setAttribute("parents_id" , parents_id);
             req.setAttribute("user", user);
             req.setAttribute("message", "変更が完了しました。");
             req.getRequestDispatcher("parentseditexecute.jsp").forward(req, res);
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("保護者情報の登録中にエラーが発生しました。");

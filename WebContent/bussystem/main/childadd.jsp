@@ -18,11 +18,14 @@
                 <!-- 自動生成された child_id を表示 -->
                 <input type="hidden" id="child_id" name="child_id" value="${child_id}" readonly>
                 <span>${child_id}</span>
-            </div>
-            <div class="form-group">
-                <label for="child_name">子供の名前:</label>
-                <input type="text" id="child_name" name="child_name" required>
-            </div>
+			            </div>
+			<div class="form-group">
+			    <label for="child_name">子供の名前:</label>
+			    <input type="text" id="child_name" name="child_name" required
+			           pattern="^[^\d０-９]+$"
+			           title="数字を含まない名前を入力してください">
+			</div>
+
             <div class="form-group">
                 <input type="hidden" id="parents_id" name="parents_id" value="${parents_id}" />
             </div>

@@ -18,7 +18,6 @@ public class ParentsInputAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         Map<String, String> errors = new HashMap<>();  // エラーメッセージ格納用マップ
 
-
         // パラメーターの取得
         String parents_id = req.getParameter("parents_id");// フォームから取得
         HttpSession session = req.getSession(true);  // セッションを取得
@@ -32,7 +31,7 @@ public class ParentsInputAction extends Action {
         boolean  TF = PD.getParentsUser(parents_id, facility_id);
 
 	    if (TF == false) {
-	        errors.put("errorMessage", "保護者IDが間違っています");
+	        errors.put("errorMessage", "保護者IDが見つかりません");
 	    }
 
         // データ取得
