@@ -25,7 +25,6 @@ public class QrCreateExecuteAction extends Action {
         String child_name = req.getParameter("child_name");
         String child_id = req.getParameter("child_id");
         String facility_id = req.getParameter("facility_id");
-        System.out.println(facility_id);
 
         // QRコードを生成
         String qrImagePath = "";
