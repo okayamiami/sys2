@@ -139,7 +139,7 @@ public class GetDao extends Dao{
 	        count = statement.executeUpdate();
 
 	        // 反転後の値が false なら処理を実行
-	        if (count > 0 && !get.isGet_is_attend()) {
+	        if (count > 0 && get.isGet_is_attend() == true) {
 	            // Daoインスタンス化
 	            FacilityDao fDao = new FacilityDao();
 	            Facility facility = fDao.getFacilityInfo(facility_id);
