@@ -3,6 +3,7 @@ package bussystem.main;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ChildDao;
 import dao.GetDao;
 import tool.Action;
 
@@ -14,7 +15,7 @@ public class QrReaderExecuteAction extends Action {
         try {
             // QRコードで読み取ったデータを取得
             String qrData = req.getParameter("qrData");
-            
+
             // QRコードデータがnullまたは空の場合、エラーメッセージを設定してリダイレクト
             if (qrData == null || qrData.isEmpty()) {
                 req.setAttribute("errorMessage", "QRコードのデータが無効です。");
@@ -42,17 +43,22 @@ public class QrReaderExecuteAction extends Action {
                 req.getRequestDispatcher("error.jsp").forward(req, res);
                 return;
             }
-            
+
             // GetDaoインスタンスを作成し、changeGetメソッドを実行
             GetDao dao = new GetDao();
             boolean isUpdated = dao.changeGet(bus_id, child_id, facility_id);
 
             if (isUpdated) {
-                // 成功メッセージを設定            	res.getWriter().println("console.log('これはサーブレットからのログですeee');");
-                req.setAttribute("message", "出席情報が更新されました。");
-                req.getRequestDispatcher("qrresult.jsp").forward(req, res);
+                // 更新成功
+            	ChildDao cDao = new ChildDao();
+            	//子供の名前を遷移先に表示させたい
+            	String childName = cDao.getChildinfo(facility_id, child_id).getChild_name();
+
+            	req.setAttribute("child_name", childName);
+            	req.setAttribute("bus_id", bus_id);
+                req.getRequestDispatcher("qrreader.jsp").forward(req, res);
             } else {
-                // 失敗メッセージを設定
+                // 更新失敗
                 req.setAttribute("errorMessage", "出席情報の更新に失敗しました。");
                 req.getRequestDispatcher("error.jsp").forward(req, res);
             }

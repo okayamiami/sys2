@@ -98,6 +98,13 @@
             }
 
             </script>
+            <c:if test="${not empty child_name}">
+		        <div>
+		            <strong style="color:black;">${child_name}</strong>
+		        </div>
+		    </c:if>
+            <a href="QrReaderSelectBus.action">バス選択に戻る</a>
+            <a href="GetListInfo.action">乗降状況を確認</a>
         </div>
     </div>
 </body>
