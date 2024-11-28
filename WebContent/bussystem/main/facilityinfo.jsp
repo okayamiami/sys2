@@ -6,25 +6,14 @@
 <c:import url="/common/navi.jsp" />
 <div class="con">
 <table>
-<tr>
-    <th>施設ID</th>
-    <th>施設名</th>
-    <th>住所</th>
-    <th>電話番号</th>
-    <th>メールアドレス</th>
-    <th>アプリパスワード</th>
-    <th>プラン</th>
-</tr>
-
 <c:if test="${not empty fc}">
-    <tr>
-        <td>${fc.facility_id}</td>
-        <td>${fc.facility_name}</td>
-        <td>${fc.facility_address}</td>
-        <td>${fc.facility_tel}</td>
-        <td>${fc.facility_mail}</td>
-        <td>********</td>
-        <td>
+<tr><th>施設ID</th><td>${fc.facility_id}</td></tr>
+<tr><th>施設名</th><td>${fc.facility_name}</td></tr>
+<tr><th>住所</th><td>${fc.facility_address}</td></tr>
+<tr><th>電話番号</th><td>${fc.facility_tel}</td></tr>
+<tr><th>メールアドレス</th><td>${fc.facility_mail}</td></tr>
+<tr><th>アプリパスワード</th><td>********v </td></tr>
+<tr><th>プラン</th><td>
         	<c:choose>
 				<c:when test="${fc.getFacility_plan()}">
 					S
@@ -34,7 +23,7 @@
 				</c:otherwise>
 			</c:choose>
 		</td>
-    </tr>
+	</tr>
 </c:if>
 </table>
 <form action="FacilityInfoEdit.action" method="post">
