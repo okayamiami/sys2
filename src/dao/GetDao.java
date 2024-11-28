@@ -162,8 +162,12 @@ public class GetDao extends Dao{
 	                        }
 
 	                        // 正常なメールアドレスの場合はメール送信
+	                        ChildDao cDao = new ChildDao();
+	                        String facilityName = fDao.getFacilityInfo(facility_id).getFacility_name();
+	                        String childName = cDao.getChildIdinfo(facility_id, child_id).getChild_name();
+
 	                        EmailService es = new EmailService();
-	                        es.sendEmail(facility_id, parentMail, "保護者の方へ", "お子さんは無事に登園完了しましたよ！^^");
+	                        es.sendEmail(facility_id, parentMail, facilityName+"から保護者の方へ", childName+"さんは無事に登園完了しましたよ！^^");
 	                    }
 	                }
 	            }

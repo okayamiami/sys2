@@ -45,14 +45,25 @@ public class QrReaderExecuteAction extends Action {
             }
 
             // GetDaoインスタンスを作成し、changeGetメソッドを実行
-            GetDao dao = new GetDao();
-            boolean isUpdated = dao.changeGet(bus_id, child_id, facility_id);
+            GetDao gDao = new GetDao();
+            boolean isUpdated = gDao.changeGet(bus_id, child_id, facility_id);
 
             if (isUpdated) {
                 // 更新成功
             	ChildDao cDao = new ChildDao();
             	//子供の名前を遷移先に表示させたい
             	String childName = cDao.getChildinfo(facility_id, child_id).getChild_name();
+            	//乗車公社の状況をセットしたい
+            	Boolean gettingStatus = gDao.getGetinfo(bus_id, child_id, facility_id).isGet_is_attend();
+
+            	if(gettingStatus == true){
+            		req.setAttribute("getting_status", "は乗車しました。");
+            	}else if(gettingStatus == false){
+            		req.setAttribute("getting_status", "は降車しました。");
+            	}else{
+            		req.setAttribute("errorMessage", "出席情報の取得に失敗しました。");
+                    req.getRequestDispatcher("error.jsp").forward(req, res);
+            	}
 
             	req.setAttribute("child_name", childName);
             	req.setAttribute("bus_id", bus_id);
