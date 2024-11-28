@@ -13,7 +13,7 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
-	<form action="AbsenceSelect.action" method="get">
+	<form action="Menu.action" method="get">
         <button type="submit">戻る</button>
     </form>
 	<h2>欠席機能選択</h2>

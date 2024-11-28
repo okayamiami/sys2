@@ -12,6 +12,10 @@
 <div class="main">
     <c:import url="/common/navi.jsp" />
     <div class="con">
+    <form action="ChildList.action" method="get">
+        <button type="submit">戻る</button>
+    </form>
+
         <h2>子供詳細情報</h2>
 
         <!-- エラーメッセージの表示 -->
@@ -43,7 +47,7 @@
             </table>
         </c:if>
 
-        <a href="ChildList.action">名簿一覧画面に戻る</a>
+
     </div>
 </div>
 

@@ -230,7 +230,7 @@ public class AbsenceDao extends Dao{
 	    PreparedStatement statement = null;
 
 	    // 欠席ID順にソート
-	    String sort = " ORDER BY absence_id ASC ";
+	    String sort = " ORDER BY absence_id DESC ";
 
 
 	    try {
@@ -294,7 +294,7 @@ public class AbsenceDao extends Dao{
 
 	    String condition = "and class_id=?  ";
 	 // 欠席ID順にソート
-	    String sort = " ORDER BY absence_id ASC ";
+	    String sort = " ORDER BY absence_id DESC ";
 
 	    try {
 	        statement = connection.prepareStatement(conectSql + condition + sort);
@@ -357,7 +357,7 @@ public class AbsenceDao extends Dao{
 
 	    String condition = "and absence_date=?  ";
 	    // 欠席ID順にソート
-	    String sort = " ORDER BY absence_id ASC ";
+	    String sort = " ORDER BY absence_id DESC ";
 
 	    try {
 	        statement = connection.prepareStatement(conectSql + condition + sort);
@@ -419,7 +419,7 @@ public class AbsenceDao extends Dao{
 
 	    String condition = "and child_name=?  ";
 	    // 欠席ID順にソート
-	    String sort = " ORDER BY absence_id ASC ";
+	    String sort = " ORDER BY absence_id DESC ";
 
 	    try {
 	        statement = connection.prepareStatement(conectSql + condition + sort);

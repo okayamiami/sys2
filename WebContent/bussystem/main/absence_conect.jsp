@@ -9,19 +9,22 @@
 
 </head>
 <body>
-
-<h2>欠席連絡</h2>
-<!-- エラーメッセージの表示 -->
-<c:if test="${not empty error}">
-    <p style="color: red; font-weight: bold;">${error}</p>
-</c:if>
 <c:import url="/common/header.jsp" />
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
-    <form action="AbsenceSelect.action" method="get">
-        <button type="submit">戻る</button>
-    </form>
+
+<h2>欠席連絡</h2>
+<!-- エラーメッセージの表示 -->
+
+<form action="AbsenceSelect.action" method="get">
+    <button type="submit">戻る</button>
+</form>
+
+
+<c:if test="${not empty error}">
+    <p style="color: red; font-weight: bold;">${error}</p>
+</c:if>
 		<form method="get">
 			<label> 欠席日 </label>
 			<select name="f1">
