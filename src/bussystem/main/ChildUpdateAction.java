@@ -99,6 +99,7 @@ public class ChildUpdateAction extends Action {
             req.setAttribute("CI", CI);
             req.setAttribute("class_set", class_set);
             req.setAttribute("parents_id", user_id);
+            req.setAttribute("user_type", user_type);
             // JSPに転送
             req.getRequestDispatcher("childupdate.jsp").forward(req, res);
         } else {

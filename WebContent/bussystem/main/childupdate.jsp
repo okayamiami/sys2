@@ -56,7 +56,17 @@
 
             <!-- 保存ボタンとリセットボタン -->
             <button type="submit">保存</button>
-            <input type="reset" value="入力内容をキャンセル"/>
+
+            <c:choose>
+	        <c:when test="${user_type == 'M'}">
+	        	<a href="ParentsIDInput.action?parents_id=${parents_id}">子供情報画面</a>
+	        </c:when>
+
+	        <c:when test="${user_type == 'P'}">
+	            <a href="ChildInfo.action">子供情報画面</a>
+	        </c:when>
+
+    </c:choose>
         </form>
         <!-- フォームの終了 -->
     </div>

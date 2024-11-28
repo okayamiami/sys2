@@ -20,11 +20,11 @@
     <p>${message}</p>
     <c:choose>
         <c:when test="${user_type == 'M'}">
-        	<a href="ParentsIDInput.action?parents_id=${parents_id}">子供情報の確認</a>
+        	<a href="ParentsIDInput.action?parents_id=${parents_id}">子供情報画面</a>
         </c:when>
 
         <c:when test="${user_type == 'P'}">
-            <a href="ChildInfo.action">保護者情報の確認</a>
+            <a href="ChildInfo.action">子供情報画面</a>
         </c:when>
 
     </c:choose>
