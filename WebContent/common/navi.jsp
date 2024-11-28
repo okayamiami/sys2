@@ -23,6 +23,9 @@
 					<li><a href="AbsenceSelect.action">欠席機能</a></li>
 					<li><a href="InfoMenu.action">お知らせ機能</a></li>
 					<li><a href="QrMenu.action">QR機能</a></li>
+					<c:if test="${user_id == 'M0000001'}">
+					<li><a href="FacilityInfo.action">施設情報</a></li>
+					</c:if>
 					</ul>
 				</c:when>
 				<c:when test="${user_type == 'T'}">
