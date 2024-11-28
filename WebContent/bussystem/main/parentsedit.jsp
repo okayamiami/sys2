@@ -85,15 +85,30 @@
                 </c:if>
 
             </table>
-            <tr>
+           		<tr>
                     <td colspan="2" style="text-align: right;">
                         <button type="submit">保存</button>
-                        <a href="menu.jsp" class="button">戻る</a>
                     </td>
                 </tr>
+
+             	<c:choose>
+			    <c:when test="${user_type == 'M'}">
+			        <form action="ParentsInput.action" method="get">
+			            <input type="hidden" name="parents_id" value="${parents_id}">
+			            <button type="submit">保護者情報の確認</button>
+			        </form>
+			    </c:when>
+
+			    <c:when test="${user_type == 'P'}">
+			        <a href="Parents.action">
+		            <button type="button">保護者情報の確認</button>
+       				 </a>
+    			</c:when>
+</c:choose>
         </form>
     </div>
 </div>
 
 </body>
+
 <c:import url="/common/footer.jsp" />

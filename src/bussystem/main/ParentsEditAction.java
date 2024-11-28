@@ -62,6 +62,8 @@ public class ParentsEditAction extends Action {
 			PU = PD.getParentsUserInfo(user_id, facility_id);
 			req.setAttribute("user", MU);
 			req.setAttribute("userinfo", PU);
+			req.setAttribute("user_type", user_type);
+			req.setAttribute("parents_id", user_id);
 			req.getRequestDispatcher("parentsedit.jsp").forward(req, res);
 
 		}else if("P".equals(user_type)){
@@ -69,6 +71,8 @@ public class ParentsEditAction extends Action {
 			PU = PD.getParentsUserInfo(user_id, facility_id);
 			req.setAttribute("user", PU);
 			req.setAttribute("userinfo", PU);
+			req.setAttribute("user_type", user_type);
+			req.setAttribute("parents_id", user_id);
 			req.getRequestDispatcher("parentseditp.jsp").forward(req, res);
 
 		}else{

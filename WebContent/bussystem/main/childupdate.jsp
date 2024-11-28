@@ -59,14 +59,15 @@
 
             <c:choose>
 	        <c:when test="${user_type == 'M'}">
-	        	<a href="ParentsIDInput.action?parents_id=${parents_id}">子供情報画面</a>
+
+	        	<a href="ParentsIDInput.action?parents_id=${parents_id}"><button type="submit">子供情報画面</button></a>
 	        </c:when>
 
 	        <c:when test="${user_type == 'P'}">
 	            <a href="ChildInfo.action">子供情報画面</a>
 	        </c:when>
 
-    </c:choose>
+    		</c:choose>
         </form>
         <!-- フォームの終了 -->
     </div>
