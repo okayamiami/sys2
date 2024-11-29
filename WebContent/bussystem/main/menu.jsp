@@ -33,6 +33,7 @@
 					<a href="QrMenu.action">QR機能</a>
 					<c:if test="${user_id == 'M0000001'}">
 					<a href="FacilityInfo.action">施設情報</a>
+					<a href="BusCreate.action">バス新規作成</a>
 					</c:if>
 					</div>
 				</c:when>

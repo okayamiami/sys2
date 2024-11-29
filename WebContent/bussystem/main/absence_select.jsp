@@ -23,9 +23,6 @@
 	<form action="AbsenceReport.action" method="post">
 		<input type="submit" value="欠席報告">
 	</form>
-	<form action="BusCreate.action" method="post">
-		<input type="submit" value="バス動作確認">
-	</form>
 
 
 	</div>
