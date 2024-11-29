@@ -169,6 +169,23 @@
   background-color: #808080;
 }
 
+#scannerContainer {
+            display: none;
+            border: 2px dashed gray;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+.button-qr {
+     margin: 10px;
+     padding: 10px 20px;
+     font-size: 16px;
+     cursor: pointer;
+ }
+.button-qr:hover {
+     background-color: #e0e0e0;
+ }
 
 @CHARSET "UTF-8";
         table {
