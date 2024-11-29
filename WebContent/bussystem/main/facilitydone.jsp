@@ -6,8 +6,10 @@
 <c:import url="/common/navi.jsp" />
 <div class="con">
 <h2>情報を変更しました</h2>
-<p><a href="Menu.action">メニューに戻る</a></p>
-<p><a href="FacilityInfo.action">施設情報</a></p>
+<div class="menu-links-fac">
+<a href="FacilityInfo.action">施設情報</a>
+<a href="Menu.action">メニューに戻る</a>
+</div>
 </div>
 </div>
 <c:import url="/common/footer.jsp" />
