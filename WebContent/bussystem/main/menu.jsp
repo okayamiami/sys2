@@ -12,8 +12,7 @@
 <body>
 <c:import url="/common/header.jsp" />
 <div class="main">
-<c:import url="/common/navi.jsp" />
-<div class="con">
+<div class="conmenu">
 		<form action = "Menu.action" method="post">
 		<%
 		session.getAttribute("user_type");
