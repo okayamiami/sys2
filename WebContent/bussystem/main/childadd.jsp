@@ -21,9 +21,11 @@
 			            </div>
 			<div class="form-group">
 			    <label for="child_name">子供の名前:</label>
-			    <input type="text" id="child_name" name="child_name" required
-			           pattern="^[^\d０-９]+$"
-			           title="数字を含まない名前を入力してください">
+			<input type="text" id="child_name" name="child_name" required
+		       pattern="^[^\d０-９]+$"
+		       title="数字を含まない名前を入力してください"
+		       maxlength="10">
+
 			</div>
 
             <div class="form-group">
@@ -58,17 +60,21 @@
                 <button type="submit">登録</button>
             </div>
         </form>
-              <c:choose>
-	        <c:when test="${user_type == 'M'}">
-	        	<a href="ParentsIDInput.action?parents_id=${parents_id}">
-	        	<button type="submit">子供情報画面</button></a>
-	        </c:when>
+       <c:choose>
+		    <c:when test="${user_type == 'M'}">
+		        <form action="ParentsIDInput.action" method="get">
+		            <input type="hidden" name="parents_id" value="${parents_id}">
+		            <button type="submit">一覧に戻る</button>
+		        </form>
+		    </c:when>
 
-	        <c:when test="${user_type == 'P'}">
-	            <a href="ChildInfo.action">子供情報画面</a>
-	        </c:when>
+		    <c:when test="${user_type == 'P'}">
+		        <form action="ChildInfo.action" method="get">
+		            <button type="submit">一覧に戻る</button>
+		        </form>
+		    </c:when>
+		</c:choose>
 
-    		</c:choose>
     </div>
 </div>
 

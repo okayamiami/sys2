@@ -15,7 +15,7 @@
     	 <h2>保護者情報</h2>
         <!-- 保護者ID入力フォーム -->
         <form action="ParentsInput.action" method="post">
-        	<div>${ errors.get("errorMessage") }</div>
+        	<div style="color: red;">${ errors.get("errorMessage") }</div>
             <label for="parents_id">保護者ID:</label>
             <input type="text" id="parents_id" name="parents_id" required/></br>
             <button type="submit">検索</button>

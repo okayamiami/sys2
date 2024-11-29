@@ -18,16 +18,21 @@
 
     <h2>子供情報</h2>
     <p>${message}</p>
-    <c:choose>
-        <c:when test="${user_type == 'M'}">
-        	<a href="ParentsIDInput.action?parents_id=${parents_id}">子供情報画面</a>
-        </c:when>
+     	 <c:choose>
+		    <c:when test="${user_type == 'M'}">
+		        <form action="ParentsIDInput.action" method="get">
+		            <input type="hidden" name="parents_id" value="${parents_id}">
+		            <button type="submit">一覧に戻る</button>
+		        </form>
+		    </c:when>
 
-        <c:when test="${user_type == 'P'}">
-            <a href="ChildInfo.action">子供情報画面</a>
-        </c:when>
+		    <c:when test="${user_type == 'P'}">
+		        <form action="ChildInfo.action" method="get">
+		            <button type="submit">一覧に戻る</button>
+		        </form>
+		    </c:when>
+		</c:choose>
 
-    </c:choose>
     <a href="menu.jsp">メニューに戻る</a>
     </div>
     </div>

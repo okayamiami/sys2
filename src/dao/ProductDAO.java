@@ -14,7 +14,7 @@ import java.util.List;
 
 import bean.Product;
 
-public class ProductDAO extends DAO {
+public class ProductDAO extends Dao {
 
 	public List<Product> search(String keyword) throws Exception {
 

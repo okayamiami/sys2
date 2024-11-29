@@ -55,13 +55,28 @@ public class ParentsEditExecuteAction extends Action {
         parentsUser.setFacility_id(facilityId);
 
         try {
-
-            // 保護者情報を保存
+            //保護者情報を保存
             PD.saveParentsUserInfo(parentsUser);
+
+            // 更新された情報を再度データベースから取得　ヘッダーの名前を更新された名前にしたい
+            //ParentsUser updatedParentsUser = PD.getParentsUserInfo(parents_id, facilityId);  // 仮にgetParentsUserByIdメソッドを使って再取得
+
+            //if("P".equals(user_type)){
+            	// 更新された情報をセッションにセットするとヘッダーが消える(ログアウトリンクと名前)
+                //session.setAttribute("user", updatedParentsUser);
+            	//ParentsUserDao PUDao = new ParentsUserDao();
+
+            	//ParentsUser PU = PUDao.parentsLogin(parents_id, parents_pass, facilityId);
+
+            	//session.setAttribute("user", PU);
+                //req.setAttribute("user", user);
+            //}else if("M".equals(user_type)){
+            	//req.setAttribute("user", user);
+            //}
             // ユーザー情報をリクエストに設定し、メッセージを表示
+            req.setAttribute("user", user);
             req.setAttribute("user_type", user_type);
             req.setAttribute("parents_id" , parents_id);
-            req.setAttribute("user", user);
             req.setAttribute("message", "変更が完了しました。");
             req.getRequestDispatcher("parentseditexecute.jsp").forward(req, res);
         } catch (Exception e) {

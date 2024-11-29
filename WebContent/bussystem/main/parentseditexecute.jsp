@@ -16,21 +16,24 @@
 
     <h2>保護者情報</h2>
     <p>${message}</p>
+		<c:choose>
+		    <c:when test="${user_type == 'M'}">
+		        <form action="ParentsInput.action" method="get">
+		            <input type="hidden" name="parents_id" value="${parents_id}">
+		            <button type="submit">保護者情報の確認</button>
+		        </form>
+		    </c:when>
 
-    <c:choose>
-        <c:when test="${user_type == 'M'}">
-        	<a href="ParentsInput.action?parents_id=${parents_id}">保護者情報の確認</a>
-        </c:when>
+		    <c:when test="${user_type == 'P'}">
+		        <form action="Parents.action" method="get">
+		            <button type="submit">保護者情報の確認</button>
+		        </form>
+		    </c:when>
+		</c:choose>
 
-        <c:when test="${user_type == 'P'}">
-            <a href="Parents.action">保護者情報の確認</a>
-        </c:when>
+	    <a href="menu.jsp">メニューに戻る</a>
 
-    </c:choose>
-    <a href="menu.jsp">メニューに戻る</a>
-
-</div>
-</div>
-
+	</div>
+	</div>
 </body>
 </html>

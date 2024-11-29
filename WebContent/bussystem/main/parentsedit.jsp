@@ -29,9 +29,10 @@
                     <th>名前</th>
                     <td>
                         <input type="text" name="parents_name" value="${userinfo.parents_name}"
-                               required minlength="1" maxlength="50" placeholder="名前を入力"
+                               required minlength="1" placeholder="名前を入力"
                                title="名前に数字を含めないでください。"
-                               pattern="^[^\d０-９]+$" />
+                               pattern="^[^\d０-９]+$"
+                               maxlength="10" />
                     </td>
 
                     </tr>
@@ -47,7 +48,7 @@
                         <th>住所</th>
                         <td>
                             <input type="text" name="parents_address" value="${userinfo.parents_address}"
-                                   maxlength="100" placeholder="住所を入力"  required />
+                                   maxlength="30" placeholder="住所を入力"  required />
                         </td>
                     </tr>
                     <tr>
@@ -65,21 +66,21 @@
                         <th>メールアドレス１</th>
                         <td>
                             <input type="email" name="parents_mail1" value="${userinfo.parents_mail1}"
-                                   maxlength="100" placeholder="メールアドレスを入力" required/>
+                                   maxlength="30" placeholder="メールアドレスを入力" required/>
                         </td>
                     </tr>
                     <tr>
                         <th>メールアドレス２</th>
                         <td>
                             <input type="email" name="parents_mail2" value="${userinfo.parents_mail2}"
-                                   maxlength="100" placeholder="メールアドレスを入力"  />
+                                   maxlength="30" placeholder="メールアドレスを入力"  />
                         </td>
                     </tr>
                     <tr>
                         <th>メールアドレス３</th>
                         <td>
                             <input type="email" name="parents_mail3" value="${userinfo.parents_mail3}"
-                                   maxlength="100" placeholder="メールアドレスを入力" />
+                                   maxlength="30" placeholder="メールアドレスを入力" />
                         </td>
                     </tr>
                 </c:if>

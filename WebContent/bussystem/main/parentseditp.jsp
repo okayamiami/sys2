@@ -13,21 +13,22 @@
         <h2>保護者情報</h2>
         <form action="ParentsEditExecute.action" method="post">
             <table>
-                <c:if test="${not empty user}">
+                <c:if test="${not empty userinfo}">
                     <tr>
                         <th>ID</th>
                         <td>
-                            <input type="hidden" name="parents_id" value="${user.parents_id}" />
-                            ${user.parents_id} <!-- IDは表示のみ -->
+                            <input type="hidden" name="parents_id" value="${userinfo.parents_id}" />
+                            ${userinfo.parents_id} <!-- IDは表示のみ -->
                         </td>
                     </tr>
                     <tr>
                   <th>名前</th>
 					<td>
-					     <input type="text" name="parents_name" value="${user.parents_name}"
-						           required minlength="1" maxlength="50" placeholder="名前を入力"
+					     <input type="text" name="parents_name" value="${userinfo.parents_name}"
+						           required minlength="8" placeholder="名前を入力"
 						           id="parents_name" title="名前に数字を含めないでください。"
-						           pattern="^[^\d０-９]+$" />
+						           pattern="^[^\d０-９]+$"
+						           maxlength="20" />
 					</td>
 
 					<script>
@@ -47,14 +48,14 @@
 						           pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+"
 						           title="大文字を1文字以上含む英数字6～20文字で入力してください"
 						           placeholder="パスワードを入力"
-						           value="${user.parents_pass}" />
+						           value="${userinfo.parents_pass}" />
 					</td>
                     </tr>
                     <tr>
                         <th>住所</th>
                         <td>
-                            <input type="text" name="parents_address" value="${user.parents_address}"
-                                   maxlength="100" placeholder="住所を入力" required />
+                            <input type="text" name="parents_address" value="${userinfo.parents_address}"
+                                   maxlength="30" placeholder="住所を入力" required />
                         </td>
                     </tr>
                     <tr>
@@ -62,7 +63,7 @@
                       	<td>
 		                    <input type="tel" name="parents_tel"
 									pattern="^\d{10,11}$"
-									value="${user.parents_tel}"
+									value="${userinfo.parents_tel}"
 									required
 									title="10～11桁の数字で入力してください（例: 09012345678）"
 									required />
@@ -71,22 +72,22 @@
                     <tr>
                         <th>メールアドレス１</th>
                         <td>
-                            <input type="email" name="parents_mail1" value="${user.parents_mail1}"
-                                   maxlength="100" placeholder="メールアドレスを入力" required />
+                            <input type="email" name="parents_mail1" value="${userinfo.parents_mail1}"
+                                   maxlength="30" placeholder="メールアドレスを入力" required />
                         </td>
                     </tr>
                     <tr>
                         <th>メールアドレス２</th>
                         <td>
-                            <input type="email" name="parents_mail2" value="${user.parents_mail2}"
-                                   maxlength="100" placeholder="メールアドレスを入力" />
+                            <input type="email" name="parents_mail2" value="${userinfo.parents_mail2}"
+                                   maxlength="30" placeholder="メールアドレスを入力" />
                         </td>
                     </tr>
                     <tr>
                         <th>メールアドレス３</th>
                         <td>
-                            <input type="email" name="parents_mail3" value="${user.parents_mail3}"
-                                   maxlength="100" placeholder="メールアドレスを入力" />
+                            <input type="email" name="parents_mail3" value="${userinfo.parents_mail3}"
+                                   maxlength="30" placeholder="メールアドレスを入力" />
                         </td>
                     </tr>
                 </c:if>

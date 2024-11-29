@@ -17,7 +17,8 @@
         <form action="ParentsIDInput.action" method="post">
 
         <!-- 入力されたIDが一致しないときのエラー文 -->
-        <div>${ errors.get("errorMessage") }</div>
+        <div style="color: red;">${ errors.get("errorMessage") }</div>
+
 
         	<!-- 保護者IDを入力 -->
             <label for="parents_id">保護者ID:</label>
