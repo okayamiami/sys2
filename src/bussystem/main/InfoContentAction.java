@@ -21,10 +21,18 @@ public class InfoContentAction extends Action {
 		InformationDao iDao = new InformationDao();
 
 		// DBからお知らせリストを取得
-		Information info = iDao.getInfoContent(mu.getFacility_id(), infoId);
+		Information info_set = iDao.getInfoContent(mu.getFacility_id(), infoId);
+
+		if (info_set == null) {
+            // info_id に該当する情報が存在しない場合
+            req.setAttribute("delete_message", "対象のお知らせは既に削除されています。");
+            req.getRequestDispatcher("infodeleteexecute.jsp").forward(req, res);
+            return;
+        }
+
 
 		// リクエスト属性にセット
-		req.setAttribute("info_set", info);
+		req.setAttribute("info_set", info_set);
 
 		// JSPへフォワード
 		req.getRequestDispatcher("infocontent.jsp").forward(req, res);

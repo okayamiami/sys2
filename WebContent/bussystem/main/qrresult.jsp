@@ -17,7 +17,7 @@
 
     <h2>出席情報の更新結果</h2>
     <p>${message}</p>
-    <a href="qrreader.jsp">戻る</a>
+    <a href="menu.jsp">メニュー画面に戻る</a>
     </div>
     </div>
 </body>

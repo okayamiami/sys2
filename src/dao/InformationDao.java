@@ -207,4 +207,44 @@ public class InformationDao extends Dao{
 	        return String.format("%s%02d", prefix, numericPart);
 	    }
 
+	 public boolean deleteInformationByIds(String facilityId, String infoId) throws Exception {
+
+			// コネクションを確立
+	     	Connection connection = getConnection();
+	        PreparedStatement statement = null;
+	        int count = 0;
+
+	        try {
+
+	            // SQL クエリの準備
+	            String query = "DELETE FROM Information WHERE facility_id = ? AND info_id = ?";
+	            statement = connection.prepareStatement(query);
+	            statement.setString(1, facilityId);
+	            statement.setString(2, infoId);
+
+	            // クエリの実行
+	            count = statement.executeUpdate();
+	        } catch (Exception e) {
+	            throw e;
+	        } finally {
+	            // リソースのクローズ
+	            if (statement != null) {
+	                try {
+	                    statement.close();
+	                } catch (SQLException sqle) {
+	                    throw sqle;
+	                }
+	            }
+	            if (connection != null) {
+	                try {
+	                	connection.close();
+	                } catch (SQLException sqle) {
+	                    throw sqle;
+	                }
+	            }
+	        }
+
+	        return count > 0; // 削除が成功した場合 true を返却
+	    }
+
 }

@@ -14,7 +14,11 @@
 
     <div class="con">
         <h2>お知らせ一覧</h2>
-
+        <c:if test="${not empty delete_message}">
+		        <div>
+		            <strong style="color:black;">${delete_message}</strong>
+		        </div>
+		</c:if>
         <!-- お知らせの一覧を表示 -->
         <c:forEach var="info" items="${ilist_set}">
             <table border="1">

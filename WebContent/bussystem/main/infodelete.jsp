@@ -3,19 +3,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+    <title>登録完了</title>
+</head>
 <body>
 
-<!-- ヘッダーをインポート -->
 <c:import url="/common/header.jsp" />
-
 <div class="main">
-    <!-- ナビゲーションをインポート -->
-    <c:import url="/common/navi.jsp" />
+<c:import url="/common/navi.jsp" />
+<div class="con">
+<h2>お知らせ削除確認</h2>
 
-    <div class="con">
-        <h2>お知らせ詳細</h2>
-
-        <!-- 詳細情報を表示 -->
+<!-- 取得した情報を表示 -->
+<!-- 詳細情報を表示 -->
         <table border="1">
             <tr>
                 <td>日付</td>
@@ -35,17 +35,22 @@
             </tr>
         </table>
 
-        <!-- 戻るボタン -->
-        <a href="InfoList.action">お知らせ一覧に戻る</a>
-        <form action="InfoDelete.action" method="post">
-		    <input type="hidden" name="info_id" value="${info_set.info_id}" />
-		    <input type="submit" value="削除確認" />
-		</form>
-    </div>
+<!-- 削除確認メッセージ -->
+<p>本当にこのお知らせ情報を削除してもよろしいですか？</p>
+
+<!-- 削除確認ボタン -->
+<form action="InfoDeleteExecute.action" method="post">
+    <input type="hidden" name="info_id" value="${info_set.info_id}" />
+    <input type="submit" value="削除する" />
+</form>
+
+<!-- 戻るボタン -->
+<form action="InfoContent.action" method="post">
+<input type="hidden" name="info_id" value="${info_set.info_id}" />
+    <input type="submit" value="キャンセル" />
+</form>
 </div>
-
-<!-- フッターをインポート -->
-<c:import url="/common/footer.jsp" />
-
+</div>
 </body>
+<c:import url="/common/footer.jsp" />
 </html>

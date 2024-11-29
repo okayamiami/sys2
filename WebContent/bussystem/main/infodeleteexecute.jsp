@@ -4,22 +4,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>登録完了</title>
+    <title>更新結果</title>
 </head>
 <body>
 
 <c:import url="/common/header.jsp" />
+
 <div class="main">
 <c:import url="/common/navi.jsp" />
-<div class="con">
-<h2>お知らせ情報 登録完了</h2>
 
-<p>${message}</p>
+<div class ="con">
 
-<!-- ホームや一覧に戻るリンク -->
-<a href="InfoMenu.action">お知らせ機能選択に戻る</a>
-</div>
-</div>
+    <h2>更新結果</h2>
+    <p>${delete_message}</p>
+    <a href="InfoMenu.action">お知らせ機能選択に戻る</a>
+    </div>
+    </div>
 </body>
-<c:import url="/common/footer.jsp" />
 </html>

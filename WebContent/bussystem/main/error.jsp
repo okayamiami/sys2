@@ -16,7 +16,7 @@
     </c:if>
 
     <br>
-    <a href="qrreader.jsp">QRコード読み取りページに戻る</a>
+    <a href="Menu.action">メニュー画面に戻る</a>
 </body>
 </html>
 
