@@ -39,8 +39,9 @@
 	</td>
 <tr>
 </table>
-
-
+	<a href="Menu.action">
+  <button type="button">戻る</button>
+</a>
 </div>
 </div>
 
