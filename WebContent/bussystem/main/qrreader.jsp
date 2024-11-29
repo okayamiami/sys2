@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 </head>
 <body>
-    <h2>QRコード読み取りページ</h2>
+    <h2>QRコード読み取り</h2>
 
     <c:import url="/common/header.jsp" />
 
@@ -15,13 +15,14 @@
         <c:import url="/common/navi.jsp" />
 
         <div class="con">
-
             <!-- QRコード読み取り開始ボタン -->
-            <button onclick="startQRCodeReader()">QRコード読み取りを開始</button>
+			<button class="button-qr" onclick="startQRCodeReader()" aria-label="QRコード読み取りを開始">QRコード読み取りを開始</button>
+			<!-- QRコード読み取り中断ボタン -->
+			<button class="button-qr" onclick="stopQRCodeReader()" aria-label="QRコード読み取りを中断">QRコード読み取りを中断</button>
 
             <!-- スキャン用のカメラビュー -->
-            <div id="scannerContainer" style="display:none;">
-                <video id="video" width="100%" height="auto" style="border:1px solid black;" autoplay playsinline></video>
+            <div id="scannerContainer">
+                <video id="video" width="100%" height="auto" style="border:1px solid black;" autoplay playsinline aria-label="QRコードスキャン用のビデオフィード"></video>
                 <canvas id="canvas" style="display:none;"></canvas>
             </div>
 
@@ -34,11 +35,19 @@
             <script>
             const video = document.getElementById('video');
             const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d', { willReadFrequently: true }); // willReadFrequently を追加
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
             let scanning = false;
+            let isCameraActive = false;
 
             // QRコードリーダーを開始
             async function startQRCodeReader() {
+                if (isCameraActive) {
+                    alert("カメラは既に動作中です。");
+                    return;
+                }
+                isCameraActive = true;
+                scanning = true;
+
                 try {
                     document.getElementById('scannerContainer').style.display = 'block';
 
@@ -47,12 +56,12 @@
                     video.srcObject = stream;
 
                     video.addEventListener('loadedmetadata', () => {
-                        scanning = true;
                         scanQRCode();
                     });
                 } catch (error) {
                     console.error("カメラ起動エラー: ", error);
-                    alert("カメラを起動できませんでした。");
+                    alert("カメラを起動できませんでした。エラー内容: " + error.message);
+                    isCameraActive = false;
                 }
             }
 
@@ -63,7 +72,7 @@
                 try {
                     if (video.videoWidth === 0 || video.videoHeight === 0) {
                         console.warn("カメラの解像度が取得できません。");
-                        return setTimeout(scanQRCode, 100); // 少し待って再試行
+                        return setTimeout(scanQRCode, 100);
                     }
 
                     canvas.width = video.videoWidth;
@@ -85,11 +94,11 @@
 
                         // スキャン停止してフォーム送信
                         scanning = false;
-                        video.srcObject.getTracks().forEach(track => track.stop()); // カメラを停止
-                        document.qrForm.submit(); // フォーム送信
+                        stopQRCodeReader();
+                        document.getElementById('scannerContainer').innerHTML = "<p>QRコードのデータを送信中...</p>";
+                        document.qrForm.submit();
                     } else {
-                        // QRコードが見つからない場合、再度スキャン
-             			requestAnimationFrame(scanQRCode);
+                        setTimeout(scanQRCode, 100);
                     }
                 } catch (error) {
                     console.error("QRコード読み取りエラー: ", error);
@@ -97,12 +106,23 @@
                 }
             }
 
+            // QRコードリーダーを停止
+            function stopQRCodeReader() {
+                scanning = false;
+                if (video.srcObject) {
+                    video.srcObject.getTracks().forEach(track => track.stop());
+                    video.srcObject = null;
+                }
+                document.getElementById('scannerContainer').style.display = 'none';
+                isCameraActive = false;
+            }
             </script>
+
             <c:if test="${not empty child_name}">
-		        <div>
-		            <strong style="color:black;">${child_name}${getting_status}</strong>
-		        </div>
-		    </c:if>
+                <div>
+                    <strong style="color:black;">${child_name}${getting_status}</strong>
+                </div>
+            </c:if>
             <a href="QrReaderSelectBus.action">バス選択に戻る</a>
             <a href="GetListInfo.action">乗降状況を確認</a>
         </div>
