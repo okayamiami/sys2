@@ -37,10 +37,13 @@
 
         <!-- 戻るボタン -->
         <a href="InfoList.action">お知らせ一覧に戻る</a>
-        <form action="InfoDelete.action" method="post">
-		    <input type="hidden" name="info_id" value="${info_set.info_id}" />
-		    <input type="submit" value="削除確認" />
-		</form>
+        <%-- リクエスト属性 user_type が "M" の場合にフォームを表示 --%>
+		<c:if test="${requestScope.user_type eq 'M'}">
+		    <form action="InfoDelete.action" method="post">
+		        <input type="hidden" name="info_id" value="${info_set.info_id}" />
+		        <input type="submit" value="削除確認" />
+		    </form>
+		</c:if>
     </div>
 </div>
 

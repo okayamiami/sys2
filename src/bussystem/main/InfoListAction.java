@@ -10,37 +10,47 @@ import javax.servlet.http.HttpSession;
 
 import bean.Information;
 import bean.ManageUser;
+import bean.ParentsUser;
 import dao.InformationDao;
 import tool.Action;
 
 public class InfoListAction extends Action {
 
-	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		// ローカル変数の宣言 1
-		HttpSession session = req.getSession(); // セッション
-		ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得（管理者or先生）
-		InformationDao iDao = new InformationDao();
+        // ローカル変数の宣言
+        HttpSession session = req.getSession(); // セッション
+        InformationDao iDao = new InformationDao();
+        String type = (String) session.getAttribute("user_type");
 
-		// DBからお知らせリストを取得
-		List<Information> ilist = iDao.getInfoList(mu.getFacility_id());
+        List<Information> ilist = null;
 
-		// お知らせリストを日付順（新しい順）にソート
-		Collections.sort(ilist, new Comparator<Information>() {
-			@Override
-			public int compare(Information o1, Information o2) {
-				// info_dateを比較して新しい日付が先に来るようにソート
-				return o2.getInfo_date().compareTo(o1.getInfo_date());
-			}
-		});
+        if (type.equals("M")) {
+            // 管理者 or 先生の場合
+            ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得
+            ilist = iDao.getInfoList(mu.getFacility_id());
+        } else {
+            // 保護者の場合
+            ParentsUser pu = (ParentsUser) session.getAttribute("user"); // ログインユーザーを取得
+            ilist = iDao.getInfoList(pu.getFacility_id());
+        }
 
-		// リクエスト属性にセット
-		req.setAttribute("ilist_set", ilist);
+        // お知らせリストを日付順（新しい順）にソート
+        Collections.sort(ilist, new Comparator<Information>() {
+            @Override
+            public int compare(Information o1, Information o2) {
+                // info_dateを比較して新しい日付が先に来るようにソート
+                return o2.getInfo_date().compareTo(o1.getInfo_date());
+            }
+        });
 
-		// JSPへフォワード
-		req.getRequestDispatcher("infolist.jsp").forward(req, res);
-	}
+        // リクエスト属性にセット
+        req.setAttribute("ilist_set", ilist);
+
+        // JSPへフォワード
+        req.getRequestDispatcher("infolist.jsp").forward(req, res);
+    }
 }
 
 
