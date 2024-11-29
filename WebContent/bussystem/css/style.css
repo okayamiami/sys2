@@ -59,6 +59,39 @@
   margin-bottom: 10px; /* 縦方向の間隔を調整 */
 }
 
+.menu-links-qr a {
+	display: block;
+	padding: 20px;
+	text-decoration: none;
+	color: #333;
+	border-radius: 10px;
+	border: solid 3px #ccc;
+	background-color: #fff;
+}
+.menu-links-qr a:hover {
+	background-color: #fffdc5;
+	text-decoration: none;
+}
+.menu-links-qr {
+	width: 100%;
+	text-align: center;
+	color: #5c87a6;
+	display: flex;
+  flex-wrap: wrap; /* 複数行に折り返す */
+  justify-content: space-between; /* アイテムを横方向に間隔を開けて配置 */
+}
+.menu-links-qr a {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 10px;
+  border: solid 3px #ccc;
+  background-color: #fff;
+  width: 25%; /* 横に3列表示するために幅を30%に設定 */
+  margin-bottom: 10px; /* 縦方向の間隔を調整 */
+}
+
 .main{
 	display: flex;
 }
