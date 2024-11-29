@@ -213,13 +213,14 @@ public class AbsenceDao extends Dao{
 				//該当の日に対象の子の欠席情報が存在した場合（欠席情報更新）
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection
-						.prepareStatement("update Absence set absence_main=?, child_id=?, absence_date=? where absence_id=? and facility_id=?  ");
+						.prepareStatement("update Absence set absence_main=?, child_id=?, absence_date=?, abs_is_attend=? where absence_id=? and facility_id=?  ");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, absence.getAbsence_main());
 				statement.setString(2, absence.getChild_id());
 				statement.setString(3, absence.getAbsence_date());
-				statement.setString(4, absence.getAbsence_id());
-				statement.setString(5, absence.getFacility_id());
+				statement.setBoolean(4, absence.getAbs_is_attend());
+				statement.setString(5, absence.getAbsence_id());
+				statement.setString(6, absence.getFacility_id());
 
 			}
 
