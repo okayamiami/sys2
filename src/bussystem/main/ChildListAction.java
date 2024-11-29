@@ -175,6 +175,8 @@ public class ChildListAction extends Action {
 		} catch (Exception e) {
 			req.setAttribute("error", "子供一覧情報の取得中にエラーが発生しました。");
 			req.getRequestDispatcher("childlist.jsp").forward(req, res);
+			return;
+
 		}
 
 

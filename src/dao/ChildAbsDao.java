@@ -46,13 +46,13 @@ public class ChildAbsDao extends Dao{
 	    // SQL文の在籍フラグ条件
 	    String conditionIsAttend = "";
 	    if (IsAttend) {
-	        conditionIsAttend = "and is_attend=true ";
+	        conditionIsAttend = " and is_attend=true ";
 	    }
 
 	    // SQL文の欠席フラグ条件
 	    String conditionAbsIsAttend = "";
 	    if (AbsIsAttend) {
-	        conditionAbsIsAttend = "and abs_is_attend=true ";
+	        conditionAbsIsAttend = " and abs_is_attend=true ";
 	    }
 
 	    try {
@@ -60,8 +60,11 @@ public class ChildAbsDao extends Dao{
 	        st = connection.prepareStatement(baseSql + conditionIsAttend + conditionAbsIsAttend );
 	        st.setString(1, facility_id);
 
+	        System.out.println("実行状況："+st);
+
 	        ResultSet rSet = st.executeQuery();
 	        while (rSet.next()) {
+
 	            String childName = rSet.getString("child_name");
 	            String absenceDate = rSet.getString("absence_date");
 
@@ -93,6 +96,11 @@ public class ChildAbsDao extends Dao{
 	                childabs.setFacility_id(rSet.getString("facility_id"));
 	                childabs.setAbs_is_attend(todayAbs);
 	                childabs.setAbsence_date(absenceDate);
+
+
+	                System.out.println(childName);
+	                System.out.println(absenceDate);
+	                System.out.println(todayAbs);
 
 	                map.put(childName, childabs); // マップに追加または更新
 	            }

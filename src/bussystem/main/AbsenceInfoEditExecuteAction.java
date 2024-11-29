@@ -34,7 +34,6 @@ public class AbsenceInfoEditExecuteAction extends Action {
 
 	Map<String, String> errors = new HashMap<>();				//エラーメッセージ
 
-	System.out.println("ここ来てる？？");
 
 //	try{
 
@@ -57,6 +56,8 @@ public class AbsenceInfoEditExecuteAction extends Action {
 		Absence abs = aDao.getAbschildinfobyAbsenceId(facility_id,absence_id);		// 更新する欠席情報を取得する
 		child_id = abs.getChild_id();
 
+
+		System.out.println(abs_is_attend);
 
 		if (abs != null) {
 			abs.setAbsence_id(absence_id);						// 欠席ID
