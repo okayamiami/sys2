@@ -13,12 +13,14 @@
 <div class ="con">
 
 <h2>お知らせ機能選択</h2>
-
+<div class="menu-links-info">
 <a href="InfoList.action">お知らせ一覧</a>
 
 <a href="InfoCreate.action">お知らせ作成</a>
 
 <a href="Menu.action">メニュー画面に戻る</a>
+</div>
+
 </div>
 </div>
 </body>
