@@ -58,6 +58,17 @@
                 <button type="submit">登録</button>
             </div>
         </form>
+              <c:choose>
+	        <c:when test="${user_type == 'M'}">
+	        	<a href="ParentsIDInput.action?parents_id=${parents_id}">
+	        	<button type="submit">子供情報画面</button></a>
+	        </c:when>
+
+	        <c:when test="${user_type == 'P'}">
+	            <a href="ChildInfo.action">子供情報画面</a>
+	        </c:when>
+
+    		</c:choose>
     </div>
 </div>
 
