@@ -32,7 +32,7 @@ public class ChildAbsDao extends Dao{
 	public List<ChildAbs> getChildListAbsinfo(String facility_id, boolean IsAttend, boolean AbsIsAttend) throws Exception {
 		System.out.println("☆★☆４");
 		System.out.println("☆★☆５");
-		// 戻り値用のマップ（名前をキーにして重複を排除）
+		// 戻り値用のマップ（子供IDをキーにして重複を排除）
 	    Map<String, ChildAbs> map = new HashMap<>();
 	    Connection connection = getConnection();
 	    PreparedStatement st = null;
@@ -62,33 +62,40 @@ public class ChildAbsDao extends Dao{
 
 	        System.out.println("実行状況："+st);
 
+	     // クエリの実行
 	        ResultSet rSet = st.executeQuery();
 	        while (rSet.next()) {
-
+	            // 子供のIDと名前を取得
+	            String childId = rSet.getString("child_id");
 	            String childName = rSet.getString("child_name");
 	            String absenceDate = rSet.getString("absence_date");
+	            Boolean absIsAttend = rSet.getBoolean("abs_is_attend");
 
-	            // 本日が欠席日であるかどうかを確認
-	            boolean todayAbs = absenceDate != null && absenceDate.equals(today_absence_date);
 
-	            // abs_is_attendの日付が本日でないものを'flase'に更新する
+	            // 欠席日が本日かつであるかどうかを確認
+	         // 欠席日が本日かつabs_is_attendがtrueであるかどうかを確認
+	            boolean todayAbs = absenceDate != null && absenceDate.equals(today_absence_date) && absIsAttend == true;
+
+	            // abs_is_attendの日付が本日でないものを'false'に更新する
 	            if (absenceDate != null && !absenceDate.equals(today_absence_date)) {
-	                // 今日でない場合、abs_is_attendをfalseに更新
 	                if (updateStmt == null) {
+	                    // 更新ステートメントの準備
 	                    updateStmt = connection.prepareStatement(
 	                        "UPDATE absence SET abs_is_attend = false WHERE child_id = ? AND facility_id = ? AND absence_date = ?");
 	                }
-	                updateStmt.setString(1, rSet.getString("child_id"));
+	                // パラメータの設定
+	                updateStmt.setString(1, childId);
 	                updateStmt.setString(2, rSet.getString("facility_id"));
 	                updateStmt.setString(3, absenceDate);
 	                updateStmt.addBatch(); // バッチ処理に追加
 	            }
 
 	            // Mapにデータを追加
-	            ChildAbs existingChild = map.get(childName);
+	            ChildAbs existingChild = map.get(childId);
 	            if (existingChild == null || todayAbs || existingChild.getAbsence_date() == null) {
+	                // 新しいChildAbsオブジェクトを作成
 	                ChildAbs childabs = new ChildAbs();
-	                childabs.setChild_id(rSet.getString("child_id"));
+	                childabs.setChild_id(childId);
 	                childabs.setChild_name(childName);
 	                childabs.setParents_id(rSet.getString("parents_id"));
 	                childabs.setClass_id(rSet.getString("class_id"));
@@ -97,14 +104,14 @@ public class ChildAbsDao extends Dao{
 	                childabs.setAbs_is_attend(todayAbs);
 	                childabs.setAbsence_date(absenceDate);
 
-
+	                // デバッグ用の出力
 	                System.out.println(childName);
 	                System.out.println(absenceDate);
 	                System.out.println(todayAbs);
 
-	                map.put(childName, childabs); // マップに追加または更新
+	                // マップに追加または更新
+	                map.put(childId, childabs);
 	            }
-
 	        }
 
 	        // バッチで更新を実行
