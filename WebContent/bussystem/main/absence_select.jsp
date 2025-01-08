@@ -24,8 +24,11 @@
 	</div>
 
 	<div class="menu-return">
-		<a href="Menu.action">メニュー画面に戻る</a>
+		<a href="Menu.action" class="menu-link">
+  			<img src="image/menu.png" class="icon"> メニュー画面に戻る
+		</a>
 	</div>
+
 	</div>
 	</div>
 </body>
