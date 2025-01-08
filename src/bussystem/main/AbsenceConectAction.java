@@ -40,7 +40,7 @@ public class AbsenceConectAction extends Action {
 
 
 
-//	    try {
+	    try {
 	        // クラス情報、子供情報の取得
 	        List<Child> childlist = cDao.getChildListinfo(facility_id);
 	        List<String> childNamelist = new ArrayList<>();
@@ -102,9 +102,9 @@ public class AbsenceConectAction extends Action {
 	        // 正常終了時のフォワード
 	        req.getRequestDispatcher("absence_conect.jsp").forward(req, res);
 
-//	    } catch (Exception e) {
-//			req.setAttribute("error", "欠席情報の取得中にエラーが発生しました。");
-//			req.getRequestDispatcher("absence_conect.jsp").forward(req, res);
-//		}
+	    } catch (Exception e) {
+			req.setAttribute("error", "欠席情報の取得中にエラーが発生しました。");
+			req.getRequestDispatcher("absence_conect.jsp").forward(req, res);
+		}
 	}
 }

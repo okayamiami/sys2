@@ -57,8 +57,6 @@ public class AbsenceInfoEditExecuteAction extends Action {
 		child_id = abs.getChild_id();
 
 
-		System.out.println(abs_is_attend);
-
 		if (abs != null) {
 			abs.setAbsence_id(absence_id);						// 欠席ID
 			abs.setAbsence_main(abs_main);						// 欠席内容

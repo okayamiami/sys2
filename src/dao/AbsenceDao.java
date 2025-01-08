@@ -28,6 +28,8 @@ public class AbsenceDao extends Dao{
 		// プリペアードステートメント
 		PreparedStatement statement = null;
 
+
+
 		try {
 
 			// プリペアードステートメントにSQL文をセット
@@ -53,7 +55,6 @@ public class AbsenceDao extends Dao{
 				abs.setAbs_is_attend(rSet.getBoolean("abs_is_attend"));
 				list.add(abs);
 
-				System.out.println(abs);
 
 			}
 		} catch (Exception e) {
@@ -223,8 +224,6 @@ public class AbsenceDao extends Dao{
 				statement.setString(6, absence.getFacility_id());
 
 			}
-
-			System.out.println("SQLがおかしい？"+ statement);
 
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();

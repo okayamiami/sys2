@@ -44,7 +44,7 @@ public class AbsenceReportExecuteAction extends Action {
 
 	// 欠席報告日作成
 	LocalDateTime nowDate = LocalDateTime.now();
-	System.out.println(nowDate);
+
 	// 表示形式を指定（年月日）
 	DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	String absence_date = dtf1.format(nowDate);
@@ -92,7 +92,6 @@ public class AbsenceReportExecuteAction extends Action {
 	child_name = req.getParameter("child_name");		// 選択した子供の名前
 	abs_main = req.getParameter("abs_main");    		// 入力した欠席理由
 
-	System.out.println("abs_mainの値は:" + abs_main);
 
 	// 欠席理由欄が空文字で帰ってきたとき
 	if ( abs_main.trim().isEmpty()){

@@ -13,17 +13,18 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
-	<form action="Menu.action" method="get">
-        <button type="submit">戻る</button>
-    </form>
-	<h2>欠席機能選択</h2>
-	<form action="AbsenceConect.action" method="post">
-		<input type="submit" value="欠席連絡">
-	</form>
-	<form action="AbsenceReport.action" method="post">
-		<input type="submit" value="欠席報告">
-	</form>
 
+	<h2>欠席機能選択</h2>
+
+	<div class="menu-links-qr">
+
+		<a href="AbsenceConect.action">欠席連絡</a>
+
+		<a href="AbsenceReport.action">欠席報告</a>
+	</div>
+
+
+	<a href="Menu.action">メニュー画面に戻る</a>
 
 	</div>
 	</div>

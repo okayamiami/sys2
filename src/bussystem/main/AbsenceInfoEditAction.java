@@ -31,22 +31,10 @@ public class AbsenceInfoEditAction extends Action{
 		absence_id = req.getParameter("absenceId");
 
 
-
-		System.out.println("欠席IDは：" + absence_id);
-
-
-
 		// DBからデータ取得 3
 		Absence abs = aDao.getAbschildinfobyAbsenceId(facility_id,absence_id);		// 選択された欠席情報を取得する
 
 		List<Child> chiidlist = cDao.getChildListinfo(facility_id);					// 子供情報のリスト
-
-
-		System.out.println(abs.getAbsence_main()+"内容");
-		System.out.println(abs.getAbsence_id()+"欠席ID");
-		System.out.println(abs.getChild_id()+"子供ID");
-		System.out.println(abs.getAbsence_date()+"欠席日");
-		System.out.println(abs.getFacility_id()+"施設ID");
 
 
 		req.setAttribute("abs",abs );

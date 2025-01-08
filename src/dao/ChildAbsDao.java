@@ -30,8 +30,7 @@ public class ChildAbsDao extends Dao{
 
 	/** 子供情報一覧表示のみ使用（欠席情報あり） */
 	public List<ChildAbs> getChildListAbsinfo(String facility_id, boolean IsAttend, boolean AbsIsAttend) throws Exception {
-		System.out.println("☆★☆４");
-		System.out.println("☆★☆５");
+
 		// 戻り値用のマップ（子供IDをキーにして重複を排除）
 	    Map<String, ChildAbs> map = new HashMap<>();
 	    Connection connection = getConnection();
@@ -60,7 +59,6 @@ public class ChildAbsDao extends Dao{
 	        st = connection.prepareStatement(baseSql + conditionIsAttend + conditionAbsIsAttend );
 	        st.setString(1, facility_id);
 
-	        System.out.println("実行状況："+st);
 
 	     // クエリの実行
 	        ResultSet rSet = st.executeQuery();
@@ -104,10 +102,6 @@ public class ChildAbsDao extends Dao{
 	                childabs.setAbs_is_attend(todayAbs);
 	                childabs.setAbsence_date(absenceDate);
 
-	                // デバッグ用の出力
-	                System.out.println(childName);
-	                System.out.println(absenceDate);
-	                System.out.println(todayAbs);
 
 	                // マップに追加または更新
 	                map.put(childId, childabs);
@@ -153,7 +147,7 @@ public class ChildAbsDao extends Dao{
 
 	/** 子供IDで指定して絞り込み */
 	public List<ChildAbs> filterbyChildId(String child_id, String facility_id, boolean IsAttend, boolean AbsIsAttend) throws Exception {
-		System.out.println("☆★☆１");
+
 		// Mapを使用して名前をキーにし、重複を排除
 	    Map<String, ChildAbs> map = new HashMap<>();
 	    Connection connection = getConnection();
@@ -268,7 +262,7 @@ public class ChildAbsDao extends Dao{
 
 	/** 子供の名前で指定して絞り込み */
 	public List<ChildAbs> filterbyChildName(String child_name, String facility_id, boolean IsAttend, boolean AbsIsAttend) throws Exception {
-		System.out.println("☆★☆２");
+
 		// Mapを使用して名前をキーにし、重複を排除
 	    Map<String, ChildAbs> map = new HashMap<>();
 		Connection connection = getConnection();
@@ -384,7 +378,7 @@ public class ChildAbsDao extends Dao{
 
 	/** クラスを指定して子供の一覧を取得する */
 	public List<ChildAbs> filterbyClassCd(String class_id, String facility_id, boolean IsAttend, boolean AbsIsAttend) throws Exception {
-		System.out.println("☆★☆３");
+
 		// Mapを使用して名前をキーにし、重複を排除
 	    Map<String, ChildAbs> map = new HashMap<>();
 		Connection connection = getConnection();
