@@ -5,7 +5,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="../../bussystem/css/style.css">
     <title>保護者情報表示</title>
 </head>
 
@@ -20,7 +19,9 @@
 
         <!-- 保護者情報の表示 -->
         <h2>保護者情報</h2>
-        <a href="menu.jsp" class="button">戻る</a>
+
+        <a href="menu.jsp" class="button-save">戻る</a>
+
         <br>
         <table>
             <c:if test="${empty error}">
@@ -57,16 +58,23 @@
                     <th>メールアドレス３</th>
                     <td>${userinfo.parents_mail3}</td>
                 </tr>
-                <tr>
-                    <td colspan="2" style="text-align: center;">
-                        <form action="ParentsEdit.action" method="post">
-                            <input type="hidden" name="parents_id" value="${userinfo.parents_id}" />
-                            <button type="submit" class="button">編集</button>
-                        </form>
-                    </td>
-                </tr>
+
             </c:if>
         </table>
+		 <tr>
+		    <td colspan="2" style="text-align: center;">
+		        <form action="ParentsEdit.action" method="post">
+		            <input type="hidden" name="parents_id" value="${userinfo.parents_id}" />
+
+		            <!-- ボタンを div タグでラップ -->
+		            <div class="button-save">
+		                <button type="submit">編集</button>
+		            </div>
+
+		        </form>
+		    </td>
+		</tr>
+
 
     </div>
 </div>

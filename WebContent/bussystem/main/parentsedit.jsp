@@ -13,6 +13,7 @@
     <c:import url="/common/navi.jsp" />
 
     <div class="con">
+
         <h2>保護者情報</h2>
         <form action="ParentsEditExecute.action" method="post">
             <table>
@@ -87,11 +88,12 @@
 
             </table>
 
-           		<tr>
-                    <td colspan="2" style="text-align: right;">
-                        <button type="submit">保存</button>
-                    </td>
-                </tr>
+           <tr>
+			    <td colspan="2" style="text-align: right;">
+			        <button type="submit" class="button-save">保存</button>
+			    </td>
+			</tr>
+
            </form>
 
              	<c:choose>
@@ -110,10 +112,9 @@
 				        </a>
 				    </c:when>
 				</c:choose>
+    	</div>
+	</div>
 
-
-    </div>
-</div>
 
 </body>
 

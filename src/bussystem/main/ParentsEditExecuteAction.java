@@ -12,8 +12,6 @@ import tool.Action;
 public class ParentsEditExecuteAction extends Action {
 
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-    	//保護者情報の変更をコミットする場所
-
         HttpSession session = req.getSession(); // セッションを取得
         String user_type = (String) session.getAttribute("user_type");
         String facilityId = null;
@@ -22,7 +20,7 @@ public class ParentsEditExecuteAction extends Action {
         Object user = session.getAttribute("user");
         ParentsUserDao PD = new ParentsUserDao();
 
-        //ユーザータイプで分ける
+        // ユーザータイプで分ける
         if ("P".equals(user_type)) {
             ParentsUser parentsUser = (ParentsUser) user;
             facilityId = parentsUser.getFacility_id();
@@ -41,6 +39,23 @@ public class ParentsEditExecuteAction extends Action {
         String parents_mail2 = req.getParameter("parents_mail2");
         String parents_mail3 = req.getParameter("parents_mail3");
 
+        if ("P".equals(user_type)) {
+        // 現在のパスワードをデータベースから取得
+        ParentsUser currentUser = PD.getParentsUserInfo(parents_id, facilityId);
+        String currentPassword = currentUser.getParents_pass();
+
+        // 入力されたパスワードが現在のパスワードと同じか確認
+        if (parents_pass.equals(currentPassword)) {
+            req.setAttribute("message", "新しいパスワードは現在のパスワードと同じです。別のパスワードを入力してください。");
+            req.setAttribute("user", user);
+            ParentsUser PU2 = PD.getParentsUserInfo(parents_id, facilityId);
+			System.out.println(PU2);
+			req.setAttribute("userinfo", PU2);
+			req.setAttribute("message", "パスワードが変更されていません。");
+            req.getRequestDispatcher("parentseditp.jsp").forward(req, res); // 編集フォームに戻る
+            return; // 処理を中断
+        }
+        }
 
         // 保護者情報を設定
         ParentsUser parentsUser = new ParentsUser();
@@ -55,28 +70,13 @@ public class ParentsEditExecuteAction extends Action {
         parentsUser.setFacility_id(facilityId);
 
         try {
-            //保護者情報を保存
+            // 保護者情報を保存
             PD.saveParentsUserInfo(parentsUser);
 
-            // 更新された情報を再度データベースから取得　ヘッダーの名前を更新された名前にしたい
-            //ParentsUser updatedParentsUser = PD.getParentsUserInfo(parents_id, facilityId);  // 仮にgetParentsUserByIdメソッドを使って再取得
-
-            //if("P".equals(user_type)){
-            	// 更新された情報をセッションにセットするとヘッダーが消える(ログアウトリンクと名前)
-                //session.setAttribute("user", updatedParentsUser);
-            	//ParentsUserDao PUDao = new ParentsUserDao();
-
-            	//ParentsUser PU = PUDao.parentsLogin(parents_id, parents_pass, facilityId);
-
-            	//session.setAttribute("user", PU);
-                //req.setAttribute("user", user);
-            //}else if("M".equals(user_type)){
-            	//req.setAttribute("user", user);
-            //}
             // ユーザー情報をリクエストに設定し、メッセージを表示
             req.setAttribute("user", user);
             req.setAttribute("user_type", user_type);
-            req.setAttribute("parents_id" , parents_id);
+            req.setAttribute("parents_id", parents_id);
             req.setAttribute("message", "変更が完了しました。");
             req.getRequestDispatcher("parentseditexecute.jsp").forward(req, res);
         } catch (Exception e) {

@@ -194,6 +194,36 @@
      background-color: #e0e0e0;
  }
 
+/* divをボタンに似たスタイルにする */
+.button-save {
+    display: inline-block; /* ボタンのように横並びにする */
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    background-color: #1bade4; /* 蒼色 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.button-save:hover {
+    background-color: #45a049;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ボタン内のテキストのスタイル */
+.button-save button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+
+
 @CHARSET "UTF-8";
         table {
             width: 100%;
