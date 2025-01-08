@@ -23,11 +23,9 @@
 		<a href="AbsenceReport.action">欠席報告</a>
 	</div>
 
-	<div class="menu-return">
 		<a href="Menu.action" class="menu-link">
-  			<img src="image/menu.png" class="icon"> メニュー画面に戻る
+  			<img src="../../common/image/home.png" class="icon">メニュー画面に戻る
 		</a>
-	</div>
 
 	</div>
 	</div>

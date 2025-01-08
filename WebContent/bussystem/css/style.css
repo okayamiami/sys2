@@ -230,13 +230,6 @@
   text-decoration: none; /* 下線を消す（必要なら） */
 }
 
-.menu-link .icon {
-  width: 20px; /* アイコンの幅 */
-  height: 20px; /* アイコンの高さ */
-  margin-right: 8px; /* テキストとの間隔 */
-}
-
-
 
 @CHARSET "UTF-8";
         table {
