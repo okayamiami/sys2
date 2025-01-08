@@ -13,9 +13,26 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
-	<form action="AbsenceSelect.action" method="get">
-        <button type="submit">戻る</button>
-    </form>
+
+
+	<%
+		session.getAttribute("user_type");
+		session.getAttribute("user_id");
+	%>
+
+	<c:choose>
+		<c:when test="${user_type == 'M' || user_type == 'T' }">
+			<form action="AbsenceSelect.action" method="get">
+        		<button type="submit">戻る</button>
+    		</form>
+		</c:when>
+		<c:when test="${user_type == 'P' }">
+			<form action="Menu.action" method="get">
+        		<button type="submit">戻る</button>
+    		</form>
+		</c:when>
+
+	</c:choose>
 
     <h2>欠席報告</h2>
 
