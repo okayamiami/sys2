@@ -27,6 +27,8 @@
     </c:if>
 
     <p>報告が完了しました</p>
+    <p></p>
+    <a href="Menu.action">メニュー画面に戻る</a>
 
   </div>
   </div>

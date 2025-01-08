@@ -16,15 +16,11 @@
 
 <h2>欠席連絡</h2>
 <!-- エラーメッセージの表示 -->
-
-<form action="AbsenceSelect.action" method="get">
-    <button type="submit">戻る</button>
-</form>
-
-
 <c:if test="${not empty error}">
     <p style="color: red; font-weight: bold;">${error}</p>
 </c:if>
+
+
 		<form method="get">
 			<label> 欠席日 </label>
 			<select name="f1">
@@ -105,7 +101,10 @@
 				</c:otherwise>
 			</c:choose>
 		</c:if>
-	<a href="Menu.action">メニュー画面に戻る</a>
+	<div>
+		<a href="Menu.action">メニュー画面に戻る</a>
+
+	</div>
 	</div>
 </div>
 </body>

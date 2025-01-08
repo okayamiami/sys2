@@ -12,6 +12,9 @@
 <div class="main">
 	<c:import url="/common/navi.jsp" />
 	<div class="con">
+
+		<a href="Menu.action">メニュー画面に戻る</a>
+
 		<h2>名簿一覧</h2>
 
 		<!-- エラーメッセージの表示 -->
@@ -119,7 +122,7 @@
 				</c:otherwise>
 			</c:choose>
 		</c:if>
-	<a href="Menu.action">メニュー画面に戻る</a>
+
 	</div>
 </div>
 </body>

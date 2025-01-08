@@ -520,5 +520,94 @@ public class AbsenceDao extends Dao{
 	}
 
 
+	// ページング対応の欠席情報取得メソッド
+    public List<Map<String, Object>> getAbsenceInfoWithPaging(String facility_id, int offset, int limit) throws Exception {
+        List<Map<String, Object>> list = new ArrayList<>();
+        Connection connection = getConnection();
+        PreparedStatement statement = null;
+
+        String sql = conectSql + " ORDER BY absence_id DESC LIMIT ? OFFSET ?";
+
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, facility_id);
+            statement.setInt(2, limit);
+            statement.setInt(3, offset);
+
+            ResultSet rSet = statement.executeQuery();
+
+            while (rSet.next()) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("absence_id", rSet.getString("absence_id"));
+                map.put("absence_main", rSet.getString("absence_main"));
+                map.put("child_id", rSet.getString("child_id"));
+                map.put("absence_date", rSet.getString("absence_date"));
+                map.put("facility_id", rSet.getString("facility_id"));
+                map.put("abs_is_attend", rSet.getBoolean("abs_is_attend"));
+                map.put("child_name", rSet.getString("child_name"));
+                map.put("class_id", rSet.getString("class_id"));
+
+                list.add(map);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+        }
+
+        return list;
+    }
+
+
+ // 総レコード数を取得するメソッド
+    public int getTotalRecords(String facility_id) throws Exception {
+        Connection connection = getConnection();
+        PreparedStatement statement = null;
+        int totalRecords = 0;
+
+        String sql = "SELECT COUNT(*) FROM Absence WHERE facility_id = ?";
+
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, facility_id);
+
+            ResultSet rSet = statement.executeQuery();
+            if (rSet.next()) {
+                totalRecords = rSet.getInt(1);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+        }
+
+        return totalRecords;
+    }
 
 }

@@ -23,9 +23,9 @@
 		<a href="AbsenceReport.action">欠席報告</a>
 	</div>
 
-
-	<a href="Menu.action">メニュー画面に戻る</a>
-
+	<div class="menu-return">
+		<a href="Menu.action">メニュー画面に戻る</a>
+	</div>
 	</div>
 	</div>
 </body>

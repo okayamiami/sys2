@@ -22,14 +22,10 @@
 
 	<c:choose>
 		<c:when test="${user_type == 'M' || user_type == 'T' }">
-			<form action="AbsenceSelect.action" method="get">
-        		<button type="submit">戻る</button>
-    		</form>
+			<a href="AbsenceSelect.action">戻る</a>
 		</c:when>
 		<c:when test="${user_type == 'P' }">
-			<form action="Menu.action" method="get">
-        		<button type="submit">戻る</button>
-    		</form>
+			<a href="Menu.action">戻る</a>
 		</c:when>
 
 	</c:choose>
