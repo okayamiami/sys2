@@ -223,13 +223,77 @@
 }
 
 
+/* ------------------------------------------- */
+
 /* メニュー画面に戻る */
 .menu-link {
   display: inline-flex; /* アイコンとテキストを横並びにする */
   align-items: center; /* アイコンとテキストを中央揃えにする */
-  text-decoration: none; /* 下線を消す（必要なら） */
+  font-size: 16px; /* テキストのサイズを適切に設定 */
+  color: #333; /* テキスト色を設定（必要なら） */
 }
 
+/* メニュー画面に戻るアイコンのスタイル */
+.menu-link .icon {
+  width: 20px; /* アイコンの幅 */
+  height: 20px; /* アイコンの高さ */
+  margin-right: 8px; /* アイコンとテキストの間の余白 */
+}
+
+/* ------------------------------------------- */
+
+/* メニュー画面以外のリンクボタンの設定（例：欠席機能選択画面） */
+/* ボタン全体を囲む親要素のスタイル */
+.menu-container {
+    display: flex; /* 横並び */
+    justify-content: center; /* 中央揃え */
+    margin-top: 20px; /* 上部の余白を調整 */
+}
+
+/* ボタン間隔調整用 */
+.menu-select {
+    margin: 0 10px; /* ボタン左右に10pxの余白を設定 */
+    padding: 20px; /* 各ボタンの内側の余白 */
+    background-color: #f9f9f9; /* 背景色 */
+    border: 1px solid #ccc; /* 枠線 */
+    border-radius: 5px; /* 枠の角丸 */
+    text-align: center; /* テキストの中央揃え */
+    transition: background-color 0.3s; /* 背景色の変化にアニメーション */
+    height: 100%; /* 親要素の高さを引き継ぐ */
+    box-sizing: border-box; /* パディングやボーダーを含む */
+}
+
+/* ホバー時のスタイル (ボタン全体) */
+.menu-select:hover {
+    background-color: #ffff80; /* ホバー時の背景色 */
+}
+
+/* 各リンク内スタイル */
+.menu-select a {
+    display: flex; /* フレックスボックスを使用 */
+    flex-direction: column; /* アイコンとテキストを縦に並べる */
+    align-items: center; /* 横方向で中央揃え */
+    justify-content: center; /* 縦方向で中央揃え */
+    padding: 10px 15px; /* ボタン内の余白 */
+    text-decoration: none; /* 下線を削除 */
+    color: inherit; /* リンクの色を継承 */
+    width: 100%; /* 親要素の幅を引き継ぐ */
+    box-sizing: border-box; /* パディングやボーダーを含む */
+}
+
+/* ホバー時のスタイル */
+.menu-select a:hover {
+    background-color: #ffff80; /* ホバー時の背景色 */
+}
+
+/* アイコンスタイル */
+.button-icon {
+    width: 20px; /* アイコン画像の幅 */
+    height: 20px; /* アイコン画像の高さ */
+    margin-right: 8px; /* アイコンとテキストの間の余白 */
+}
+
+/* ------------------------------------------- */
 
 @CHARSET "UTF-8";
         table {

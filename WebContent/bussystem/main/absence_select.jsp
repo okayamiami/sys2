@@ -16,15 +16,22 @@
 
 	<h2>欠席機能選択</h2>
 
-	<div class="menu-links-qr">
-
-		<a href="AbsenceConect.action">欠席連絡</a>
-
-		<a href="AbsenceReport.action">欠席報告</a>
-	</div>
+<div class="menu-container">
+    <div class="menu-select">
+        <a href="AbsenceConect.action" class="button-qr">
+            <img src="../../common/image/bus.png" alt="欠席連絡アイコン" class="button-icon">欠席連絡
+        </a>
+    </div>
+    <div class="menu-select">
+        <a href="AbsenceReport.action" class="button-qr">
+            <img src="../../common/image/home.png" alt="欠席報告アイコン" class="button-icon">欠席報告
+        </a>
+    </div>
+</div>
 
 		<a href="Menu.action" class="menu-link">
-  			<img src="../../common/image/home.png" class="icon">メニュー画面に戻る
+		    <img src="../../common/image/home.png" class="icon" alt="メニューアイコン">
+		    メニュー画面に戻る
 		</a>
 
 	</div>
