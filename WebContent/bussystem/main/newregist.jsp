@@ -26,8 +26,7 @@
 
 		<input type="submit" value="登録して終了">
 	</form>
-	<a href="Menu.action">戻る
-</a>
+	<a href="NewRegistMenu.action">戻る</a>
 
 </div>
 </div>

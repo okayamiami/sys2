@@ -14,11 +14,6 @@
 <c:import url="/common/navi.jsp" />
 <div class="con">
 
-	<form action="Menu.action" method="get"> <%--決まったら正しいことろに飛ばす --%>
-        <button type="submit">戻る</button>
-    </form>
-
-
 	<h2>バス新規作成</h2>
 
 	<!-- エラーメッセージの表示 -->
@@ -27,7 +22,7 @@
     </c:if>
 
     <p>バス新規作成が完了しました</p>
-
+    <a href="NewRegistMenu.action">新規作成機能選択に戻る</a>
   </div>
   </div>
 </body>

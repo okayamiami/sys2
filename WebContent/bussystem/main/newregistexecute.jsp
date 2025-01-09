@@ -40,8 +40,8 @@
 <tr>
 </table>
 	<a href="Menu.action">
-  <button type="button">戻る</button>
 </a>
+<a href="NewRegistMenu.action">新規作成機能選択に戻る</a>
 </div>
 </div>
 

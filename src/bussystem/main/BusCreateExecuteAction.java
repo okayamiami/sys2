@@ -109,7 +109,7 @@ public class BusCreateExecuteAction extends Action {
 	// 無し
 
 	//JSPへフォワード 7
-	req.getRequestDispatcher("absence_report_done.jsp").forward(req, res);
+	req.getRequestDispatcher("buscreate_done.jsp").forward(req, res);
 
 
 

@@ -13,9 +13,6 @@
 <div class="main">
 <c:import url="/common/navi.jsp" />
 <div class="con">
-	<form action="" method="get">
-        <button type="submit">戻る</button>
-    </form>
 
     <h2>バス新規作成</h2>
 
@@ -33,6 +30,7 @@
 
         <input type="submit" value="送信">
     </form>
+    <a href="NewRegistMenu.action">戻る</a>
 
    </div>
    </div>

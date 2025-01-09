@@ -23,7 +23,7 @@
 				<c:when test="${user_type == 'M'}">
 					<h2>管理者</h2>
 					<div class="menu-links">
-					<a href="NewRegist.action">新規登録</a>
+					<a href="NewRegistMenu.action">新規登録</a>
 					<a href="ChildList.action">名簿情報一覧</a>
 					<a href="Parents.action">保護者情報</a>
 					<a href="ChildInfo.action">子供情報</a>
@@ -32,7 +32,6 @@
 					<a href="QrMenu.action">QR機能</a>
 					<c:if test="${user_id == 'M0000001'}">
 					<a href="FacilityInfo.action">施設情報</a>
-					<a href="BusCreate.action">バス新規作成</a>
 					</c:if>
 					</div>
 				</c:when>
