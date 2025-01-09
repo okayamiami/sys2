@@ -58,7 +58,6 @@
                     <th>メールアドレス３</th>
                     <td>${userinfo.parents_mail3}</td>
                 </tr>
-
             </c:if>
         </table>
 		 <tr>
