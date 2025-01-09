@@ -21,13 +21,13 @@
 		    <c:when test="${user_type == 'M'}">
 		        <form action="ParentsIDInput.action" method="get">
 		            <input type="hidden" name="parents_id" value="${parents_id}">
-		            <button type="submit">一覧に戻る</button>
+		            <button type="submit">子供一覧に戻る</button>
 		        </form>
 		    </c:when>
 
 		    <c:when test="${user_type == 'P'}">
 		        <form action="ChildInfo.action" method="get">
-		            <button type="submit">一覧に戻る</button>
+		            <button type="submit">子供一覧に戻る</button>
 		        </form>
 		    </c:when>
 		</c:choose>

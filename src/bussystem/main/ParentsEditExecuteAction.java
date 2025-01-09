@@ -19,6 +19,7 @@ public class ParentsEditExecuteAction extends Action {
         // ユーザー情報をセッションから取得
         Object user = session.getAttribute("user");
         ParentsUserDao PD = new ParentsUserDao();
+        ParentsUser PU = new ParentsUser();
 
         // ユーザータイプで分ける
         if ("P".equals(user_type)) {
@@ -72,6 +73,10 @@ public class ParentsEditExecuteAction extends Action {
         try {
             // 保護者情報を保存
             PD.saveParentsUserInfo(parentsUser);
+            parentsUser.setAuthenticated(true); // 保護者情報が正しく更新されるように認証状態を付与
+            session.removeAttribute("user");
+            session.setAttribute("user", parentsUser); // セッションに更新後のユーザー情報を保存ー＞header用に
+
 
             // ユーザー情報をリクエストに設定し、メッセージを表示
             req.setAttribute("user", user);
