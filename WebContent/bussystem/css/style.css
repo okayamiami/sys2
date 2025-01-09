@@ -1,9 +1,57 @@
+/* ヘッダー全体のスタイル */
 .header {
-  width: 100%;
-  text-align: center;
-  background-color: #dff4dd;
-
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(90deg, #dff4dd, #a8d5ba); /* グラデーション */
+    padding: 20px; /* 上下の余白 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 下にシャドウを追加 */
+    color: #2c3e50; /* テキスト色 */
+    font-family: 'Arial', sans-serif; /* フォント変更 */
 }
+
+/* ヘッダー内タイトルのスタイル */
+.header h1 {
+    font-size: 28px; /* フォントサイズを大きく */
+    font-weight: bold; /* 太字 */
+    margin: 0; /* 余白を調整 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* 文字にシャドウを追加 */
+    color: #34495e; /* タイトルの文字色 */
+}
+
+/* ヘッダー内のユーザー情報とリンク */
+.header div {
+    display: flex; /* フレックスボックスで要素を横並びに */
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 縦方向で中央揃え */
+    gap: 20px; /* 要素間の間隔 */
+    margin-top: 10px; /* 上部の余白 */
+}
+
+/* ユーザー名のスタイル */
+.header span {
+    font-size: 16px; /* フォントサイズ */
+    font-weight: 500; /* 中程度の太さ */
+    color: #2c3e50; /* 文字色 */
+}
+
+/* ログアウトリンクのスタイル */
+.header a {
+    text-decoration: none; /* 下線を削除 */
+    color: #3498db; /* リンクの色 */
+    font-weight: bold; /* 太字 */
+    padding: 5px 10px; /* リンク内の余白 */
+    border: 1px solid #3498db; /* リンクに枠線を追加 */
+    border-radius: 4px; /* 枠を角丸に */
+    transition: all 0.3s ease; /* アニメーションを追加 */
+}
+
+/* ログアウトリンクのホバー時のスタイル */
+.header a:hover {
+    background-color: #3498db; /* 背景色を変更 */
+    color: #fff; /* テキスト色を白に */
+}
+
+/* ------------------------------------------- */
 
 
 .side {

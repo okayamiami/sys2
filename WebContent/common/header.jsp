@@ -8,28 +8,27 @@
   <link rel='stylesheet' href='../../bussystem/css/style.css'>
   <title>登園・バス管理システム</title>
 </head>
-<div class ="header">
-<div>
-  <h1>登園・バス管理システム</h1>
-</div>
-
-<c:if test="${user.isAuthenticated()}">
+<div class="header">
   <div>
-    <span>
-      <c:choose>
-        <c:when test="${user_type == 'M'}">
-          ${user.getUser_name()}先生、ようこそ！
-        </c:when>
-        <c:when test="${user_type == 'T'}">
-          ${user.getUser_name()}先生、ようこそ！
-        </c:when>
-        <c:when test="${user_type == 'P'}">
-          ${user.getParents_name()}様、ようこそ！
-        </c:when>
-      </c:choose>
-    </span>
-    <a href="Syslogout.action">ログアウト</a>
+    <h1>登園・バス管理システム</h1>
   </div>
-</c:if>
+  <c:if test="${user.isAuthenticated()}">
+    <div>
+      <span>
+        <c:choose>
+          <c:when test="${user_type == 'M'}">
+            ${user.getUser_name()}先生、ようこそ！
+          </c:when>
+          <c:when test="${user_type == 'T'}">
+            ${user.getUser_name()}先生、ようこそ！
+          </c:when>
+          <c:when test="${user_type == 'P'}">
+            ${user.getParents_name()}様、ようこそ！
+          </c:when>
+        </c:choose>
+      </span>
+      <a href="Syslogout.action">ログアウト</a>
+    </div>
+  </c:if>
 </div>
 <body>
