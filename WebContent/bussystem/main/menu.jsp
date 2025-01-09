@@ -13,7 +13,7 @@
 <c:import url="/common/header.jsp" />
 <div class="main">
 <div class="conmenu">
-		<form action = "Menu.action" method="post">
+		<form action = "ｃ" method="post">
 		<%
 		session.getAttribute("user_type");
 		session.getAttribute("user_id");
