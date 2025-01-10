@@ -218,6 +218,16 @@
 
 /* ------------------------------------------- */
 
+.menu-section {
+    margin-bottom: 20px; /* 各セクションの間にスペースを追加 */
+}
+
+.menu-links {
+    display: flex;
+    flex-wrap: wrap; /* 複数行に折り返す */
+    justify-content: space-between; /* アイテムを横方向に間隔を開けて配置 */
+}
+
 .menu-links a {
     display: block;
     padding: 20px;
@@ -228,6 +238,8 @@
     background-color: #fff;
     margin-bottom: 10px; /* 縦方向の間隔を調整 */
     width: 18%; /* 横に5列表示するために幅を18%に設定 */
+    white-space: nowrap; /* テキストの折り返しを防ぐ */
+    text-align: center; /* テキストを中央揃えにする */
 }
 
 .menu-links a:hover {
@@ -235,18 +247,11 @@
     text-decoration: none;
 }
 
-.menu-links {
-    width: 100%;
-    text-align: center;
-    color: #5c87a6;
-    display: flex;
-    flex-wrap: wrap; /* 複数行に折り返す */
-    justify-content: space-between; /* アイテムを横方向に間隔を開けて配置 */
-}
-
 h4 {
     margin-top: 20px; /* 上部のマージンを設定 */
-    margin-bottom: 20px; /* 下部のマージンを設定 */
+    margin-bottom: 10px; /* 下部のマージンを設定 */
+    display: block; /* ブロック要素として表示 */
+    width: 100%; /* 幅を100%に設定して改行を確実にする */
 }
 
 /* 画面サイズが768px以下の場合のスタイル */
@@ -262,6 +267,7 @@ h4 {
         width: 100%; /* 横に1列表示するために幅を100%に設定 */
     }
 }
+
 
 /* ------------------------------------------- */
 
