@@ -22,11 +22,14 @@
 
         	<!-- 保護者IDを入力 -->
             <label for="parents_id">保護者ID:</label>
-            <input type="text" id="parents_id" name="parents_id" required/></br>
-            <button type="submit">検索</button>
+            <input type="text" id="parents_id" name="parents_id"/>
+               <div class="button-save">
+		          <button type="submit">検索</button>
+		       </div>
+
              <input type="hidden" id="parents_name" name="parents_name" value="${parents_name}" />
         </form>
-        <a href="menu.jsp">戻る</a>
+        <a href="menu.jsp" class="menu-link">メニューに戻る</a>
     </div>
 </div>
 

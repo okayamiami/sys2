@@ -10,7 +10,7 @@
     <c:import url="/common/navi.jsp" />
 
     <div class="con">
-        <a href="menu.jsp">戻る</a>
+        <a href="menu.jsp" class="menu-link">メニューに戻る</a>
         <br>
 
         <!-- 子供情報テーブル -->
@@ -45,7 +45,9 @@
                             <input type="hidden" name="parents_id" value="${child.parents_id}" />
                             <!-- 子供のchild_idを送信する隠しフィールド -->
                             <input type="hidden" name="child_id" value="${child.child_id}" />
-                            <button type="submit">更新</button>
+                            <div class="button-save">
+		                		<button type="submit">子供情報の更新</button>
+		            		</div>
                         </form>
                     </td>
 
@@ -57,7 +59,9 @@
         <c:if test="${not empty parents_id}">
             <form action="ChildAdd.action" method="post" style="display:inline;">
                 <input type="hidden" name="parents_id" value="${parents_id}" />
-                <button type="submit">新規登録</button>
+                   <div class="button-save">
+		                <button type="submit">子供情報の新規登録</button>
+		            </div>
             </form>
         </c:if>
 

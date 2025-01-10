@@ -15,6 +15,26 @@
     <div class="con">
 
         <h2>保護者情報</h2>
+        <c:choose>
+				    <c:when test="${user_type == 'M'}">
+				        <!-- 管理者向けのフォーム -->
+				        <form action="ParentsInput.action" method="get">
+
+				            <input type="hidden" name="parents_id" value="${parents_id}">
+
+				                <div class="button-save">
+		                		<button type="submit">保護者情報の確認</button>
+		            			</div>
+				        </form>
+				    </c:when>
+
+				    <c:when test="${user_type == 'P'}">
+				        <!-- 保護者向けのリンク -->
+				        <a href="Parents.action">
+				            <button type="button">保護者情報の確認</button>
+				        </a>
+				    </c:when>
+				</c:choose>
         <form action="ParentsEditExecute.action" method="post">
             <table>
                 <c:if test="${not empty userinfo}">
@@ -96,22 +116,7 @@
 
            </form>
 
-             	<c:choose>
-				    <c:when test="${user_type == 'M'}">
-				        <!-- 管理者向けのフォーム -->
-				        <form action="ParentsInput.action" method="get">
-				            <input type="hidden" name="parents_id" value="${parents_id}">
-				            <button type="submit">保護者情報の確認</button><br>
-				        </form>
-				    </c:when>
 
-				    <c:when test="${user_type == 'P'}">
-				        <!-- 保護者向けのリンク -->
-				        <a href="Parents.action">
-				            <button type="button">保護者情報の確認</button>
-				        </a>
-				    </c:when>
-				</c:choose>
     	</div>
 	</div>
 

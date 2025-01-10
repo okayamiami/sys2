@@ -17,10 +17,13 @@
         <form action="ParentsInput.action" method="post">
         	<div style="color: red;">${ errors.get("errorMessage") }</div>
             <label for="parents_id">保護者ID:</label>
-            <input type="text" id="parents_id" name="parents_id" required/></br>
-            <button type="submit">検索</button>
+            <input type="text" id="parents_id" name="parents_id" required/>
+
+              <div class="button-save">
+		          <button type="submit">検索</button>
+		      </div>
         </form>
-        <a href="menu.jsp">戻る</a>
+        <a href="menu.jsp" class="menu-link">メニューに戻る</a>
     </div>
 </div>
 

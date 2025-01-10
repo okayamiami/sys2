@@ -20,7 +20,8 @@
         <!-- 保護者情報の表示 -->
         <h2>保護者情報</h2>
 
-        <a href="menu.jsp" class="button-save">戻る</a>
+        <a href="menu.jsp" class="menu-link">メニューに戻る</a>
+
 
         <br>
         <table>
@@ -60,21 +61,15 @@
                 </tr>
             </c:if>
         </table>
-		 <tr>
-		    <td colspan="2" style="text-align: center;">
-		        <form action="ParentsEdit.action" method="post">
+
+		    		<form action="ParentsEdit.action" method="post">
 		            <input type="hidden" name="parents_id" value="${userinfo.parents_id}" />
 
 		            <!-- ボタンを div タグでラップ -->
 		            <div class="button-save">
 		                <button type="submit">編集</button>
 		            </div>
-
-		        </form>
-		    </td>
-		</tr>
-
-
+		        	</form>
     </div>
 </div>
 

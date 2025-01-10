@@ -53,8 +53,9 @@
 	</dl>
 
 	<div class="button">
-    <input type="submit" name="login" value="ログイン"/>
-    </div>
+	    <input type="submit" name="login" value="ログイン" class="button-save" />
+	</div>
+
 
   </form>
   </div>

@@ -11,6 +11,26 @@
 
     <div class="con">
         <h2>保護者情報</h2>
+        <c:choose>
+            <c:when test="${user_type == 'M'}">
+                <!-- 管理者向けのフォーム -->
+                <form action="ParentsInput.action" method="get">
+                    <input type="hidden" name="parents_id" value="${parents_id}">
+                     <div class="button-save">
+		                <button type="submit">保護者情報の確認</button>
+		            </div>
+                </form>
+            </c:when>
+
+            <c:when test="${user_type == 'P'}">
+                <!-- 保護者向けのリンク -->
+         	        <form action="Parents.action" method="get">
+		            <div class="button-save">
+		                <button type="submit">保護者情報の確認</button>
+		            </div>
+		        </form>
+            </c:when>
+        </c:choose>
         <form action="ParentsEditExecute.action" method="post">
             <table>
                 <c:if test="${not empty userinfo}">
@@ -90,32 +110,10 @@
                     </tr>
                 </c:if>
             </table>
-            <div class="form-actions" style="text-align: right; margin-top: 20px;">
-                <button type="submit" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; cursor: pointer;">
-                    保存
-                </button>
-                <a href="menu.jsp" class="button" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; text-decoration: none; cursor: pointer;">
-                    戻る
-                </a>
-            </div>
+                 <div class="button-save">
+		                <button type="submit">保存</button>
+		         </div>
         </form>
-
-        <c:choose>
-            <c:when test="${user_type == 'M'}">
-                <!-- 管理者向けのフォーム -->
-                <form action="ParentsInput.action" method="get">
-                    <input type="hidden" name="parents_id" value="${parents_id}">
-                    <button type="submit" style="margin-top: 20px;">保護者情報の確認</button>
-                </form>
-            </c:when>
-
-            <c:when test="${user_type == 'P'}">
-                <!-- 保護者向けのリンク -->
-                <a href="Parents.action" style="margin-top: 20px;">
-                    <button type="button">保護者情報の確認</button>
-                </a>
-            </c:when>
-        </c:choose>
     </div>
 </div>
 

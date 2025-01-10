@@ -26,11 +26,32 @@
 }
 
 
+/* ------------------------------------------- */
+
+/* ボタンを変更 */
 .button {
   width: 100%;
   text-align: center;
-  padding: 20px 0 20px 0;
+  padding: 20px 0;
 }
+
+.button-save {
+  background-color: #1bade4;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.2s;
+  width: 100%; /* ボタンが親要素の幅いっぱいに広がる */
+}
+
+.button-save:hover {
+  background-color: #0080ff; /* ホバー時の色 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+}
+
 
 .main {
   display: flex;

@@ -20,18 +20,25 @@
 		    <c:when test="${user_type == 'M'}">
 		        <form action="ParentsInput.action" method="get">
 		            <input type="hidden" name="parents_id" value="${parents_id}">
-		            <button type="submit">保護者情報の確認</button>
+
+		            <div class="button-save">
+		                <button type="submit">保護者情報の確認</button>
+		            </div>
+
 		        </form>
 		    </c:when>
 
 		    <c:when test="${user_type == 'P'}">
 		        <form action="Parents.action" method="get">
-		            <button type="submit">保護者情報の確認</button>
+		            <div class="button-save">
+		                <button type="submit">保護者情報の確認</button>
+		            </div>
 		        </form>
 		    </c:when>
 		</c:choose>
 
-	    <a href="menu.jsp">メニューに戻る</a>
+	    <a href="menu.jsp" class="menu-link">メニューに戻る</a>
+
 
 	</div>
 	</div>

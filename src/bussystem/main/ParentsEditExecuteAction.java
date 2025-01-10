@@ -47,12 +47,12 @@ public class ParentsEditExecuteAction extends Action {
 
         // 入力されたパスワードが現在のパスワードと同じか確認
         if (parents_pass.equals(currentPassword)) {
-            req.setAttribute("message", "新しいパスワードは現在のパスワードと同じです。別のパスワードを入力してください。");
+
             req.setAttribute("user", user);
             ParentsUser PU2 = PD.getParentsUserInfo(parents_id, facilityId);
 			System.out.println(PU2);
 			req.setAttribute("userinfo", PU2);
-			req.setAttribute("message", "パスワードが変更されていません。");
+			req.setAttribute("message", "新しいパスワードは現在のパスワードと同じです。別のパスワードを入力してください。");
             req.getRequestDispatcher("parentseditp.jsp").forward(req, res); // 編集フォームに戻る
             return; // 処理を中断
         }
@@ -71,12 +71,13 @@ public class ParentsEditExecuteAction extends Action {
         parentsUser.setFacility_id(facilityId);
 
         try {
+            if ("P".equals(user_type)) {
             // 保護者情報を保存
             PD.saveParentsUserInfo(parentsUser);
             parentsUser.setAuthenticated(true); // 保護者情報が正しく更新されるように認証状態を付与
             session.removeAttribute("user");
             session.setAttribute("user", parentsUser); // セッションに更新後のユーザー情報を保存ー＞header用に
-
+            }
 
             // ユーザー情報をリクエストに設定し、メッセージを表示
             req.setAttribute("user", user);
