@@ -34,8 +34,9 @@ public class QrReaderExecuteAction extends Action {
             String child_id = qrValues[0];
             String facility_id = qrValues[1];
 
-            // JSPから取得したbus_idを取得
+            // JSPから取得したbus_idとbus_nameを取得
             String bus_id = req.getParameter("bus_id");
+            String bus_name = req.getParameter("bus_name");
 
             // bus_idがnullまたは空の場合、エラーメッセージを設定してリダイレクト
             if (bus_id == null || bus_id.isEmpty()) {
@@ -57,9 +58,9 @@ public class QrReaderExecuteAction extends Action {
             	Boolean gettingStatus = gDao.getGetinfo(bus_id, child_id, facility_id).isGet_is_attend();
 
             	if(gettingStatus == true){
-            		req.setAttribute("getting_status", "は乗車しました。");
+            		req.setAttribute("getting_status", "乗車しました。");
             	}else if(gettingStatus == false){
-            		req.setAttribute("getting_status", "は降車しました。");
+            		req.setAttribute("getting_status", "降車しました。");
             	}else{
             		req.setAttribute("errorMessage", "出席情報の取得に失敗しました。");
                     req.getRequestDispatcher("error.jsp").forward(req, res);
@@ -67,6 +68,10 @@ public class QrReaderExecuteAction extends Action {
 
             	req.setAttribute("child_name", childName);
             	req.setAttribute("bus_id", bus_id);
+            	req.setAttribute("bus_name", bus_name);
+
+            	int countAttend = gDao.countAttendees(facility_id, bus_id);
+            	req.setAttribute("countAttend", countAttend);
                 req.getRequestDispatcher("qrreader.jsp").forward(req, res);
             } else {
                 // 更新失敗

@@ -14,6 +14,8 @@
     <div class="main">
         <c:import url="/common/navi.jsp" />
 
+
+		<h1>${bus_name}に${countAttend}人乗車しています</h1>
         <div class="con">
             <!-- QRコード読み取り開始ボタン -->
 			<button class="button-qr" onclick="startQRCodeReader()" aria-label="QRコード読み取りを開始">QRコード読み取りを開始</button>
@@ -30,6 +32,7 @@
             <form name="qrForm" action="QrReaderExecute.action" method="post">
                 <input type="hidden" id="qrData" name="qrData" />
                 <input type="hidden" id="bus_id" name="bus_id" value="${bus_id}">
+                <input type="hidden" id="bus_name" name="bus_name" value="${bus_name}">
             </form>
 
             <script>
@@ -120,7 +123,7 @@
 
             <c:if test="${not empty child_name}">
                 <div>
-                    <strong style="color:black;">${child_name}${getting_status}</strong>
+                    <strong style="color:black;">${child_name}は${bus_id}から${getting_status}</strong>
                 </div>
             </c:if>
             <a href="QrReaderSelectBus.action">バス選択に戻る</a>

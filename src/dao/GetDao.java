@@ -310,4 +310,50 @@ public class GetDao extends Dao{
 	    return count > 0;
 	}
 
+	// facility_id と bus_id を指定して get_is_attend が true の人数を取得するメソッド
+	public int countAttendees(String facility_id, String bus_id) throws Exception {
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    int attendeeCount = 0;
+
+	    try {
+	        // SQL クエリを準備
+	        String sql = "SELECT COUNT(*) AS attendee_count FROM Get WHERE facility_id = ? AND bus_id = ? AND get_is_attend = true";
+	        statement = connection.prepareStatement(sql);
+
+	        // パラメータを設定
+	        statement.setString(1, facility_id);
+	        statement.setString(2, bus_id);
+
+	        // クエリを実行
+	        ResultSet resultSet = statement.executeQuery();
+
+	        // 結果を取得
+	        if (resultSet.next()) {
+	            attendeeCount = resultSet.getInt("attendee_count");
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        // リソースのクリーンアップ
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                sqle.printStackTrace();
+	            }
+	        }
+
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                sqle.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return attendeeCount;
+	}
+
 }
