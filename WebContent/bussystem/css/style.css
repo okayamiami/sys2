@@ -51,6 +51,10 @@
     color: #fff; /* テキスト色を白に */
 }
 
+/* ------------------------------------------- */
+
+
+/* ------------------------------------------- */
 #menu__toggle {
   opacity: 0;
 }
@@ -181,7 +185,7 @@
 
 
 /* ------------------------------------------- */
-
+/* サイドバー部分（初期） */
 .side {
   width: 16.5%;
   height: 100%;
@@ -194,6 +198,7 @@
     transparent 100.5%
   );
 
+/* ------------------------------------------- */
 
 }
 .con {
@@ -210,38 +215,55 @@
   margin-left: 20px;
 
 }
+
+/* ------------------------------------------- */
+
 .menu-links a {
-	display: block;
-	padding: 20px;
-	text-decoration: none;
-	color: #333;
-	border-radius: 10px;
-	border: solid 3px #ccc;
-	background-color: #fff;
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 10px;
+    border: solid 3px #ccc;
+    background-color: #fff;
+    margin-bottom: 10px; /* 縦方向の間隔を調整 */
+    width: 18%; /* 横に5列表示するために幅を18%に設定 */
 }
+
 .menu-links a:hover {
-	background-color: #fffdc5;
-	text-decoration: none;
+    background-color: #fffdc5;
+    text-decoration: none;
 }
+
 .menu-links {
-	width: 100%;
-	text-align: center;
-	color: #5c87a6;
-	display: flex;
-  flex-wrap: wrap; /* 複数行に折り返す */
-  justify-content: space-between; /* アイテムを横方向に間隔を開けて配置 */
+    width: 100%;
+    text-align: center;
+    color: #5c87a6;
+    display: flex;
+    flex-wrap: wrap; /* 複数行に折り返す */
+    justify-content: space-between; /* アイテムを横方向に間隔を開けて配置 */
 }
-.menu-links a {
-  display: block;
-  padding: 20px;
-  text-decoration: none;
-  color: #333;
-  border-radius: 10px;
-  border: solid 3px #ccc;
-  background-color: #fff;
-  width: 18%; /* 横に3列表示するために幅を30%に設定 */
-  margin-bottom: 10px; /* 縦方向の間隔を調整 */
+
+h4 {
+    margin-top: 20px; /* 上部のマージンを設定 */
+    margin-bottom: 20px; /* 下部のマージンを設定 */
 }
+
+/* 画面サイズが768px以下の場合のスタイル */
+@media (max-width: 768px) {
+    .menu-links a {
+        width: 45%; /* 横に2列表示するために幅を45%に設定 */
+    }
+}
+
+/* 画面サイズが480px以下の場合のスタイル */
+@media (max-width: 480px) {
+    .menu-links a {
+        width: 100%; /* 横に1列表示するために幅を100%に設定 */
+    }
+}
+
+/* ------------------------------------------- */
 
 .menu-links-qr a {
 	display: block;
@@ -376,6 +398,10 @@
             background-color: #f9f9f9;
             border-radius: 10px;
         }
+
+/* ------------------------------------------- */
+
+/* メニュー画面 */
 .button-qr {
      margin: 10px;
      padding: 10px 20px;
@@ -385,6 +411,8 @@
 .button-qr:hover {
      background-color: #e0e0e0;
  }
+
+/* ------------------------------------------- */
 
 /* divをボタンに似たスタイルにする */
 .button-save {
