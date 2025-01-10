@@ -19,56 +19,86 @@
 		session.getAttribute("user_id");
 		%>
 
-<c:choose>
-    <c:when test="${user_type == 'M'}">
-        <h2>管理者</h2>
-			<div class="menu-section">
-			    <h4>情報関係</h4>
-			    <div class="menu-links">
-			        <a href="NewRegistMenu.action">新規登録</a>
-			        <a href="Parents.action">保護者情報</a>
-			        <a href="ChildInfo.action">子供情報</a>
-			        <c:if test="${user_id == 'M0000001'}">
-			            <a href="FacilityInfo.action">施設情報</a>
-			        </c:if>
-			    </div>
-			</div>
+				<c:choose>
+				    <c:when test="${user_type == 'M'}">
+				        <h2>管理者</h2>
+							<div class="menu-section">
+							    <h4>情報関係</h4>
+							    <div class="menu-links">
+							        <a href="NewRegistMenu.action">新規登録</a>
+							        <a href="Parents.action">保護者情報</a>
+							        <a href="ChildInfo.action">子供情報</a>
+							        <c:if test="${user_id == 'M0000001'}">
+							            <a href="FacilityInfo.action">施設情報</a>
+							        </c:if>
+							    </div>
+							</div>
 
-			<div class="menu-section">
-			    <h4>子供管理</h4>
-			    <div class="menu-links">
-			        <a href="ChildList.action">名簿情報一覧</a>
-			        <a href="AbsenceSelect.action">欠席機能</a>
-			        <a href="QrMenu.action">QR機能</a>
-			    </div>
-			</div>
+							<div class="menu-section">
+							    <h4>子供管理</h4>
+							    <div class="menu-links">
+							        <a href="ChildList.action">名簿情報一覧</a>
+							        <a href="AbsenceSelect.action">欠席機能</a>
+							        <a href="QrMenu.action">QR機能</a>
+							    </div>
+							</div>
 
-			<div class="menu-section">
-			    <h4>お知らせ</h4>
-			    <div class="menu-links">
-			        <a href="InfoMenu.action">お知らせ機能</a>
-			    </div>
-			</div>
-	</c:when>
-    <c:when test="${user_type == 'T'}">
-        <h2>先生</h2>
-        <div class="menu-links">
-            <a href="ChildList.action">名簿情報一覧</a>
-            <a href="AbsenceSelect.action">欠席機能</a>
-            <a href="InfoMenu.action">お知らせ機能</a>
-            <a href="QrMenu.action">QR機能</a>
-        </div>
-    </c:when>
-    <c:when test="${user_type == 'P'}">
-        <h2>保護者</h2>
-        <div class="menu-links">
-            <a href="Parents.action">保護者情報</a>
-            <a href="ChildInfo.action">子供情報</a>
-            <a href="AbsenceReport.action">欠席報告</a>
-            <a href="InfoList.action">お知らせ一覧</a>
-        </div>
-    </c:when>
-</c:choose>
+							<div class="menu-section">
+							    <h4>お知らせ</h4>
+							    <div class="menu-links">
+							        <a href="InfoMenu.action">お知らせ機能</a>
+							    </div>
+							</div>
+					</c:when>
+
+
+				    <c:when test="${user_type == 'T'}">
+				        <h2>先生</h2>
+				     		<div class="menu-section">
+							    <h4>子供管理</h4>
+							    <div class="menu-links">
+							        <a href="ChildList.action">名簿情報一覧</a>
+							        <a href="AbsenceSelect.action">欠席機能</a>
+							        <a href="QrMenu.action">QR機能</a>
+							    </div>
+							</div>
+
+							<div class="menu-section">
+							    <h4>お知らせ</h4>
+							    <div class="menu-links">
+							        <a href="InfoMenu.action">お知らせ機能</a>
+							    </div>
+							</div>
+				    </c:when>
+
+
+				    <c:when test="${user_type == 'P'}">
+				        <h2>保護者</h2>
+				        	<div class="menu-section">
+							    <h4>情報関係</h4>
+							    <div class="menu-links">
+							        <a href="Parents.action">保護者情報</a>
+							        <a href="ChildInfo.action">子供情報</a>
+							    </div>
+							</div>
+
+							<div class="menu-section">
+							    <h4>欠席管理</h4>
+							    <div class="menu-links">
+							        <a href="AbsenceSelect.action">欠席機能</a>
+							    </div>
+							</div>
+
+							<div class="menu-section">
+							    <h4>お知らせ</h4>
+							    <div class="menu-links">
+							        <a href="InfoMenu.action">お知らせ機能</a>
+							    </div>
+							</div>
+				    </c:when>
+
+
+				</c:choose>
 
 		</form>
 </div>

@@ -222,6 +222,23 @@
     margin-bottom: 20px; /* 各セクションの間にスペースを追加 */
 }
 
+.menu-section h4 {
+    margin: 20px auto 10px; /* 上下の余白を指定、左右を自動中央揃え */
+    display: inline-block; /* 要素の幅を文字列の幅に合わせる */
+  	border-bottom: solid 3px #ddfdce;
+  	position: relative;
+}
+
+
+.menu-section h4:after {
+  	position: absolute;
+  	content: " ";
+  	display: block;
+  	border-bottom: solid 3px #b1fb8e;
+  	bottom: -3px;
+  	width: 20%;
+}
+
 .menu-links {
     display: flex;
     flex-wrap: wrap; /* 複数行に折り返す */
@@ -247,12 +264,6 @@
     text-decoration: none;
 }
 
-h4 {
-    margin-top: 20px; /* 上部のマージンを設定 */
-    margin-bottom: 10px; /* 下部のマージンを設定 */
-    display: block; /* ブロック要素として表示 */
-    width: 100%; /* 幅を100%に設定して改行を確実にする */
-}
 
 /* 画面サイズが768px以下の場合のスタイル */
 @media (max-width: 768px) {
@@ -270,6 +281,8 @@ h4 {
 
 
 /* ------------------------------------------- */
+
+/* 時間があったらアイコンを含めたボタンにしたい */
 
 .menu-links-qr a {
 	display: block;
