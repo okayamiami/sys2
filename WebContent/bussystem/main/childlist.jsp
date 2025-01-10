@@ -103,15 +103,14 @@
 		                			</c:if>
 								</td>
 								<td class="text-center">
-									<%-- 欠席フラグがたっている場合「○」それ以外は「×」を表示 --%>
-									<c:choose>
-										<c:when test="${child.Abs_is_attend()}">
-											×
-										</c:when>
-										<c:otherwise>
-											◯
-										</c:otherwise>
-									</c:choose>
+								    <c:choose>
+								        <c:when test="${child.Abs_is_attend()}">
+								            <span class="status-absent">×</span>
+								        </c:when>
+								        <c:otherwise>
+								            <span class="status-attend">◯</span>
+								        </c:otherwise>
+								    </c:choose>
 								</td>
 							</tr>
 						</c:forEach>

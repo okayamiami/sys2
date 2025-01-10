@@ -55,6 +55,8 @@
 
 
 /* ------------------------------------------- */
+
+/* ハンバーガーメニュー部分 */
 #menu__toggle {
   opacity: 0;
 }
@@ -218,6 +220,9 @@
 
 /* ------------------------------------------- */
 
+/* メニュー画面部分 */
+/* 時間があったらアイコンを含めたボタンにしたい */
+
 .menu-section {
     margin-bottom: 20px; /* 各セクションの間にスペースを追加 */
 }
@@ -281,8 +286,6 @@
 
 
 /* ------------------------------------------- */
-
-/* 時間があったらアイコンを含めたボタンにしたい */
 
 .menu-links-qr a {
 	display: block;
@@ -420,7 +423,7 @@
 
 /* ------------------------------------------- */
 
-/* メニュー画面 */
+/* メニュー画面（初期） */
 .button-qr {
      margin: 10px;
      padding: 10px 20px;
@@ -464,7 +467,7 @@
 
 /* ------------------------------------------- */
 
-/* メニュー画面に戻る */
+/* メニュー画面に戻る部分 */
 .menu-link {
   display: inline-flex; /* アイコンとテキストを横並びにする */
   align-items: center; /* アイコンとテキストを中央揃えにする */
@@ -533,6 +536,53 @@
     height: 24px; /* アイコン画像の高さを少し広げる */
     margin-right: 12px; /* アイコンとテキストの間の余白を調整 */
     flex-shrink: 0; /* アイコンが縮小されないようにする */
+}
+
+/* ------------------------------------------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* セル間の隙間をなくす */
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: left;
+    margin: 10px 0;
+}
+
+table th, table td {
+    padding: 12px 16px; /* セル内の余白を増やして見やすく */
+    border: none; /* 枠線を削除 */
+}
+
+table th {
+    background-color: #e0fed3; /* ヘッダーの背景色 */
+    color: #333; /* ヘッダーの文字色 */
+    font-weight: bold; /* 強調 */
+    text-align: center; /* ヘッダーを中央揃え */
+}
+
+table tr:nth-child(even) {
+    background-color: #f9fff7; /* 偶数行に薄い背景色 */
+}
+
+table tr:hover {
+    background-color: #eaf2ff; /* 行のホバー効果 */
+    cursor: pointer; /* カーソルをポインターに */
+}
+
+.text-center {
+    text-align: center; /* 出欠状況を中央揃え */
+}
+
+/* 出欠状況の丸とバツにスタイル */
+td .status-attend {
+    color: green;
+    font-weight: bold;
+}
+
+td .status-absent {
+    color: red;
+    font-weight: bold;
 }
 
 /* ------------------------------------------- */
