@@ -8,11 +8,10 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
 
 <div class ="con">
 
-<h2>新規情報登録</h2>
+<h2 class="title">新規情報登録</h2>
 
 	<form action = "NewRegistExecute.action" method="post">
 		<label>新規ユーザー区分</label>
@@ -24,9 +23,16 @@
 		</select>
 		<div>${errors.get("user_status")}</div>
 
-		<input type="submit" value="登録して終了">
+
+       <div class="button-save">
+          <button type="submit">検索</button>
+       </div>
 	</form>
-	<a href="NewRegistMenu.action">戻る</a>
+
+	<a href="NewRegistMenu.action" class="menu-link">
+	    <img src="../../common/image/矢印.png" class="icon" alt="戻るアイコン">
+	    選択画面に戻る
+	</a>
 
 </div>
 </div>

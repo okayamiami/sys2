@@ -8,18 +8,23 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
 
 <div class ="con">
 
-<h2>お知らせ機能選択</h2>
-<div class="menu-links-info">
+<h2 class="title">お知らせ機能選択</h2>
+
+<div class="menu-links">
 <a href="NewRegist.action">アカウント新規作成</a>
 
 <a href="BusCreate.action">バス新規作成</a>
 
-<a href="Menu.action">メニュー画面に戻る</a>
 </div>
+
+<a href="Menu.action" class="menu-link">
+    <img src="../../common/image/home.png" class="icon" alt="メニューアイコン">
+    メニュー画面に戻る
+</a>
+
 
 </div>
 </div>
