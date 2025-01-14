@@ -132,7 +132,7 @@ public class BusDao extends Dao {
 				statement.setString(2, bus.getBus_name());
 				statement.setString(3, bus.getFacility_id());
 			} else {
-				//子供が存在した場合
+				//バスが存在した場合
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection
 						.prepareStatement("update Bus set bus_name=? where bus_id=? and facility_id=?");
