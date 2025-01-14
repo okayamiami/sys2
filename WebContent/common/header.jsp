@@ -5,7 +5,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel='stylesheet' href='../../bussystem/css/style.css'>
+  <link rel='stylesheet' href='/sys2/bussystem/css/style.css'>
   <title>登園・バス管理システム</title>
 </head>
 
