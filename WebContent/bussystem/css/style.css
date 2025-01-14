@@ -1,190 +1,59 @@
 /* ヘッダー全体のスタイル */
 .header {
     width: 100%;
-    text-align: center;
-    background: linear-gradient(90deg, #dff4dd, #a8d5ba); /* グラデーション */
-    padding: 20px; /* 上下の余白 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 下にシャドウを追加 */
-    color: #2c3e50; /* テキスト色 */
-    font-family: 'Arial', sans-serif; /* フォント変更 */
+    background-color: #dbfebe; /* 全体の背景色 */
+    padding: 20px; /* 上下左右に余白を追加 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 下部に軽いシャドウを追加 */
 }
 
-/* ヘッダー内タイトルのスタイル */
+/* ロゴやタイトルを含む部分 */
 .header h1 {
-    font-size: 28px; /* フォントサイズを大きく */
-    font-weight: bold; /* 太字 */
-    margin: 0; /* 余白を調整 */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* 文字にシャドウを追加 */
-    color: #34495e; /* タイトルの文字色 */
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff; /* 白文字 */
+    margin: 0; /* 余白をリセット */
+    display: flex;
+    align-items: center;
 }
 
-/* ヘッダー内のユーザー情報とリンク */
-.header div {
-    display: flex; /* フレックスボックスで要素を横並びに */
-    justify-content: center; /* 中央揃え */
-    align-items: center; /* 縦方向で中央揃え */
-    gap: 20px; /* 要素間の間隔 */
-    margin-top: 10px; /* 上部の余白 */
+/* タイトル横のアイコン */
+.header h1 img {
+    margin-right: 10px; /* タイトルとの間隔 */
+    height: 40px; /* 高さ調整 */
 }
 
-/* ユーザー名のスタイル */
-.header span {
-    font-size: 16px; /* フォントサイズ */
-    font-weight: 500; /* 中程度の太さ */
-    color: #2c3e50; /* 文字色 */
+/* 右側のリンクやアイコン */
+.header div.links {
+    display: flex;
+    gap: 15px; /* アイテム間のスペース */
+    align-items: center;
 }
 
-/* ログアウトリンクのスタイル */
+/* ボタンリンクのスタイル */
 .header a {
     text-decoration: none; /* 下線を削除 */
-    color: #3498db; /* リンクの色 */
-    font-weight: bold; /* 太字 */
-    padding: 5px 10px; /* リンク内の余白 */
-    border: 1px solid #3498db; /* リンクに枠線を追加 */
-    border-radius: 4px; /* 枠を角丸に */
-    transition: all 0.3s ease; /* アニメーションを追加 */
-}
-
-/* ログアウトリンクのホバー時のスタイル */
-.header a:hover {
-    background-color: #3498db; /* 背景色を変更 */
     color: #fff; /* テキスト色を白に */
+    background-color: #9efc83; /* ボタンの背景色 */
+    padding: 8px 12px; /* ボタン内の余白 */
+    border-radius: 5px; /* 角を丸くする */
+    font-weight: bold; /* 太字 */
+    transition: background-color 0.3s; /* ホバー時のアニメーション */
 }
 
-/* ------------------------------------------- */
-
-
-/* ------------------------------------------- */
-
-/* ハンバーガーメニュー部分 */
-#menu__toggle {
-  opacity: 0;
-}
-#menu__toggle:checked + .menu__btn > span {
-  transform: rotate(45deg);
-}
-#menu__toggle:checked + .menu__btn > span::before {
-  top: 0;
-  transform: rotate(0deg);
-}
-#menu__toggle:checked + .menu__btn > span::after {
-  top: 0;
-  transform: rotate(90deg);
-}
-#menu__toggle:checked ~ .menu__box {
-  left: 0 !important;
-}
-/* ハンバーガーメニューのスタイル */
-.menu__btn {
-  position: fixed; /* 固定表示 */
-  top: 45px;
-  left: 30px;
-  width: 26px;
-  height: 26px;
-  cursor: pointer;
-  z-index: 1;
-}
-.menu__btn > span,
-.menu__btn > span::before,
-.menu__btn > span::after {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: #616161;
-  transition-duration: .25s;
-}
-.menu__btn > span::before {
-  content: '';
-  top: -8px;
-}
-.menu__btn > span::after {
-  content: '';
-  top: 8px;
+/* ホバー時のスタイル */
+.header a:hover {
+    background-color: #d35400; /* ホバー時に背景色を濃く */
 }
 
-#menu__toggle {
-  opacity: 0;
+/* アイコン付きボタン */
+.header a img {
+    vertical-align: middle; /* アイコンをテキストと揃える */
+    margin-right: 5px; /* テキストとの間隔 */
+    height: 20px; /* 高さを調整 */
 }
-#menu__toggle:checked + .menu__btn > span {
-  transform: rotate(45deg);
-}
-#menu__toggle:checked + .menu__btn > span::before {
-  top: 0;
-  transform: rotate(0deg);
-}
-#menu__toggle:checked + .menu__btn > span::after {
-  top: 0;
-  transform: rotate(90deg);
-}
-#menu__toggle:checked ~ .menu__box {
-  left: 0 !important;
-}
-
-.menu__box {
-  display: block;
-  position: absolute; /* 通常のフローに従う */
-  top: 75px; /* メニューの位置を調整 */
-  left: -100%;
-  width: 300px;
-  padding: 10px 0;
-  list-style: none;
-  background-color: #ECEFF1;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
-  transition-duration: .25s;
-  z-index: 10000;
-}
-
-.menu__box label {
-  margin-left: 10px;
-}
-
-.menu__item {
-  display: block;
-  padding: 7px 10px;
-  color: #333;
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  text-decoration: none;
-  transition-duration: .25s;
-}
-
-.menu__item:hover {
-  background-color: #CFD8DC;
-}.menu__box {
-  display: block;
-  position: absolute; /* 通常のフローに従う */
-  top: 75px; /* メニューの位置を調整 */
-  left: -100%;
-  width: 300px;
-  padding: 10px 0;
-  list-style: none;
-  background-color: #ECEFF1;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
-  transition-duration: .25s;
-  z-index: 10000;
-}
-
-.menu__box label {
-  margin-left: 10px;
-}
-
-.menu__item {
-  display: block;
-  padding: 7px 10px;
-  color: #333;
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  text-decoration: none;
-  transition-duration: .25s;
-}
-
-.menu__item:hover {
-  background-color: #CFD8DC;
-}
-
 
 /* ------------------------------------------- */
 /* サイドバー部分（初期） */
@@ -547,11 +416,12 @@ table {
     font-size: 14px;
     text-align: left;
     margin: 10px 0;
+    border: none; /* テーブル外枠を削除 */
 }
 
 table th, table td {
     padding: 12px 16px; /* セル内の余白を増やして見やすく */
-    border: none; /* 枠線を削除 */
+    border: none; /* セルの枠線を削除 */
 }
 
 table th {
@@ -583,6 +453,10 @@ td .status-attend {
 td .status-absent {
     color: red;
     font-weight: bold;
+}
+
+table, th, td {
+    border: none !important; /* すべてのボーダーを削除 */
 }
 
 /* ------------------------------------------- */
