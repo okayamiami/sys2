@@ -13,6 +13,8 @@
 
 <h2 class="title">新規情報登録</h2>
 
+<p>ユーザー区分を選択してください<br>M：管理者　T：先生　P：保護者</p>
+
 	<form action = "NewRegistExecute.action" method="post">
 		<label>新規ユーザー区分</label>
 		<select name="user_status">
@@ -24,15 +26,9 @@
 		<div>${errors.get("user_status")}</div>
 
 
-       <div class="button-save">
-          <button type="submit">検索</button>
-       </div>
+          <button type="submit" class="button-send">登録</button>
 	</form>
 
-	<a href="NewRegistMenu.action" class="menu-link">
-	    <img src="../../common/image/矢印.png" class="icon" alt="戻るアイコン">
-	    選択画面に戻る
-	</a>
 
 </div>
 </div>

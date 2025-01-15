@@ -30,7 +30,7 @@
 </div>
 
 		<a href="Menu.action" class="menu-link">
-		    <img src="../../common/image/home.png" class="icon" alt="メニューアイコン">
+		    <img src="../../common/image/arrow.png" class="icon" alt="メニューアイコン">
 		    メニュー画面に戻る
 		</a>
 

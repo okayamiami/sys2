@@ -8,14 +8,17 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <!-- ナビゲーションのインクルード -->
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
-        <h2>子供情報</h2>
+        <h2 class="title">子供情報</h2>
+        <p>修正箇所を選択または入力し保存ボタンを押してください</p>
 
-        <!-- フォームの開始 -->
         <form action="ChildUpdateExecute.action" method="post">
+            <!-- 保存ボタン -->
+		    <button type="submit" class="button-send">保存</button>
+        </form>
+
+
             <table>
                 <tr>
                     <th>保護者ID</th>
@@ -55,26 +58,13 @@
                 </c:if>
             </table>
 
-
-            <!-- 保存ボタンとリセットボタン -->
-               <div class="button-save">
-		                <button type="submit">保存</button>
-		       </div>
-		</form>
       <c:choose>
-		    <c:when test="${user_type == 'M'}">
-		        <form action="ParentsIDInput.action" method="get">
-		            <input type="hidden" name="parents_id" value="${parents_id}">
-		               <div class="button-save">
-		                <button type="submit">子供情報の確認</button>
-		            </div>
-		        </form>
-		    </c:when>
+
 
 		    <c:when test="${user_type == 'P'}">
 		        <form action="ChildInfo.action" method="get">
 		             <div class="button-save">
-		                <button type="submit">子供情報の確認</button>
+		                <button type="submit">多分戻るボタン確認してから消す</button>
 		             </div>
 		        </form>
 		    </c:when>

@@ -11,7 +11,9 @@
 
 <div class ="con">
 
-<h2 class="title">お知らせ機能選択</h2>
+<h2 class="title">新規登録区分選択</h2>
+
+<p>新規作成する項目を選択してください</p>
 
 <div class="menu-links">
 <a href="NewRegist.action">アカウント新規作成</a>
@@ -19,11 +21,6 @@
 <a href="BusCreate.action">バス新規作成</a>
 
 </div>
-
-<a href="Menu.action" class="menu-link">
-    <img src="../../common/image/home.png" class="icon" alt="メニューアイコン">
-    メニュー画面に戻る
-</a>
 
 
 </div>

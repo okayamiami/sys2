@@ -3,8 +3,16 @@
 
 <c:import url="/common/header.jsp" />
 <div class="main">
-<c:import url="/common/navi.jsp" />
 <div class="con">
+
+<h2 class="title">施設情報</h2>
+<p>情報に変更がある場合は「編集」ボタンから変更を行ってください</p>
+
+<form action="FacilityInfoEdit.action" method="post">
+    <input type="hidden" name="facility_id" value="${fc.facility_id}"/>
+    <button type="submit" class="button-send">編集</button>
+</form>
+
 <table>
 <c:if test="${not empty fc}">
 <tr><th>施設ID</th><td>${fc.facility_id}</td></tr>
@@ -26,13 +34,7 @@
 	</tr>
 </c:if>
 </table>
-<form action="FacilityInfoEdit.action" method="post">
-    <input type="hidden" name="facility_id" value="${fc.facility_id}"/>
-    <button type="submit">編集</button>
-</form>
-<a href="Menu.action">
-  <button type="button">戻る</button>
-</a>
+
 </div>
 </div>
 <c:import url="/common/footer.jsp" />

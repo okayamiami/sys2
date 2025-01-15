@@ -3,27 +3,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>保護者情報表示</title>
-</head>
-
 <body>
 
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
 
         <!-- 保護者情報の表示 -->
-        <h2>保護者情報</h2>
+        <h2 class="title">保護者情報</h2>
+        <p>情報に変更がある場合は「編集」ボタンから変更を行ってください</p>
 
-        <a href="menu.jsp" class="menu-link">メニューに戻る</a>
+
+   		<form action="ParentsEdit.action" method="post">
+            <input type="hidden" name="parents_id" value="${userinfo.parents_id}" />
 
 
-        <br>
+           <button type="submit" class="button-send">編集</button>
+
+        </form>
+
+
         <table>
             <c:if test="${empty error}">
             <br>
@@ -62,14 +63,7 @@
             </c:if>
         </table>
 
-		    		<form action="ParentsEdit.action" method="post">
-		            <input type="hidden" name="parents_id" value="${userinfo.parents_id}" />
 
-		            <!-- ボタンを div タグでラップ -->
-		            <div class="button-save">
-		                <button type="submit">編集</button>
-		            </div>
-		        	</form>
     </div>
 </div>
 

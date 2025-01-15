@@ -7,10 +7,10 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
-        <h2>子供情報追加登録</h2>
+        <h2 class="title">子供情報追加登録</h2>
+        <p>新規登録する子供の名前の入力とクラスを選択してください</p>
 
         <form action="ChildAddExecute.action" method="post">
             <div class="form-group">
@@ -56,24 +56,16 @@
                 <input type="hidden" id="facility_id" name="facility_id" value="${facility_id}" />
             </div>
 
-            <div class="button-save">
-		                <button type="submit">登録</button>
-		    </div>
+		    <button type="submit" class="button-send">登録</button>
+
         </form>
        <c:choose>
-		    <c:when test="${user_type == 'M'}">
-		        <form action="ParentsIDInput.action" method="get">
-		            <input type="hidden" name="parents_id" value="${parents_id}">
-		             <div class="button-save">
-		                <button type="submit">子供情報の確認</button>
-		            </div>
-		        </form>
-		    </c:when>
+
 
 		    <c:when test="${user_type == 'P'}">
 		        <form action="ChildInfo.action" method="get">
 		             <div class="button-save">
-		                <button type="submit">子供情報の確認</button>
+		                <button type="submit">多分戻るボタン</button>
 		            </div>
 		        </form>
 		    </c:when>

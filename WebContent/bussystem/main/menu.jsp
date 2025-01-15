@@ -11,6 +11,8 @@
 
 <body>
 <c:import url="/common/header.jsp" />
+
+
 <div class="main">
 <div class="conmenu">
 		<form action = "ｃ" method="post">
