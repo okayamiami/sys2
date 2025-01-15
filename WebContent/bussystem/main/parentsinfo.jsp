@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th>パスワード</th>
-                    <td>${userinfo.parents_pass}</td>
+                    <td>*******</td>
                 </tr>
                 <tr>
                     <th>住所</th>

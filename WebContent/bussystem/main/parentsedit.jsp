@@ -46,9 +46,13 @@
                     <tr>
                         <th>パスワード</th>
                         <td>
-                         <input type="hidden" name="parents_pass" value="${userinfo.parents_pass}" />
-               				<span>${userinfo.parents_pass} *変更不可</span>
-
+                           <input type="text" name="parents_pass"
+                                   minlength="6" maxlength="20"
+                                   pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+"
+                                   title="大文字を1文字以上含む英数字6～20文字で入力してください"
+                                   placeholder="パスワードを入力"
+                                   value="${userinfo.parents_pass}"
+                           />
                         </td>
                     </tr>
                     <tr>
