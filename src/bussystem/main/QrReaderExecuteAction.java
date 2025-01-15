@@ -58,9 +58,9 @@ public class QrReaderExecuteAction extends Action {
             	Boolean gettingStatus = gDao.getGetinfo(bus_id, child_id, facility_id).isGet_is_attend();
 
             	if(gettingStatus == true){
-            		req.setAttribute("getting_status", "乗車しました。");
+            		req.setAttribute("getting_status", "に乗車しました。");
             	}else if(gettingStatus == false){
-            		req.setAttribute("getting_status", "降車しました。");
+            		req.setAttribute("getting_status", "から降車しました。");
             	}else{
             		req.setAttribute("errorMessage", "出席情報の取得に失敗しました。");
                     req.getRequestDispatcher("error.jsp").forward(req, res);
