@@ -2,18 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<body>
-
 <!-- ヘッダーをインポート -->
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <!-- ナビゲーションをインポート -->
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
-        <h2>お知らせ詳細</h2>
+        <h2 class="title">お知らせ詳細</h2>
 
         <!-- 詳細情報を表示 -->
         <table border="1">
@@ -45,12 +40,11 @@
         </table>
 
         <!-- 戻るボタン -->
-        <a href="InfoList.action">お知らせ一覧に戻る</a>
         <%-- リクエスト属性 user_type が "M" の場合にフォームを表示 --%>
 		<c:if test="${requestScope.user_type eq 'M'}">
 		    <form action="InfoDelete.action" method="post">
 		        <input type="hidden" name="info_id" value="${info_set.info_id}" />
-		        <input type="submit" value="削除確認" />
+		        <button type="submit" class="button-send">削除確認</button>
 		    </form>
 		</c:if>
     </div>
@@ -59,5 +53,3 @@
 <!-- フッターをインポート -->
 <c:import url="/common/footer.jsp" />
 
-</body>
-</html>
