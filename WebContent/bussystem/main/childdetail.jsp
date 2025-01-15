@@ -2,21 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>子供詳細</title>
-</head>
-<body>
+
 <c:import url="/common/header.jsp" />
 <div class="main">
-    <c:import url="/common/navi.jsp" />
     <div class="con">
-    <form action="ChildList.action" method="get">
-        <button type="submit">戻る</button>
-    </form>
 
-        <h2>子供詳細情報</h2>
+        <h2 class="title">子供詳細情報</h2>
+
+        <p>選択した子供情報は以下の通りです</p>
 
         <!-- エラーメッセージの表示 -->
         <c:if test="${not empty error}">
@@ -51,6 +44,4 @@
     </div>
 </div>
 
-</body>
 <c:import url="/common/footer.jsp" />
-</html>

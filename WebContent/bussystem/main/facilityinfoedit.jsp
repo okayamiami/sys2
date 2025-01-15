@@ -3,9 +3,13 @@
 
 <c:import url="/common/header.jsp" />
 <div class="main">
-<c:import url="/common/navi.jsp" />
+
 <div class="con">
+
+<h2 class="title">施設情報編集</h2>
+<p>変更箇所の入力をして変更ボタンを押してください</p>
 <form action="FacilityInfoEditExecute.action" method="post">
+	<button type="submit" class="button-send">変更</button>
     <table>
     <c:if test="${not empty fc}">
         <tr><th>施設ID</th><td>
@@ -74,11 +78,8 @@
     }
 	</script>
 
-    <button type="submit">保存</button>
+
 </form>
-<a href="FacilityInfo.action">
-  <button type="button">戻る</button>
-</a>
 </div>
 </div>
 <c:import url="/common/footer.jsp" />
