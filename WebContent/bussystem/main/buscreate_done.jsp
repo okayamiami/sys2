@@ -8,10 +8,9 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
 <div class="con">
 
-	<h2>バス新規作成</h2>
+	<h2 class="title">バス新規作成完了</h2>
 
 	<!-- エラーメッセージの表示 -->
 	<c:if test="${not empty error}">
@@ -19,7 +18,6 @@
     </c:if>
 
     <p>バス新規作成が完了しました</p>
-    <a href="NewRegistMenu.action">新規作成機能選択に戻る</a>
   </div>
   </div>
 </body>

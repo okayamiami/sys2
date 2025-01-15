@@ -1,41 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title>保護者情報</title>
-</head>
-<body>
+
 
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
 
-        <h2>保護者情報</h2>
+        <h2 class="title">保護者情報編集</h2>
+        <p>変更箇所を入力してください</p>
         <c:choose>
-				    <c:when test="${user_type == 'M'}">
-				        <!-- 管理者向けのフォーム -->
-				        <form action="ParentsInput.action" method="get">
-
-				            <input type="hidden" name="parents_id" value="${parents_id}">
-
-				                <div class="button-save">
-		                		<button type="submit">保護者情報の確認</button>
-		            			</div>
-				        </form>
-				    </c:when>
 
 				    <c:when test="${user_type == 'P'}">
 				        <!-- 保護者向けのリンク -->
 				        <a href="Parents.action">
-				            <button type="button">保護者情報の確認</button>
+				            <button type="button">戻るボタン（確認後消去）</button>
 				        </a>
 				    </c:when>
 				</c:choose>
         <form action="ParentsEditExecute.action" method="post">
+        	<button type="submit" class="button-send">保存</button>
             <table>
                 <c:if test="${not empty userinfo}">
                     <tr>
@@ -108,11 +94,8 @@
 
             </table>
 
-           <tr>
-			    <td colspan="2" style="text-align: right;">
-			        <button type="submit" class="button-save">保存</button>
-			    </td>
-			</tr>
+
+
 
            </form>
 
@@ -121,6 +104,5 @@
 	</div>
 
 
-</body>
 
 <c:import url="/common/footer.jsp" />
