@@ -27,7 +27,7 @@
 	            placeholder="7文字以内で入力してください"  />
 
 
-        <input type="submit" value="送信" class="button-send">
+        <input type="submit" value="登録" class="button-send">
     </form>
 
    </div>
