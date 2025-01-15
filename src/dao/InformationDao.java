@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,7 +139,7 @@ public class InformationDao extends Dao{
 	        java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(System.currentTimeMillis());
 
 	        // 新しい info_id を生成
-	        String newInfoId = generateNewInfoId(connection);
+	        String newInfoId = generateNewInfoId(connection, facilityId);
 
 	        // プリペアードステートメントに INSERT 文をセット
 	        statement = connection.prepareStatement(
@@ -181,31 +182,34 @@ public class InformationDao extends Dao{
 	}
 
 
-	 public String generateNewInfoId(Connection connection) throws SQLException {
-	        String prefix = "24Y";
-	        int numericPart = 1; // デフォルトの数値部分
+	public String generateNewInfoId(Connection connection, String facilityId) throws SQLException {
+	    // 現在の年を取得（例: "2025"）
+	    String currentYear = String.valueOf(LocalDate.now().getYear()).substring(2); // 年の末尾2桁を取得
 
-	        String query = "SELECT MAX(info_id) AS max_id FROM Information WHERE info_id LIKE ?";
-	        try (PreparedStatement statement = connection.prepareStatement(query)) {
-	            statement.setString(1, prefix + "%");
-	            try (ResultSet resultSet = statement.executeQuery()) {
-	                if (resultSet.next()) {
-	                    String currentMaxId = resultSet.getString("max_id");
-	                    if (currentMaxId != null && currentMaxId.startsWith(prefix)) {
-	                        String numberPart = currentMaxId.substring(prefix.length());
-	                        try {
-	                            numericPart = Integer.parseInt(numberPart) + 1;
-	                        } catch (NumberFormatException e) {
-	                            numericPart = 1;
-	                        }
+	    int numericPart = 1; // デフォルトの数値部分
+
+	    String query = "SELECT MAX(info_id) AS max_id FROM Information WHERE info_id LIKE ? and facility_id = ?";
+	    try (PreparedStatement statement = connection.prepareStatement(query)) {
+	        statement.setString(1, currentYear + "%");
+	        statement.setString(2, facilityId);
+	        try (ResultSet resultSet = statement.executeQuery()) {
+	            if (resultSet.next()) {
+	                String currentMaxId = resultSet.getString("max_id");
+	                if (currentMaxId != null && currentMaxId.startsWith(currentYear)) {
+	                    String numberPart = currentMaxId.substring(currentYear.length());
+	                    try {
+	                        numericPart = Integer.parseInt(numberPart) + 1;
+	                    } catch (NumberFormatException e) {
+	                        numericPart = 1;
 	                    }
 	                }
 	            }
 	        }
-
-	        // 新しいIDを生成し、ゼロパディング（例: "24Y01"）
-	        return String.format("%s%02d", prefix, numericPart);
 	    }
+
+	    // 新しいIDを生成し、ゼロパディング（例: "2501"）
+	    return String.format("%s%02d", currentYear, numericPart);
+	}
 
 	 public boolean deleteInformationByIds(String facilityId, String infoId) throws Exception {
 

@@ -20,27 +20,35 @@
 		        </div>
 		</c:if>
         <!-- お知らせの一覧を表示 -->
-        <c:forEach var="info" items="${ilist_set}">
-            <table border="1">
-                <tr>
-                    <td>日付</td>
-                    <!-- Timestamp型の日付をフォーマットして表示 -->
-                    <td>
-                        <fmt:formatDate value="${info.info_date}" pattern="yyyy年MM月dd日 HH:mm" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>タイトル</td>
-                    <!-- タイトルをクリック可能にする -->
-                    <td><a href="InfoContent.action?info_id=${info.info_id}">${info.info_title}</a></td>
-                </tr>
-                <tr>
-                    <td>ジャンル</td>
-                    <td>${info.info_genre}</td>
-                </tr>
-            </table>
-            <br>
-        </c:forEach>
+        <c:if test="${empty ilist_set}">
+        	<div>
+		            <strong style="color:black;">現在閲覧可能なお知らせはありません。</strong>
+		    </div>
+        </c:if>
+         <c:if test="${not empty ilist_set}">
+	        <c:forEach var="info" items="${ilist_set}">
+	            <table border="1">
+	                <tr>
+	                    <td>日付</td>
+	                    <!-- Timestamp型の日付をフォーマットして表示 -->
+	                    <td>
+	                        <fmt:formatDate value="${info.info_date}" pattern="yyyy年MM月dd日 HH:mm" />
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>タイトル</td>
+	                    <!-- タイトルをクリック可能にする -->
+	                    <td><a href="InfoContent.action?info_id=${info.info_id}">${info.info_title}</a></td>
+	                </tr>
+	                <tr>
+	                    <td>ジャンル</td>
+	                    <td>${info.info_genre}</td>
+	                </tr>
+	            </table>
+	            <br>
+	        </c:forEach>
+        </c:if>
+
 
         <!-- 戻るボタン -->
         <a href="InfoMenu.action">お知らせ機能選択に戻る</a>

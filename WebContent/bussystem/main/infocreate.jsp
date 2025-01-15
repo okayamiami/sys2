@@ -17,11 +17,20 @@
         <form action="InfoCreateExecute.action" method="post">
             <!-- ジャンルの選択 -->
             <label>ジャンル</label>
-            <select name="info_genre">
+            <select name="info_genre" required>
                 <option value="">---</option>
-                <c:forEach var="info" items="${info_set}">
-                    <option value="${info.info_genre}">${info.info_genre}</option>
-                </c:forEach>
+                <!-- 9つのジャンルを直接指定 -->
+                <option value="行事関連">行事関連</option>
+                <option value="日常活動">日常活動</option>
+                <option value="健康・安全">健康・安全</option>
+                <option value="給食・アレルギー">給食・アレルギー</option>
+                <option value="保護者会・面談">保護者会・面談</option>
+                <option value="お知らせ・お願い">お知らせ・お願い</option>
+                <option value="緊急連絡">緊急連絡</option>
+                <option value="入園・退園・進級">入園・退園・進級</option>
+                <option value="園だより">園だより</option>
+                <!-- その他 -->
+                <option value="その他">その他</option>
             </select>
             <div>${errors.get("info_genre")}</div>
 
@@ -31,9 +40,11 @@
             <div>${errors.get("title")}</div>
 
             <!-- 本文の入力 -->
-            <label>本文</label>
-            <textarea name="content" rows="5" cols="40" maxlength="300" required>${content}</textarea>
-            <div>${errors.get("content")}</div>
+			<label>本文</label>
+			<textarea name="content" rows="5" cols="40" maxlength="300" required>${content}</textarea>
+			<div>${errors.get("content")}</div>
+
+
 
             <!-- 送信ボタンと戻るボタン -->
             <div>

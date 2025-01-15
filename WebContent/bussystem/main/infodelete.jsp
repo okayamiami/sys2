@@ -27,7 +27,15 @@
             </tr>
             <tr>
                 <td>本文</td>
-                <td>${info_set.info_main}</td>
+                <script>
+				    window.onload = function() {
+				        var content = document.getElementById("info_main");
+				        if (content) {
+				            content.innerHTML = content.innerHTML.replace(/\n/g, "<br>");
+				        }
+				    };
+				</script>
+                <td id="info_main">${info_set.info_main}</td>
             </tr>
             <tr>
                 <td>ジャンル</td>

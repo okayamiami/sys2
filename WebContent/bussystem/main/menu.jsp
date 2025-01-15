@@ -92,7 +92,7 @@
 							<div class="menu-section">
 							    <h4>お知らせ</h4>
 							    <div class="menu-links">
-							        <a href="InfoMenu.action">お知らせ機能</a>
+							        <a href="InfoList.action">お知らせ一覧</a>
 							    </div>
 							</div>
 				    </c:when>
