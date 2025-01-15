@@ -118,7 +118,7 @@
 
             <c:if test="${not empty child_name}">
                 <div>
-                    <strong style="color:black;">${child_name}は${bus_id}から${getting_status}</strong>
+                    <strong style="color:black;">${child_name}は${bus_name}${getting_status}</strong>
                 </div>
             </c:if>
 
