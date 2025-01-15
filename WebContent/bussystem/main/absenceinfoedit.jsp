@@ -2,26 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>欠席連絡更新画面</title>
-</head>
 
-<body>
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
 <div class="con">
 
-	<form action="AbsenceSelect.action" method="get">
-        <button type="submit">戻る</button>
-    </form>
-
-
-	<h2>欠席連絡更新</h2>
+	<h2 class="title">欠席連絡更新</h2>
+	<p>欠席理由の変更または欠席状態の変更をして保存ボタンを押してください</p>
 <form action="AbsenceInfoEditExecute.action" method="post">
+	<button type="submit" class="button-send">保存</button>
     <table>
     <c:if test="${not empty abs}">
         <tr><th>欠席ID</th><td>
@@ -58,11 +48,10 @@
          </c:if>
     </table>
 
-    <button type="submit">保存</button>
+
 </form>
 
 </div>
 </div>
-</body>
+
 <c:import url="/common/footer.jsp" />
-</html>
