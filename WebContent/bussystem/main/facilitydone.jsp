@@ -3,14 +3,11 @@
 
 <c:import url="/common/header.jsp" />
 <div class="main">
-<c:import url="/common/navi.jsp" />
+
 <div class="con">
-<h2>情報を変更しました</h2>
-<div class="menu-links-fac">
-<a href="FacilityInfo.action">施設情報</a>
-<a href="Menu.action">メニューに戻る</a>
+<h2 class="title">施設情報変更完了</h2>
+<p>情報を変更しました</p>
 </div>
 </div>
-</div>
+
 <c:import url="/common/footer.jsp" />
-</html>

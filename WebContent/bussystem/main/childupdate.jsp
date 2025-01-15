@@ -16,7 +16,7 @@
         <form action="ChildUpdateExecute.action" method="post">
             <!-- 保存ボタン -->
 		    <button type="submit" class="button-send">保存</button>
-        </form>
+
 
 
             <table>
@@ -73,7 +73,7 @@
 
     </div>
 </div>
-
+</form>
 <!-- フッターのインクルード -->
 <c:import url="/common/footer.jsp" />
 

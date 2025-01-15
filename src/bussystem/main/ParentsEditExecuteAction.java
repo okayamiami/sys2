@@ -40,6 +40,7 @@ public class ParentsEditExecuteAction extends Action {
         String parents_mail2 = req.getParameter("parents_mail2");
         String parents_mail3 = req.getParameter("parents_mail3");
 
+        System.out.println(parents_name);
         if ("P".equals(user_type)) {
         // 現在のパスワードをデータベースから取得
         ParentsUser currentUser = PD.getParentsUserInfo(parents_id, facilityId);
@@ -72,11 +73,13 @@ public class ParentsEditExecuteAction extends Action {
 
         try {
             if ("P".equals(user_type)) {
-            // 保護者情報を保存
-            PD.saveParentsUserInfo(parentsUser);
-            parentsUser.setAuthenticated(true); // 保護者情報が正しく更新されるように認証状態を付与
-            session.removeAttribute("user");
-            session.setAttribute("user", parentsUser); // セッションに更新後のユーザー情報を保存ー＞header用に
+	            // 保護者情報を保存
+	            PD.saveParentsUserInfo(parentsUser);
+	            parentsUser.setAuthenticated(true); // 保護者情報が正しく更新されるように認証状態を付与
+	            session.removeAttribute("user");
+	            session.setAttribute("user", parentsUser); // セッションに更新後のユーザー情報を保存ー＞header用に
+            }else if("M".equals(user_type)){
+            	PD.saveParentsUserInfo(parentsUser);
             }
 
             // ユーザー情報をリクエストに設定し、メッセージを表示

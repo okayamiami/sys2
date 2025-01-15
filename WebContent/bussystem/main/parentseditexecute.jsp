@@ -13,12 +13,19 @@
     <p>${message}</p>
 		<c:choose>
 
+			<c:when test="${user_type == 'M'}">
+                <!-- 管理者向けのフォーム -->
+                <form action="ParentsInput.action" method="get">
+                    <input type="hidden" name="parents_id" value="${parents_id}">
+		                <button type="submit" class="button-send">保護者情報の確認</button>
+
+                </form>
+            </c:when>
+
 
 		    <c:when test="${user_type == 'P'}">
 		        <form action="Parents.action" method="get">
-		            <div class="button-save">
-		                <button type="submit">保護者情報の確認</button>
-		            </div>
+		                <button type="submit" class="button-send">保護者情報の確認</button>
 		        </form>
 		    </c:when>
 		</c:choose>

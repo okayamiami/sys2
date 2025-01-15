@@ -15,7 +15,6 @@
 
 <div class="main">
 <div class="conmenu">
-		<form action = "ｃ" method="post">
 		<%
 		session.getAttribute("user_type");
 		session.getAttribute("user_id");
@@ -102,7 +101,6 @@
 
 				</c:choose>
 
-		</form>
 </div>
 </div>
 
