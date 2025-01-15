@@ -4,7 +4,7 @@
 
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <c:import url="/common/header.jsp" />
 
     <div class="main">
