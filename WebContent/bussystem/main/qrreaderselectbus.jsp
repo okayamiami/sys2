@@ -2,17 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<body>
 
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
+
 
 <div class ="con">
 
-<h2>バス選択</h2>
+<h2 class="title">バス選択</h2>
 <table>
     <tr>
         <th>施設ID</th>
@@ -32,7 +30,7 @@
                     <input type="hidden" name="facility_id" value="${bus.facility_id}" />
                     <input type="hidden" name="bus_id" value="${bus.bus_id}" />
                     <input type="hidden" name="bus_name" value="${bus.bus_name}" />
-                    <button type="submit">選択</button>
+                    <button type="submit" class="button-send">選択</button>
                 </form>
             </td>
         </tr>
@@ -43,10 +41,9 @@
 </table>
 
 
-<a href="QrMenu.action">QR機能選択画面に戻る</a>
+
 </div>
 </div>
 
-</body>
+
 <c:import url="/common/footer.jsp" />
-</html>

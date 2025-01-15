@@ -5,11 +5,10 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
 
 <div class ="con">
 
-<h2>QRコード作成</h2>
+<h2 class="title">QRコード作成</h2>
 <table>
     <tr>
         <th>ID</th>
@@ -37,7 +36,7 @@
                     <input type="hidden" name="child_id" value="${child.child_id}" />
                     <input type="hidden" name="child_name" value="${child.child_name}" />
                     <input type="hidden" name="facility_id" value="${child.facility_id}" />
-                    <button type="submit">作成</button>
+                    <button type="submit" class="button-send">作成</button>
                 </form>
             </td>
         </tr>
