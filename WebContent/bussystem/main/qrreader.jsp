@@ -1,26 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>QRコード読み取り</title>
-    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
-</head>
-<body>
-    <h2>QRコード読み取り</h2>
+
+
+
 
     <c:import url="/common/header.jsp" />
 
     <div class="main">
-        <c:import url="/common/navi.jsp" />
 
-
-		<h1>${bus_name}に${countAttend}人乗車しています</h1>
         <div class="con">
+        <h2 class="title">QRコード読み取り</h2>
+		<p>${bus_name}に${countAttend}人乗車しています</p>
             <!-- QRコード読み取り開始ボタン -->
-			<button class="button-qr" onclick="startQRCodeReader()" aria-label="QRコード読み取りを開始">QRコード読み取りを開始</button>
+			<button class="button-send" onclick="startQRCodeReader()" aria-label="QRコード読み取りを開始">QRコード読み取りを開始</button>
 			<!-- QRコード読み取り中断ボタン -->
-			<button class="button-qr" onclick="stopQRCodeReader()" aria-label="QRコード読み取りを中断">QRコード読み取りを中断</button>
+			<button class="button-send" onclick="stopQRCodeReader()" aria-label="QRコード読み取りを中断">QRコード読み取りを中断</button>
 
             <!-- スキャン用のカメラビュー -->
             <div id="scannerContainer">
@@ -126,9 +121,7 @@
                     <strong style="color:black;">${child_name}は${bus_id}から${getting_status}</strong>
                 </div>
             </c:if>
-            <a href="QrReaderSelectBus.action">バス選択に戻る</a>
-            <a href="GetListInfo.action">乗降状況を確認</a>
+
         </div>
     </div>
-</body>
-</html>
+<c:import url="/common/footer.jsp" />

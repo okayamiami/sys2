@@ -5,44 +5,49 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel='stylesheet' href='/sys2/bussystem/css/style.css'>
+  <link rel='stylesheet' href=${pageContext.request.contextPath}/bussystem/css/style.css>
   <title>登園・バス管理システム</title>
 </head>
 
 
   <div class="header">
 
-    <h1>
-        登園・バス管理システム
-    </h1>
+<h1>
+    <!-- ホームアイコンには特別なスタイルを適用しない -->
+    <a class="home-icon" href="Menu.action">
+        <img src="${pageContext.request.contextPath}/images/new.png" alt="ホーム">
+    </a>
 
-    <c:if test="${user.isAuthenticated()}">
+    登園・バス管理システム
+</h1>
 
-       <span>
+<c:if test="${user.isAuthenticated()}">
+    <span>
         <c:choose>
-          <c:when test="${user_type == 'M'}">
-            ${user.getUser_name()}先生、ようこそ！
-          </c:when>
-          <c:when test="${user_type == 'T'}">
-            ${user.getUser_name()}先生、ようこそ！
-          </c:when>
-          <c:when test="${user_type == 'P'}">
-            ${user.getParents_name()}様、ようこそ！
-          </c:when>
+            <c:when test="${user_type == 'M'}">
+                ${user.getUser_name()}先生、ようこそ！
+            </c:when>
+            <c:when test="${user_type == 'T'}">
+                ${user.getUser_name()}先生、ようこそ！
+            </c:when>
+            <c:when test="${user_type == 'P'}">
+                ${user.getParents_name()}様、ようこそ！
+            </c:when>
         </c:choose>
-      </span>
+    </span>
 
-    <div class="links">
-        <a href="Menu.action">
-            <img src="../images/home.png" >
-            メニュー画面に戻る
-        </a>
-        <a href="Syslogout.action">
-            <img src="../images/home.png" >
-            ログアウト
-        </a>
-    </div>
-  </c:if>
+		<div class="links">
+		    <!-- 各ボタン間に間隔ができます -->
+		    <a href="Menu.action">
+		        <img src="${pageContext.request.contextPath}/images/new.png" alt="メニュー">
+		        メニュー画面に戻る
+		    </a>
+		    <a href="Syslogout.action">
+		        <img src="${pageContext.request.contextPath}/images/home.png" alt="ログアウト">
+		        ログアウト
+		    </a>
+		</div>
+</c:if>
 </div>
 
 <body>

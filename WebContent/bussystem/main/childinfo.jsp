@@ -7,19 +7,30 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <c:import url="/common/navi.jsp" />
+
 
     <div class="con">
-        <a href="menu.jsp" class="menu-link">メニューに戻る</a>
-        <br>
+
+
 
         <!-- 子供情報テーブル -->
+        <h2 class="title">子供情報一覧</h2>
+        <p>クラス・名前に変更がある場合は変更ボタンから修正してください</p>
+
+        <!-- 追加ボタン -->
+        <c:if test="${not empty parents_id}">
+            <form action="ChildAdd.action" method="post" style="display:inline;">
+                <input type="hidden" name="parents_id" value="${parents_id}" />
+		        <button type="submit" class="button-send">新規子供情報登録</button>
+            </form>
+        </c:if>
+
         <table>
             <tr>
                 <th>保護者ID</th>
                 <th>クラス名</th>
                 <th>子供の名前</th>
-                <th>操作</th>
+                <th>-</th>
             </tr>
             <c:forEach var="child" items="${userCI}">
                 <tr>
@@ -45,25 +56,13 @@
                             <input type="hidden" name="parents_id" value="${child.parents_id}" />
                             <!-- 子供のchild_idを送信する隠しフィールド -->
                             <input type="hidden" name="child_id" value="${child.child_id}" />
-                            <div class="button-save">
-		                		<button type="submit">子供情報の更新</button>
-		            		</div>
+		                		<button type="submit" class="button-send">編集</button>
                         </form>
                     </td>
 
                 </tr>
             </c:forEach>
         </table>
-
-        <!-- 追加ボタン -->
-        <c:if test="${not empty parents_id}">
-            <form action="ChildAdd.action" method="post" style="display:inline;">
-                <input type="hidden" name="parents_id" value="${parents_id}" />
-                   <div class="button-save">
-		                <button type="submit">子供情報の新規登録</button>
-		            </div>
-            </form>
-        </c:if>
 
     </div>
 </div>

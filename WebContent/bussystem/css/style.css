@@ -242,7 +242,7 @@
 
 /* ------------------------------------------- */
 
-/* ボタンCSS */
+/* ログインボタンCSS */
 .button-save {
     display: inline-block; /* ボタンのように横並びにする */
     padding: 10px 20px;
@@ -270,6 +270,35 @@
     cursor: pointer;
 }
 
+/* ------------------------------------------- */
+/* 各ページボタンCSS（小さめ） */
+
+.button-send {
+    display: inline-block;
+    padding: 5px 10px; /* パディングを小さくする */
+    font-size: 12px; /* フォントサイズを小さくする */
+    text-align: center;
+    color: white;
+    background-color: #1bade4; /* 蒼色 */
+    border: none;
+    border-radius: 3px; /* 角丸を小さくする */
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.button-send:hover {
+    background-color: #45a049;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2); /* 影も少し小さくする */
+}
+
+/* ボタン内のテキストのスタイル */
+.button-send button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
 
 /* ------------------------------------------- */
 

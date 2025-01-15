@@ -1,22 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>乗降状況</title>
-</head>
-<body>
+
 
 <!-- ヘッダーのインポート -->
 <c:import url="/common/header.jsp" />
 
 <div class="main">
     <!-- ナビゲーションのインポート -->
-    <c:import url="/common/navi.jsp" />
+
 
     <div class="con">
-        <h1>乗降状況</h1>
+        <h2 class="title">乗降状況</h2>
 
         <!-- エラーメッセージの表示 -->
         <c:if test="${not empty error}">
@@ -60,7 +55,7 @@
 
             </select>
 
-            <button type="submit">検索</button>
+            <button type="submit" class="button-send">検索</button>
         </form>
 
         <!-- 検索結果 -->
@@ -91,11 +86,10 @@
                 </c:forEach>
             </tbody>
         </table>
-        <a href="QrMenu.action">QR機能選択画面に戻る</a>
+
     </div>
 </div>
+<c:import url="/common/footer.jsp" />
 
-</body>
-</html>
 
 

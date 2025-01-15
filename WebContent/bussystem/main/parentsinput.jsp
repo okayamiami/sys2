@@ -9,21 +9,21 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
-    	 <h2>保護者情報</h2>
+    	 <h2 class="title">保護者情報</h2>
+    	 <p>保護者IDを入力してください</p>
+
         <!-- 保護者ID入力フォーム -->
         <form action="ParentsInput.action" method="post">
         	<div style="color: red;">${ errors.get("errorMessage") }</div>
             <label for="parents_id">保護者ID:</label>
             <input type="text" id="parents_id" name="parents_id" required/>
 
-              <div class="button-save">
-		          <button type="submit">検索</button>
-		      </div>
+
+		          <button type="submit" class="button-send">検索</button>
         </form>
-        <a href="menu.jsp" class="menu-link">メニューに戻る</a>
+
     </div>
 </div>
 

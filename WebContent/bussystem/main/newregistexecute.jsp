@@ -8,12 +8,12 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
+
 
 <div class ="con">
 
-<h2>新規情報登録</h2>
-<p>登録完了しました</p>
+<h2 class="title">新規情報登録</h2>
+<p>新規ユーザーの登録が完了しました</p>
 
 <table class="table table-hover">
 <tr>
@@ -39,9 +39,7 @@
 	</td>
 <tr>
 </table>
-	<a href="Menu.action">
-</a>
-<a href="NewRegistMenu.action">新規作成機能選択に戻る</a>
+
 </div>
 </div>
 

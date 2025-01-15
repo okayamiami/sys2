@@ -9,11 +9,12 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
         <!-- 保護者ID入力フォーム -->
-        <h2>子供情報</h2>
+        <h2 class="title">子供情報</h2>
+
+        <p>表示する子供の保護者IDを入力してください</p>
         <form action="ParentsIDInput.action" method="post">
 
         <!-- 入力されたIDが一致しないときのエラー文 -->
@@ -23,13 +24,13 @@
         	<!-- 保護者IDを入力 -->
             <label for="parents_id">保護者ID:</label>
             <input type="text" id="parents_id" name="parents_id"/>
-               <div class="button-save">
-		          <button type="submit">検索</button>
-		       </div>
+
+		          <button type="submit" class="button-send">検索</button>
+
 
              <input type="hidden" id="parents_name" name="parents_name" value="${parents_name}" />
         </form>
-        <a href="menu.jsp" class="menu-link">メニューに戻る</a>
+
     </div>
 </div>
 
