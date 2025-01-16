@@ -15,10 +15,13 @@ public class ChildAddExecuteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        HttpSession session = req.getSession(); // セッションを取得
+
+    	// セッションを取得
+    	HttpSession session = req.getSession();
         String user_type = (String) session.getAttribute("user_type");
         String facilityId = null;
         String parentsId = null;
+
 
         // ユーザー情報をセッションから取得
         Object user = session.getAttribute("user");
@@ -30,24 +33,31 @@ public class ChildAddExecuteAction extends Action {
             ManageUser manageUser = (ManageUser) user;
             facilityId = manageUser.getFacility_id();
             parentsId = req.getParameter("parents_id");
-            //System.out.println(parentsId);
         }
+
         // リクエストパラメータを取得
         String parents_id = req.getParameter("parents_id");
         String childId = req.getParameter("child_id");
         String childName = req.getParameter("child_name");
         String classId = req.getParameter("class_id");
         String isAttend = req.getParameter("is_attend");
+        String class_name = req.getParameter("class_name");
 
+
+        //入力チェック
         if (childId == null || childId.isEmpty() ||
             childName == null || childName.isEmpty() ||
-            classId == null || classId.isEmpty() ||
+            class_name == null || class_name.isEmpty() ||
             isAttend == null || isAttend.isEmpty()) {
             req.setAttribute("message", "すべての項目を入力してください。");
           //本当はchildinfo.jsp　なぜ　ー＞情報がなくなるため
             req.getRequestDispatcher("menu.jsp").forward(req, res);
             return;
         }
+        //DAO　クラス名からクラスコードを入手
+        ChildDao ChildDao = new ChildDao();
+        ChildDao.getClassCdByName(class_name, facilityId);
+        classId = ChildDao.getClassCdByName(class_name, facilityId);
 
         // 子供情報の作成
         Child child = new Child();
@@ -57,6 +67,7 @@ public class ChildAddExecuteAction extends Action {
         child.setClass_id(classId);
         child.setIs_attend(Boolean.parseBoolean(isAttend));
         child.setFacility_id(facilityId);
+        //child.setClass_name(class_name);
 
         try {
             // データベースに子供情報を登録
@@ -72,6 +83,7 @@ public class ChildAddExecuteAction extends Action {
         } catch (Exception e) {
             e.printStackTrace(); // エラーをログに出力
             req.setAttribute("message", "登録中にエラーが発生しました。再度お試しください。");
+            System.out.println("失敗");
             //本当はchildinfo.jsp　なぜ　ー＞情報がなくなるため
             req.getRequestDispatcher("menu.jsp").forward(req, res);
         }

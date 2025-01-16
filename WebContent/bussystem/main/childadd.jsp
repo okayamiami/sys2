@@ -39,13 +39,14 @@
                 <input type="hidden" id="parents_name" name="parents_name" value="${parents_name}" />
             </div>
 
-            <div class="form-group">
-                <label for="class_id">クラスID:</label>
-                <select id="class_id" name="class_id">
-                    <c:forEach var="classId" items="${class_set}">
-                        <option value="${classId}">${classId}</option>
-                    </c:forEach>
-                </select>
+           <div class="form-group">
+                <label for="class_name">クラス名:</label>
+              <select id="class_name" name="class_name">
+				    <c:forEach var="className" items="${class_set}">
+				        <option value="${className}">${className}</option>
+				    </c:forEach>
+				</select>
+
             </div>
 
             <div class="form-group">
