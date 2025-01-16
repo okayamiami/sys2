@@ -87,12 +87,20 @@ public class ChildAddAction extends Action {
                     .collect(Collectors.toList()); // Listに変換
             }
 
-            System.out.println(nextNumber);
-            System.out.println(PU + "保護者ユーザーログイン");
+          //クラスの名前を取得
+            List<String> uniqueClassNames = new ArrayList<>(); // class_nameを格納するリスト
+            if (CID != null && !CID.isEmpty()) {
+                uniqueClassNames = CID.stream()
+                    .map(ClassCd::getClass_name)  // ClassCdのclass_nameを抽出
+                    .distinct()                  // 重複を削除
+                    .collect(Collectors.toList()); // Listに変換
+            }
+
+
 
             // 保護者が新規登録を押した場合の処理
             req.setAttribute("child_id", nextNumber);
-            req.setAttribute("class_set", uniqueClassIds);
+            req.setAttribute("class_set", uniqueClassNames);
             req.setAttribute("parents_name", parents_name);
             req.setAttribute("parents_id", user_id);
             req.setAttribute("user", PU);
@@ -118,6 +126,15 @@ public class ChildAddAction extends Action {
                     .collect(Collectors.toList()); // Listに変換
             }
 
+            //クラスの名前を取得
+            List<String> uniqueClassNames = new ArrayList<>(); // class_nameを格納するリスト
+            if (CID != null && !CID.isEmpty()) {
+                uniqueClassNames = CID.stream()
+                    .map(ClassCd::getClass_name)  // ClassCdのclass_nameを抽出
+                    .distinct()                  // 重複を削除
+                    .collect(Collectors.toList()); // Listに変換
+            }
+
             // 子供リストを取得
             List<Child> child_list = CD.getChildListinfo(facility_id);
             System.out.println(child_list);
@@ -138,12 +155,11 @@ public class ChildAddAction extends Action {
                 nextNumber = 1;
             }
 
-            System.out.println(nextNumber);
-            System.out.println(MU + "管理ユーザーログイン");
 
-            // 管理者が新規登録を押した場合の処理
+            // 管理者が新規登録を押した場合の処理　uniqueClassNames
             req.setAttribute("child_id", nextNumber);
-            req.setAttribute("class_set", uniqueClassIds);
+            //req.setAttribute("class_set", uniqueClassIds);
+            req.setAttribute("class_set", uniqueClassNames);
             req.setAttribute("parents_name", parents_name);
             req.setAttribute("parents_id", user_id);
             req.setAttribute("user", MU);

@@ -371,4 +371,27 @@ public class ChildDao extends Dao{
 
 	}
 
+	//クラス名と施設CDからクラスIDを入手(新規子供で使う)
+	public String getClassCdByName(String className, String facilityId) throws Exception {
+	    String classCd = null;
+	    // コネクションを確立
+	    try (Connection connection = getConnection()) {
+	        // クエリの準備
+	        String query = "SELECT class_id FROM ClassCd WHERE class_name = ? AND facility_id = ?";
+	        try (PreparedStatement statement = connection.prepareStatement(query)) {
+	            statement.setString(1, className);  // class_name
+	            statement.setString(2, facilityId); // facility_id
+	            try (ResultSet resultSet = statement.executeQuery()) {
+	                if (resultSet.next()) {
+	                    classCd = resultSet.getString("class_id");  // class_cd
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        throw new Exception("Error fetching class_cd by class_name", e);
+	    }
+	    return classCd;
+	}
+
+
 }
