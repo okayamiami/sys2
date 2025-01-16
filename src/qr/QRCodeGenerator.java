@@ -25,7 +25,7 @@ public class QRCodeGenerator {
     // QRコード画像生成処理（プライベート）
     private String generateQRCodeImage(String text, int width, int height, ServletContext context) throws WriterException, IOException {
         // WebContent/sysshin ディレクトリに保存する相対パスを指定
-        String relativePath = "/sys2/sysshin/MyQRCode.png";
+        String relativePath = "/sysshin/MyQRCode.png";
         String absolutePath = context.getRealPath(relativePath); // 絶対パスに変換
 
         // 画像保存先のディレクトリが存在しない場合は作成する

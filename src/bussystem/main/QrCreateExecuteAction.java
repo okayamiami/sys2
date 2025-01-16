@@ -33,7 +33,6 @@ public class QrCreateExecuteAction extends Action {
             QRCodeGenerator qrg = new QRCodeGenerator();
             qrImagePath = qrg.generateQRCode(child_id, facility_id, context);
             System.out.println("QRコードの生成が成功しました。");
-            System.out.println(qrImagePath);
 
         } catch (WriterException | IOException e) {
             e.printStackTrace();
