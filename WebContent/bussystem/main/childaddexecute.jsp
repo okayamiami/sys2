@@ -10,23 +10,19 @@
 <div class ="con">
 
 
-    <h2 class="title">子供情報</h2>
+    <h2 class="title">新規子供情報登録完了/h2>
     <p>${message}</p>
     		<c:choose>
 		    <c:when test="${user_type == 'M'}">
 		        <form action="ParentsIDInput.action" method="get">
 		            <input type="hidden" name="parents_id" value="${parents_id}">
-		             <div class="button-save">
 		                <button type="submit" class="button-send">子供情報の確認</button>
-		            </div>
 		        </form>
 		    </c:when>
 
 		    <c:when test="${user_type == 'P'}">
 		        <form action="ChildInfo.action" method="get">
-		             <div class="button-save">
 		                <button type="submit" class="button-send">子供情報の確認</button>
-		            </div>
 		        </form>
 		    </c:when>
 		</c:choose>

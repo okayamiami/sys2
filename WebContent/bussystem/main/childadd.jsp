@@ -59,17 +59,6 @@
 		    <button type="submit" class="button-send">登録</button>
 
         </form>
-       <c:choose>
-
-
-		    <c:when test="${user_type == 'P'}">
-		        <form action="ChildInfo.action" method="get">
-		             <div class="button-save">
-		                <button type="submit">多分戻るボタン</button>
-		            </div>
-		        </form>
-		    </c:when>
-		</c:choose>
 
     </div>
 </div>
