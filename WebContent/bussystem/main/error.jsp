@@ -6,7 +6,7 @@
     <title>エラー</title>
 </head>
 <body>
-    <h2>エラーが発生しました</h2>
+    <h2 class="title">エラーが発生しました</h2>
 
     <!-- errorMessage属性が存在する場合に表示 -->
     <c:if test="${not empty errorMessage}">

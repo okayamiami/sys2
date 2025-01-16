@@ -7,7 +7,6 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <!-- ナビゲーションのインポート -->
 
 
     <div class="con">
@@ -90,6 +89,3 @@
     </div>
 </div>
 <c:import url="/common/footer.jsp" />
-
-
-
