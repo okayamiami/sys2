@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 
-<body>
 <c:import url="/common/header.jsp" />
 <div class="main">
 <div class="con">
@@ -44,7 +42,7 @@
 				</c:forEach>
 			</select>
 
-			<button>絞込み</button>
+			<button class="button-send">絞込み</button>
 
 			<div style="color: red; font-weight: bold;">${errors.get("f1")}</div>
 		</form>
@@ -84,7 +82,7 @@
 								<td>
 								    <form action="AbsenceInfoEdit.action" method="get">
 								        <input type="hidden" name="absenceId" value="${abs.absence_id}">
-								        <button type="submit">変更</button>
+								        <button type="submit" class="button-send">変更</button>
 								    </form>
 								</td>
 						    </tr>
@@ -97,11 +95,10 @@
 			</c:choose>
 		</c:if>
 	<div>
-		<a href="Menu.action">メニュー画面に戻る</a>
+
 
 	</div>
 	</div>
 </div>
-</body>
+
 <c:import url="/common/footer.jsp" />
-</html>

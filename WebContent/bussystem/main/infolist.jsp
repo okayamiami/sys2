@@ -2,18 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<body>
 
 <!-- ヘッダーをインポート -->
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <!-- ナビゲーションをインポート -->
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
-        <h2>お知らせ一覧</h2>
+        <h2 class="title">お知らせ一覧</h2>
         <c:if test="${not empty delete_message}">
 		        <div>
 		            <strong style="color:black;">${delete_message}</strong>
@@ -49,16 +45,10 @@
 	        </c:forEach>
         </c:if>
 
-
-        <!-- 戻るボタン -->
-        <a href="InfoMenu.action">お知らせ機能選択に戻る</a>
     </div>
 </div>
 
 <!-- フッターをインポート -->
 <c:import url="/common/footer.jsp" />
-
-</body>
-</html>
 
 

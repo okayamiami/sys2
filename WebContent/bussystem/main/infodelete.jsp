@@ -5,14 +5,11 @@
 <html>
 <head>
     <title>登録完了</title>
-</head>
-<body>
 
 <c:import url="/common/header.jsp" />
 <div class="main">
-<c:import url="/common/navi.jsp" />
 <div class="con">
-<h2>お知らせ削除確認</h2>
+<h2 class="title">お知らせ削除確認</h2>
 
 <!-- 取得した情報を表示 -->
 <!-- 詳細情報を表示 -->
@@ -49,16 +46,15 @@
 <!-- 削除確認ボタン -->
 <form action="InfoDeleteExecute.action" method="post">
     <input type="hidden" name="info_id" value="${info_set.info_id}" />
-    <input type="submit" value="削除する" />
+    <button type="submit" class="button-send">削除</button>
 </form>
 
 <!-- 戻るボタン -->
 <form action="InfoContent.action" method="post">
 <input type="hidden" name="info_id" value="${info_set.info_id}" />
-    <input type="submit" value="キャンセル" />
+    <button type="submit" class="button-send">キャンセル</button>
 </form>
 </div>
 </div>
-</body>
 <c:import url="/common/footer.jsp" />
-</html>
+
