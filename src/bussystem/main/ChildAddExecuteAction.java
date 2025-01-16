@@ -75,10 +75,14 @@ public class ChildAddExecuteAction extends Action {
             GetDao gDao = new GetDao();
             childDao.saveChildinfo(child);
             gDao.saveGetInfoForAllBuses(child);
-            req.setAttribute("user_type", user_type);
+
+            // 完了画面で表示する
             req.setAttribute("parents_id", parents_id);
+            req.setAttribute("class_name", class_name);
+            req.setAttribute("child_name", childName);
+
             // 登録完了メッセージを設定して遷移
-            req.setAttribute("message", "登録が完了しました。");
+            req.setAttribute("message", "以下の情報で新規子供情報の登録が完了しました。");
             req.getRequestDispatcher("childaddexecute.jsp").forward(req, res);
         } catch (Exception e) {
             e.printStackTrace(); // エラーをログに出力

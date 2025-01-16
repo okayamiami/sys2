@@ -11,25 +11,17 @@
 
     <h2 class="title">保護者情報更新完了</h2>
     <p>${message}</p>
-		<c:choose>
 
-			<c:when test="${user_type == 'M'}">
-                <!-- 管理者向けのフォーム -->
-                <form action="ParentsInput.action" method="get">
-                    <input type="hidden" name="parents_id" value="${parents_id}">
-		                <button type="submit" class="button-send">保護者情報の確認</button>
-
-                </form>
-            </c:when>
-
-
-		    <c:when test="${user_type == 'P'}">
-		        <form action="Parents.action" method="get">
-		                <button type="submit" class="button-send">保護者情報の確認</button>
-		        </form>
-		    </c:when>
-		</c:choose>
-
+		<table class="table table-hover">
+              <tr><th>保護者ID</th><td>${parents_id}</td></tr>
+              <tr><th>保護者名</th><td>${parents_name}</td></tr>
+              <tr><th>パスワード</th><td>${parents_pass}</td></tr>
+              <tr><th>住所</th><td>${parents_address}</td></tr>
+              <tr><th>電話番号</th><td>${parents_tel}</td></tr>
+              <tr><th>メールアドレス1</th><td>${parents_mail1}</td></tr>
+              <tr><th>メールアドレス2</th><td>${parents_mail2}</td></tr>
+              <tr><th>メールアドレス3</th><td>${parents_mail3}</td></tr>
+        </table>
 
 
 	</div>
