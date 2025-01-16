@@ -17,8 +17,16 @@
     	<p style="color: red; font-weight: bold;">${error}</p>
     </c:if>
 
-    <p>欠席報告が完了しました</p>
-    <p></p>
+    <p>下記情報で欠席報告の登録が完了しました</p>
+
+
+		<table class="table table-hover">
+              <tr><th>欠席ID</th><td>${abs_id}</td></tr>
+              <tr><th>名前</th><td>${child_name}</td></tr>
+              <tr><th>欠席理由</th><td>${abs_main}</td></tr>
+              <tr><th>欠席日</th><td>${absence_date}</td></tr>
+        </table>
+
 
 
   </div>

@@ -17,7 +17,20 @@
     	<p style="color: red; font-weight: bold;">${error}</p>
     </c:if>
 
-    <p>バス新規作成が完了しました</p>
+    <p>下記情報でバス新規登録が完了しました</p>
+
+    <table class="table table-hover">
+		<tr>
+			<th>バスID</th>
+			<th>バス名</th>
+		</tr>
+		<tr>
+			<td>${bus_id}</td>
+			<td>${bus_name}</td>
+		<tr>
+	</table>
+
+
   </div>
   </div>
 </body>
