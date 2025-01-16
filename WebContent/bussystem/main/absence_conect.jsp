@@ -8,6 +8,8 @@
 <div class="con">
 
 <h2 class="title">欠席連絡</h2>
+<p>登録されている欠席情報を表示します</p>
+<p>絞り込みをする場合は条件を1つのみ選択してください<br>複数の条件が選択された場合は条件なしの結果が表示されます</p>
 <!-- エラーメッセージの表示 -->
 <c:if test="${not empty error}">
     <p style="color: red; font-weight: bold;">${error}</p>

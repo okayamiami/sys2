@@ -7,7 +7,7 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
+
 
 <div class ="con">
 

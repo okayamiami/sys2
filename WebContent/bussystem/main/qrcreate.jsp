@@ -47,7 +47,7 @@
 </table>
 
 
-<a href="QrMenu.action">QR機能選択画面に戻る</a>
+
 </div>
 </div>
 

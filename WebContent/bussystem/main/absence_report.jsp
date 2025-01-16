@@ -2,16 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>欠席報告</title>
-</head>
-<body>
+
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-<c:import url="/common/navi.jsp" />
+
 <div class="con">
 
 
@@ -20,17 +15,11 @@
 		session.getAttribute("user_id");
 	%>
 
-	<c:choose>
-		<c:when test="${user_type == 'M' || user_type == 'T' }">
-			<a href="AbsenceSelect.action">戻る</a>
-		</c:when>
-		<c:when test="${user_type == 'P' }">
-			<a href="Menu.action">戻る</a>
-		</c:when>
+<!-- 戻る先　管理者・先生　欠席選択画面　　保護者　メニュー画面 -->
 
-	</c:choose>
 
-    <h2>欠席報告</h2>
+    <h2 class="title">欠席報告</h2>
+    <p>名前の選択と欠席理由の入力をしてください</p>
 
     <!-- エラーメッセージの表示 -->
 	<c:if test="${not empty error}">
@@ -51,11 +40,11 @@
 	        <input type="text" name="abs_main" style="width:400px;height:25px;"
 	            placeholder="30文字以内で欠席理由を入力してください" maxlength="30"  />
 
-        <input type="submit" value="送信">
+        <input type="submit" class="button-send" value="送信">
     </form>
 
    </div>
    </div>
-</body>
+
 <c:import url="/common/footer.jsp" />
-</html>
+
