@@ -79,7 +79,7 @@
 							<div class="menu-section">
 							    <h4>欠席管理</h4>
 							    <div class="menu-links">
-							        <a href="AbsenceSelect.action">欠席機能</a>
+							        <a href="AbsenceReport.action">欠席機能</a>
 							    </div>
 							</div>
 

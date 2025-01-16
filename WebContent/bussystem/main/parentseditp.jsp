@@ -7,31 +7,13 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <c:import url="/common/navi.jsp" />
+
 
     <div class="con">
-        <h2>保護者情報</h2>
-        <c:choose>
-            <c:when test="${user_type == 'M'}">
-                <!-- 管理者向けのフォーム -->
-                <form action="ParentsInput.action" method="get">
-                    <input type="hidden" name="parents_id" value="${parents_id}">
-                     <div class="button-save">
-		                <button type="submit">保護者情報の確認</button>
-		            </div>
-                </form>
-            </c:when>
-
-            <c:when test="${user_type == 'P'}">
-                <!-- 保護者向けのリンク -->
-         	        <form action="Parents.action" method="get">
-		            <div class="button-save">
-		                <button type="submit">保護者情報の確認</button>
-		            </div>
-		        </form>
-            </c:when>
-        </c:choose>
+        <h2 class="title">保護者情報編集</h2>
         <form action="ParentsEditExecute.action" method="post">
+			<button type="submit" class="button-send">保存</button>
+
             <table>
                 <c:if test="${not empty userinfo}">
                     <tr>
@@ -110,9 +92,6 @@
                     </tr>
                 </c:if>
             </table>
-                 <div class="button-save">
-		                <button type="submit">保存</button>
-		         </div>
         </form>
     </div>
 </div>
