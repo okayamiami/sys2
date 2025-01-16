@@ -31,6 +31,16 @@ public class FacilityInfoEditExecuteAction extends Action{
 		fc.setFacility_plan(facility_plan);
 		try{
 			fcdao.saveFacilityInfo(fc);
+
+			// 完了画面に表示
+            req.setAttribute("facility_id", facility_id);
+            req.setAttribute("facility_name", facility_name);
+            req.setAttribute("facility_address", facility_address);
+            req.setAttribute("facility_tel", facility_tel);
+            req.setAttribute("facility_mail", facility_mail);
+            req.setAttribute("facility_app_password", facility_app_password);
+            req.setAttribute("facility_plan", facility_plan);
+
 			req.getRequestDispatcher("facilitydone.jsp").forward(req, res);
 		}catch (Exception e) {
             e.printStackTrace();
