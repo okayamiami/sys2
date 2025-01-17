@@ -3,8 +3,19 @@
 
 <c:import url="/common/header.jsp" />
 <div class="main">
-
 <div class="con">
+
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="FacilityInfo.action">施設情報</a></li>
+	    <li class="breadcrumb-item"><span>施設情報編集</span></li>
+	    <li class="breadcrumb-item active" aria-current="page">施設情報更新完了</li>
+	  </ol>
+	</nav>
+
+
 <h2 class="title">施設情報変更完了</h2>
 <p>以下情報に施設情報を変更しました</p>
 

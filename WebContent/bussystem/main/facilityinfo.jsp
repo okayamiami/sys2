@@ -5,6 +5,17 @@
 <div class="main">
 <div class="con">
 
+
+
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">施設情報</li>
+	  </ol>
+	</nav>
+
+
 <h2 class="title">施設情報</h2>
 <p>情報に変更がある場合は「編集」ボタンから変更を行ってください</p>
 
