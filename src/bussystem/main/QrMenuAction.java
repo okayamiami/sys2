@@ -17,7 +17,7 @@ public class QrMenuAction extends Action{
 		//JSPへフォワード 7
 		if (type.equals("M")){
 			req.getRequestDispatcher("mqrmenu.jsp").forward(req, res);
-			//jspがおかしいっぽい
+
 		}
 		else{
 			req.getRequestDispatcher("tqrmenu.jsp").forward(req, res);

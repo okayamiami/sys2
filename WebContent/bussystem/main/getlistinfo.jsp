@@ -7,9 +7,18 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-
-
     <div class="con">
+
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="QrMenu.action">QR機能選択</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">乗降状況</li>
+	  </ol>
+	</nav>
+
+
         <h2 class="title">乗降状況</h2>
 
         <!-- エラーメッセージの表示 -->
