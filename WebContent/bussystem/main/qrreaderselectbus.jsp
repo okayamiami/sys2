@@ -11,15 +11,16 @@
 <div class ="con">
 
 <h2 class="title">バス選択</h2>
-<table>
+
+
+<c:if test="${not empty bus_set}">
+	<table>
     <tr>
         <th>施設ID</th>
         <th>バスID</th>
         <th>名前</th>
         <th>選択</th>
     </tr>
-
-<c:if test="${not empty bus_set}">
     <c:forEach var="bus" items="${bus_set}">
         <tr>
             <td>${bus.facility_id}</td>
@@ -35,10 +36,14 @@
             </td>
         </tr>
     </c:forEach>
+    </table>
+
+</c:if>
+<c:if test="${empty bus_set}">
+    <p>バスが登録されていません。</p>
 </c:if>
 
 
-</table>
 
 
 
