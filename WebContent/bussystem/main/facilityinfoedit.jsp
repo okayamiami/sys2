@@ -9,7 +9,7 @@
 <h2 class="title">施設情報編集</h2>
 <p>変更箇所の入力をして変更ボタンを押してください</p>
 <form action="FacilityInfoEditExecute.action" method="post">
-	<button type="submit" class="button-send">変更</button>
+	<button type="submit" class="button-send">保存</button>
     <table>
     <c:if test="${not empty fc}">
         <tr><th>施設ID</th><td>
@@ -43,20 +43,6 @@
         <tr><th>プラン選択</th><td>
 				    <!-- 初期値をhiddenにセット -->
 				    <input type="hidden" name="facility_plan" id="facility_plan_hidden" value="${fc.facility_plan}" />
-
-				    <!-- ラジオボタンでプランを選択 -->
-				    <label>
-				        <input type="radio" name="facility_plan_radio" value="true"
-				               <c:if test="${fc.facility_plan}">checked</c:if>
-				               onclick="document.getElementById('facility_plan_hidden').value = 'true';">
-				        S（スタンダード）
-				    </label>
-				    <label>
-				        <input type="radio" name="facility_plan_radio" value="false"
-				               <c:if test="${not fc.facility_plan}">checked</c:if>
-				               onclick="document.getElementById('facility_plan_hidden').value = 'false';">
-				        L（ライト）
-				    </label>
 
 				    <!-- 現在のプランを表示 -->
 				    現在のプラン: <c:if test="${fc.facility_plan}">S</c:if><c:if test="${not fc.facility_plan}">L</c:if>
