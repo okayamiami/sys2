@@ -9,6 +9,16 @@
 
     <div class="con">
 
+    	<!-- パンくずリスト -->
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+		    <li class="breadcrumb-item"><a href="Parents.action">保護者ID入力</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">保護者情報</li>
+		  </ol>
+		</nav>
+
+
         <!-- 保護者情報の表示 -->
         <h2 class="title">保護者情報</h2>
         <p>情報に変更がある場合は「編集」ボタンから変更を行ってください</p>

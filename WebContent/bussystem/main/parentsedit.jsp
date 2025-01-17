@@ -9,8 +9,19 @@
 
     <div class="con">
 
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="Parents.action">保護者ID入力</a></li>
+	    <li class="breadcrumb-item"><a href="ParentsInput.action">保護者情報</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">保護者情報編集</li>
+	  </ol>
+	</nav>
+
+
         <h2 class="title">保護者情報編集</h2>
-        <p>変更箇所を入力してください</p>
+
         <c:choose>
 
 				    <c:when test="${user_type == 'P'}">
