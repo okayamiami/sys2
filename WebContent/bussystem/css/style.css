@@ -107,6 +107,11 @@
   color: #52b5ee;/*色*/
 }
 
+.breadcrumb li span {
+  text-decoration: none;
+  color: #52b5ee;/*色*/
+}
+
 .breadcrumb li a:hover {
   text-decoration: underline;
 }

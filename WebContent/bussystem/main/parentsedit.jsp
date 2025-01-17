@@ -14,7 +14,7 @@
 	  <ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
 	    <li class="breadcrumb-item"><a href="Parents.action">保護者ID入力</a></li>
-	    <li class="breadcrumb-item"><a href="ParentsInput.action">保護者情報</a></li>
+	    <li class="breadcrumb-item"><a href="ParentsInput.action?parents_id=${userinfo.parents_id}">保護者情報</a></li>
 	    <li class="breadcrumb-item active" aria-current="page">保護者情報編集</li>
 	  </ol>
 	</nav>

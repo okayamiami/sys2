@@ -13,7 +13,7 @@
 	  <ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
 	    <li class="breadcrumb-item"><a href="ChildInfo.action">保護者ID入力（子供情報）</a></li>
-	    <li class="breadcrumb-item"><a href="ParentsIDInput.action">子供情報一覧</a></li>
+	    <li class="breadcrumb-item"><a href="ParentsIDInput.action?parents_id=${parents_id}">子供情報一覧</a></li>
 	    <li class="breadcrumb-item active" aria-current="page">新規子供情報入力</li>
 	  </ol>
 	</nav>
