@@ -8,6 +8,17 @@
 <div class="main">
 <div class="con">
 
+<!-- パンくずリスト -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+    <li class="breadcrumb-item"><a href="NewRegistMenu.action">新規登録メニュー</a></li>
+    <li class="breadcrumb-item"><a href="BusCreate.action">バス新規作成</a></li>
+    <li class="breadcrumb-item active" aria-current="page">バス新規作成完了</li>
+  </ol>
+</nav>
+
+
 	<h2 class="title">バス新規作成完了</h2>
 
 	<!-- エラーメッセージの表示 -->

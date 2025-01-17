@@ -9,15 +9,15 @@
 
 <div class ="con">
 
-
+<!-- パンくずリスト -->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="Menu.action">メニュー画面</a></li>
-    <li class="breadcrumb-item active" aria-current="page">新規登録メニュー画面</li>
+    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+    <li class="breadcrumb-item active" aria-current="page">新規登録メニュー</li>
   </ol>
 </nav>
 
-<h2 class="title">新規登録区分選択</h2>
+<h2 class="title">新規登録メニュー</h2>
 
 <p>新規作成する項目を選択してください</p>
 

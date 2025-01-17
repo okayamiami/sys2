@@ -5,9 +5,17 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-
-
 <div class ="con">
+
+<!-- パンくずリスト -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+    <li class="breadcrumb-item"><a href="NewRegistMenu.action">新規登録メニュー</a></li>
+    <li class="breadcrumb-item"><a href="NewRegist.action">アカウント新規登録</a></li>
+    <li class="breadcrumb-item active" aria-current="page">アカウント新規登録完了</li>
+  </ol>
+</nav>
 
 <h2 class="title">アカウント新規情報登録完了</h2>
 <p>アカウントの新規登録が完了しました</p>
