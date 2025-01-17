@@ -6,10 +6,18 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-
     <div class="con">
+
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">保護者ID入力（子供情報）</li>
+	  </ol>
+	</nav>
+
         <!-- 保護者ID入力フォーム -->
-        <h2 class="title">子供情報</h2>
+        <h2 class="title">保護者ID入力（子供情報）</h2>
 
         <p>表示する子供の保護者IDを入力してください</p>
         <form action="ParentsIDInput.action" method="post">

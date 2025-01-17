@@ -7,9 +7,20 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-
     <div class="con">
-        <h2 class="title">子供情報</h2>
+
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="ChildInfo.action">保護者ID入力（子供情報）</a></li>
+	    <li class="breadcrumb-item"><a href="ParentsIDInput.action">子供情報一覧</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">新規子供情報編集</li>
+	  </ol>
+	</nav>
+
+
+        <h2 class="title">子供情報編集</h2>
         <p>修正箇所を選択または入力し保存ボタンを押してください</p>
 
         <form action="ChildUpdateExecute.action" method="post">

@@ -6,10 +6,16 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-
-
     <div class="con">
 
+	<!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="ChildInfo.action">保護者ID入力（子供情報）</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">子供情報一覧</li>
+	  </ol>
+	</nav>
 
 
         <!-- 子供情報テーブル -->

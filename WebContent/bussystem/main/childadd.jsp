@@ -6,9 +6,19 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-
     <div class="con">
-        <h2 class="title">子供情報追加登録</h2>
+
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="ChildInfo.action">保護者ID入力（子供情報）</a></li>
+	    <li class="breadcrumb-item"><a href="ParentsIDInput.action">子供情報一覧</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">新規子供情報入力</li>
+	  </ol>
+	</nav>
+
+        <h2 class="title">新規子供情報入力</h2>
         <p>新規登録する子供の名前の入力とクラスを選択してください</p>
 
         <form action="ChildAddExecute.action" method="post">
