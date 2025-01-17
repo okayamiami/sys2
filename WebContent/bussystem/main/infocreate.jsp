@@ -42,9 +42,8 @@
 
 
 
-            <!-- 送信ボタンと戻るボタン -->
             <div>
-               <button type="submit" class="button-send">作成</button>
+               <button type="submit" class="button-send">投稿</button>
             </div>
         </form>
     </div>

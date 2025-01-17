@@ -23,7 +23,7 @@ public class InfoContentAction extends Action {
 
         // ログインユーザーを取得
         Object user = session.getAttribute("user");
-        if ("M".equals(type)) {
+        if ("M".equals(type) || "T".equals(type)) {
             // 管理者 or 先生の場合
             ManageUser mu = (ManageUser) user;
             // DBからお知らせ内容を取得
