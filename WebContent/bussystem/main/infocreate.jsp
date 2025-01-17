@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<body>
 
 <!-- ヘッダーをインポート -->
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-    <!-- ナビゲーションをインポート -->
-    <c:import url="/common/navi.jsp" />
 
     <div class="con">
-        <h2>お知らせ作成</h2>
+        <h2 class="title">お知らせ作成</h2>
 
         <form action="InfoCreateExecute.action" method="post">
             <!-- ジャンルの選択 -->
@@ -48,17 +44,11 @@
 
             <!-- 送信ボタンと戻るボタン -->
             <div>
-                <button type="submit">送信</button>
+               <button type="submit" class="button-send">作成</button>
             </div>
         </form>
-        <a href="InfoMenu.action">お知らせ機能選択に戻る</a>
     </div>
 </div>
 
 <!-- フッターをインポート -->
 <c:import url="/common/footer.jsp" />
-
-</body>
-</html>
-
-

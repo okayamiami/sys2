@@ -26,7 +26,7 @@ public class InfoListAction extends Action {
 
         List<Information> ilist = null;
 
-        if (type.equals("M")) {
+        if (type.equals("M") || type.equals("T")) {
             // 管理者 or 先生の場合
             ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得
             ilist = iDao.getInfoList(mu.getFacility_id());
