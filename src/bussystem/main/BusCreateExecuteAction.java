@@ -46,7 +46,7 @@ public class BusCreateExecuteAction extends Action {
 	}
 
 
-//	try{
+	try{
 
 		ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得
 		// リクエストパラメータ―の取得 2
@@ -98,17 +98,22 @@ public class BusCreateExecuteAction extends Action {
 		// 新規作成分の乗降をDBに登録する
 		gDao.saveGetInfoForNewBus(bus);
 
-//	} catch (Exception e) {
-//		req.setAttribute("error", "バス情報登録中にエラーが発生しました");
-//		req.getRequestDispatcher("buscreate.jsp").forward(req, res);
-//		return;
-//	}
+	} catch (Exception e) {
+		req.setAttribute("error", "バス情報登録中にエラーが発生しました");
+		req.getRequestDispatcher("buscreate.jsp").forward(req, res);
+		return;
+	}
 
 
 	//レスポンス値をセット 6
 	// 無し
 
 	//JSPへフォワード 7
+
+	// 完了画面に情報表示用
+	req.setAttribute("bus_id", perfect_id);
+	req.setAttribute("bus_name", bus_name);
+
 	req.getRequestDispatcher("buscreate_done.jsp").forward(req, res);
 
 

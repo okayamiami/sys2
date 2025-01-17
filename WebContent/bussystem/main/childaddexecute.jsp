@@ -10,22 +10,22 @@
 <div class ="con">
 
 
-    <h2 class="title">新規子供情報登録完了/h2>
+    <h2 class="title">新規子供情報登録完了</h2>
     <p>${message}</p>
-    		<c:choose>
-		    <c:when test="${user_type == 'M'}">
-		        <form action="ParentsIDInput.action" method="get">
-		            <input type="hidden" name="parents_id" value="${parents_id}">
-		                <button type="submit" class="button-send">子供情報の確認</button>
-		        </form>
-		    </c:when>
 
-		    <c:when test="${user_type == 'P'}">
-		        <form action="ChildInfo.action" method="get">
-		                <button type="submit" class="button-send">子供情報の確認</button>
-		        </form>
-		    </c:when>
-		</c:choose>
+	    <table class="table table-hover">
+	   	    <tr>
+	                  <th>保護者ID</th>
+	                  <th>クラス名</th>
+	                  <th>名前（子供）</th>
+	       </tr>
+	    	<tr>
+                    <td>${parents_id}</td>
+                    <td>${class_name}</td>
+                    <td>${child_name}</td>
+           </tr>
+        </table>
+
 
     </div>
     </div>

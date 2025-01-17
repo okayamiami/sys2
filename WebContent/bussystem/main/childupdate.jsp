@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<body>
+
 
 <!-- ヘッダーのインクルード -->
 <c:import url="/common/header.jsp" />
@@ -58,24 +57,11 @@
                 </c:if>
             </table>
 
-      <c:choose>
-
-
-		    <c:when test="${user_type == 'P'}">
-		        <form action="ChildInfo.action" method="get">
-		             <div class="button-save">
-		                <button type="submit">多分戻るボタン確認してから消す</button>
-		             </div>
-		        </form>
-		    </c:when>
-		</c:choose>
-
-
+</form>
     </div>
 </div>
-</form>
+
 <!-- フッターのインクルード -->
 <c:import url="/common/footer.jsp" />
 
-</body>
-</html>
+

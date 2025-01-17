@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Absence;
+import bean.Child;
 import bean.ManageUser;
 import dao.AbsenceDao;
+import dao.ChildDao;
 import tool.Action;
 
 
@@ -25,6 +27,8 @@ public class AbsenceInfoEditExecuteAction extends Action {
 	//ローカル変数の宣言 1
 	HttpSession session = req.getSession(true);				// セッションを取得
 	AbsenceDao aDao = new AbsenceDao(); 						// 欠席Daoを初期化
+	ChildDao cDao = new ChildDao();
+	String child_name = "";
 	String absence_id = "";
 	String abs_main = ""; 										// 欠席理由
 	String child_id = "";										// 子供ID
@@ -35,7 +39,7 @@ public class AbsenceInfoEditExecuteAction extends Action {
 	Map<String, String> errors = new HashMap<>();				//エラーメッセージ
 
 
-//	try{
+	try{
 
 		ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得
 
@@ -56,6 +60,9 @@ public class AbsenceInfoEditExecuteAction extends Action {
 		Absence abs = aDao.getAbschildinfobyAbsenceId(facility_id,absence_id);		// 更新する欠席情報を取得する
 		child_id = abs.getChild_id();
 
+		Child child = cDao.getChildinfo(facility_id, child_id);
+		child_name = child.getChild_name();
+
 
 		if (abs != null) {
 			abs.setAbsence_id(absence_id);						// 欠席ID
@@ -69,24 +76,33 @@ public class AbsenceInfoEditExecuteAction extends Action {
 
 		}
 
-//	} catch (Exception e) {
-//
-//
-//		req.setAttribute("error", "欠席情報更新中にエラーが発生しました");
-//
-//		/**後でここ周辺修正する*/
-//		req.getRequestDispatcher("error.jsp").forward(req, res);
-//		return; // エラー時に処理を終了する
-//	}
+	} catch (Exception e) {
+
+
+		req.setAttribute("error", "欠席情報更新中にエラーが発生しました");
+
+
+		req.getRequestDispatcher("error.jsp").forward(req, res);
+		return; // エラー時に処理を終了する
+	}
 
 
 	//レスポンス値をセット 6
 	// 無し
 
 	//JSPへフォワード 7
+
+
+	System.out.println("出欠席フラグの状態は"+ abs_is_attend);
+
+	// 完了画面に表示する
+	req.setAttribute("absence_id", absence_id);			// 欠席ID
+	req.setAttribute("abs_main", abs_main);				// 欠席内容
+	req.setAttribute("absence_date", absence_date);		// 欠席日
+	req.setAttribute("abs_is_attend", abs_is_attend);	// 出欠席フラグ
+	req.setAttribute("child_name", child_name);			// 子供名前
+
 	req.getRequestDispatcher("absenceinfoedit_done.jsp").forward(req, res);
-
-
 
 	}
 

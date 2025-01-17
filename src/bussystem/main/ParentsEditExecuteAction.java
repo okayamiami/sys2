@@ -82,11 +82,18 @@ public class ParentsEditExecuteAction extends Action {
             	PD.saveParentsUserInfo(parentsUser);
             }
 
-            // ユーザー情報をリクエストに設定し、メッセージを表示
-            req.setAttribute("user", user);
-            req.setAttribute("user_type", user_type);
             req.setAttribute("parents_id", parents_id);
-            req.setAttribute("message", "変更が完了しました。");
+
+            // 完了画面で表示する
+            req.setAttribute("parents_name", parents_name);
+            req.setAttribute("parents_pass", parents_pass);
+            req.setAttribute("parents_address", parents_address);
+            req.setAttribute("parents_tel", parents_tel);
+            req.setAttribute("parents_mail1", parents_mail1);
+            req.setAttribute("parents_mail2", parents_mail2);
+            req.setAttribute("parents_mail3", parents_mail3);
+
+            req.setAttribute("message", "以下情報で保護者情報の変更が完了しました。");
             req.getRequestDispatcher("parentseditexecute.jsp").forward(req, res);
         } catch (Exception e) {
             e.printStackTrace();

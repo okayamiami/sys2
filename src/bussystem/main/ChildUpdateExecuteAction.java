@@ -85,10 +85,13 @@ public class ChildUpdateExecuteAction extends Action {
             try {
                 // 子供情報を保存
                 CD.saveChildinfo(targetChild);
+
                 req.setAttribute("parents_id", parents_id);
-                req.setAttribute("user_type", user_type);
-                req.setAttribute("user", user);
-                req.setAttribute("message", "変更が完了しました。");
+                req.setAttribute("class_name", class_name);
+                req.setAttribute("child_name", child_name);
+
+                // 完了画面に表示
+                req.setAttribute("message", "以下の情報で子供情報の変更が完了しました。");
                 req.getRequestDispatcher("childupdateexecute.jsp").forward(req, res);
             } catch (Exception e) {
                 e.printStackTrace(); // エラーログの出力

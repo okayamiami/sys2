@@ -8,7 +8,7 @@
 	<div class="con">
 
 
-		<h2>名簿一覧</h2>
+		<h2 class="title">名簿一覧</h2>
 
 		<!-- エラーメッセージの表示 -->
 		<c:if test="${not empty error}">

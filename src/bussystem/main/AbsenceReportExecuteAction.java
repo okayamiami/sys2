@@ -177,9 +177,14 @@ public class AbsenceReportExecuteAction extends Action {
 	// 無し
 
 	//JSPへフォワード 7
+
+	// 完了画面に情報表示
+	req.setAttribute("abs_id", perfect_id);				// 欠席ID
+	req.setAttribute("child_name", child_name);			// 子供名
+	req.setAttribute("abs_main", abs_main);				// 欠席内容
+	req.setAttribute("absence_date", absence_date);		// 欠席ID
+
 	req.getRequestDispatcher("absence_report_done.jsp").forward(req, res);
-
-
 
 	}
 
