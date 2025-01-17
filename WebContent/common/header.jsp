@@ -20,6 +20,8 @@
 
     登園・バス管理システム
 </h1>
+<!-- 日付表示 -->
+<span id="currentDate"></span>
 
 <c:if test="${user.isAuthenticated()}">
     <span>
@@ -36,6 +38,7 @@
         </c:choose>
     </span>
 
+
 		<div class="links">
 		    <!-- 各ボタン間に間隔ができます -->
 		    <a href="Menu.action">
@@ -47,7 +50,11 @@
 		        ログアウト
 		    </a>
 		</div>
-</c:if>
+
+
+<script> document.addEventListener("DOMContentLoaded", function() { var today = new Date(); var days = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日']; var date = today.getFullYear() + '年' + (today.getMonth() + 1) + '月' + today.getDate() + '日' + ' (' + days[today.getDay()] + ')'; document.getElementById('currentDate').innerText = date; }); </script></c:if>
+
+
 </div>
 
 <body>

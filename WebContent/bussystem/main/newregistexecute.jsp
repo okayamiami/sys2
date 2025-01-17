@@ -9,8 +9,8 @@
 
 <div class ="con">
 
-<h2 class="title">新規情報登録</h2>
-<p>新規ユーザーの登録が完了しました</p>
+<h2 class="title">アカウント新規情報登録完了</h2>
+<p>アカウントの新規登録が完了しました</p>
 
 <table class="table table-hover">
 <tr>

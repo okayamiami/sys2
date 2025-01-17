@@ -8,7 +8,7 @@
 
 <div class ="con">
 
-<h2 class="title">新規情報登録</h2>
+<h2 class="title">アカウント新規登録</h2>
 
 <p>ユーザー区分を選択してください<br>M：管理者　T：先生　P：保護者</p>
 
