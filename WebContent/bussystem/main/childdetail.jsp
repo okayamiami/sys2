@@ -7,9 +7,17 @@
 <div class="main">
     <div class="con">
 
-        <h2 class="title">子供詳細情報</h2>
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="ChildList.action">名簿情報一覧</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">子供詳細情報</li>
+	  </ol>
+	</nav>
 
-        <p>選択した子供情報は以下の通りです</p>
+
+        <h2 class="title">子供詳細情報</h2>
 
         <!-- エラーメッセージの表示 -->
         <c:if test="${not empty error}">

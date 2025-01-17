@@ -8,8 +8,16 @@
 <div class="main">
 <div class="con">
 
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">欠席機能選択</li>
+	  </ol>
+	</nav>
+
+
 	<h2 class="title">欠席機能選択</h2>
-	<p>欠席機能を選択してください</p>
 
 
 		<div class="menu-links">

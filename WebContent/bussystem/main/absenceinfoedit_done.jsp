@@ -6,9 +6,18 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-
 <div class="con">
 
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="AbsenceSelect.action">欠席機能選択</a></li>
+	    <li class="breadcrumb-item"><a href="AbsenceConect.action">欠席連絡</a></li>
+	    <li class="breadcrumb-item"><span>欠席連絡更新</span></li>
+	    <li class="breadcrumb-item active" aria-current="page">欠席連絡更新完了</li>
+	  </ol>
+	</nav>
 
 	<h2 class="title">欠席連絡更新</h2>
 
