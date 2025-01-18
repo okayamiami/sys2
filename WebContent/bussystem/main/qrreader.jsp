@@ -3,13 +3,23 @@
 <html lang="ja">
 
 
-
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <c:import url="/common/header.jsp" />
 
     <div class="main">
-
         <div class="con">
+
+            <!-- パンくずリスト -->
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+			    <li class="breadcrumb-item"><a href="QrMenu.action">QR機能選択</a></li>
+			    <li class="breadcrumb-item"><a href="QrReaderSelectBus.action">バス選択（QR読み取り）</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">QR読み取り</li>
+			  </ol>
+			</nav>
+
+
         <h2 class="title">QRコード読み取り</h2>
 		<p>${bus_name}に${countAttend}人乗車しています</p>
             <!-- QRコード読み取り開始ボタン -->
