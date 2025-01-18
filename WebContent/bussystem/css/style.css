@@ -38,7 +38,7 @@
     padding: 10px 15px;
     text-decoration: none;
     color: #000000;
-    background-color: #c1ffc5; /* 背景色 */
+    background-color: #dfffe1; /* 背景色 */
     border: solid 2px #ffffff; /* 枠線を薄く変更 */
     border-radius: 5px;
     transition: all 0.3s ease;
@@ -80,7 +80,6 @@ a.home-icon {
 .header a img {
     vertical-align: middle; /* アイコンをテキストと揃える */
     margin-right: 5px; /* テキストとの間隔 */
-    height: 100px; /* 高さを調整 */
 }
 
 /* 日付と挨拶メッセージのスタイル */

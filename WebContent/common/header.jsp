@@ -40,10 +40,10 @@
     <div class="links">
         <!-- 各ボタン間に間隔ができます -->
         <a href="Menu.action">
-            メニュー画面に戻る
+        	<img src="${pageContext.request.contextPath}/images/home_g.png" alt="メニュー">
         </a>
         <a href="Syslogout.action">
-            ログアウト
+            <img src="${pageContext.request.contextPath}/images/logout.png" alt="ログアウト">
         </a>
     </div>
   </div>
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
   <div id="h_line">
-    <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="ホーム">
+    <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="しずく線">
   </div>
 
 

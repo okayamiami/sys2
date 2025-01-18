@@ -3,7 +3,7 @@
 </body>
 <div id="footer-container">
   <div id="h_line">
-    <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="ホーム">
+    <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="しずく線">
   </div>
   <div class="foo">
     <p>2024©</p>

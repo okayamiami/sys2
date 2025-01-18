@@ -61,6 +61,10 @@
   </div>
   </div>
 
-  <c:import url="/common/footer.jsp" />
+    <div class="foo">
+    <p>2024©</p>
+    <p>大原学園teamD</p>
+  </div>
+
 </body>
 </html>
