@@ -15,7 +15,7 @@
   <div class="header">
     <h1>
         <a class="home-icon" href="Menu.action">
-            <img src="${pageContext.request.contextPath}/images/400.png" alt="ホーム">登園・バス管理システム
+            <img src="${pageContext.request.contextPath}/images/kids.png" alt="ホーム">登園・バス管理システム
         </a>
     </h1>
     <!-- 日付表示 -->

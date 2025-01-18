@@ -2,7 +2,6 @@
 .header {
     width: 100%;
     background-color: #ffffff; /* 背景色 */
-    padding: 20px; /* 余白 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,7 +15,7 @@
     margin: 0; /* 余白をリセット */
     display: flex;
     align-items: center;
-    margin-right: 30px; /* 右側に余白を設定 */
+    margin-right: 45px; /* 右側に余白を設定 */
 }
 
 /* タイトル横のアイコン */
