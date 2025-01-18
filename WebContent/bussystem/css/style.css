@@ -1,14 +1,13 @@
 /* ヘッダー全体のスタイル */
 .header {
     width: 100%;
-    background-color: #dbfebe; /* 全体の背景色 */
-    padding: 20px; /* 上下左右に余白を追加 */
+    background-color: #ffffff; /* 背景色 */
+    padding: 20px; /* 余白 */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 下部に軽いシャドウを追加 */
+    border-bottom: 2px solid #ffffff; /* オプションで下に線を追加 */
 }
-
 /* ロゴやタイトルを含む部分 */
 .header h1 {
     font-size: 24px;
@@ -17,12 +16,13 @@
     margin: 0; /* 余白をリセット */
     display: flex;
     align-items: center;
+    margin-right: 30px; /* 右側に余白を設定 */
 }
 
 /* タイトル横のアイコン */
 .header h1 img {
     margin-right: 10px; /* タイトルとの間隔 */
-    height: 40px; /* 高さ調整 */
+    height: 200px; /* 高さ調整 */
 }
 
 /* 右側のリンクやアイコン */
@@ -37,9 +37,9 @@
     display: inline-block; /* ブロック化 */
     padding: 10px 15px;
     text-decoration: none;
-    color: #fff;
-    background-color: #b1fca5; /* 背景色 */
-    border: 1px solid #808080;
+    color: #000000;
+    background-color: #c1ffc5; /* 背景色 */
+    border: solid 2px #ffffff; /* 枠線を薄く変更 */
     border-radius: 5px;
     transition: all 0.3s ease;
     margin-right: 25px; /* 右側に余白を設定 */
@@ -52,8 +52,8 @@
 
 /* ホバー時のスタイル */
 .links a:hover {
-    background-color: #dffcfd;
-    color: #fff;
+    background-color: #e6ffe8;
+    color: #808080;
 }
 
 /* home-icon のリンクには背景や枠を適用しない */
@@ -70,51 +70,85 @@
     color: inherit;
 }
 
+a.home-icon {
+    text-decoration: none; /* リンクの線を消す */
+    color: #000040; /* リンクの色 */
+}
+
+
 /* アイコン付きボタン */
 .header a img {
     vertical-align: middle; /* アイコンをテキストと揃える */
     margin-right: 5px; /* テキストとの間隔 */
-    height: 20px; /* 高さを調整 */
+    height: 100px; /* 高さを調整 */
 }
 
+/* 日付と挨拶メッセージのスタイル */
+#dateContainer {
+    display: flex;
+    flex-direction: column; /* 縦方向に配置 */
+    align-items: flex-start; /* 左揃えにする */
+    margin-right: auto; /* リンクとのスペースを調整 */
+}
+
+#greeting {
+    margin-top: 10px; /* 日付との間隔 */
+    font-size: 18px;
+    color: #333333; /* 文字色 */
+}
+
+/* 境界線（画像）のスタイル */
+#h_line {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 画像を中央揃え */
+    margin: 0;
+    padding: 0;
+}
+
+#h_line img {
+    width: 100%; /* 画像を横幅いっぱいに */
+    height: auto; /* 高さを自動調整 */
+    display: block;
+}
 /* ------------------------------------------- */
 /* パンくずリスト */
 
 .breadcrumb {
-  margin-top: 20px;
-  padding: 0;
-  list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
 }
 
-.breadcrumb li {
-  display: inline;/*横に並ぶように*/
-  list-style: none;
-  font-weight: bold;/*太字*/
+.breadcrumb-item + .breadcrumb-item {
+    margin-left: 0.5rem;
 }
 
-.breadcrumb li:after {/* >を表示*/
-  content: '>';
-  padding: 0 0.2em;
-  color: #555;
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: #6c757d;
+    content: ">";
 }
 
-.breadcrumb li:last-child:after {
-  content: '';
+.breadcrumb-item a {
+    color: #606060;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    background-color: #c1ffc5;
+    border: 1px solid #ffffff;
+    border-radius: 1rem; /* 各アイテムの角を丸くする */
 }
 
-.breadcrumb li a {
-  text-decoration: none;
-  color: #52b5ee;/*色*/
+.breadcrumb-item a:hover {
+    color: #606060;
+    background-color: #e6ffe8;
+    text-decoration: none;
 }
 
-.breadcrumb li span {
-  text-decoration: none;
-  color: #52b5ee;/*色*/
-}
 
-.breadcrumb li a:hover {
-  text-decoration: underline;
-}
 
 /* ------------------------------------------- */
 
@@ -175,8 +209,8 @@
     text-decoration: none;
     color: #333;
     border-radius: 10px;
-    border: solid 2px #ccc; /* 枠線を薄く変更 */
-    background-color: #fff;
+    border: solid 2px #fff; /* 枠線を薄く変更 */
+    background-color: #c1ffc5;
     width: calc(20% - 10px); /* 間隔を考慮したボタン幅 */
     min-width: 120px; /* 最小幅を設定してデザイン崩れを防止 */
     text-align: center; /* テキストを中央揃え */
@@ -186,7 +220,7 @@
 }
 
 .menu-links a:hover {
-    background-color: #fffdc5; /* ホバー時の背景色 */
+    background-color: #e6ffe8; /* ホバー時の背景色 */
     text-decoration: none;
 }
 
@@ -222,16 +256,34 @@
 
 /* ------------------------------------------- */
 
-/* フッター */
+/* フッターコンテナ */
+#footer-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
 
+/* フッター上の境界線（画像） */
+#footer-container #h_line {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 画像を中央揃え */
+    margin: 0;
+    padding: 0;
+}
+
+#footer-container #h_line img {
+    width: 100%; /* 画像を横幅いっぱいに */
+    height: auto; /* 高さを自動調整 */
+    display: block;
+}
+
+/* フッター本体 */
 .foo {
     width: 100%;
     text-align: center;
-    background-color: #808080;
+    background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: white;
     font-family: 'Arial', sans-serif;
 }
 
@@ -344,7 +396,7 @@ table th, table td {
 }
 
 table th {
-    background-color: #e0fed3; /* ヘッダーの背景色 */
+    background-color: #ecfed6; /* ヘッダーの背景色 */
     color: #333; /* ヘッダーの文字色 */
     font-weight: bold; /* 強調 */
     text-align: center; /* ヘッダーを中央揃え */
