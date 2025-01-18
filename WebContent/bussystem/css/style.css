@@ -350,6 +350,10 @@ table th {
     text-align: center; /* ヘッダーを中央揃え */
 }
 
+table tr:nth-child(odd) {
+  background-color: #ddfde2;
+}
+
 table tr:nth-child(even) {
     background-color: #f9fff7; /* 偶数行に薄い背景色 */
 }

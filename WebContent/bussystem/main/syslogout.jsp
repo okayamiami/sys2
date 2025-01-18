@@ -12,7 +12,7 @@
 <body>
 
 <div class="header">
-	<h1>得点管理システム</h1>
+	<h1>登園・バス管理システム</h1>
 	<h2>ログアウト</h2>
 </div>
 <div class="main">
