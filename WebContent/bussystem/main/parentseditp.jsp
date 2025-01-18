@@ -5,9 +5,17 @@
 <c:import url="/common/header.jsp" />
 
 <div class="main">
-
-
     <div class="con">
+
+    <!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="ParentsInput.action?parents_id=${userinfo.parents_id}">保護者情報</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">保護者情報編集</li>
+	  </ol>
+	</nav>
+
         <h2 class="title">保護者情報編集</h2>
         <form action="ParentsEditExecute.action" method="post">
 			<button type="submit" class="button-send">保存</button>

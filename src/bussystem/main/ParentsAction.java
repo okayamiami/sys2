@@ -32,6 +32,11 @@ public class ParentsAction extends Action {
 		// ログインユーザーを一時的に取得
 		String user_type = (String) session.getAttribute("user_type");
 
+		int count = 0;
+		count ++;
+		System.out.println("ユーザータイプは"+user_type+""+count+"回目");
+
+
 		// userの型に応じて処理
 		if ("P".equals(user_type)) {
 			// 保護者ユーザーの場合
@@ -43,6 +48,13 @@ public class ParentsAction extends Action {
 			ParentsUser PU2 = PD.getParentsUserInfo(user_id, facility_id);
 			req.setAttribute("user", PU);
 			req.setAttribute("userinfo", PU2);
+
+			req.setAttribute("user_type", user_type);	// パンくずの表示判断用
+			int count_info = 0;
+			count_info ++;
+
+			System.out.println("保護者アカウントでの保護者情報表示"+count_info+"回目");
+
 			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 
 		} else if ("M".equals(user_type)) {
@@ -50,6 +62,7 @@ public class ParentsAction extends Action {
 			ManageUser MU = (ManageUser) session.getAttribute("user");
 			String facility_id = MU.getFacility_id();
 			req.setAttribute("facility_id", facility_id);
+
 			// 保護者ID入力ページへ
 			req.getRequestDispatcher("parentsinput.jsp").forward(req, res);
 

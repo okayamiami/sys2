@@ -9,14 +9,33 @@
 
     <div class="con">
 
-    	<!-- パンくずリスト -->
-		<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
-		    <li class="breadcrumb-item"><a href="Parents.action">保護者ID入力</a></li>
-		    <li class="breadcrumb-item active" aria-current="page">保護者情報</li>
-		  </ol>
-		</nav>
+		<!-- アカウント区分ごとの表示 -->
+    	<c:choose>
+		    <c:when test="${user_type == 'M'}">
+		    <!-- 管理者パンくずリスト -->
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+			    <li class="breadcrumb-item"><a href="Parents.action">保護者ID入力</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">保護者情報</li>
+			  </ol>
+			</nav>
+		    </c:when>
+
+		    <c:when test="${user_type == 'P'}">
+		    <!-- 保護者パンくずリスト -->
+		    <nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">保護者情報</li>
+			  </ol>
+			</nav>
+
+		    </c:when>
+		</c:choose>
+
+
+
 
 
         <!-- 保護者情報の表示 -->

@@ -8,16 +8,32 @@
 <div class="main">
 <div class="con">
 
-    <!-- パンくずリスト -->
-	<nav aria-label="breadcrumb">
-	  <ol class="breadcrumb">
-	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
-	    <li class="breadcrumb-item"><a href="AbsenceSelect.action">欠席機能選択</a></li>
-	    <li class="breadcrumb-item"><span>欠席報告</span></li>
-	    <li class="breadcrumb-item active" aria-current="page">欠席報告完了</li>
-	  </ol>
-	</nav>
+		<!-- アカウント区分ごとの表示 -->
+       	<c:choose>
+	    <c:when test="${user_type == 'M' || user_type == 'T'}">
+	    <!-- 管理者・先生パンくずリスト -->
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+		    <li class="breadcrumb-item"><a href="AbsenceSelect.action">欠席機能選択</a></li>
+		    <li class="breadcrumb-item"><span>欠席報告</span></li>
+		    <li class="breadcrumb-item active" aria-current="page">欠席報告完了</li>
+		  </ol>
+		</nav>
+	    </c:when>
 
+	    <c:when test="${user_type == 'P'}">
+	    <!-- 保護者パンくずリスト -->
+	    <nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+		    <li class="breadcrumb-item"><span>欠席報告</span></li>
+		    <li class="breadcrumb-item active" aria-current="page">欠席報告完了</li>
+		  </ol>
+		</nav>
+
+	    </c:when>
+	</c:choose>
 
 
 	<h2 class="title">欠席報告完了</h2>

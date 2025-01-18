@@ -59,6 +59,9 @@ public class ChildInfoAction extends Action{
 			req.setAttribute("userCI", CI);
 			req.setAttribute("user", PU);
 			req.setAttribute("parents_id", user_id);
+
+			req.setAttribute("user_type", user_type);	// パンくずの表示判断用
+
 			req.getRequestDispatcher("childinfo.jsp").forward(req, res);
 
 		} else if ("M".equals(user_type)) {
