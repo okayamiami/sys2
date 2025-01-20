@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.ManageUser;
 import bean.ParentsUser;
+import dao.FacilityDao;
 import dao.ManageUserDao;
 import dao.ParentsUserDao;
 import tool.Action;
@@ -27,6 +28,8 @@ public class LoginExecuteAction extends Action{
 	    ParentsUser PU = new ParentsUser();
 	    ParentsUserDao PUDao = new ParentsUserDao();
 	    String user_type = null;
+	    FacilityDao FDDao = new FacilityDao();
+	    Boolean FP;
 
 	    String user_id = req.getParameter("user_id");
 	    String user_pass = req.getParameter("user_pass");
@@ -39,6 +42,7 @@ public class LoginExecuteAction extends Action{
 	            user_type = ("T");
 	        }
 	        MU = MUDao.login(user_id, user_pass, facility_id);
+	        FP = FDDao.getFacilityInfo(facility_id).getFacility_plan();
 	        if(MU == null){
 	            errors.put("kome", "ログインに失敗しました。IDまたはパスワードが違います。");
 	            req.setAttribute("errors", errors);
@@ -49,6 +53,7 @@ public class LoginExecuteAction extends Action{
 	            session.setAttribute("user", MU);
 	            session.setAttribute("user_id", MU.getUser_id());
 	            session.setAttribute("user_type", user_type);
+	            session.setAttribute("fc_plan", FP);
 	            if(MU.getUser_name()==null){
 	            	url = "main/NewInfo.action";
 	            }else{
@@ -59,6 +64,7 @@ public class LoginExecuteAction extends Action{
 	    } else if(user_id.contains("P")) {
 	        user_type = ("P");
 	        PU = PUDao.parentsLogin(user_id, user_pass, facility_id);
+	        FP = FDDao.getFacilityInfo(facility_id).getFacility_plan();
 	        if(PU == null){
 	            errors.put("kome", "ログインに失敗しました。IDまたはパスワードが違います。");
 	            req.setAttribute("errors", errors);
@@ -67,6 +73,7 @@ public class LoginExecuteAction extends Action{
 	            PU.setAuthenticated(true);
 	            session.setAttribute("user", PU);
 	            session.setAttribute("user_type", user_type);
+	            session.setAttribute("fc_plan", FP);
 	            if(PU.getParents_name()==null){
 	            	url = "main/NewInfo.action";
 	            }else{

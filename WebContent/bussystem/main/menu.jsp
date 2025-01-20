@@ -12,7 +12,8 @@
 		session.getAttribute("user_type");
 		session.getAttribute("user_id");
 		%>
-
+<c:choose>
+		<c:when test="${fc_plan}">
 				<c:choose>
 				    <c:when test="${user_type == 'M'}">
 				        <h2>管理者</h2>
@@ -93,7 +94,58 @@
 
 
 				</c:choose>
+</c:when>
+<c:otherwise>
+<c:choose>
+				    <c:when test="${user_type == 'M'}">
+				        <h2>管理者</h2>
+							<div class="menu-section">
+							    <h4>情報関係</h4>
+							    <div class="menu-links">
+							        <a href="NewRegistMenu.action">新規登録</a>
+							        <a href="Parents.action">保護者情報</a>
+							        <a href="ChildInfo.action">子供情報</a>
+							        <c:if test="${user_id == 'M0000001'}">
+							            <a href="FacilityInfo.action">施設情報</a>
+							        </c:if>
+							    </div>
+							</div>
 
+							<div class="menu-section">
+							    <h4>子供管理</h4>
+							    <div class="menu-links">
+							        <a href="QrMenu.action">QR機能</a>
+							    </div>
+							</div>
+					</c:when>
+
+
+				    <c:when test="${user_type == 'T'}">
+				        <h2>先生</h2>
+				     		<div class="menu-section">
+							    <h4>子供管理</h4>
+							    <div class="menu-links">
+							        <a href="QrMenu.action">QR機能</a>
+							    </div>
+							</div>
+				    </c:when>
+
+
+				    <c:when test="${user_type == 'P'}">
+				        <h2>保護者</h2>
+				        	<div class="menu-section">
+							    <h4>情報関係</h4>
+							    <div class="menu-links">
+							        <a href="Parents.action">保護者情報</a>
+							        <a href="ChildInfo.action">子供情報</a>
+							    </div>
+							</div>
+				    </c:when>
+
+
+				</c:choose>
+</c:otherwise>
+</c:choose>
 </div>
 </div>
 
