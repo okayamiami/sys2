@@ -48,7 +48,7 @@
 			<div class="form-group">
 			    <label for="child_name">子供の名前:</label>
 			<input type="text" id="child_name" name="child_name" required
-		       pattern="^[^\d０-９]+$"
+		       pattern="^[\p{L}\d０-９]+$"
 		       title="数字を含まない名前を入力してください"
 		       maxlength="10">
 

@@ -19,7 +19,6 @@ public class ParentsEditExecuteAction extends Action {
         // ユーザー情報をセッションから取得
         Object user = session.getAttribute("user");
         ParentsUserDao PD = new ParentsUserDao();
-        ParentsUser PU = new ParentsUser();
 
         // ユーザータイプで分ける
         if ("P".equals(user_type)) {
@@ -41,23 +40,7 @@ public class ParentsEditExecuteAction extends Action {
         String parents_mail3 = req.getParameter("parents_mail3");
 
         System.out.println(parents_name);
-        if ("P".equals(user_type)) {
-        // 現在のパスワードをデータベースから取得
-        ParentsUser currentUser = PD.getParentsUserInfo(parents_id, facilityId);
-        String currentPassword = currentUser.getParents_pass();
 
-        // 入力されたパスワードが現在のパスワードと同じか確認
-        if (parents_pass.equals(currentPassword)) {
-
-            req.setAttribute("user", user);
-            ParentsUser PU2 = PD.getParentsUserInfo(parents_id, facilityId);
-			System.out.println(PU2);
-			req.setAttribute("userinfo", PU2);
-			req.setAttribute("message", "新しいパスワードは現在のパスワードと同じです。別のパスワードを入力してください。");
-            req.getRequestDispatcher("parentseditp.jsp").forward(req, res); // 編集フォームに戻る
-            return; // 処理を中断
-        }
-        }
 
         // 保護者情報を設定
         ParentsUser parentsUser = new ParentsUser();

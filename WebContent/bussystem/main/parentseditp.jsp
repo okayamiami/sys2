@@ -35,8 +35,9 @@
                             <input type="text" name="parents_name" value="${userinfo.parents_name}"
                                    required minlength="1" placeholder="名前を入力"
                                    id="parents_name" title="名前に数字を含めないでください。"
-                                   pattern="^[^\d０-９]+$"
-                                   maxlength="10" />
+                                   pattern="^[\p{L}\d０-９]+$"
+                                   maxlength="10"
+                                   required/>
                         </td>
                     </tr>
                     <script>
