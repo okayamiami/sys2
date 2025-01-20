@@ -25,9 +25,8 @@
              <tr><th>住所</th><td>${facility_address}</td></tr>
              <tr><th>電話番号</th><td>${facility_tel}</td></tr>
              <tr><th>メールアドレス</th><td>${facility_mail}</td></tr>
-             <tr><th>パスワード</th><td>${facility_app_password}</td></tr>
              <tr>
-             	<th>プラン情報</th>
+             	<th>プラン</th>
              	<td>
              		<c:choose>
 				            <c:when test="${facility_plan == true}">

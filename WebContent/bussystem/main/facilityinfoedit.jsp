@@ -45,11 +45,7 @@
         <tr><th>メールアドレス</th><td>
                 	<input type="email" name="facility_mail" value="${fc.facility_mail}" required/>
                 </td></tr>
-        <tr><th>アプリパスワード</th><td>
-	                <input type="password" id="facility_app_password" name="facility_app_password" value="${fc.facility_app_password}" maxlength="20" required title="20文字以内で入力してください"/>
-	                <button type="button" onclick="togglePassword()">表示/非表示</button>
-	            </td></tr>
-        <tr><th>プラン選択</th><td>
+        <tr><th>プラン</th><td>
 				    <!-- 初期値をhiddenにセット -->
 				    <input type="hidden" name="facility_plan" id="facility_plan_hidden" value="${fc.facility_plan}" />
 
@@ -58,20 +54,6 @@
 				</td></tr>
          </c:if>
     </table>
-    <script>
-    // パスワードの表示/非表示を切り替える関数
-    function togglePassword() {
-        var passwordField = document.getElementById("facility_app_password");
-        var currentType = passwordField.type;
-
-        // 現在のタイプがpasswordならtextに、textならpasswordに変更
-        if (currentType === "password") {
-            passwordField.type = "text";
-        } else {
-            passwordField.type = "password";
-        }
-    }
-	</script>
 
 
 </form>
