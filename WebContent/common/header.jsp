@@ -11,8 +11,6 @@
 
 
   <div class="header">
-
-  <div class="header">
     <h1>
         <a class="home-icon" href="Menu.action">
             <img src="${pageContext.request.contextPath}/images/kids.png" alt="ホーム">登園・バス管理システム
@@ -55,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById('currentDate').innerText = date;
 });
 </script>
-</div>
+
 
   <div id="h_line">
     <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="しずく線">

@@ -16,45 +16,13 @@
 	  </ol>
 	</nav>
 
-<h2 class="title">欠席連絡</h2>
+<h2 class="title">本日の欠席連絡</h2>
 <!-- エラーメッセージの表示 -->
 <c:if test="${not empty error}">
     <p style="color: red; font-weight: bold;">${error}</p>
 </c:if>
 
 
-		<form method="get">
-			<label> 欠席日 </label>
-			<select name="f1">
-				<option value="0">--------</option>
-				<c:forEach var="absdate" items="${datelist}">
-					<%-- 現在のchildIdと選択されていたf1が一致していた場合selectedを追記 --%>
-					<option value="${absdate}" <c:if test="${absdate==f1}">selected</c:if>>${absdate}</option>
-				</c:forEach>
-			</select>
-
-			<label> クラス </label>
-			<select name="f2">
-				<option value="0">--------</option>
-				<c:forEach var="ClassName" items="${class_name_set}">
-					<%-- 現在のchildNameと選択されていたf2が一致していた場合selectedを追記 --%>
-					<option value="${ClassName}" <c:if test="${ClassName==f2}">selected</c:if>>${ClassName}</option>
-				</c:forEach>
-			</select>
-
-			<label> 名前 </label>
-			<select name="f3">
-				<option value="0">--------</option>
-				<c:forEach var="childName" items="${child_name_set}">
-					<%-- 現在のclassNameと選択されていたf2が一致していた場合selectedを追記 --%>
-					<option value="${childName}" <c:if test="${childName==f3}">selected</c:if>>${childName}</option>
-				</c:forEach>
-			</select>
-
-			<button class="button-send">絞込み</button>
-
-			<div style="color: red; font-weight: bold;">${errors.get("f1")}</div>
-		</form>
 
 
 

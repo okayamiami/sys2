@@ -162,7 +162,7 @@ public class AbsenceReportExecuteAction extends Action {
 		abs.setAbs_is_attend(abs_is_attend);				// 出欠席フラグ
 
 		// 欠席情報を保存
-		aDao.saveAbsenceInfo(abs);
+		aDao.saveAbsenceReport(abs);
 
 	} catch (Exception e) {
 		req.setAttribute("error", "本日の欠席登録がすでにされているか<br>子供の選択がされていません");

@@ -140,12 +140,20 @@ a.home-icon {
     border-radius: 1rem; /* 各アイテムの角を丸くする */
 }
 
+.breadcrumb-item span {
+    color: #606060;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    background-color: #c1ffc5;
+    border: 1px solid #ffffff;
+    border-radius: 1rem; /* 各アイテムの角を丸くする */
+}
+
 .breadcrumb-item a:hover {
     color: #606060;
     background-color: #e6ffe8;
     text-decoration: none;
 }
-
 
 
 /* ------------------------------------------- */
