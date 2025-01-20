@@ -72,38 +72,6 @@
 
 		</form>
 
-		<script>
-		    function disableFormWhileLoading() {
-		        // フォームのすべての要素を取得
-		        const form = document.querySelector('#filterForm');
-		        const elements = form.querySelectorAll('input, select, button');
-
-		        // 全て無効化
-		        elements.forEach(el => el.disabled = true);
-
-		        // ローディング中のメッセージ表示
-		        const loadingMessage = document.createElement('p');
-		        loadingMessage.id = 'loadingMessage';
-		        loadingMessage.textContent = '絞り込み中です。お待ちください...';
-		        form.appendChild(loadingMessage);
-		    }
-
-		    function enableFormAfterLoading() {
-		        const form = document.querySelector('#filterForm');
-		        const elements = form.querySelectorAll('input, select, button');
-
-		        // 全て有効化
-		        elements.forEach(el => el.disabled = false);
-
-		        // ローディングメッセージを削除
-		        const loadingMessage = document.getElementById('loadingMessage');
-		        if (loadingMessage) {
-		            loadingMessage.remove();
-		        }
-		    }
-		</script>
-
-
 
 
         <!-- 情報表示 -->
