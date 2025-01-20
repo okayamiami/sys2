@@ -3,13 +3,22 @@
 <!-- 上記はEclipseの警告を消すための記述です。 -->
 
 <Context reloadable="true">
-	<Resource
-		name="jdbc/book"
-		auth="Container"
-		type="javax.sql.DataSource"
-		driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://localhost:5432/book"
-		username="postgres"
-		password="pass"
-	/>
+    <Resource
+        name="jdbc/book"
+        auth="Container"
+        type="javax.sql.DataSource"
+        driverClassName="org.postgresql.Driver"
+        url="jdbc:postgresql://localhost:5432/book"
+        username="postgres"
+        password="pass"
+        maxTotal="20"
+        maxIdle="10"
+        minIdle="2"
+        maxWaitMillis="30000"
+        validationQuery="SELECT 1"
+        testOnBorrow="true"
+        testWhileIdle="true"
+        timeBetweenEvictionRunsMillis="5000"
+        minEvictableIdleTimeMillis="60000"
+    />
 </Context>
