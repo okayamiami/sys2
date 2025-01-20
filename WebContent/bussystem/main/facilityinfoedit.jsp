@@ -26,7 +26,7 @@
 		            ${fc.facility_id} <!-- IDは表示する -->
         		</td></tr>
         <tr><th>施設名</th><td>
-                    <input type="text" name="facility_name" pattern="^[^0-9]*$"  value="${fc.facility_name}" required title="数字を含めないでください"/>
+                    <input type="text" name="facility_name" pattern="^[\p{L}\d０-９]+$"  value="${fc.facility_name}" required title="記号を含めないでください"/>
                 </td></tr>
         <tr><th>住所</th><td>
                     <input type="text" name="facility_address"
