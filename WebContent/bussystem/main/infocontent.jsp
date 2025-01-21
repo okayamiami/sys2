@@ -20,13 +20,14 @@
 
         <h2 class="title">お知らせ詳細</h2>
 
-        <%-- リクエスト属性 user_type が "M" の場合にフォームを表示 --%>
-		<c:if test="${requestScope.user_type eq 'M'}">
+        <%-- リクエスト属性 user_type が "MかT" の場合にフォームを表示 --%>
+		<c:if test="${requestScope.user_type == 'M' || requestScope.user_type == 'T'}">
 		    <form action="InfoDelete.action" method="post">
 		        <input type="hidden" name="info_id" value="${info_set.info_id}" />
 		        <button type="submit" class="button-send">削除</button>
 		    </form>
 		</c:if>
+
 
 
         <!-- 詳細情報を表示 -->
