@@ -33,8 +33,8 @@
 
 
         <label>バス名</label>
-	        <input type="text" name="bus_name" maxlength="7" style="width:200px;height:25px;"
-	            placeholder="7文字以内で入力してください"  />
+	        <input type="text" name="bus_name" maxlength="20" style="width:200px;height:25px;"
+	            placeholder="20文字以内で入力してください"  />
 
 
         <input type="submit" value="登録" class="button-send">

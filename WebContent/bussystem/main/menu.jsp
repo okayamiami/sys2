@@ -24,7 +24,7 @@
 							        <a href="Parents.action">保護者情報</a>
 							        <a href="ChildInfo.action">子供情報</a>
 							        <c:if test="${user_id == 'M0000001'}">
-							            <a href="FacilityInfo.action">施設情報</a>
+							            <a href="FacilityInfoMenu.action">施設・バス情報</a>
 							        </c:if>
 							    </div>
 							</div>
@@ -106,7 +106,7 @@
 							        <a href="Parents.action">保護者情報</a>
 							        <a href="ChildInfo.action">子供情報</a>
 							        <c:if test="${user_id == 'M0000001'}">
-							            <a href="FacilityInfo.action">施設情報</a>
+							            <a href="FacilityInfoMenu.action">施設・バス情報</a>
 							        </c:if>
 							    </div>
 							</div>

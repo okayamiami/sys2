@@ -47,7 +47,7 @@
 
             <!-- 本文の入力 -->
 			<label>本文</label>
-			<textarea name="content" rows="5" cols="40" maxlength="300" required>${content}</textarea>
+			<textarea name="content" rows="5" cols="40" maxlength="2000" required>${content}</textarea>
 			<div>${errors.get("content")}</div>
 
 
