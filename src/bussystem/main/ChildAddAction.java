@@ -60,7 +60,6 @@ public class ChildAddAction extends Action {
 
             // 子供リストを取得
             List<Child> child_list = CD.getChildListinfo(facility_id);
-            System.out.println(child_list);
 
             // child_idの最大値を計算
             OptionalInt maxChildId = child_list.stream()
@@ -137,7 +136,6 @@ public class ChildAddAction extends Action {
 
             // 子供リストを取得
             List<Child> child_list = CD.getChildListinfo(facility_id);
-            System.out.println(child_list);
 
             // child_idの最大値を計算
             OptionalInt maxChildId = child_list.stream()

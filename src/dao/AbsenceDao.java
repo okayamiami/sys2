@@ -225,8 +225,6 @@ public class AbsenceDao extends Dao{
 				statement.setString(5, absence.getAbsence_id());
 				statement.setString(6, absence.getFacility_id());
 
-				System.out.println(statement);
-
 			}
 
 			//プリペアードステートメントを実行
@@ -304,8 +302,6 @@ public class AbsenceDao extends Dao{
 				statement.setBoolean(4, absence.getAbs_is_attend());
 				statement.setString(5, absence.getAbsence_id());
 				statement.setString(6, absence.getFacility_id());
-
-				System.out.println(statement);
 
 			}
 

@@ -41,7 +41,7 @@
 		session.getAttribute("user_id");
 	%>
 
-<!-- 戻る先　管理者・先生　欠席選択画面　　保護者　メニュー画面 -->
+
 
 
     <h2 class="title">欠席報告</h2>

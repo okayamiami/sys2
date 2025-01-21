@@ -44,6 +44,9 @@ public class AbsenceReportAction extends Action {
 
 			session.setAttribute("user", pu);
 
+
+
+
 		} else if ("T".equals(user_type) || "M".equals(user_type)) {
 			ManageUser mu = (ManageUser) session.getAttribute("user"); // ログインユーザーを取得
 			// リクエストパラメータ―の取得 2

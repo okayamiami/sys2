@@ -67,11 +67,8 @@ public class ParentsEditAction extends Action {
 			req.getRequestDispatcher("parentsedit.jsp").forward(req, res);
 
 		}else if("P".equals(user_type)){
-			System.out.println(user_id);
-			System.out.println(facility_id);
 			//ログインユーザーが保護者の時、ログインした保護者の情報を取得
 			ParentsUser PU2 = PD.getParentsUserInfo(user_id, facility_id);
-			System.out.println(PU2);
 			req.setAttribute("user", PU);
 			req.setAttribute("userinfo", PU2);
 			req.setAttribute("user_type", user_type);

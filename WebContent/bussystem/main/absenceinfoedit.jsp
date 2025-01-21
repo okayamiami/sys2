@@ -47,13 +47,7 @@
 		            ${abs.absence_date} <!-- 欠席日は表示する -->
                 </td></tr>
 
-        <tr><th>欠席</th><td>
-				<%-- abs_is_attendがtrueの場合checkedを追記 --%>
-				<input type="checkbox" name="abs_is_attend"
-					<c:if test="${abs.abs_is_attend}">checked</c:if>>
-	            </td></tr>
 
-	            <input type="hidden" name="facility_id" value="${abs.facility_id}"/>
 
 
          </c:if>

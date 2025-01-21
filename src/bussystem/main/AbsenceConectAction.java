@@ -40,6 +40,8 @@ public class AbsenceConectAction extends Action {
 
 	    Map<String, String> errors = new HashMap<>();
 
+
+
 	    try{
 
 		if ("M".equals(user_type) || "T".equals(user_type)) {
@@ -54,6 +56,7 @@ public class AbsenceConectAction extends Action {
 		            childNamelist.add(c.getChild_name());
 		        }
 
+		        // クラス情報
 		        List<ClassCd> classlist = ccDao.getClassCdinfo(facility_id);
 		        List<String> classNamelist = new ArrayList<>();
 		        for (ClassCd c : classlist) {
@@ -114,6 +117,13 @@ public class AbsenceConectAction extends Action {
 			String parents_id = pu.getParents_id();
 			List<Map<String, Object>> absMapList;
 
+	        // クラス情報
+	        List<ClassCd> classlist = ccDao.getClassCdinfo(facility_id);
+	        List<String> classNamelist = new ArrayList<>();
+	        for (ClassCd c : classlist) {
+	            classNamelist.add(c.getClass_name());
+	        }
+
 	        LocalDate today = LocalDate.now();
 	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	        String formattedDate = today.format(dtf);
@@ -123,6 +133,9 @@ public class AbsenceConectAction extends Action {
 			req.setAttribute("facility_id", facility_id);
 			req.setAttribute("parents_id", parents_id);
 			req.setAttribute("abs", absMapList);
+			req.setAttribute("class_name_set", classNamelist);
+			req.setAttribute("class_set", classlist);
+
 
 			// 正常終了時のフォワード
 	        req.getRequestDispatcher("absence_conect_parents.jsp").forward(req, res);

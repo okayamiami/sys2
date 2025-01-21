@@ -26,6 +26,7 @@ public class ChildDao extends Dao{
 			st.setString(2,child_id);
 			ResultSet rSet = st.executeQuery();
 
+
 			if(rSet.next()){
 				child.setChild_id(rSet.getString("child_id"));
 				child.setChild_name(rSet.getString("child_name"));
@@ -33,6 +34,7 @@ public class ChildDao extends Dao{
 				child.setClass_id(rSet.getString("class_id"));
 				child.setIs_attend(rSet.getBoolean("is_attend"));
 				child.setFacility_id(rSet.getString("facility_id"));
+
 			}else{
 				child=null;
 			}

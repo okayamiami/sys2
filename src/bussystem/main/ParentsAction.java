@@ -32,9 +32,7 @@ public class ParentsAction extends Action {
 		// ログインユーザーを一時的に取得
 		String user_type = (String) session.getAttribute("user_type");
 
-		int count = 0;
-		count ++;
-		System.out.println("ユーザータイプは"+user_type+""+count+"回目");
+
 
 
 		// userの型に応じて処理
@@ -50,10 +48,6 @@ public class ParentsAction extends Action {
 			req.setAttribute("userinfo", PU2);
 
 			req.setAttribute("user_type", user_type);	// パンくずの表示判断用
-			int count_info = 0;
-			count_info ++;
-
-			System.out.println("保護者アカウントでの保護者情報表示"+count_info+"回目");
 
 			req.getRequestDispatcher("parentsinfo.jsp").forward(req, res);
 
