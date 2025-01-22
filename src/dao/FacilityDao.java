@@ -81,9 +81,9 @@ public class FacilityDao extends Dao{
 			statement.setString(3, fc.getFacility_address());
 			statement.setString(4, fc.getFacility_tel());
 			statement.setString(5, fc.getFacility_mail());
-			statement.setString(5, fc.getFacility_app_password());
-			statement.setBoolean(6, fc.getFacility_plan());
-			statement.setString(7, fc.getFacility_id());
+			statement.setString(6, fc.getFacility_app_password());
+			statement.setBoolean(7, fc.getFacility_plan());
+			statement.setString(8, fc.getFacility_id());
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
 

@@ -27,7 +27,7 @@ public class FacilityInfoEditExecuteAction extends Action{
 		fc.setFacility_address(facility_address);
 		fc.setFacility_tel(facility_tel);
 		fc.setFacility_mail(facility_mail);
-		fc.setFacility_mail(facility_app_password);
+		fc.setFacility_app_password(facility_app_password);
 		fc.setFacility_plan(facility_plan);
 		try{
 			fcdao.saveFacilityInfo(fc);
