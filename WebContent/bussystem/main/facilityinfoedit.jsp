@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="/common/header.jsp" />
 <div class="main">
 <div class="con">
@@ -45,6 +45,17 @@
         <tr><th>メールアドレス</th><td>
                 	<input type="email" name="facility_mail" value="${fc.facility_mail}" required/>
                 </td></tr>
+        <tr>
+                        <th>パスワード</th>
+                        <td>
+                           <input type="text" name="facility_app_password"
+                                   required minlength="6" maxlength="20"
+                                   placeholder="パスワードを入力"
+                                   title="大文字を1文字以上含む英数字6～20文字で入力してください。"
+                                   pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,20}"
+                                   value="${fn:trim(fc.facility_app_password)}" />
+                        </td>
+                    </tr>
         <tr><th>プラン</th><td>
 				    <!-- 初期値をhiddenにセット -->
 				    <input type="hidden" name="facility_plan" id="facility_plan_hidden" value="${fc.facility_plan}" />

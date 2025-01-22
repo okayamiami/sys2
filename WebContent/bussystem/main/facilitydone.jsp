@@ -25,6 +25,7 @@
              <tr><th>住所</th><td>${facility_address}</td></tr>
              <tr><th>電話番号</th><td>${facility_tel}</td></tr>
              <tr><th>メールアドレス</th><td>${facility_mail}</td></tr>
+             <tr><th>アプリパスワード</th><td>${facility_app_password}</td></tr>
              <tr>
              	<th>プラン</th>
              	<td>

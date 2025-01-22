@@ -7,6 +7,7 @@ public class Facility {
 	private String facility_address;
 	private String facility_tel;
 	private String facility_mail;
+	private String facility_app_password;
 	private Boolean facility_plan;
 
 	public String getFacility_id() {
@@ -38,6 +39,13 @@ public class Facility {
 	}
 	public void setFacility_mail(String facility_mail) {
 		this.facility_mail = facility_mail;
+	}
+
+	public String getFacility_app_password() {
+		return facility_app_password;
+	}
+	public void setFacility_app_password(String facility_app_password) {
+		this.facility_app_password = facility_app_password;
 	}
 	public Boolean getFacility_plan() {
 		return facility_plan;
