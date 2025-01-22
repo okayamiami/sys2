@@ -65,7 +65,6 @@ public class BusCreateExecuteAction extends Action {
             bus.setBus_name(bus_name);         // バス名
             bus.setFacility_id(facility_id);   // 施設ID
 
-            System.out.println(perfect_id);
             // バス情報を保存
             boolean isSaved = bDao.saveBus(bus);
 

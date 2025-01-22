@@ -18,7 +18,7 @@
 	</nav>
 
 
-<h2 class="title">バス選択</h2>
+<h2 class="title">バス情報</h2>
 
 
 <c:if test="${not empty bus_set}">

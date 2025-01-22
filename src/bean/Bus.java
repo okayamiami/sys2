@@ -5,6 +5,7 @@ public class Bus {
 	private String bus_id;
 	private String bus_name;
 	private String facility_id;
+	private boolean bus_is_attend;
 
 	public String getBus_id() {
 		return bus_id;
@@ -23,6 +24,12 @@ public class Bus {
 	}
 	public void setFacility_id(String facility_id) {
 		this.facility_id = facility_id;
+	}
+	public boolean getBus_is_attend() {
+		return bus_is_attend;
+	}
+	public void setBus_is_attend(boolean bus_is_attend) {
+		this.bus_is_attend = bus_is_attend;
 	}
 
 
