@@ -49,7 +49,7 @@ public class AbsenceConectAction extends Action {
 
 		    String facility_id = mu.getFacility_id();
 
-		        // クラス情報、子供情報の取得
+		        // 子供情報の取得
 		        List<Child> childlist = cDao.getChildListinfo(facility_id);
 		        List<String> childNamelist = new ArrayList<>();
 		        for (Child c : childlist) {

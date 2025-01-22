@@ -19,7 +19,7 @@
 	  </ol>
 	</nav>
 
-	<h2 class="title">欠席連絡更新</h2>
+	<h2 class="title">欠席連絡更新完了</h2>
 
 	<!-- エラーメッセージの表示 -->
 	<c:if test="${not empty error}">

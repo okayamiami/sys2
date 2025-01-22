@@ -65,7 +65,7 @@ public class AbsenceInfoEditAction extends Action{
 			// DBからデータ取得 3
 			Absence abs = aDao.getAbschildinfobyAbsenceId(facility_id,absence_id);		// 選択された欠席情報を取得する
 
-			List<Child> chiidlist = cDao.getChildListinfo(facility_id);					// 子供情報のリスト
+			List<Child> chiidlist = cDao.getChildListinfo(facility_id);					// 子供情報のリスト(画面に名前を表示させるため)
 
 
 			req.setAttribute("abs",abs );
