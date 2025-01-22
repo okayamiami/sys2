@@ -15,12 +15,12 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
     <li class="breadcrumb-item"><a href="NewRegistMenu.action">新規登録メニュー</a></li>
-    <li class="breadcrumb-item active" aria-current="page">バス新規作成</li>
+    <li class="breadcrumb-item active" aria-current="page">バス新規登録</li>
   </ol>
 </nav>
 
 
-    <h2 class="title">バス新規作成</h2>
+    <h2 class="title">バス新規登録</h2>
 
     <p>新規登録するバス名を入力してください</p>
 

@@ -19,12 +19,12 @@
 
 <h2 class="title">新規登録メニュー</h2>
 
-<p>新規作成する項目を選択してください</p>
+<p>新規登録する項目を選択してください</p>
 
 <div class="menu-links">
-<a href="NewRegist.action">アカウント新規作成</a>
+<a href="NewRegist.action">アカウント新規登録</a>
 
-<a href="BusCreate.action">バス新規作成</a>
+<a href="BusCreate.action">バス新規登録</a>
 
 </div>
 
