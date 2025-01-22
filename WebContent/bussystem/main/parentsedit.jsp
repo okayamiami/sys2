@@ -41,15 +41,7 @@
 
         <h2 class="title">保護者情報編集</h2>
 
-        <c:choose>
 
-				    <c:when test="${user_type == 'P'}">
-				        <!-- 保護者向けのリンク -->
-				        <a href="Parents.action">
-				            <button type="button">戻るボタン（確認後消去）</button>
-				        </a>
-				    </c:when>
-				</c:choose>
         <form action="ParentsEditExecute.action" method="post">
         	<button type="submit" class="button-send">保存</button>
             <table>
