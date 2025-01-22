@@ -21,6 +21,7 @@
 							    <h4>情報関係</h4>
 							    <div class="menu-links">
 							        <a href="NewRegistMenu.action">新規登録</a>
+							        <a href="ManageUser.action">ユーザー情報</a>
 							        <a href="Parents.action">保護者情報</a>
 							        <a href="ChildInfo.action">子供情報</a>
 							        <c:if test="${user_id == 'M0000001'}">
