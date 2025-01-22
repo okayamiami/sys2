@@ -8,6 +8,8 @@
 <div class="main">
     <div class="con">
 
+
+
 		<!-- アカウント区分ごとの表示 -->
        	<c:choose>
 	    <c:when test="${user_type == 'M'}">
@@ -53,6 +55,7 @@
                 <th>クラス名</th>
                 <th>子供の名前</th>
                 <th>-</th>
+                <th>-</th>
             </tr>
             <c:forEach var="child" items="${userCI}">
                 <tr>
@@ -81,6 +84,34 @@
 		                		<button type="submit" class="button-send">編集</button>
                         </form>
                     </td>
+
+
+                    <c:choose>
+						<c:when test="${user_type == 'M'}">
+		                    <!-- 子供情報非表示ボタン -->
+		                    <td>
+		                        <form action="ChildIsAttend.action" method="post" style="display:inline;">
+		                            <input type="hidden" name="parents_id" value="${child.parents_id}" />
+		                            <!-- 子供のchild_idを送信する隠しフィールド -->
+		                            <input type="hidden" name="child_id" value="${child.child_id}" />
+				                		<button type="submit" class="button-send">非表示</button>
+		                        </form>
+		                    </td>
+					    </c:when>
+					    <c:when test="${user_type == 'P'}">
+					    	<!-- 子供情報削除風ボタン -->
+		                    <td>
+		                        <form action="ChildIsAttend.action" method="post" style="display:inline;">
+		                            <input type="hidden" name="parents_id" value="${child.parents_id}" />
+		                            <!-- 子供のchild_idを送信する隠しフィールド -->
+		                            <input type="hidden" name="child_id" value="${child.child_id}" />
+				                		<button type="submit" class="button-send">削除</button>
+		                        </form>
+		                    </td>
+
+					    </c:when>
+					</c:choose>
+
 
                 </tr>
             </c:forEach>

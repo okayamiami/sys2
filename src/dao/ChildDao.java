@@ -373,6 +373,65 @@ public class ChildDao extends Dao{
 
 	}
 
+	//子供情報非表示・削除
+	public boolean saveAbsChildinfo(Child child) throws Exception{
+				//コネクションを確立
+				Connection connection = getConnection();
+				//プリペアードステートメント
+				PreparedStatement statement = null;
+				//実行件数
+				int count = 0;
+
+				try{
+
+					//プリペアードステートメントにUPDATE文をセット
+					statement = connection
+							.prepareStatement("update Child set is_attend=? where child_id=? and facility_id=?");
+					//プリペアードステートメントに値をバインド
+					statement.setString(1, child.getChild_name());
+					statement.setString(2, child.getParents_id());
+					statement.setString(3, child.getClass_id());
+					statement.setBoolean(4, child.is_attend());
+					statement.setString(5, child.getFacility_id());
+					statement.setString(6, child.getChild_id());
+					statement.setString(7, child.getFacility_id());
+
+
+					//プリペアードステートメントを実行
+					count = statement.executeUpdate();
+
+				} catch (Exception e) {
+					throw e;
+				} finally {
+					//
+					if(statement != null) {
+						try {
+							statement.close();
+						} catch (SQLException sqle) {
+							throw sqle;
+						}
+					}
+
+					if(connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException sqle) {
+							throw sqle;
+						}
+					}
+				}
+
+				if (count > 0) {
+					//実行件数が1以上ある場合
+					return true;
+				} else {
+					//実行件数が0件の場合
+					return false;
+				}
+
+	}
+
+
 	//クラス名と施設CDからクラスIDを入手(新規子供で使う)
 	public String getClassCdByName(String className, String facilityId) throws Exception {
 	    String classCd = null;
