@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Facility;
 import bean.ManageUser;
 import bean.ParentsUser;
 import dao.FacilityDao;
@@ -29,7 +30,7 @@ public class LoginExecuteAction extends Action{
 	    ParentsUserDao PUDao = new ParentsUserDao();
 	    String user_type = null;
 	    FacilityDao FDDao = new FacilityDao();
-	    Boolean FP;
+	    Facility FP;
 
 	    String user_id = req.getParameter("user_id");
 	    String user_pass = req.getParameter("user_pass");
@@ -41,19 +42,23 @@ public class LoginExecuteAction extends Action{
 	        } else if (user_id.contains("T")){
 	            user_type = ("T");
 	        }
+	        System.out.println("0");
 	        MU = MUDao.login(user_id, user_pass, facility_id);
-	        FP = FDDao.getFacilityInfo(facility_id).getFacility_plan();
-	        if(MU == null){
-	            errors.put("kome", "ログインに失敗しました。IDまたはパスワードが違います。");
+	        FP = FDDao.getFacilityInfo(facility_id);
+	        if(MU == null || FP == null){
+	        	System.out.println("1");
+	            errors.put("null", "ログインに失敗しました。IDまたはパスワードが違います。");
 	            req.setAttribute("errors", errors);
 	            req.getRequestDispatcher("login.jsp").forward(req, res);
 	        } else {
+	        	System.out.println("2");
 	            MU.setAuthenticated(true);
 	            // セッションに "user" として ManageUser インスタンスを格納
+	            boolean fp = FP.getFacility_plan();
 	            session.setAttribute("user", MU);
 	            session.setAttribute("user_id", MU.getUser_id());
 	            session.setAttribute("user_type", user_type);
-	            session.setAttribute("fc_plan", FP);
+	            session.setAttribute("fc_plan", fp);
 	            if(MU.getUser_name()==null){
 	            	url = "main/NewInfo.action";
 	            }else{
@@ -64,16 +69,17 @@ public class LoginExecuteAction extends Action{
 	    } else if(user_id.contains("P")) {
 	        user_type = ("P");
 	        PU = PUDao.parentsLogin(user_id, user_pass, facility_id);
-	        FP = FDDao.getFacilityInfo(facility_id).getFacility_plan();
-	        if(PU == null){
-	            errors.put("kome", "ログインに失敗しました。IDまたはパスワードが違います。");
+	        FP = FDDao.getFacilityInfo(facility_id);
+	        if(PU == null || FP == null){
+	            errors.put("null", "ログインに失敗しました。IDまたはパスワードが違います。");
 	            req.setAttribute("errors", errors);
 	            req.getRequestDispatcher("login.jsp").forward(req, res);
 	        } else {
 	            PU.setAuthenticated(true);
+	            boolean fp = FP.getFacility_plan();
 	            session.setAttribute("user", PU);
 	            session.setAttribute("user_type", user_type);
-	            session.setAttribute("fc_plan", FP);
+	            session.setAttribute("fc_plan", fp);
 	            if(PU.getParents_name()==null){
 	            	url = "main/NewInfo.action";
 	            }else{
@@ -81,6 +87,10 @@ public class LoginExecuteAction extends Action{
 	            }
 	            res.sendRedirect(url);
 	        }
+	    }else{
+	    	errors.put("null", "ログインに失敗しました。ID,パスワード又は施設IDが違います。");
+            req.setAttribute("errors", errors);
+            req.getRequestDispatcher("login.jsp").forward(req, res);
 	    }
 	}
 }

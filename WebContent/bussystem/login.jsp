@@ -23,13 +23,13 @@
       <dt><label>ID</label></dt>
       <%-- value=T0000001 --%>
       <%-- value=P2400001 --%>
-      <dd><input type="text" name="user_id" maxlength="20" value="M0000001" pattern="[a-zA-Z0-9]*" title="英数字のみ入力してください"required></dd>
+      <dd><input type="text" name="user_id" maxlength="20" pattern="[a-zA-Z0-9]*" title="英数字のみ入力してください"required></dd>
 
 
       <dt><label>パスワード</label></dt>
       <%-- value=kanasen01 --%>
       <%-- value=nohara111 --%>
-      <dd><input type="password" id="user_pass" name="user_pass" maxlength="20" value="kanakan01" required/></dd>
+      <dd><input type="password" id="user_pass" name="user_pass" maxlength="20"  required/></dd>
       <dt><label for="showPassword">パスワードを表示</label>
 
       <script>
@@ -49,7 +49,7 @@
 
 
     <dt><label>facility_ID</label></dt>
-    <dd><input type="text" name="facility_id" maxlength="20" value="KK000" pattern="[a-zA-Z0-9]*" title="英数字のみ入力してください"required></dd>
+    <dd><input type="text" name="facility_id" maxlength="20"  pattern="[a-zA-Z0-9]*" title="英数字のみ入力してください"required></dd>
 	</dl>
 
 	<div class="button">
