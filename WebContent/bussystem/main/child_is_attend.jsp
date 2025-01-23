@@ -18,7 +18,7 @@
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
 		    <li class="breadcrumb-item"><a href="ChildInfo.action">保護者ID入力（子供情報）</a></li>
-		    <li class="breadcrumb-item"><a href="AbsenceConect.action">子供情報一覧</a></li>
+		    <li class="breadcrumb-item"><a href="ParentsIDInput.action?parents_id=${parents_id}">子供情報一覧</a></li>
 		    <li class="breadcrumb-item active" aria-current="page">在籍状況変更</li>
 		  </ol>
 		</nav>
@@ -29,8 +29,8 @@
 	    <nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
-		    <li class="breadcrumb-item"><a href="AbsenceConect.action">子供情報一覧</a></li>
-		    <li class="breadcrumb-item active" aria-current="page">在籍状況変更</li>
+		    <li class="breadcrumb-item"><a href="ChildInfo.action">子供情報一覧</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">子供情報削除確認</li>
 		  </ol>
 		</nav>
 
@@ -50,23 +50,24 @@
 		    </c:if>
 
 		    <p>本当に在籍情報を非表示に変更してもよろしいですか？</p>
-				<form action="AbsenceInfoDeleteExecute.action" method="get">
+				<form action="ChildIsAttendExecute.action" method="get">
 			        <input type="hidden" name="child_id" value="${child_id}">
 			        <input type="hidden" name="facility_id" value="${facility_id}">
+			        <input type="hidden" name="parents_id" value="${parents_id}">
 			        <button type="submit" class="button-send">非表示</button>
 			    </form>
 	    </c:when>
 
 	    <c:when test="${user_type == 'P'}">
 	    <!-- 保護者タイトル -->
-		<h2 class="title">子供情報削除</h2>
+		<h2 class="title">子供情報削除確認</h2>
 			<!-- エラーメッセージの表示 -->
 			<c:if test="${not empty error}">
 		    	<p style="color: red; font-weight: bold;">${error}</p>
 		    </c:if>
 
 		    <p>本当に子供情報を削除してもよろしいですか？</p>
-				<form action="AbsenceInfoDeleteExecute.action" method="get">
+				<form action="ChildIsAttendExecute.action" method="get">
 			        <input type="hidden" name="child_id" value="${child_id}">
 			        <input type="hidden" name="facility_id" value="${facility_id}">
 			        <button type="submit" class="button-send">削除</button>

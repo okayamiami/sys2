@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Child;
 import bean.ManageUser;
 import bean.ParentsUser;
 import dao.ChildDao;
@@ -36,10 +35,19 @@ public class ChildIsAttendExecuteAction extends Action {
         try{
 
 	        String child_id = req.getParameter("child_id");			// 削除または非表示にする子供ID
-	        String facility_id = req.getParameter("facility_id");	;
+	        String facility_id = req.getParameter("facility_id");
+	        String parents_id = req.getParameter("parents_id");
 
-	        Child child = CD.getChildIdinfo(facility_id, child_id) ;		// 変更する子供情報取得
-	        CD.saveAbsChildinfo(child);
+	        System.out.println("子供ID"+child_id);
+	        System.out.println("施設ID"+facility_id);
+	        System.out.println("保護者ID"+parents_id);
+
+	        CD.saveAbsChildinfo(facility_id, child_id);
+
+	        req.setAttribute("parents_id", parents_id);
+			//JSPへフォワード 7
+			req.getRequestDispatcher("child_is_attend_done.jsp").forward(req, res);
+
 
 		} catch (Exception e) {
 			req.setAttribute("error", "情報更新中にエラーが発生しました。");
@@ -49,8 +57,6 @@ public class ChildIsAttendExecuteAction extends Action {
 		}
 
 
-		//JSPへフォワード 7
-		req.getRequestDispatcher("child.jsp").forward(req, res);
 	}
 
 

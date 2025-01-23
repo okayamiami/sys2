@@ -116,7 +116,7 @@ public class ChildDao extends Dao{
 		Connection connection = getConnection();
 		PreparedStatement st = null;
 
-		String sql = "select * from Child where parents_id = ? and facility_id=?";
+		String sql = "select * from Child where parents_id = ? and facility_id=? and is_attend=true";
 		try {
 			st = connection.prepareStatement(sql);
 			st.setString(1, parents_id);
@@ -374,7 +374,7 @@ public class ChildDao extends Dao{
 	}
 
 	//子供情報非表示・削除
-	public boolean saveAbsChildinfo(Child child) throws Exception{
+	public boolean saveAbsChildinfo(String facility_id, String child_id) throws Exception{
 				//コネクションを確立
 				Connection connection = getConnection();
 				//プリペアードステートメント
@@ -386,15 +386,13 @@ public class ChildDao extends Dao{
 
 					//プリペアードステートメントにUPDATE文をセット
 					statement = connection
-							.prepareStatement("update Child set is_attend=? where child_id=? and facility_id=?");
+							.prepareStatement("update Child set is_attend=false where child_id=? and facility_id=?");
 					//プリペアードステートメントに値をバインド
-					statement.setString(1, child.getChild_name());
-					statement.setString(2, child.getParents_id());
-					statement.setString(3, child.getClass_id());
-					statement.setBoolean(4, child.is_attend());
-					statement.setString(5, child.getFacility_id());
-					statement.setString(6, child.getChild_id());
-					statement.setString(7, child.getFacility_id());
+
+					statement.setString(1, child_id);
+					statement.setString(2, facility_id);
+
+					System.out.println(statement);
 
 
 					//プリペアードステートメントを実行

@@ -33,6 +33,8 @@ public class ChildInfoAction extends Action{
 		ChildDao CD = new ChildDao();
 		ClassCdDao CC = new ClassCdDao();
 
+
+
 		// ログインユーザーを一時的に取得
 		String user_type = (String) session.getAttribute("user_type");
 

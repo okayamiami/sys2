@@ -57,6 +57,7 @@ public class ChildIsAttendAction extends Action {
 	        req.setAttribute("facility_id", facility_id);
 	        req.setAttribute("child_id", child.getChild_id());
 	        req.setAttribute("child_name", child.getChild_name());
+	        req.setAttribute("parents_id", child.getParents_id());
 
 
 	        System.out.println(child.getChild_id());
