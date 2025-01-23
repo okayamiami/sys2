@@ -21,6 +21,7 @@
 
 
 		<div class="menu-links">
+
 		<a href="AbsenceConect.action">欠席連絡</a>
 
 		<a href="AbsenceReport.action">欠席報告</a>
