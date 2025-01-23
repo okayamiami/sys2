@@ -42,7 +42,7 @@ public class ChildIsAttendExecuteAction extends Action {
 	        System.out.println("施設ID"+facility_id);
 	        System.out.println("保護者ID"+parents_id);
 
-	        CD.saveAbsChildinfo(facility_id, child_id);
+	        CD.deleteChildinfo(facility_id, child_id);
 
 	        req.setAttribute("parents_id", parents_id);
 			//JSPへフォワード 7

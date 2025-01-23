@@ -374,7 +374,7 @@ public class ChildDao extends Dao{
 	}
 
 	//子供情報非表示・削除
-	public boolean saveAbsChildinfo(String facility_id, String child_id) throws Exception{
+	public boolean deleteChildinfo(String facility_id, String child_id) throws Exception{
 				//コネクションを確立
 				Connection connection = getConnection();
 				//プリペアードステートメント
