@@ -16,8 +16,8 @@
     </div>
   </div>
 <div class="main">
-<div>${errors.get("null")}</div>
 <div class="con">
+<div>${errors.get("null")}</div>
   <form action="LoginExecute.action" method="post">
   <dl>
       <dt><label>ID</label></dt>
