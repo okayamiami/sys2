@@ -8,6 +8,13 @@
 <div class="main">
 
 <div class ="con">
+<!-- パンくずリスト -->
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">施設・バス情報</li>
+	  </ol>
+	</nav>
 
 <h2 class="title">施設情報選択</h2>
 <div class="menu-links">
