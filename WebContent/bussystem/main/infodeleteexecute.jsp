@@ -17,7 +17,7 @@
 	    <li class="breadcrumb-item"><a href="InfoList.action">お知らせ一覧</a></li>
 	    <li class="breadcrumb-item"><span>お知らせ詳細</span></li>							<!-- 削除完了されている記事 -->
 	    <li class="breadcrumb-item"><span>お知らせ削除確認</span></li>						<!-- 削除完了されている記事 -->
-	    <li class="breadcrumb-item active" aria-current="page">お知らせ削除確認 </li>
+	    <li class="breadcrumb-item active" aria-current="page">お知らせ削除完了 </li>
 	  </ol>
 	</nav>
 
