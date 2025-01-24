@@ -30,10 +30,10 @@
                 </td></tr>
         <tr><th>住所</th><td>
                     <input type="text" name="facility_address"
-           					pattern="^[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF0-9\s\-ー,、]*$"
-           					value="${fc.facility_address}"
-           					required
-           					title="住所は漢字、ひらがな、カタカナ、数字、一部の記号（-、ー、,）を使用してください"/>
+					    pattern="^[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF0-9 ー\-、,]+$"
+					    value="${fc.facility_address}"
+					    required
+					    title="住所は漢字、ひらがな、カタカナ、数字、一部の記号（-、ー、,、スペース）を使用してください"/>
                 </td></tr>
         <tr><th>電話番号</th><td>
                     <input type="tel" name="facility_tel"

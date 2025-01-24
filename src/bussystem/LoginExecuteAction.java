@@ -47,7 +47,7 @@ public class LoginExecuteAction extends Action{
 	        FP = FDDao.getFacilityInfo(facility_id);
 	        if(MU == null || FP == null){
 	        	System.out.println("1");
-	            errors.put("null", "ログインに失敗しました。IDまたはパスワードが違います。");
+	            errors.put("null", "ログインに失敗しました。ID,パスワード又は施設IDが違います。");
 	            req.setAttribute("errors", errors);
 	            req.getRequestDispatcher("login.jsp").forward(req, res);
 	        } else {
@@ -71,7 +71,7 @@ public class LoginExecuteAction extends Action{
 	        PU = PUDao.parentsLogin(user_id, user_pass, facility_id);
 	        FP = FDDao.getFacilityInfo(facility_id);
 	        if(PU == null || FP == null){
-	            errors.put("null", "ログインに失敗しました。IDまたはパスワードが違います。");
+	            errors.put("null", "ログインに失敗しました。ID,パスワード又は施設IDが違います。");
 	            req.setAttribute("errors", errors);
 	            req.getRequestDispatcher("login.jsp").forward(req, res);
 	        } else {
