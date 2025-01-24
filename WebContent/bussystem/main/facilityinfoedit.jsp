@@ -46,15 +46,15 @@
                 	<input type="email" name="facility_mail" value="${fc.facility_mail}" required/>
                 </td></tr>
         <tr>
-                        <th>パスワード</th>
+                        <th>アプリパスワード</th>
                         <td>
-                           <input type="text" name="facility_app_password"
-                                   required minlength="6" maxlength="20"
-                                   placeholder="パスワードを入力"
-                                   title="大文字を1文字以上含む英数字6～20文字で入力してください。"
-                                   pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,20}"
-                                   value="${fn:trim(fc.facility_app_password)}" />
-                        </td>
+						    <input type="text" name="facility_app_password"
+						           required minlength="6" maxlength="20"
+						           placeholder="アプリパスワードを入力"
+						           title="英数字6～20文字で入力してください。"
+						           pattern="[A-Za-z\d]{6,20}"
+						           value="${fn:trim(fc.facility_app_password)}" />
+						</td>
                     </tr>
         <tr><th>プラン</th><td>
 				    <!-- 初期値をhiddenにセット -->
