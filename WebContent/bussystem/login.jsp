@@ -13,10 +13,10 @@
     <div>
       <h1>登園・バス管理システム</h1>
       <h2>ログイン</h2>
-      <div>${errors.get("null")}</div>
     </div>
   </div>
 <div class="main">
+<div>${errors.get("null")}</div>
 <div class="con">
   <form action="LoginExecute.action" method="post">
   <dl>
