@@ -69,9 +69,10 @@ public class ChildDao extends Dao{
 		List<Child> list = new ArrayList<>();
 		Connection connection = getConnection();
 		PreparedStatement st = null;
+		String sort = " ORDER BY child_id DESC ";
 
 		try{
-			st = connection.prepareStatement(baseSql);
+			st = connection.prepareStatement(baseSql+sort);
 			st.setString(1,facility_id);
 			ResultSet rSet = st.executeQuery();
 
