@@ -23,12 +23,12 @@ public class InfoCreateExecuteAction extends Action {
         try {
             InformationDao infoDao = new InformationDao();
             infoDao.saveInfo(infoTitle, infoMain, facilityId, infoGenre);
-                req.setAttribute("message", "お知らせ情報が正常に登録されました。");
+                req.setAttribute("message", "お知らせが正常に投稿されました。");
                 req.getRequestDispatcher("infocreateexecute.jsp").forward(req, res);
 
         } catch (Exception e) {
         	e.printStackTrace();
-            System.out.println("お知らせ情報登録中にエラーが発生しました。");
+            System.out.println("お知らせ投稿中にエラーが発生しました。");
         }
     }
 }

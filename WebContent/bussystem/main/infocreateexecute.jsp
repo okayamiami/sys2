@@ -19,7 +19,7 @@
 	</nav>
 
 
-<h2 class="title">お知らせ情報 登録完了</h2>
+<h2 class="title">お知らせ投稿完了</h2>
 
 <p>${message}</p>
 
