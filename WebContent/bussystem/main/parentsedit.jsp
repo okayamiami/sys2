@@ -75,7 +75,7 @@
                                    title="大文字を1文字以上含む英数字6～20文字で入力してください"
                                    placeholder="パスワードを入力"
                                    value="${userinfo.parents_pass}"
-                           />
+                                   required/>
                         </td>
                     </tr>
                     <tr>

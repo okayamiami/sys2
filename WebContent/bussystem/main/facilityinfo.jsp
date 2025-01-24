@@ -11,6 +11,7 @@
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item"><a href="FacilityInfoMenu.action">施設・バス情報</a></li>
 	    <li class="breadcrumb-item active" aria-current="page">施設情報</li>
 	  </ol>
 	</nav>
