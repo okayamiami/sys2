@@ -50,11 +50,11 @@
                         <th>アプリパスワード</th>
                         <td>
 						    <input type="text" name="facility_app_password"
-						           required minlength="6" maxlength="20"
-						           placeholder="アプリパスワードを入力"
-						           title="英数字6～20文字で入力してください。"
-						           pattern="[A-Za-z\d]{6,20}"
-						           value="${fn:trim(fc.facility_app_password)}" />
+						       required minlength="16" maxlength="16"
+						       placeholder="16文字の小文字英数字を入力"
+						       title="小文字英数字16文字で入力してください。"
+						       pattern="[a-z\d]{16}"
+						       value="${fn:trim(fc.facility_app_password)}" />
 						</td>
                     </tr>
         <tr><th>プラン</th><td>

@@ -70,9 +70,9 @@
                         <th>パスワード</th>
                         <td>
                            <input type="text" name="parents_pass"
-                                   minlength="6" maxlength="20"
+                                   minlength="8" maxlength="20"
                                    pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+"
-                                   title="大文字を1文字以上含む英数字6～20文字で入力してください"
+                                   title="大文字を1文字以上含む英数字8～20文字で入力してください"
                                    placeholder="パスワードを入力"
                                    value="${userinfo.parents_pass}"
                                    required/>

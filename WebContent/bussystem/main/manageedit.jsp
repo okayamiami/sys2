@@ -48,10 +48,10 @@
                         <th>パスワード</th>
                         <td>
                            <input type="text" name="user_pass"
-                                   required minlength="6" maxlength="20"
+                                   required minlength="8" maxlength="20"
                                    placeholder="パスワードを入力"
-                                   title="大文字を1文字以上含む英数字6～20文字で入力してください。"
-                                   pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,20}"
+                                   title="大文字を1文字以上含む英数字8～20文字で入力してください。"
+                                   pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,20}"
                                    value="${fn:trim(muinfo.user_pass)}" />
                         </td>
                     </tr>
