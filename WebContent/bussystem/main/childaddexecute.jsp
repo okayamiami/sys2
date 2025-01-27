@@ -43,12 +43,13 @@
 
 	    <table class="table table-hover">
 	   	    <tr>
-	                  <th>保護者ID</th>
+	                  <th>子供ID</th>
 	                  <th>クラス名</th>
 	                  <th>名前（子供）</th>
 	       </tr>
 	    	<tr>
-                    <td>${parents_id}</td>
+					<input type="hidden" id="parents_id" name="parents_id" value="${parents_id}" />
+                    <td>${child_id}</td>
                     <td>${class_name}</td>
                     <td>${child_name}</td>
            </tr>

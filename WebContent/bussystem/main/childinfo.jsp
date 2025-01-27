@@ -51,7 +51,7 @@
 
         <table>
             <tr>
-                <th>保護者ID</th>
+                <th>子供ID</th>
                 <th>クラス名</th>
                 <th>子供の名前</th>
                 <th>-</th>
@@ -60,7 +60,7 @@
             <c:forEach var="child" items="${userCI}">
                 <tr>
                 	<!-- 保護者IDの表示 -->
-                    <td>${child.parents_id}</td>
+                    <td>${child.child_id}</td>
 
 					<!-- クラスの名前を表示 -->
                     <td>

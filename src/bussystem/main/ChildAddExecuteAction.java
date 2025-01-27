@@ -1,5 +1,8 @@
 package bussystem.main;
 
+import java.util.List;
+import java.util.OptionalInt;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +18,9 @@ public class ChildAddExecuteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+
+    	//Daoインスタンス化
+    	ChildDao CD = new ChildDao();
 
     	// セッションを取得
     	HttpSession session = req.getSession();
@@ -35,9 +41,31 @@ public class ChildAddExecuteAction extends Action {
             parentsId = req.getParameter("parents_id");
         }
 
-        // リクエストパラメータを取得
-        String parents_id = req.getParameter("parents_id");
-        String childId = req.getParameter("child_id");
+
+        // 子供リストを取得
+        List<Child> child_list = CD.getChildListinfo(facilityId);
+
+        // child_idの最大値を計算
+        OptionalInt maxChildId = child_list.stream()
+            .map(Child::getChild_id)       // Childオブジェクトからchild_idを取得
+            .map(childId -> childId.trim()) // 空白を削除
+            .mapToInt(Integer::parseInt)   // Stringをintに変換
+            .max();
+
+        // 次のchild_idを決定
+        int nextNumber;
+        if (maxChildId.isPresent()) {
+            nextNumber = maxChildId.getAsInt() + 1;
+        } else {
+            System.out.println("子供テーブルにchild_idが存在しません。");
+            nextNumber = 1;
+        }
+        String childId = String.valueOf(nextNumber);
+
+
+
+
+        //String childId = req.getParameter("child_id");
         String childName = req.getParameter("child_name");
         String classId = req.getParameter("class_id");
         String isAttend = req.getParameter("is_attend");
@@ -77,7 +105,8 @@ public class ChildAddExecuteAction extends Action {
             gDao.saveGetInfoForAllBuses(child);
 
             // 完了画面で表示する
-            req.setAttribute("parents_id", parents_id);
+            req.setAttribute("parents_id", parentsId);
+            req.setAttribute("child_id", childId);
             req.setAttribute("class_name", class_name);
             req.setAttribute("child_name", childName);
 

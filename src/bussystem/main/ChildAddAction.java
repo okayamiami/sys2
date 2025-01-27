@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Child;
 import bean.ClassCd;
 import bean.ManageUser;
 import bean.ParentsUser;
-import dao.ChildDao;
 import dao.ClassCdDao;
 import dao.ParentsUserDao;
 import tool.Action;
@@ -28,8 +25,7 @@ public class ChildAddAction extends Action {
         ParentsUser PU = new ParentsUser();
         ManageUser MU = new ManageUser();
 
-        // DAOのインスタンス化
-        ChildDao CD = new ChildDao();
+        //Daoインスタンス化
         ParentsUserDao PD = new ParentsUserDao();
         ClassCdDao CCD = new ClassCdDao();
 
@@ -44,9 +40,6 @@ public class ChildAddAction extends Action {
         String facility_id = null;
         String parents_name = null;
 
-        // 空のリストを作成
-        List<String> uniqueClassIds = new ArrayList<>();
-
         // ログインユーザーを取得
         String user_type = (String) session.getAttribute("user_type");
 
@@ -58,32 +51,11 @@ public class ChildAddAction extends Action {
             facility_id = PU.getFacility_id();
             parents_name = PU.getParents_name();
 
-            // 子供リストを取得
-            List<Child> child_list = CD.getChildListinfo(facility_id);
 
-            // child_idの最大値を計算
-            OptionalInt maxChildId = child_list.stream()
-                .map(Child::getChild_id)       // Childオブジェクトからchild_idを取得
-                .map(childId -> childId.trim()) // 空白を削除
-                .mapToInt(Integer::parseInt)   // Stringをintに変換
-                .max();
-
-            // 次のchild_idを決定
-            int nextNumber;
-            if (maxChildId.isPresent()) {
-                nextNumber = maxChildId.getAsInt() + 1;
-            } else {
-                System.out.println("子供テーブルにchild_idが存在しません。");
-                nextNumber = 1;
-            }
 
             // クラス情報を取得
             List<ClassCd> CID = CCD.getClassCdinfo(facility_id);
             if (CID != null && !CID.isEmpty()) {
-                uniqueClassIds = CID.stream()
-                    .map(ClassCd::getClass_id)  // ClassCdのclass_idを抽出
-                    .distinct()                 // 重複を削除
-                    .collect(Collectors.toList()); // Listに変換
             }
 
           //クラスの名前を取得
@@ -98,7 +70,7 @@ public class ChildAddAction extends Action {
 
 
             // 保護者が新規登録を押した場合の処理
-            req.setAttribute("child_id", nextNumber);
+            //req.setAttribute("child_id", nextNumber);
             req.setAttribute("class_set", uniqueClassNames);
             req.setAttribute("parents_name", parents_name);
             req.setAttribute("parents_id", user_id);
@@ -119,10 +91,6 @@ public class ChildAddAction extends Action {
             // クラス情報を取得
             List<ClassCd> CID = CCD.getClassCdinfo(facility_id);
             if (CID != null && !CID.isEmpty()) {
-                uniqueClassIds = CID.stream()
-                    .map(ClassCd::getClass_id)  // ClassCdのclass_idを抽出
-                    .distinct()                 // 重複を削除
-                    .collect(Collectors.toList()); // Listに変換
             }
 
             //クラスの名前を取得
@@ -134,28 +102,10 @@ public class ChildAddAction extends Action {
                     .collect(Collectors.toList()); // Listに変換
             }
 
-            // 子供リストを取得
-            List<Child> child_list = CD.getChildListinfo(facility_id);
-
-            // child_idの最大値を計算
-            OptionalInt maxChildId = child_list.stream()
-                .map(Child::getChild_id)       // Childオブジェクトからchild_idを取得
-                .map(childId -> childId.trim()) // 空白を削除
-                .mapToInt(Integer::parseInt)   // Stringをintに変換
-                .max();
-
-            // 次のchild_idを決定
-            int nextNumber;
-            if (maxChildId.isPresent()) {
-                nextNumber = maxChildId.getAsInt() + 1;
-            } else {
-                System.out.println("子供テーブルにchild_idが存在しません。");
-                nextNumber = 1;
-            }
 
 
             // 管理者が新規登録を押した場合の処理　uniqueClassNames
-            req.setAttribute("child_id", nextNumber);
+            //req.setAttribute("child_id", nextNumber);
             //req.setAttribute("class_set", uniqueClassIds);
             req.setAttribute("class_set", uniqueClassNames);
             req.setAttribute("parents_name", parents_name);

@@ -39,12 +39,7 @@
         <h2 class="title">新規子供情報入力</h2>
 
         <form action="ChildAddExecute.action" method="post">
-            <div class="form-group">
-                <label for="child_id">子供ID:</label>
-                <!-- 自動生成された child_id を表示 -->
-                <input type="hidden" id="child_id" name="child_id" value="${child_id}" readonly>
-                <span>${child_id}</span>
-			            </div>
+
 			<div class="form-group">
 			    <label for="child_name">子供の名前:</label>
 			<input type="text" id="child_name" name="child_name" required
