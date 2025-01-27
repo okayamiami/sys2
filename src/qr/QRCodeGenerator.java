@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
@@ -19,13 +18,14 @@ public class QRCodeGenerator {
     // QRコード生成メソッド
     public String generateQRCode(String childId, String facilityId, ServletContext context) throws WriterException, IOException {
         String qrData = childId + "," + facilityId;
-        String imagePath = generateQRCodeImage(qrData, 350, 350, context);
+        String cid = childId;
+        String imagePath = generateQRCodeImage(qrData, 350, 350, context,cid);
         return imagePath;
     }
 
     // QRコード画像生成処理（プライベート）
-    private String generateQRCodeImage(String text, int width, int height, ServletContext context) throws WriterException, IOException {
-    	String uniqueFileName = UUID.randomUUID().toString() + ".png";
+    private String generateQRCodeImage(String text, int width, int height, ServletContext context,String cid) throws WriterException, IOException {
+    	String uniqueFileName = cid + ".png";
         String relativePath = "/sysshin/" + uniqueFileName;
         String absolutePath = context.getRealPath(relativePath); // 絶対パスに変換
 
