@@ -50,6 +50,12 @@
 
 				    <c:when test="${user_type == 'T'}">
 				        <h2>先生</h2>
+				        <div class="menu-section">
+							    <h4>情報関係</h4>
+							    <div class="menu-links">
+							        <a href="ManageUser.action">ユーザー情報</a>
+							    </div>
+							</div>
 				     		<div class="menu-section">
 							    <h4>子供管理</h4>
 							    <div class="menu-links">
