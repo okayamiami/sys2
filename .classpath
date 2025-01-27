@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/core-3.4.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javase-3.4.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.mail.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.activation_1.2.2.v20221203-1659.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

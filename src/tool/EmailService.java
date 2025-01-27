@@ -1,4 +1,5 @@
 package tool;
+
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -12,25 +13,20 @@ import javax.mail.internet.MimeMessage;
 
 import dao.FacilityDao;
 
-
 public class EmailService {
-	//recipientEmail 受取先 subject 件名 messageBody メール内容
-	public boolean sendEmail(String facility_id, String recipientEmail, String subject, String messageBody) throws Exception {
-
-        // 送信元のメールアドレスとパスワード
-		FacilityDao fDao = new FacilityDao();
+    public boolean sendEmail(String facility_id, String recipientEmail, String subject, String messageBody) throws Exception {
+        FacilityDao fDao = new FacilityDao();
         String fromEmail = fDao.getFacilityInfo(facility_id).getFacility_mail();
         String password = fDao.getFacilityInfo(facility_id).getFacility_app_password();
-
-        // メールサービスのドメインを確認して適切なSMTPサーバーを選択
         String smtpServer = getSmtpServerFromEmail(fromEmail);
-        String smtpPort = "587"; // 通常のSMTPポート（STARTTLS）
+        String smtpPort = "587";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", smtpServer);
         properties.put("mail.smtp.port", smtpPort);
+
         Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
@@ -41,26 +37,23 @@ public class EmailService {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-            message.setSubject(subject,"UTF-8");
-            message.setText(messageBody,"UTF-8");
-            System.out.println("メッセージ準備成功");
+            message.setSubject(subject, "UTF-8");
+            message.setContent(messageBody, "text/plain; charset=UTF-8");
 
-            // メール送信
             Transport.send(message);
             return true;
         } catch (MessagingException e) {
+            System.err.println("メール送信エラー: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
 
-    // メールアドレスからSMTPサーバーを選択するロジック
-    private static String getSmtpServerFromEmail(String email) {
+    private static String getSmtpServerFromEmail(String email) throws IllegalArgumentException {
         if (email.endsWith("@gmail.com")) {
-            return "smtp.gmail.com"; // Gmailの場合の場合
-        }  else {
-            return "えらー"; // 対応してない
+            return "smtp.gmail.com";
+        } else {
+            throw new IllegalArgumentException("未対応のメールドメインです: " + email);
         }
     }
-
 }
