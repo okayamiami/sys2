@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
@@ -24,8 +25,8 @@ public class QRCodeGenerator {
 
     // QRコード画像生成処理（プライベート）
     private String generateQRCodeImage(String text, int width, int height, ServletContext context) throws WriterException, IOException {
-        // WebContent/sysshin ディレクトリに保存する相対パスを指定
-        String relativePath = "/sysshin/MyQRCode.png";
+    	String uniqueFileName = UUID.randomUUID().toString() + ".png";
+        String relativePath = "/sysshin/" + uniqueFileName;
         String absolutePath = context.getRealPath(relativePath); // 絶対パスに変換
 
         // 画像保存先のディレクトリが存在しない場合は作成する
