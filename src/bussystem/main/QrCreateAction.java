@@ -1,6 +1,7 @@
 package bussystem.main;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,12 +28,17 @@ public class QrCreateAction extends Action {
 		//DBからデータ取得 3
 		List<Child> clist = cDao.getChildListinfo(mu.getFacility_id());
 		List<ClassCd> cdlist = cdDao.getClassCdinfo(mu.getFacility_id());
+
+		List<Child> attendingChildren = clist.stream()
+			    .filter(Child::is_attend) // is_attend が true のみ通過
+			    .collect(Collectors.toList());
+
 		//ビジネスロジック 4
 		//なし
 		//DBへデータ保存 5
 		//なし
 		//レスポンス値をセット 6
-		req.setAttribute("child_set", clist);
+		req.setAttribute("child_set", attendingChildren);
 		req.setAttribute("class_set", cdlist);
 		//JSPへフォワード 7
 		req.getRequestDispatcher("qrcreate.jsp").forward(req, res);
