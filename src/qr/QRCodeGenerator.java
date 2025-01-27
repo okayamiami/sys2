@@ -44,6 +44,6 @@ public class QRCodeGenerator {
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
         // 保存された画像のパスを返す
-        return path.toString();
+        return context.getContextPath() + relativePath;
     }
 }
