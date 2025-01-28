@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     ${user.parents_id} <!-- IDは表示する -->
                 		</td>
                         <td>
-                             <input type="text" name="parents_name" pattern="^[^0-9]*$" required title="数字を含めないでください"/>
+                             <input type="text" name="parents_name" pattern="^[^\d０-９]*$" required title="数字を含めないでください"/>
                         </td>
                         <td>
                             <input type="text" name="parents_address"
