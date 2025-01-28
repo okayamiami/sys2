@@ -25,7 +25,7 @@
 <p>子供名:${child_name}</p>
 <!-- QRコード画像を表示 -->
     <div>
-        <img src="${qrImagePath}" alt="QR Code" width="500" height="500" />
+        <img src="/sys2/sysshin/${child_id}${facility_id}.png" alt="QR Code" width="500" height="500" />
     </div>
 
 </div>

@@ -1,17 +1,11 @@
 // QrCreateExecuteAction.java
 package bussystem.main;
 
-import java.io.IOException;
-
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.zxing.WriterException;
-
 import bean.ManageUser;
-import qr.QRCodeGenerator;
 import tool.Action;
 
 public class QrCreateExecuteAction extends Action {
@@ -27,21 +21,14 @@ public class QrCreateExecuteAction extends Action {
         String facility_id = req.getParameter("facility_id");
 
         // QRコードを生成
-        String qrImagePath = "";
-        try {
-            ServletContext context = req.getServletContext(); // サーブレットコンテキストを取得
-            QRCodeGenerator qrg = new QRCodeGenerator();
-            qrImagePath = qrg.generateQRCode(child_id, facility_id, context);
-            System.out.println("QRコードの生成が成功しました。");
 
-        } catch (WriterException | IOException e) {
-            e.printStackTrace();
-            System.out.println("QRコード生成中にエラーが発生しました。");
-        }
+
 
         // レスポンス値をセット
         req.setAttribute("child_name", child_name);
-        req.setAttribute("qrImagePath", qrImagePath); // QRコード画像のパスをJSPに渡す
+        req.setAttribute("child_id", child_id);
+        req.setAttribute("facility_id", facility_id);
+        // QRコード画像のパスをJSPに渡す
 
         // JSPへフォワード
         req.getRequestDispatcher("qrcreatedone.jsp").forward(req, res);

@@ -1,17 +1,22 @@
 package bussystem.main;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.OptionalInt;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.zxing.WriterException;
 
 import bean.Child;
 import bean.ManageUser;
 import bean.ParentsUser;
 import dao.ChildDao;
 import dao.GetDao;
+import qr.QRCodeGenerator;
 import tool.Action;
 
 public class ChildAddExecuteAction extends Action {
@@ -70,7 +75,7 @@ public class ChildAddExecuteAction extends Action {
         String classId = req.getParameter("class_id");
         String isAttend = req.getParameter("is_attend");
         String class_name = req.getParameter("class_name");
-
+        String qrImagePath = "";
 
         //入力チェック
         if (childId == null || childId.isEmpty() ||
@@ -104,6 +109,18 @@ public class ChildAddExecuteAction extends Action {
             childDao.saveChildinfo(child);
             gDao.saveGetInfoForAllBuses(child);
 
+            String child_id = child.getChild_id();
+            String facility_id = child.getFacility_id();
+            try {
+                ServletContext context = req.getServletContext(); // サーブレットコンテキストを取得
+                QRCodeGenerator qrg = new QRCodeGenerator();
+                qrImagePath = qrg.generateQRCode(child_id, facility_id, context);
+                System.out.println("QRコードの生成が成功しました。");
+
+            } catch (WriterException | IOException e) {
+                e.printStackTrace();
+                System.out.println("QRコード生成中にエラーが発生しました。");
+            }
             // 完了画面で表示する
             req.setAttribute("parents_id", parentsId);
             req.setAttribute("child_id", childId);

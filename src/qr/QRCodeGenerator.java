@@ -19,13 +19,14 @@ public class QRCodeGenerator {
     public String generateQRCode(String childId, String facilityId, ServletContext context) throws WriterException, IOException {
         String qrData = childId + "," + facilityId;
         String cid = childId;
-        String imagePath = generateQRCodeImage(qrData, 350, 350, context,cid);
+        String fid = facilityId;
+        String imagePath = generateQRCodeImage(qrData, 350, 350, context,cid,fid);
         return imagePath;
     }
 
     // QRコード画像生成処理（プライベート）
-    private String generateQRCodeImage(String text, int width, int height, ServletContext context,String cid) throws WriterException, IOException {
-    	String uniqueFileName = cid + ".png";
+    private String generateQRCodeImage(String text, int width, int height, ServletContext context,String cid,String fid) throws WriterException, IOException {
+    	String uniqueFileName = cid +fid+ ".png";
         String relativePath = "/sysshin/" + uniqueFileName;
         String absolutePath = context.getRealPath(relativePath); // 絶対パスに変換
 
