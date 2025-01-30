@@ -12,8 +12,24 @@
 <body>
 
 <div class="header">
-	<h1>登園・バス管理システム</h1>
-	<h2>ログアウト</h2>
+    <div class="header-content">
+        <img class="logo-image" src="${pageContext.request.contextPath}/images/kids.png" alt="ホーム">
+        <div class="text-content">
+            <h1>登園・バス管理システム</h1>
+            <h2>ログアウト</h2>
+        </div>
+    </div>
+
+    <div class="links">
+        <a href="Login.action">
+            <img src="${pageContext.request.contextPath}/images/login.png" alt="ログイン">
+        </a>
+    </div>
+
+    <div id="h_line">
+        <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="しずく線">
+    </div>
+
 </div>
 <div class="main">
 <div class="con">
@@ -24,9 +40,15 @@
 </div>
 
 </body>
+
+<div id="footer-container">
+  <div id="h_line">
+    <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="しずく線">
+  </div>
   <div class="foo">
     <p>2024©</p>
     <p>大原学園teamD</p>
   </div>
+</div>
 
 </html>

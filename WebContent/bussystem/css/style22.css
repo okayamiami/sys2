@@ -1,9 +1,90 @@
 
+/* ログイン・ログアウトのCSS */
+
+/* ------------ヘッダー部分--------------- */
+
+/* ヘッダー全体のスタイル */
 .header {
-	width: 100%;
-  text-align: center;
-  background-color: #0080ff;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid #ffffff;
+    position: relative;
 }
+
+/* ヘッダー内部のコンテンツ横並び */
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* 画像とテキストの間の間隔 */
+    justify-content: center;
+}
+
+/* ロゴ画像のスタイル */
+.logo-image {
+    height: 100px; /* 適切な高さを指定 */
+    width: auto;
+}
+
+/* テキストコンテンツ */
+.text-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.text-content h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000040; /* 濃い青色 */
+    margin: 0;
+}
+
+.text-content h2 {
+    font-size: 18px;
+    color: #9f9f9f; /* 灰色 */
+    margin: 5px 0 0;
+}
+
+/* ログインアイコンのスタイル */
+
+.links {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+}
+
+.links a img {
+    height: 40px; /* ログインアイコンのサイズ調整 */
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.links a:hover img {
+    transform: scale(1.1); /* ホバー時に少し拡大 */
+}
+
+/* 境界線（画像）のスタイル */
+#h_line {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 0;
+}
+
+#h_line img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* ------------ID等入力部分--------------- */
+
 
 .pas {
 	width: 100%;
@@ -25,8 +106,6 @@
    padding: 10px 0 0 0;
 }
 
-
-/* ------------------------------------------- */
 
 /* ボタンを変更 */
 .button {
@@ -107,10 +186,42 @@ form dl dd{
   padding:10px 0;
 }
 
-
-
-.foo {
-  width: 100%;
-  text-align: center;
-  background-color: #808080;
+#footer-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
+
+/* フッター上の境界線（画像） */
+#footer-container #h_line {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 画像を中央揃え */
+    margin: 0;
+    padding: 0;
+}
+
+#footer-container #h_line img {
+    width: 100%; /* 画像を横幅いっぱいに */
+    height: auto; /* 高さを自動調整 */
+    display: block;
+}
+
+
+/* ------------フッター部分--------------- */
+
+/* フッター本体 */
+.foo {
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.foo p {
+    margin: 5px 0;
+    font-size: 1.2em;
+}
+
+

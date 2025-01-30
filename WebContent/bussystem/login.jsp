@@ -9,12 +9,25 @@
   <title>登園・バス管理システム</title>
 </head>
 <body>
-  <div class="header">
-    <div>
-      <h1>登園・バス管理システム</h1>
-      <h2>ログイン</h2>
+<div class="header">
+    <div class="header-content">
+        <img class="logo-image" src="${pageContext.request.contextPath}/images/kids.png" alt="ホーム">
+        <div class="text-content">
+            <h1>登園・バス管理システム</h1>
+            <h2>ログイン</h2>
+        </div>
     </div>
-  </div>
+
+    <div class="links">
+        <a href="Login.action">
+            <img src="${pageContext.request.contextPath}/images/login.png" alt="ログイン">
+        </a>
+    </div>
+
+    <div id="h_line">
+        <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="しずく線">
+    </div>
+</div>
 <div class="main">
 <div class="con">
 <div>${errors.get("null")}</div>
@@ -60,11 +73,16 @@
   </form>
   </div>
   </div>
+</body>
 
-    <div class="foo">
+<div id="footer-container">
+  <div id="h_line">
+    <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="しずく線">
+  </div>
+  <div class="foo">
     <p>2024©</p>
     <p>大原学園teamD</p>
   </div>
+</div>
 
-</body>
 </html>
