@@ -1,6 +1,7 @@
 package bussystem.main;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.OptionalInt;
 
@@ -50,12 +51,18 @@ public class ChildAddExecuteAction extends Action {
         // 子供リストを取得
         List<Child> child_list = CD.getChildListinfo(facilityId);
 
-        // child_idの最大値を計算
-        OptionalInt maxChildId = child_list.stream()
-            .map(Child::getChild_id)       // Childオブジェクトからchild_idを取得
-            .map(childId -> childId.trim()) // 空白を削除
-            .mapToInt(Integer::parseInt)   // Stringをintに変換
-            .max();
+        LocalDateTime nowDate = LocalDateTime.now();
+        int year = nowDate.getYear() % 100;  					// 2桁の年を取得
+	    String formattedYear = String.format("%02d", year); 	// ゼロ埋めして2桁にする
+
+	 // child_idの最大値を計算（後ろ5桁のみを取得して数値化）
+	    OptionalInt maxChildId = child_list.stream()
+	        .map(Child::getChild_id)        // Childオブジェクトからchild_idを取得
+	        .map(String::trim)               // 空白を削除
+	        .map(id -> id.length() > 5 ? id.substring(id.length() - 5) : id) // 後ろ5桁を取得
+	        .mapToInt(Integer::parseInt)     // Stringをintに変換
+	        .max();
+
 
         // 次のchild_idを決定
         int nextNumber;
@@ -65,11 +72,9 @@ public class ChildAddExecuteAction extends Action {
             System.out.println("子供テーブルにchild_idが存在しません。");
             nextNumber = 1;
         }
-        String childId = String.valueOf(nextNumber);
 
-
-
-
+        String childId = formattedYear + String.format("%05d", nextNumber);
+        System.out.println(childId);
         //String childId = req.getParameter("child_id");
         String childName = req.getParameter("child_name");
         String classId = req.getParameter("class_id");
