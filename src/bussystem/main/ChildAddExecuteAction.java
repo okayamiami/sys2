@@ -55,13 +55,13 @@ public class ChildAddExecuteAction extends Action {
         int year = nowDate.getYear() % 100;  					// 2桁の年を取得
 	    String formattedYear = String.format("%02d", year); 	// ゼロ埋めして2桁にする
 
-	 // child_idの最大値を計算（後ろ5桁のみを取得して数値化）
+	    // child_idの最大値を計算（後ろ5桁のみを取得して数値化）
 	    OptionalInt maxChildId = child_list.stream()
-	        .map(Child::getChild_id)        // Childオブジェクトからchild_idを取得
-	        .map(String::trim)               // 空白を削除
-	        .map(id -> id.length() > 5 ? id.substring(id.length() - 5) : id) // 後ろ5桁を取得
-	        .mapToInt(Integer::parseInt)     // Stringをintに変換
-	        .max();
+	            .map(Child::getChild_id)  // child_id を取得
+	            .filter(id -> id.startsWith(formattedYear)) // 年をフィルタリング
+	            .map(id -> id.substring(id.length() - 5)) // 後ろ5桁を取得
+	            .mapToInt(Integer::parseInt) // 数値化
+	            .max();
 
 
         // 次のchild_idを決定
@@ -74,13 +74,13 @@ public class ChildAddExecuteAction extends Action {
         }
 
         String childId = formattedYear + String.format("%05d", nextNumber);
-        System.out.println(childId);
+
         //String childId = req.getParameter("child_id");
         String childName = req.getParameter("child_name");
         String classId = req.getParameter("class_id");
         String isAttend = req.getParameter("is_attend");
         String class_name = req.getParameter("class_name");
-        String qrImagePath = "";
+
 
         //入力チェック
         if (childId == null || childId.isEmpty() ||
@@ -119,7 +119,7 @@ public class ChildAddExecuteAction extends Action {
             try {
                 ServletContext context = req.getServletContext(); // サーブレットコンテキストを取得
                 QRCodeGenerator qrg = new QRCodeGenerator();
-                qrImagePath = qrg.generateQRCode(child_id, facility_id, context);
+                qrg.generateQRCode(child_id, facility_id, context);
                 System.out.println("QRコードの生成が成功しました。");
 
             } catch (WriterException | IOException e) {

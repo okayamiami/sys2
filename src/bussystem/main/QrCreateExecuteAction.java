@@ -3,18 +3,12 @@ package bussystem.main;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import bean.ManageUser;
 import tool.Action;
 
 public class QrCreateExecuteAction extends Action {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        // セッションを取得してログインユーザーを取得
-        HttpSession session = req.getSession(true);
-        ManageUser mu = (ManageUser) session.getAttribute("user");
-
         // リクエストパラメータからchild_idとfacility_idを取得
         String child_name = req.getParameter("child_name");
         String child_id = req.getParameter("child_id");
