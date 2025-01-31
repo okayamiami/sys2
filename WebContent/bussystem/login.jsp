@@ -61,7 +61,7 @@
       <dd><input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()" /></dd>
 
 
-    <dt><label>facility_ID</label></dt>
+    <dt><label>施設ID</label></dt>
     <dd><input type="text" name="facility_id" maxlength="20"  pattern="[a-zA-Z0-9]*" title="英数字のみ入力してください"required></dd>
 	</dl>
 
