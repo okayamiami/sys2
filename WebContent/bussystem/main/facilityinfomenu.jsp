@@ -18,9 +18,15 @@
 
 <h2 class="title">施設情報選択</h2>
 <div class="menu-links">
-<a href="FacilityInfo.action">施設情報</a>
+<a href="FacilityInfo.action" class="menu-links-sub">
+    <img src="${pageContext.request.contextPath}/images/施設・バス.png" alt="施設情報" width="50">
+    <span>施設情報</span>
+</a>
 
-<a href="BusInfo.action">バス情報</a>
+<a href="BusInfo.action" class="menu-links-sub">
+    <img src="${pageContext.request.contextPath}/images/新規バス.png" alt="バス情報" width="50">
+    <span>バス情報</span>
+</a>
 
 </div>
 </div>

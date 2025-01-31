@@ -22,9 +22,14 @@
 <p>新規登録する項目を選択してください</p>
 
 <div class="menu-links">
-<a href="NewRegist.action">アカウント新規登録</a>
-
-<a href="BusCreate.action">バス新規登録</a>
+<a href="NewRegist.action" class="menu-links-sub">
+    <img src="${pageContext.request.contextPath}/images/ユーザー情報.png" alt="アカウント新規登録" width="50">
+    <span>アカウント新規登録</span>
+</a>
+<a href="BusCreate.action" class="menu-links-sub">
+    <img src="${pageContext.request.contextPath}/images/新規バス.png" alt="バス新規登録" width="50">
+    <span>バス新規登録</span>
+</a>
 
 </div>
 
