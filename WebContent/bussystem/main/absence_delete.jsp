@@ -13,7 +13,7 @@
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
 		    <li class="breadcrumb-item"><a href="AbsenceSelect.action">欠席機能選択</a></li>
-		    <li class="breadcrumb-item"><a href="AbsenceConect.action">欠席連絡</a></li>
+		    <li class="breadcrumb-item"><a href="AbsenceConect.action">欠席状況</a></li>
 		    <li class="breadcrumb-item active" aria-current="page">欠席情報削除確認</li>
 		  </ol>
 		</nav>

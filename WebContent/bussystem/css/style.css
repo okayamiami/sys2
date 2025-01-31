@@ -183,7 +183,36 @@ a.home-icon {
 
 }
 
-/* ------------------------------------------- */
+/* --------------sub--------------------------- */
+
+
+.menu-links-sub {
+    display: flex;
+    flex-direction: column; /* アイテムを縦に並べる */
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 10px;
+    border: solid 2px #000000;
+    background-color: #c1ffc5;
+    width: calc(20% - 10px);
+    min-width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.menu-links-sub img {
+    margin-bottom: 5px; /* 画像とテキストの間に少しスペースを追加 */
+}
+
+.menu-links-sub:hover {
+    background-color: #e6ffe8;
+    text-decoration: none;
+}
+/* -----------------sub---------------------- */
 
 /* メニュー画面部分 */
 
@@ -223,7 +252,7 @@ a.home-icon {
     text-decoration: none;
     color: #333;
     border-radius: 10px;
-    border: solid 2px #000000; /* 枠線を薄く変更 */
+    border: solid 2px #000000;
     background-color: #c1ffc5;
     width: calc(20% - 10px); /* 間隔を考慮したボタン幅 */
     min-width: 120px; /* 最小幅を設定してデザイン崩れを防止 */

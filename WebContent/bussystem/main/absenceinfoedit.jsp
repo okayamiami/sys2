@@ -13,13 +13,13 @@
 	  <ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
 	    <li class="breadcrumb-item"><a href="AbsenceSelect.action">欠席機能選択</a></li>
-	    <li class="breadcrumb-item"><a href="AbsenceConect.action">欠席連絡</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">欠席連絡更新</li>
+	    <li class="breadcrumb-item"><a href="AbsenceConect.action">欠席状況</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">欠席状況更新</li>
 	  </ol>
 	</nav>
 
 
-	<h2 class="title">欠席連絡更新</h2>
+	<h2 class="title">欠席状況更新</h2>
 	<p>欠席理由の変更または欠席状態の変更をして保存ボタンを押してください</p>
 <form action="AbsenceInfoEditExecute.action" method="post">
 	<button type="submit" class="button-send">保存</button>

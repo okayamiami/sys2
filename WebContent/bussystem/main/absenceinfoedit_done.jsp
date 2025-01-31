@@ -13,20 +13,20 @@
 	  <ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
 	    <li class="breadcrumb-item"><a href="AbsenceSelect.action">欠席機能選択</a></li>
-	    <li class="breadcrumb-item"><a href="AbsenceConect.action">欠席連絡</a></li>
-	    <li class="breadcrumb-item"><span>欠席連絡更新</span></li>
-	    <li class="breadcrumb-item active" aria-current="page">欠席連絡更新完了</li>
+	    <li class="breadcrumb-item"><a href="AbsenceConect.action">欠席状況</a></li>
+	    <li class="breadcrumb-item"><span>欠席状況更新</span></li>
+	    <li class="breadcrumb-item active" aria-current="page">欠席状況更新完了</li>
 	  </ol>
 	</nav>
 
-	<h2 class="title">欠席連絡更新完了</h2>
+	<h2 class="title">欠席状況更新完了</h2>
 
 	<!-- エラーメッセージの表示 -->
 	<c:if test="${not empty error}">
     	<p style="color: red; font-weight: bold;">${error}</p>
     </c:if>
 
-    <p>下記情報で欠席連絡更新が完了しました</p>
+    <p>下記情報で欠席状況更新が完了しました</p>
 
 
 		<table class="table table-hover">

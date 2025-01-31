@@ -20,7 +20,10 @@
 							<div class="menu-section">
 							    <h3>情報関係</h3>
 							    <div class="menu-links">
-							        <a href="NewRegistMenu.action">新規登録</a>
+							        <a href="NewRegistMenu.action" class="menu-links-sub">
+									    <img src="${pageContext.request.contextPath}/images/bus.png" alt="新規登録" width="50">
+									    <span>新規登録</span>
+									</a>
 							        <a href="ManageUser.action">ユーザー情報</a>
 							        <a href="Parents.action">保護者情報</a>
 							        <a href="ChildInfo.action">子供情報</a>
