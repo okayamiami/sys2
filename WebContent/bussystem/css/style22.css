@@ -3,7 +3,7 @@
 
 /* ------------ヘッダー部分--------------- */
 html,header, body,foo,main,con{
-    background: linear-gradient(to bottom, #fef3c7, #fde2e4);
+    background: #fef3c7;
 
 }
 header, foo {
