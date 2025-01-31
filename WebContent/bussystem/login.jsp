@@ -11,7 +11,7 @@
 <body>
 <div class="header">
     <div class="header-content">
-        <img class="logo-image" src="${pageContext.request.contextPath}/images/kids.png" alt="ホーム">
+        <img class="logo-image" src="${pageContext.request.contextPath}/images/login_head.png" alt="ホーム">
         <div class="text-content">
             <h1>登園・バス管理システム</h1>
             <h2>ログイン</h2>

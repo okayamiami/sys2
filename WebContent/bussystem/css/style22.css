@@ -139,6 +139,9 @@
 
 }
 
+
+/* con必要か確認する */
+
 .con {
   display: flex;
   flex-direction: column; /* 縦方向に並べる */
@@ -163,6 +166,8 @@
 .con a:hover {
   background-color: #0066cc; /* ホバー時の色 */
 }
+
+/* --------------------------------- */
 
 
 form {
@@ -192,6 +197,8 @@ form dl dd{
     padding: 0;
 }
 
+
+/* ------------フッター部分--------------- */
 /* フッター上の境界線（画像） */
 #footer-container #h_line {
     width: 100%;
@@ -206,9 +213,6 @@ form dl dd{
     height: auto; /* 高さを自動調整 */
     display: block;
 }
-
-
-/* ------------フッター部分--------------- */
 
 /* フッター本体 */
 .foo {

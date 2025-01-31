@@ -18,7 +18,7 @@
 				    <c:when test="${user_type == 'M'}">
 				        <h2>管理者</h2>
 							<div class="menu-section">
-							    <h4>情報関係</h4>
+							    <h3>情報関係</h3>
 							    <div class="menu-links">
 							        <a href="NewRegistMenu.action">新規登録</a>
 							        <a href="ManageUser.action">ユーザー情報</a>
@@ -31,7 +31,7 @@
 							</div>
 
 							<div class="menu-section">
-							    <h4>子供管理</h4>
+							    <h3>子供管理</h3>
 							    <div class="menu-links">
 							        <a href="ChildList.action">名簿情報一覧</a>
 							        <a href="AbsenceSelect.action">欠席機能</a>
@@ -40,7 +40,7 @@
 							</div>
 
 							<div class="menu-section">
-							    <h4>お知らせ</h4>
+							    <h3>お知らせ</h3>
 							    <div class="menu-links">
 							        <a href="InfoMenu.action">お知らせ機能</a>
 							    </div>
@@ -51,13 +51,13 @@
 				    <c:when test="${user_type == 'T'}">
 				        <h2>先生</h2>
 				        <div class="menu-section">
-							    <h4>情報関係</h4>
+							    <h3>情報関係</h3>
 							    <div class="menu-links">
 							        <a href="ManageUser.action">ユーザー情報</a>
 							    </div>
 							</div>
 				     		<div class="menu-section">
-							    <h4>子供管理</h4>
+							    <h3>子供管理</h3>
 							    <div class="menu-links">
 							        <a href="ChildList.action">名簿情報一覧</a>
 							        <a href="AbsenceSelect.action">欠席機能</a>
@@ -66,7 +66,7 @@
 							</div>
 
 							<div class="menu-section">
-							    <h4>お知らせ</h4>
+							    <h3>お知らせ</h3>
 							    <div class="menu-links">
 							        <a href="InfoMenu.action">お知らせ機能</a>
 							    </div>
@@ -77,7 +77,7 @@
 				    <c:when test="${user_type == 'P'}">
 				        <h2>保護者</h2>
 				        	<div class="menu-section">
-							    <h4>情報関係</h4>
+							    <h3>情報関係</h3>
 							    <div class="menu-links">
 							        <a href="Parents.action">保護者情報</a>
 							        <a href="ChildInfo.action">子供情報</a>
@@ -85,14 +85,14 @@
 							</div>
 
 							<div class="menu-section">
-							    <h4>欠席管理</h4>
+							    <h3>欠席管理</h3>
 							    <div class="menu-links">
 							        <a href="AbsenceSelect.action">欠席機能</a>
 							    </div>
 							</div>
 
 							<div class="menu-section">
-							    <h4>お知らせ</h4>
+							    <h3>お知らせ</h3>
 							    <div class="menu-links">
 							        <a href="InfoList.action">お知らせ一覧</a>
 							    </div>
@@ -107,7 +107,7 @@
 				    <c:when test="${user_type == 'M'}">
 				        <h2>管理者</h2>
 							<div class="menu-section">
-							    <h4>情報関係</h4>
+							    <h3>情報関係</h3>
 							    <div class="menu-links">
 							        <a href="NewRegistMenu.action">新規登録</a>
 							        <a href="Parents.action">保護者情報</a>
@@ -119,7 +119,7 @@
 							</div>
 
 							<div class="menu-section">
-							    <h4>子供管理</h4>
+							    <h3>子供管理</h3>
 							    <div class="menu-links">
 							        <a href="QrMenu.action">QR機能</a>
 							    </div>
@@ -130,7 +130,7 @@
 				    <c:when test="${user_type == 'T'}">
 				        <h2>先生</h2>
 				     		<div class="menu-section">
-							    <h4>子供管理</h4>
+							    <h3>子供管理</h3>
 							    <div class="menu-links">
 							        <a href="QrMenu.action">QR機能</a>
 							    </div>
@@ -141,7 +141,7 @@
 				    <c:when test="${user_type == 'P'}">
 				        <h2>保護者</h2>
 				        	<div class="menu-section">
-							    <h4>情報関係</h4>
+							    <h3>情報関係</h3>
 							    <div class="menu-links">
 							        <a href="Parents.action">保護者情報</a>
 							        <a href="ChildInfo.action">子供情報</a>

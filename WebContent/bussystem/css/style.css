@@ -180,13 +180,12 @@ a.home-icon {
 /* ------------------------------------------- */
 
 /* メニュー画面部分 */
-/* 時間があったらアイコンを含めたボタンにしたい */
 
 .menu-section {
     margin-bottom: 20px; /* 各セクションの間にスペースを追加 */
 }
 
-.menu-section h4 {
+.menu-section h3 {
     margin: 20px auto 10px; /* 上下の余白を指定、左右を自動中央揃え */
     display: inline-block; /* 要素の幅を文字列の幅に合わせる */
   	border-bottom: solid 3px #ddfdce;
@@ -194,7 +193,7 @@ a.home-icon {
 }
 
 
-.menu-section h4:after {
+.menu-section h3:after {
   	position: absolute;
   	content: " ";
   	display: block;
