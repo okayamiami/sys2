@@ -32,9 +32,9 @@
 </div>
 <div class="main">
 <div class="con">
-	<p>ログアウトしました</p>
+	<h2>ログアウトしました</h2>
 	<br>
-	<a href="/sys2/bussystem/Login.action" >ログイン</a>
+	<a href="/sys2/bussystem/Login.action" class="login-btn">ログイン</a>
 </div>
 </div>
 

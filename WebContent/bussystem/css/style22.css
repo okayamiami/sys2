@@ -247,4 +247,17 @@ form dl dd{
     font-size: 1.2em;
 }
 
+.login-btn {
+    display: inline-block;
+    background-color: #d37f52;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.login-btn:hover {
+    background-color: #e6ffe8;
+    color: black;
+}
 
