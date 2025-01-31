@@ -76,7 +76,7 @@
 </body>
 
 <div id="footer-container">
-  <div id="h_line">
+  <div id="h_line2">
     <img src="${pageContext.request.contextPath}/images/drop_line.png" alt="しずく線">
   </div>
   <div class="foo">

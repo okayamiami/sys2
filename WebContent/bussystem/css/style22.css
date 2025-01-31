@@ -87,6 +87,19 @@ header, foo {
     height: auto;
     display: block;
 }
+#h_line2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 0;
+}
+
+#h_line2 img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
 
 /* ------------ID等入力部分--------------- */
@@ -121,9 +134,9 @@ header, foo {
 }
 
 .button-save {
-  background-color: #1bade4;
+  background-color: #d37f52;
   border: none;
-  color: white;
+
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
@@ -133,8 +146,8 @@ header, foo {
 }
 
 .button-save:hover {
-  background-color: #0080ff; /* ホバー時の色 */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+  	background-color: #e6ffe8; /* ホバー時の背景色 */
+    text-decoration: none;
 }
 
 
@@ -177,12 +190,12 @@ header, foo {
 
 
 form {
-  background-color: #eaeaea;
+  background: #e0c9a6;
   padding: 30px 50px;
   width: 400px; /* フォームの幅を制限 */
   margin: auto;
   border-radius: 10px; /* 角を少し丸く */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 軽い影 */
+  border: solid 2px #c0c0c0;
 }
 
 
