@@ -2,16 +2,22 @@
 /* ログイン・ログアウトのCSS */
 
 /* ------------ヘッダー部分--------------- */
+html,header, body,foo,main,con{
+    background: linear-gradient(to bottom, #fef3c7, #fde2e4);
 
+}
+header, foo {
+    background: transparent;
+}
 /* ヘッダー全体のスタイル */
 .header {
     width: 100%;
-    background-color: #ffffff;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
-    border-bottom: 2px solid #ffffff;
+
     position: relative;
 }
 
@@ -218,7 +224,7 @@ form dl dd{
 .foo {
     width: 100%;
     text-align: center;
-    background-color: #fff;
+
     padding: 20px;
     font-family: 'Arial', sans-serif;
 }

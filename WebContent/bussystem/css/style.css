@@ -1,14 +1,20 @@
 
 /* メインのCSS */
+html,header, body,foo,main,con{
+    background: linear-gradient(to bottom, #fef3c7, #fde2e4);
 
+}
+header, foo {
+    background: transparent;
+}
 /* ヘッダー全体のスタイル */
 .header {
     width: 100%;
-    background-color: #ffffff; /* 背景色 */
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #ffffff; /* オプションで下に線を追加 */
+
 }
 /* ロゴやタイトルを含む部分 */
 .header h1 {
@@ -41,7 +47,7 @@
     text-decoration: none;
     color: #000000;
     background-color: #dfffe1; /* 背景色 */
-    border: solid 2px #ffffff; /* 枠線を薄く変更 */
+    border: solid 2px #000000; /* 枠線を薄く変更 */
     border-radius: 5px;
     transition: all 0.3s ease;
     margin-right: 25px; /* 右側に余白を設定 */
@@ -139,7 +145,7 @@ a.home-icon {
     text-decoration: none;
     padding: 0.25rem 0.5rem;
     background-color: #c1ffc5;
-    border: 1px solid #ffffff;
+    border: 1px solid #000000;
     border-radius: 1rem; /* 各アイテムの角を丸くする */
 }
 
@@ -217,7 +223,7 @@ a.home-icon {
     text-decoration: none;
     color: #333;
     border-radius: 10px;
-    border: solid 2px #fff; /* 枠線を薄く変更 */
+    border: solid 2px #000000; /* 枠線を薄く変更 */
     background-color: #c1ffc5;
     width: calc(20% - 10px); /* 間隔を考慮したボタン幅 */
     min-width: 120px; /* 最小幅を設定してデザイン崩れを防止 */
@@ -290,7 +296,7 @@ a.home-icon {
 .foo {
     width: 100%;
     text-align: center;
-    background-color: #fff;
+
     padding: 20px;
     font-family: 'Arial', sans-serif;
 }
