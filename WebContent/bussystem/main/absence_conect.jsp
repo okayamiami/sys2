@@ -12,11 +12,11 @@
 	  <ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
 	    <li class="breadcrumb-item"><a href="AbsenceSelect.action">欠席機能選択</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">欠席情報</li>
+	    <li class="breadcrumb-item active" aria-current="page">欠席状況</li>
 	  </ol>
 	</nav>
 
-<h2 class="title">欠席情報</h2>
+<h2 class="title">欠席状況</h2>
 <!-- エラーメッセージの表示 -->
 <c:if test="${not empty error}">
     <p style="color: red; font-weight: bold;">${error}</p>
