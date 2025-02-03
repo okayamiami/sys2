@@ -167,9 +167,11 @@ public class GetDao extends Dao{
 	                        String childName = cDao.getChildinfo(facility_id, child_id).getChild_name();
 
 	                        EmailService es = new EmailService();
-	                        es.sendEmail(facility_id, parentMail,
+	                        es.sendEmail(
+	                        	    facility_id,
+	                        	    parentMail,
 	                        	    "[" + facilityName + "] " + childName + "さんの登園完了のお知らせ",
-	                        	    childName + "さんが無事に園に到着しました。今日も元気に過ごせるよう見守りますので、ご安心ください。"
+	                        	    createEmailBody(facility, childName)
 	                        	);
 	                    }
 	                }
@@ -199,6 +201,24 @@ public class GetDao extends Dao{
 	    }
 
 	    return count > 0;
+	}
+
+	private String createEmailBody(Facility facility, String childName) {
+	    StringBuilder body = new StringBuilder();
+
+	    body.append(childName)
+	        .append("さんが無事に園に到着しました。\n")
+	        .append("今日も元気に過ごせるよう見守りますので、ご安心ください。\n\n")
+	        .append("何かご不明点がございましたら、お気軽にご連絡ください。\n\n")
+	        .append("【施設情報】\n")
+	        .append("施設名: ").append(facility.getFacility_name()).append("\n")
+	        .append("住所: ").append(facility.getFacility_address()).append("\n")
+	        .append("電話番号: ").append(facility.getFacility_tel()).append("\n")
+	        .append("メール: ").append(facility.getFacility_mail()).append("\n\n")
+	        .append("どうぞよろしくお願いいたします。\n")
+	        .append(facility.getFacility_name());
+
+	    return body.toString();
 	}
 
 	// メールアドレス形式を検証するメソッド
