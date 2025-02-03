@@ -11,7 +11,7 @@
     <nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
-	    <li class="breadcrumb-item"><a href="ManageUser.action">ユーザー情報</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">ユーザー情報</li>
 	</nav>
      <h2 class="title">ユーザー情報</h2>
         <p>情報に変更がある場合は「編集」ボタンから変更を行ってください</p>

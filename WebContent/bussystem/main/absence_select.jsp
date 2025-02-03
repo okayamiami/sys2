@@ -22,9 +22,16 @@
 
 		<div class="menu-links">
 
-		<a href="AbsenceConect.action">欠席連絡</a>
+		<a href="AbsenceConect.action" class="menu-links-sub">
+		    <img src="${pageContext.request.contextPath}/images/本.png" alt="欠席状況" width="50">
+		    <span>欠席状況</span>
+		</a>
 
-		<a href="AbsenceReport.action">欠席状況</a>
+		<a href="AbsenceReport.action" class="menu-links-sub">
+		    <img src="${pageContext.request.contextPath}/images/連絡.png" alt="欠席報告" width="50">
+		    <span>欠席報告</span>
+		</a>
+
 
 		</div>
 
