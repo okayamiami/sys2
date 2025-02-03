@@ -167,7 +167,10 @@ public class GetDao extends Dao{
 	                        String childName = cDao.getChildinfo(facility_id, child_id).getChild_name();
 
 	                        EmailService es = new EmailService();
-	                        es.sendEmail(facility_id, parentMail, facilityName+"から保護者の方へ", childName+"さんは無事に登園完了しましたよ！^^");
+	                        es.sendEmail(facility_id, parentMail,
+	                        	    "[" + facilityName + "] " + childName + "さんの登園完了のお知らせ",
+	                        	    childName + "さんが無事に園に到着しました。今日も元気に過ごせるよう見守りますので、ご安心ください。"
+	                        	);
 	                    }
 	                }
 	            }
