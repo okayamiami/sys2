@@ -82,7 +82,7 @@
 							    <h3>情報関係</h3>
 							    <div class="menu-links">
 							    	<a href="ManageUser.action" class="menu-links-sub">
-									    <img src="${pageContext.request.contextPath}/images/bus.png" alt="ユーザー情報" width="50">
+									    <img src="${pageContext.request.contextPath}/images/ユーザー情報.png" alt="ユーザー情報" width="50">
 									    <span>ユーザー情報</span>
 									</a>
 
@@ -92,15 +92,15 @@
 							    <h3>子供管理</h3>
 							    <div class="menu-links">
 							    	<a href="ChildList.action" class="menu-links-sub">
-									    <img src="${pageContext.request.contextPath}/images/bus.png" alt="名簿情報一覧" width="50">
+									    <img src="${pageContext.request.contextPath}/images/子供情報一覧.png" alt="名簿情報一覧" width="50">
 									    <span>名簿情報一覧</span>
 									</a>
 									<a href="AbsenceSelect.action" class="menu-links-sub">
-									    <img src="${pageContext.request.contextPath}/images/bus.png" alt="欠席機能" width="50">
+									    <img src="${pageContext.request.contextPath}/images/欠席.png" alt="欠席機能" width="50">
 									    <span>欠席機能</span>
 									</a>
 									<a href="QrMenu.action" class="menu-links-sub">
-									    <img src="${pageContext.request.contextPath}/images/bus.png" alt="QR機能" width="50">
+									    <img src="${pageContext.request.contextPath}/images/QR.png" alt="QR機能" width="50">
 									    <span>QR機能</span>
 									</a>
 							    </div>
@@ -110,7 +110,7 @@
 							    <h3>お知らせ</h3>
 							    <div class="menu-links">
 							    	<a href="InfoMenu.action" class="menu-links-sub">
-									    <img src="${pageContext.request.contextPath}/images/bus.png" alt="お知らせ機能" width="50">
+									    <img src="${pageContext.request.contextPath}/images/お知らせ.png" alt="お知らせ機能" width="50">
 									    <span>お知らせ機能</span>
 									</a>
 							    </div>

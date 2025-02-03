@@ -19,9 +19,16 @@
 
 <h2 class="title">QR機能選択</h2>
 <div class="menu-links">
-<a href="QrReaderSelectBus.action">QR読み取り</a>
 
-<a href="GetListInfo.action">乗降状況</a>
+		<a href="QrReaderSelectBus.action" class="menu-links-sub">
+		    <img src="${pageContext.request.contextPath}/images/スマホ.png" alt="QR読み取り" width="50">
+		    <span>QR読み取り</span>
+		</a>
+
+		<a href="GetListInfo.action" class="menu-links-sub">
+		    <img src="${pageContext.request.contextPath}/images/乗降.png" alt="乗降状況" width="50">
+		    <span>乗降状況</span>
+		</a>
 
 </div>
 </div>

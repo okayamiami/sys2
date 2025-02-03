@@ -20,9 +20,17 @@
 
 <h2 class="title">お知らせ機能選択</h2>
 <div class="menu-links">
-<a href="InfoList.action">お知らせ一覧</a>
 
-<a href="InfoCreate.action">お知らせ作成</a>
+		<a href="InfoList.action" class="menu-links-sub">
+		    <img src="${pageContext.request.contextPath}/images/一覧お知らせ.png" alt="お知らせ一覧" width="50">
+		    <span>お知らせ一覧</span>
+		</a>
+
+		<a href="InfoCreate.action" class="menu-links-sub">
+		    <img src="${pageContext.request.contextPath}/images/新規作成.png" alt="お知らせ作成" width="50">
+		    <span>お知らせ作成</span>
+		</a>
+
 </div>
 
 </div>

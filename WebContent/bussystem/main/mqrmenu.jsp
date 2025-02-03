@@ -19,9 +19,17 @@
 
 <h2 class="title">QR機能選択</h2>
 <div class="menu-links">
-<a href="QrCreate.action">QR作成</a>
 
-<a href="GetListInfo.action">乗降状況</a>
+		<a href="QrCreate.action" class="menu-links-sub">
+		    <img src="${pageContext.request.contextPath}/images/QRコード.png" alt="QR作成" width="50">
+		    <span>QR作成</span>
+		</a>
+
+		<a href="GetListInfo.action" class="menu-links-sub">
+		    <img src="${pageContext.request.contextPath}/images/乗降.png" alt="乗降状況" width="50">
+		    <span>乗降状況</span>
+		</a>
+
 
 </div>
 </div>
