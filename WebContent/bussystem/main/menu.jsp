@@ -169,6 +169,10 @@
 									    <img src="${pageContext.request.contextPath}/images/新規作成.png" alt="新規登録" width="50">
 									    <span>新規登録</span>
 									</a>
+									<a href="ManageUser.action" class="menu-links-sub">
+									    <img src="${pageContext.request.contextPath}/images/ユーザー情報.png" alt="ユーザー情報" width="50">
+									    <span>ユーザー情報</span>
+									</a>
 									<a href="Parents.action" class="menu-links-sub">
 									    <img src="${pageContext.request.contextPath}/images/保護者.png" alt="保護者情報" width="50">
 									    <span>保護者情報</span>
