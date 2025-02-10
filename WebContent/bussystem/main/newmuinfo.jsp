@@ -53,28 +53,29 @@ document.addEventListener("DOMContentLoaded", function() {
         <h2 class="title">管理者・先生情報</h2>
         <form action="NewInfoExecute.action" method="post">
             <table>
-                <tr>
-                    <th>ID</th>
-                    <th>名前</th>
-                    <th>パスワード</th>
-                </tr>
-
-                <c:if test="${not empty user}">
-                    <tr>
-                        <td>
+            <c:if test="${not empty user}">
+                <tr><th>ID</th><td>
                     <input type="hidden" name="user_id" value="${user.user_id}"/>
                     ${user.user_id} <!-- IDは表示する -->
-                		</td>
-                        <td>
+                		</td></tr>
+
+                    <tr><th>名前</th> <td>
                            <input type="text" name="user_name" pattern="^[^\d０-９]*$" required title="半角・全角の数字を含めないでください"/>
-                        </td>
-                        <td>
+                        </td></tr>
+
+                    <tr><th>パスワード</th><td>
                             <input type="password" name="user_pass"
            					pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}"
            					required
            					title="8文字以上で、大文字・小文字・数字をそれぞれ1文字以上含めてください"/>
                         </td>
-                    </tr>
+                </tr>
+
+
+
+
+
+
                 </c:if>
             </table>
 
