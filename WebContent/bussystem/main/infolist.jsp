@@ -10,6 +10,8 @@
     <div class="con">
 
     <!-- パンくずリスト -->
+    <c:choose>
+	<c:when test="${user_type == 'M' || user_type == 'T'}">
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
@@ -17,6 +19,17 @@
 	    <li class="breadcrumb-item active" aria-current="page">お知らせ一覧</li>
 	  </ol>
 	</nav>
+	</c:when>
+
+	    <c:when test="${user_type == 'P'}">
+	    <nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="Menu.action">メニュー</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">お知らせ一覧</li>
+	  </ol>
+	</nav>
+	    </c:when>
+	</c:choose>
 
 
         <h2 class="title">お知らせ一覧</h2>
